@@ -2,6 +2,9 @@ import React, {useEffect} from 'react';
 import Image from 'next/image';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
+
 import Item from './Item'
 
 const Heading = () =>{
@@ -63,11 +66,11 @@ const Heading = () =>{
             image:"/img/industrial_hero_1"
         }
     ];
-    // style="background-image: url('http://localhost:3000/static/img/industrial_hero_1.jpg');"
+    //
     return(
         <section id={sliderId} className="home-slider owl-carousel">
             {/*{items.forEach( (item,index) =>*/}
-                    <div className="slider-item" >
+                    <div className="slider-item" style={{backgroundImage: "url('/static/img/industrial_hero_1.jpg')"}}>
                         {/*<Image src='/static/img/industrial_hero_1.jpg'*/}
                         {/*       height={900}*/}
                         {/*       width={1900}*/}
@@ -77,7 +80,7 @@ const Heading = () =>{
                                 <div className="col-lg-7 text-center col-sm-12 element-animate">
                                     <div className="btn-play-wrap mx-auto"><p className="mb-4"><a
                                         href="https://vimeo.com/59256790" data-fancybox data-ratio="2"
-                                        className="btn-play"><span className="ion ion-ios-play"></span></a></p></div>
+                                        className="btn-play"><FontAwesomeIcon icon={faPlay} /></a></p></div>
                                     <h1 className="mb-4"><span>We Are Industrial Company</span></h1>
                                     <p className="mb-5 w-75">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                         Alias iste ipsa excepturi nostrum sequi molestias?</p>
@@ -85,7 +88,7 @@ const Heading = () =>{
                             </div>
                         </div>
                     </div>
-                    <div className="slider-item" >
+                    <div className="slider-item" style={{backgroundImage: "url('/static/img/industrial_hero_2.jpg')"}}>
                         {/*<Image src='/static/img/industrial_hero_1.jpg'*/}
                         {/*       height={900}*/}
                         {/*       width={1900}*/}

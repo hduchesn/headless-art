@@ -1,0 +1,15 @@
+import React from 'react';
+import { useRouter } from 'next/router'
+const Items = () => {
+    const router = useRouter();
+    React.useEffect(() => {
+        if (router.isReady) {
+            // Code using query
+            console.log(router.query);
+        }
+    }, [router.isReady]);
+
+
+    return(<h2>Items</h2>)
+}
+export default Items
