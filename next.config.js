@@ -9,5 +9,14 @@ module.exports = {
       'window.jQuery': 'jquery'
     }))
     return config;
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/files/:slug*',
+        destination: 'http://localhost:8080/files/:slug*',
+        permanent: true,
+      }
+    ]
+  },
 }

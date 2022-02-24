@@ -18,6 +18,14 @@ const DynamicPage = () => {
 
 export default DynamicPage;
 
+export async function getStaticProps(context) {
+    const { params, locale, locales, defaultLocale, preview = null } = context
+    console.log("params :",params)
+    return {
+        props: {}
+    }
+}
+
 // export async function getStaticProps() {
 //
 //     const content = {
