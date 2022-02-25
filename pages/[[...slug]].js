@@ -1,28 +1,50 @@
 import { useRouter } from 'next/router'
 
 
-const DynamicPage = () => {
-    const {query,pathname} = useRouter();
-    const {jpath} = query;
-    console.log("router.query : ",query);
-    console.log("jpath : ",jpath);
-    console.log("router.pathname : ",pathname);
+import Template from "templates";
+import {getAllPages} from "lib/pages";
 
-    // <Home content={content}/>
 
-    return(
-        <h1>Hello me</h1>
 
-    )
+const DynamicPage = (props) => {
+
+    return <Template templateName/>;
+    // const {query,pathname} = useRouter();
+    // const {jpath} = query;
+    // console.log("router.query : ",query);
+    // console.log("jpath : ",jpath);
+    // console.log("router.pathname : ",pathname);
+    //
+    // // <Home content={content}/>
+    //
+    // return(
+    //     <h1>Hello me</h1>
+    //
+    // )
 }
 
 export default DynamicPage;
 
-export async function getStaticProps(context) {
-    const { params, locale, locales, defaultLocale, preview = null } = context
-    console.log("params :",params)
+export const getStaticPaths = async (context) => {
+    console.log('Get static path')
+
     return {
-        props: {}
+        paths: getAllPages(),
+        fallback: 'blocking'
+    }
+
+}
+
+export const getStaticProps = async (context) => {
+    // const { params, locale, locales, defaultLocale, preview = null } = context
+    //TODO or not getPageInfo()
+    console.log("Get static props", context.preview)
+    // Nothing to add
+    return {
+        props: {
+            isPreview: !context.preview
+        },
+        revalidate: 10
     }
 }
 
