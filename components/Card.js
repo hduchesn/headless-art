@@ -11,15 +11,15 @@ const Card = ({content}) => {
             {/*    pathname:content.linkTo*/}
             {/*}}>*/}
                 <a href={content.linkTo}>
-                    <Image
-                        priority
-                        src={content.image}
-                        className="img-fluid"
-                        height={700}
-                        width={700}
-                        // layout='fill'
-                        alt="Team member"
-                    />
+                    {/*<Image*/}
+                    {/*    priority*/}
+                    {/*    src={content.image}*/}
+                    {/*    className="img-fluid"*/}
+                    {/*    height={700}*/}
+                    {/*    width={700}*/}
+                    {/*    // layout='fill'*/}
+                    {/*    alt="Team member"*/}
+                    {/*/>*/}
                 </a>
             {/*</Link>*/}
             <RichText content={content.body}/>
