@@ -3,7 +3,7 @@ import HalfBlock from "../components/HalfBlock"
 import Nav from "../components/Nav"
 import Card from "../components/Card"
 import RichText from "../components/text/RichText";
-
+import Area from "../components/Area"
 const Home = ({templateName,path,content}) => {
 
     // const getNodes = gql`query($workspace: Workspace!, $base: String!) {
@@ -47,7 +47,13 @@ console.log("[Home] templateName : ",templateName);
              templateName={templateName}
              nodetypes="nt:base jmix:navMenuItem">
 
-            <Nav/>
+            {/*<Nav/>*/}
+            <p style={{color:"red"}}>hardcoded area 1</p>
+            <Area name="testArea" mainResourcePath={path}>
+                <p>hardcoded area content</p>
+            </Area>
+            <p style={{color:"red"}}>hardcoded area 2</p>
+
             <div className="top-shadow"></div>
             {/*<Hero/>*/}
             {/*<HalfBlock/>*/}
