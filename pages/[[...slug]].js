@@ -14,6 +14,11 @@ const DynamicPage = (props) => {
             <Template {...props}/>
         </Layout>
     );
+    // return (
+    //
+    //         <Template {...props}/>
+    //
+    // );
 }
 
 export default DynamicPage;
@@ -22,7 +27,7 @@ export const getStaticPaths = async (context) => {
     const paths = await getAllPages();
     console.log('[getStaticPaths] paths: ',paths);
     return {
-        paths,
+        paths,//: [ '/sites/headless-industrial/home' ],
         fallback: 'blocking'
     }
 
@@ -89,11 +94,12 @@ export const getStaticProps = async (context) => {
     // }
 
 
-    console.log("[getStaticPropss] context.preview : ", context.preview)
+    console.log("[getStaticProps] context.preview : ", context.preview)
+    console.log("[getStaticProps] isPreview : ", !!context.preview)
     // Nothing to add
     return {
         props: {
-            isPreview: !context.preview,
+            isPreview: !!context.preview,
             // content
         },
         revalidate: 10

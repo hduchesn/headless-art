@@ -49,9 +49,8 @@ console.log("[Home] templateName : ",templateName);
 
             {/*<Nav/>*/}
             <p style={{color:"red"}}>hardcoded area 1</p>
-            <Area name="testArea" mainResourcePath={path}>
-                <p>hardcoded area content</p>
-            </Area>
+            <Area name="testArea" mainResourcePath={path}/>
+
             <p style={{color:"red"}}>hardcoded area 2</p>
 
             <div className="top-shadow"></div>
