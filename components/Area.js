@@ -51,6 +51,7 @@ const Area = ({name, mainResourcePath, path}) => {
     })
     console.log("[Area] area :",area);
     console.log("[Area] output :",area?.data?.npm?.renderedComponent?.output);
+
     return (
         <>
             {/*<Head>*/}

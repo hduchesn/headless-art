@@ -4,6 +4,7 @@ import Nav from "../components/Nav"
 import Card from "../components/Card"
 import RichText from "../components/text/RichText";
 import Area from "../components/Area"
+import AreaJ from "../components/AreaJ"
 const Home = ({templateName,path,content}) => {
 
     // const getNodes = gql`query($workspace: Workspace!, $base: String!) {
@@ -49,10 +50,12 @@ console.log("[Home] templateName : ",templateName);
 
             {/*<Nav/>*/}
             <p style={{color:"red"}}>hardcoded area 1</p>
-            <Area name="testArea" mainResourcePath={path}/>
+            {/*<Area name="testArea" mainResourcePath={path}/>*/}
+            <AreaJ name="testArea" mainResourcePath={path}/>
 
             <p style={{color:"red"}}>hardcoded area 2</p>
 
+            {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}
             <div className="top-shadow"></div>
             {/*<Hero/>*/}
             {/*<HalfBlock/>*/}
