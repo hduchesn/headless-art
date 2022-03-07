@@ -1,7 +1,15 @@
 import React from "react";
 import {gql, useQuery} from "@apollo/client";
 import { parse } from 'node-html-parser';
+import RichText from "./text/RichText";
+import Hero from "./Hero";
 
+const components = {
+    'jnt:bigText': RichText,
+    // 'news': News,
+    'hicnt:heading': Hero,
+    // '2-column': TwoColumns
+}
 
 const Areaj = ({name, mainResourcePath, path}) => {
     const [divs, setDivs] = React.useState([]);
@@ -70,23 +78,6 @@ const Areaj = ({name, mainResourcePath, path}) => {
     })
 
 
-    // if(area?.data?.npm?.renderedComponent?.output){
-    //
-    //
-    //
-    //     console.log("[Areaj] html",html);
-    //     divs=html?.getElementsByTagName('div')
-    //         .reduce((map,div) => {
-    //             const path = div.getAttribute('path');
-    //             // console.log("[Areaj] path",path);
-    //             if(path)
-    //                 map[path]=div.attributes;
-    //             return map;
-    //         },{})
-    //     console.log("[Areaj] divs",divs);
-    //         // console.log("[Areaj] all div",dom?.getElementsByTagName('div'));
-    // }
-
 //TODO faire une boucle sur les noeud jcr et pour chacun mettre un div autour avec les attr qui vont bien et faire un mapping avec un composant local
 //     en fonction du type de noeud
 
@@ -109,18 +100,26 @@ const Areaj = ({name, mainResourcePath, path}) => {
     const showChildren = () =>{
         if(!area.children?.nodes)
             return <>loading</>;
-
+        console.log("[Areaj] area.children.nodes : ",area.children.nodes);
         return  area.children.nodes.map(node =>{
                 console.log("[Areaj] node",node)
                 return (<div key={node.id} {...divs[node.path]}>
-                            <p>{node.primaryNodeType}</p>
+                            <p>{node.primaryNodeType.name}</p>
                         </div>)
         })
     }
     return(
         <div {...divs[area.path]}>
             <h2>Je suis l area</h2>
-            {showChildren()}
+            {
+                area.children?.nodes && area.children.nodes.map(node =>{
+                    const Component = components[node.primaryNodeType.name];
+                    return(<div key={node.id} {...divs[node.path]}>
+                        <Component id={node.id} path={node.path}/>
+                    </div>)
+                })
+            }
+            <div {...divs["*"]}></div>
         </div>
     )
 }
