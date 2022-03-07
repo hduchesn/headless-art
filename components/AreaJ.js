@@ -11,10 +11,10 @@ const components = {
     // '2-column': TwoColumns
 }
 
-const Areaj = ({name, mainResourcePath, path}) => {
+const Areaj = ({name, mainResourcePath, isEdit, locale, path}) => {
     const [divs, setDivs] = React.useState([]);
     const [area, setArea] = React.useState({});
-
+    const isEditMode = JSON.parse(isEdit) || false;
 
     const getRenderedContent = gql`query ($pathArea:String!,$mainResourcePath: String, $path: String, $language: String, $node: InputJCRNode, $isEditMode: Boolean) {
         npm {
@@ -60,7 +60,7 @@ const Areaj = ({name, mainResourcePath, path}) => {
             isEditMode: true
         },
         onCompleted: data =>{
-            console.log("[Areaj] data :",data)
+            // console.log("[Areaj] data :",data)
             const html = parse(data.npm?.renderedComponent?.output);
             setDivs(
                 html?.getElementsByTagName('div')
@@ -94,34 +94,53 @@ const Areaj = ({name, mainResourcePath, path}) => {
     //      showAreaButton="false">
     //     {children}
     // </div>
-    console.log("[Areaj] divs",divs);
-    console.log("[Areaj] area",area);
+    // console.log("[Areaj] divs",divs);
+    // console.log("[Areaj] area",area);
+    // console.log("[Areaj] isEdit",isEditMode);
 
     const showChildren = () =>{
         if(!area.children?.nodes)
             return <>loading</>;
-        console.log("[Areaj] area.children.nodes : ",area.children.nodes);
-        return  area.children.nodes.map(node =>{
-                console.log("[Areaj] node",node)
-                return (<div key={node.id} {...divs[node.path]}>
-                            <p>{node.primaryNodeType.name}</p>
-                        </div>)
-        })
-    }
-    return(
-        <div {...divs[area.path]}>
-            <h2>Je suis l area</h2>
-            {
-                area.children?.nodes && area.children.nodes.map(node =>{
-                    const Component = components[node.primaryNodeType.name];
-                    return(<div key={node.id} {...divs[node.path]}>
-                        <Component id={node.id} path={node.path}/>
-                    </div>)
-                })
+
+        return area.children.nodes.map(node =>{
+            if (components[node.primaryNodeType.name]){
+                const Component = components[node.primaryNodeType.name];
+
+                if(isEditMode)
+                    return(
+                        <div key={node.id} {...divs[node.path]}>
+                            <Component id={node.id}
+                                       path={node.path}
+                                       locale={locale}/>
+                        </div>
+                    )
+
+                return <Component key={node.id}
+                                  id={node.id}
+                                  path={node.path}
+                                  locale={locale}/>
             }
-            <div {...divs["*"]}></div>
-        </div>
-    )
+            return (
+                <div key={node.id}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>
+            )
+        });
+    }
+    //
+        return(
+            <>
+                {isEditMode &&
+                    <div {...divs[area.path]}>
+                        {showChildren()}
+                        <div {...divs["*"]}></div>
+                    </div>
+                }
+                {!isEditMode &&
+                    showChildren()
+                }
+            </>
+
+        )
+
 }
 
 

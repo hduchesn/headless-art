@@ -1,4 +1,11 @@
 export default {
     baseUrl: 'http://localhost:8080',
-    token: 'V+InkyRlQ/65oZIJ1TEFcYcfgC1Wyk7LE81s9v84CY0='
+    token: 'V+InkyRlQ/65oZIJ1TEFcYcfgC1Wyk7LE81s9v84CY0=',
+    cnd_type : {
+        WIDEN_IMAGE:"wdennt:image",
+        WIDEN_VIDEO:"wdennt:video",
+        EXT_VIDEO:'ext:video',
+        JNT_FILE:'jnt:file',
+        IMAGE:'jmix:image'
+    }
 }

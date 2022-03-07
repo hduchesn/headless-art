@@ -51,9 +51,20 @@ console.log("[Home] templateName : ",templateName);
             {/*<Nav/>*/}
             <p style={{color:"red"}}>hardcoded area 1</p>
             {/*<Area name="testArea" mainResourcePath={path}/>*/}
-            <AreaJ name="testArea" mainResourcePath={path}/>
+            <AreaJ
+                name="testArea"
+                mainResourcePath={path}
+                isEdit="true"
+                locale="en"/>
+
 
             <p style={{color:"red"}}>hardcoded area 2</p>
+
+            {/*<AreaJ*/}
+            {/*    name="testArea2"*/}
+            {/*    mainResourcePath={path}*/}
+            {/*    isEdit="true"*/}
+            {/*    locale="en"/>*/}
 
             {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}
             <div className="top-shadow"></div>

@@ -7,6 +7,10 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+  },
   // webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
   //   config.plugins.push(new webpack.ProvidePlugin({
   //     $: 'jquery',
@@ -15,15 +19,15 @@ module.exports = {
   //   }))
   //   return config;
   // },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/files/:slug*',
-  //       destination: 'http://localhost:8080/files/:slug*',
-  //       permanent: true,
-  //     }
-  //   ]
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/files/:slug*',
+        destination: 'http://localhost:8080/files/:slug*',
+        permanent: true,
+      }
+    ]
+  },
   // async redirects() {
   //   return [
   //     {
