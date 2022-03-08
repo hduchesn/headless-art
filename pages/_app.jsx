@@ -93,7 +93,9 @@ MyApp.getInitialProps = async (appContext) => {
         // meta,
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName.value,
-        isPreview
+        isPreview,
+        isEdit:'true',//TODO how to get this?
+        locale:'en'
       },
     }
 

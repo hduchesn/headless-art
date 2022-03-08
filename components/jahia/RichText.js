@@ -7,22 +7,8 @@ import {gql, useQuery} from "@apollo/client";
 const RichText = ({id,path, locale}) => {
     const {workspace} = useContext(JahiaCtx);
     const [content,setContent] = React.useState("")
-    // const getRenderedContent = gql`query($workspace: Workspace!, $path: String!, $mainResourcePath: String) {
-    //     jcr(workspace: $workspace) {
-    //         nodeByPath(path: $path) {
-    //             renderedContent(mainResourcePath: $mainResourcePath, isEditMode:true) {
-    //                 output
-    //                 css: staticAssets(type: "css") {
-    //                     key
-    //                 }
-    //                 javascript: staticAssets(type: "javascript") {
-    //                     key
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }`;
 
+    //todo manage view ?
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
             workspace

@@ -1,38 +1,32 @@
-import Hero from '../components/Hero'
-import HalfBlock from "../components/HalfBlock"
-import Nav from "../components/Nav"
-import Card from "../components/Card"
-import RichText from "../components/text/RichText";
-import Area from "../components/Area"
-import AreaJ from "../components/AreaJ"
-const Home = ({templateName,path,content}) => {
+import Area from "../components/jahia/Area";
+import components from "../components/";
+
+const Home = ({templateName,path,isEdit,locale}) => {
 
 console.log("[Home] templateName : ",templateName);
     return(
-        <div jahiatype="mainmodule"
-             path={path}
-             locale="en"
-             template=""
-             templateName={templateName}
-             nodetypes="nt:base jmix:navMenuItem">
+        <>
 
             {/*<Nav/>*/}
-            <p style={{color:"red"}}>hardcoded area 1</p>
+            {/*<p style={{color:"red"}}>hardcoded area 1</p>*/}
             {/*<Area name="testArea" mainResourcePath={path}/>*/}
-            <AreaJ
+            <Area
                 name="testArea"
                 mainResourcePath={path}
-                isEdit="true"
-                locale="en"/>
+                components={components}
+                isEdit={isEdit}
+                locale={locale}/>
 
 
-            <p style={{color:"red"}}>hardcoded area 2</p>
 
-            <AreaJ
+            {/*<p style={{color:"red"}}>hardcoded area 2</p>*/}
+
+            <Area
                 name="testArea2"
                 mainResourcePath={path}
-                isEdit="true"
-                locale="en"/>
+                components={components}
+                isEdit={isEdit}
+                locale={locale}/>
 
             {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}
             <div className="top-shadow"></div>
@@ -41,16 +35,21 @@ console.log("[Home] templateName : ",templateName);
             {/*<section className="section bg-light">*/}
             {/*    <div className="container">*/}
             {/*        <div className="row">*/}
-            {/*            {content?.media?.map((item,index) => (*/}
-            {/*                    <div className="col-md-6 col-lg-4 element-animate "*/}
-            {/*                         key={index}*/}
-            {/*                         dangerouslySetInnerHTML={{ __html: item }}>*/}
-            {/*                    </div>*/}
-            {/*                )*/}
-            {/*            )}*/}
+            {/*            <Area*/}
+            {/*                name="mediaBloc"*/}
+            {/*                mainResourcePath={path}*/}
+            {/*                components={components}*/}
+            {/*                isEdit={isEdit}*/}
+            {/*                locale={locale}/>*/}
             {/*        </div>*/}
             {/*    </div>*/}
             {/*</section>*/}
+            {/*<Area*/}
+            {/*    name="mediaBloc2"*/}
+            {/*    mainResourcePath={path}*/}
+            {/*    components={components}*/}
+            {/*    isEdit={isEdit}*/}
+            {/*    locale={locale}/>*/}
             {/*<section className="section">*/}
             {/*    <div className="container">*/}
             {/*        <div className="row justify-content-center mb-5 element-animate">*/}
@@ -73,7 +72,7 @@ console.log("[Home] templateName : ",templateName);
             {/*    </div>*/}
             {/*</section>*/}
 
-        </div>
+        </>
 
     )
 }

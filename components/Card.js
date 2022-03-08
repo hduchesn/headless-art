@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import RichText from "./text/RichText"
+import RichText from "./jahia/RichText"
 
 const Card = ({content}) => {
     //TODO replace content by graphQL call, should receive a content id or path

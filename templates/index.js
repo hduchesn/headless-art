@@ -4,9 +4,7 @@ import Home from "./Home";
 
 const templates = {
     'home': Home,
-    // 'news': News,
     'default': Home,
-    // '2-column': TwoColumns
 }
 
  const Template = ({templateName, ...props}) => {
