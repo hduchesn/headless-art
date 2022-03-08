@@ -7,38 +7,6 @@ import Area from "../components/Area"
 import AreaJ from "../components/AreaJ"
 const Home = ({templateName,path,content}) => {
 
-    // const getNodes = gql`query($workspace: Workspace!, $base: String!) {
-    //     jcr(workspace: $workspace) {
-    //         nodeByPath(path: $base) {
-    //             id: uuid
-    //             children {
-    //                 nodes {
-    //                     id: uuid
-    //                     name
-    //                     path
-    //                     primaryNodeType {
-    //                         name
-    //                     }
-    //                     properties {
-    //                         name
-    //                         value
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }`;
-    //
-    // const ret = useQuery(getNodes, {
-    //     variables: {
-    //         base: path + "/area-main",
-    //         workspace
-    //     }
-    // })
-
-
-
-
 console.log("[Home] templateName : ",templateName);
     return(
         <div jahiatype="mainmodule"
@@ -60,11 +28,11 @@ console.log("[Home] templateName : ",templateName);
 
             <p style={{color:"red"}}>hardcoded area 2</p>
 
-            {/*<AreaJ*/}
-            {/*    name="testArea2"*/}
-            {/*    mainResourcePath={path}*/}
-            {/*    isEdit="true"*/}
-            {/*    locale="en"/>*/}
+            <AreaJ
+                name="testArea2"
+                mainResourcePath={path}
+                isEdit="true"
+                locale="en"/>
 
             {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}
             <div className="top-shadow"></div>

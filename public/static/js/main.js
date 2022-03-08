@@ -145,6 +145,16 @@
   // 	}
 	// });
 
+	// $('.element-animate').each(function(index){
+	// 	var el = $(this);
+	// 	el.appear(function () {
+	// 		el.css("opacity", "1");
+	// 		el.css("visibility", "visible");
+	// 		setTimeout( function () {
+	// 			el.addClass("animated fadeInUp");
+	// 		},  index * 100);
+	// 	});
+	// });
 
 	var contentWayPoint = function() {
 		var i = 0;

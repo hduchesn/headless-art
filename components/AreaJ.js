@@ -31,13 +31,16 @@ const Areaj = ({name, mainResourcePath, isEdit, locale, path}) => {
             }
         }
         jcr {
+            workspace
             nodeByPath(path:$pathArea) {
-                id: uuid
+                workspace
+                uuid
                 name
                 path
                 children{
                     nodes{
-                        id: uuid
+                        workspace
+                        uuid
                         path
                         primaryNodeType{name}
                     }
@@ -108,20 +111,20 @@ const Areaj = ({name, mainResourcePath, isEdit, locale, path}) => {
 
                 if(isEditMode)
                     return(
-                        <div key={node.id} {...divs[node.path]}>
-                            <Component id={node.id}
+                        <div key={node.uuid} {...divs[node.path]}>
+                            <Component id={node.uuid}
                                        path={node.path}
                                        locale={locale}/>
                         </div>
                     )
 
-                return <Component key={node.id}
-                                  id={node.id}
+                return <Component key={node.uuid}
+                                  id={node.uuid}
                                   path={node.path}
                                   locale={locale}/>
             }
             return (
-                <div key={node.id}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>
+                <div key={node.uuid}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>
             )
         });
     }

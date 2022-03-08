@@ -8,15 +8,18 @@ const Hero = ({id, path, locale}) => {
     const [content,setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
+            workspace
             nodeById(uuid: $id) {
-                id:uuid
+                workspace
+                uuid
                 name
                 body: property(language:$language, name:"body"){
                     value
                 }
                 media: property(language:$language,name:"wden:mediaNode",){
                     node: refNode {
-                        id: uuid
+                        workspace
+                        uuid
                         type: primaryNodeType{
                             value:name
                         }

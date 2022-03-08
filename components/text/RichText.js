@@ -25,8 +25,10 @@ const RichText = ({id,path, locale}) => {
 
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
+            workspace
             nodeById(uuid: $id) {
-                id:uuid
+                workspace
+                uuid
                 name
                 content: property(language:$language, name:"text"){
                     value

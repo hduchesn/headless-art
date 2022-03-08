@@ -20,11 +20,11 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
     console.log("[MyApps] pageProps:",JSON.stringify(pageProps))
   }, [pageProps]);
     // console.log("[MyApps] pageProps:",JSON.stringify(pageProps))
-  // useEffect(() => {
-  //   import("../public/static/js/jquery.waypoints.min.js");
-  //   import("bootstrap/dist/js/bootstrap");
-  //   import("../public/static/js/main.js");
-  // }, []);
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap");
+    // import("../public/static/js/jquery.waypoints.min.js");
+    // import("../public/static/js/main.js");
+  }, []);
 
   if (process.browser && apolloState) {
     console.log('restoring cache..')
