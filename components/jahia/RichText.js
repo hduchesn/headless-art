@@ -31,7 +31,7 @@ const RichText = ({id,path, locale}) => {
         },
         onCompleted: data => setContent(data.jcr?.nodeById?.content.value)
     });
-
+    // console.log("[RichText] is resolved");
     // const content= "<h3>Hello le text</h3>"
     return (
         <div dangerouslySetInnerHTML={{ __html: content }}></div>

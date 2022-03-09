@@ -1,12 +1,14 @@
 import React, {useContext} from "react";
 import {JahiaCtx} from "../../lib/context";
-import {gql, useQuery} from "@apollo/client";
-import classNames from 'classnames';
+import {useQuery} from "@apollo/client";
 
 import OWCHeading from "./heading"
 // import OWCTestimonial from "./testimonial"
 
-import {getJahiaDivsProps} from "../../lib/utils";
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel';
+import {queryCarousel} from "./gqlQuery";
+
 
 const carouselType = {
     'heading': OWCHeading,
@@ -15,78 +17,71 @@ const carouselType = {
 
 const OwlCarousel = ({id, path,mainResourcePath, locale,isEdit}) =>{
     const {workspace} = useContext(JahiaCtx);
-    const [divs, setDivs] = React.useState([]);
     const [carousel, setCarousel] = React.useState({});
-    const isEditMode = JSON.parse(isEdit) || false;
 
-    const getContent = gql`query (
-        $workspace:Workspace!,
-        $id: String!,
-        $mainResourcePath: String,
-        $language:String,
-        $isEditMode: Boolean) {
-        jcr(workspace: $workspace) {
-            workspace
-            nodeById(uuid:$id) {
-                renderedContent(
-                    mainResourcePath: $mainResourcePath,
-                    language: $language,
-                    isEditMode:$isEditMode) {
-                    output
-                }
-                workspace
-                uuid
-                name
-                path
-                carouselType:property(name:"carouselType") {
-                    value
-                }
-                options:property(name:"options") {
-                    value
-                }
-                class:property(name:"class") {
-                    value
-                }
-                children{
-                    items:nodes{
-                        workspace
-                        uuid
-                        path
-                        primaryNodeType{name}
+    React.useEffect(() => {
+        if(carousel.uuid && process.browser){
+            console.log("[OwlCarousel] launch the carousel in the browser");
+
+            let gqlOptions = {};
+            try{
+                gqlOptions = JSON.parse(carousel.options?.value)
+            }catch (error){
+                console.warn("no options configured for the carousel: ",carousel.name)
+            }
+
+            const options = Object.assign({
+                loop:true,
+                autoplay: true,
+                margin:0,
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                nav:true,
+                autoplayHoverPause: true,
+                items: 1,
+                dragTouch: false,
+                navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:false
+                    },
+                    600:{
+                        items:1,
+                        nav:false
+                    },
+                    1000:{
+                        items:1,
+                        nav:true
                     }
                 }
-            }
-        }
-    }`;
+            },gqlOptions);
+            window.jQuery(`#${carousel.uuid}`).owlCarousel(options)
 
-    useQuery(getContent, {
+        }
+    }, [carousel]);
+
+    useQuery(queryCarousel, {
         variables: {
             workspace,
             id,
             language: locale,
             mainResourcePath,
-            isEditMode
+            isEditMode:false
         },
         onCompleted: data => {
-            setDivs(getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output));
             setCarousel(data.jcr?.nodeById);
         }
     });
 
+// console.log("[OwlCarousel] carousel.class :",carousel.class);
     if (carouselType[carousel.carouselType?.value]){
         const Component = carouselType[carousel.carouselType.value];
         return(
             <>
-                <section id={carousel.uuid} className={classNames(
-                    carousel.class,
-                    {'j-owl-carousel-edit':isEditMode}
-                )}>
+                <section id={carousel.uuid} className={carousel.class?.value}>
                     <Component items={carousel.children.items} locale={locale} isEdit={isEdit}/>
                 </section>
-                {/*Jahia btn placeholder to add a new item*/}
-                {isEditMode &&
-                    <div {...divs["*"]}></div>
-                }
             </>
         )
     }

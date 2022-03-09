@@ -1,6 +1,7 @@
+import {getBoolean} from "../../lib/utils";
 
 const Main = ({path,templateName,locale,isEdit,children}) =>{
-    const isEditMode = JSON.parse(isEdit) || false;
+    const isEditMode = getBoolean(isEdit);
 
     if(!isEditMode)
         return(<>{children}</>)

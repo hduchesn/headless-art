@@ -1,13 +1,13 @@
 import React from "react";
 import {gql, useQuery} from "@apollo/client";
-import {getJahiaDivsProps} from "../../lib/utils";
+import {getBoolean, getJahiaDivsProps} from "../../lib/utils";
 
 
 const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
     const [divs, setDivs] = React.useState([]);
     const [area, setArea] = React.useState({});
-    const isEditMode = JSON.parse(isEdit) || false;
-
+    const isEditMode = getBoolean(isEdit);
+// console.log("[Area] components: ",components);
     const getRenderedContent = gql`query (
         $pathArea: String!,
         $mainResourcePath: String,
@@ -64,16 +64,6 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
         onCompleted: data =>{
             // console.log("[Area] data :",data)
             setDivs(getJahiaDivsProps(data.npm?.renderedComponent?.output));
-            // const html = parse(data.npm?.renderedComponent?.output);
-            // setDivs(
-            //     html?.getElementsByTagName('div')
-            //     .reduce((map,div) => {
-            //         const path = div.getAttribute('path');
-            //         if(path)
-            //             map[path]=div.attributes;
-            //         return map;
-            //     },{})
-            // )
             setArea(data.jcr?.nodeByPath);
         }
     })
@@ -109,7 +99,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
             )
         });
     }
-
+// console.log("[Area] resolve area : ",name);
     return(
         <>
             {isEditMode &&

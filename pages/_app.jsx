@@ -61,6 +61,8 @@ MyApp.getInitialProps = async (appContext) => {
   if (!process.browser ) {//&& (appContext.ctx.pathname === '/ssr/[...path]' || appContext.ctx.pathname === '/ssg/[...path]')
     console.log("[MyApp.getInitialProps] isPreview :", isPreview);
 
+    // console.log("[MyApp.getInitialProps] appContext.ctx.req :", (appContext.ctx.req));
+
   if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {
     await client.resetStore();
   }
@@ -83,7 +85,7 @@ MyApp.getInitialProps = async (appContext) => {
     //   variables: {path}
     // });
 
-    const gqlData = await getPageInfo(path)
+    const {data:gqlData} = await getPageInfo(path);
     console.log("[MyApp.getInitialProps] gqlData :", gqlData);
 
     data = {
@@ -94,7 +96,7 @@ MyApp.getInitialProps = async (appContext) => {
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName.value,
         isPreview,
-        isEdit:'true',//TODO how to get this?
+        //isEdit:true,//TODO how to get this?
         locale:'en'
       },
     }

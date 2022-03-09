@@ -46,7 +46,7 @@ const Hero = ({id, path, locale}) => {
         })
     });
 
-
+    // console.log("[Hero] is resolved");
 //element-animate
 //     <div className="slider-item" style={{backgroundImage: `url('/files/default${getImageURI(content.media?.path)}')`}}>
 //     <div className="slider-item" style={{backgroundImage:   `url('/files/default${encodeURI(content.media?.path)}')`}}>

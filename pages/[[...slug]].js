@@ -31,10 +31,12 @@ export const getStaticProps = async (context) => {
     // const { params, locale, locales, defaultLocale, preview = null } = context
     console.log("[getStaticProps] context.preview : ", context.preview)
     console.log("[getStaticProps] isPreview : ", !!context.preview)
+    console.log("[getStaticProps] isEdit : ", context.previewData?.isEdit || false)
     // Nothing to add
     return {
         props: {
             isPreview: !!context.preview,
+            isEdit:context.previewData?.isEdit || false
             // content
         },
         revalidate: 10

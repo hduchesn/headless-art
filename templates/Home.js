@@ -3,7 +3,7 @@ import components from "../components/";
 
 const Home = ({templateName,path,isEdit,locale}) => {
 
-console.log("[Home] templateName : ",templateName);
+// console.log("[Home] templateName : ",templateName);
     return(
         <>
 
@@ -13,7 +13,7 @@ console.log("[Home] templateName : ",templateName);
             <Area
                 name="testArea"
                 mainResourcePath={path}
-                components={components}
+                components={components({isEdit})}
                 isEdit={isEdit}
                 locale={locale}/>
 
@@ -24,7 +24,7 @@ console.log("[Home] templateName : ",templateName);
             <Area
                 name="testArea2"
                 mainResourcePath={path}
-                components={components}
+                components={components({isEdit})}
                 isEdit={isEdit}
                 locale={locale}/>
 
