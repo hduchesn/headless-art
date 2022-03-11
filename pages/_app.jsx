@@ -56,8 +56,9 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
 
 MyApp.getInitialProps = async (appContext) => {
   let data = await App.getInitialProps(appContext);
+  console.log("[MyApp.getInitialProps] cookies : ",(appContext.ctx.req).cookies);
   const isPreview = (appContext.ctx.req).cookies && !!(appContext.ctx.req).cookies.__next_preview_data;
-  // console.log("appContext.ctx : ",appContext.ctx)
+  // console.log("appContext.ctx.req : ",appContext.ctx.req)
   if (!process.browser ) {//&& (appContext.ctx.pathname === '/ssr/[...path]' || appContext.ctx.pathname === '/ssg/[...path]')
     console.log("[MyApp.getInitialProps] isPreview :", isPreview);
 
@@ -67,19 +68,31 @@ MyApp.getInitialProps = async (appContext) => {
     await client.resetStore();
   }
 
-    // const path = appContext.ctx.asPath.substr(4)
-    let path = appContext.ctx.asPath
-     console.log("[MyApp.getInitialProps] initial path :", path);
+    console.log("[MyApp.getInitialProps] initial path :", appContext.ctx.asPath);
+    const [path,queryParams] = appContext.ctx.asPath.split("?");
+    const query = queryParams?.split('&').reduce((queryObj,item)=>{
+      const [key,value]=item.split('=');
+      queryObj[key]=value;
+      return queryObj;
+    },{});
+    console.log("[MyApp.getInitialProps] updated path :", path);
+    console.log("[MyApp.getInitialProps] updated query :", query);
 
-    const qIndex = path.indexOf('?')
-    if(qIndex!==-1)
-      path = path.substr(0,qIndex)
+    // // const path = appContext.ctx.asPath.substr(4)
+    // let path = appContext.ctx.asPath
+    //  console.log("[MyApp.getInitialProps] initial path :", path);
+    //
+    // const qIndex = path.indexOf('?')
+    //
+    //
+    // if(qIndex!==-1)
+    //   path = path.substr(0,qIndex)
 
 //TODO get meta of the page
 //     const meta = {
 //       title:"Industrial"
 //     }
-    console.log("[MyApp.getInitialProps] updated path :", path);
+
     // const {data: gqlData} = await client.query({
     //   query: getPageInfo,
     //   variables: {path}
@@ -96,7 +109,7 @@ MyApp.getInitialProps = async (appContext) => {
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName.value,
         isPreview,
-        //isEdit:true,//TODO how to get this?
+        isEdit:query?.edit === 'true'?true:false,
         locale:'en'
       },
     }

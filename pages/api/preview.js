@@ -1,4 +1,5 @@
 import {getPageInfo} from "../../lib/pages";
+import jahia from'../../jahia';
 
 
 export default async function handler(req, res) {
@@ -23,13 +24,20 @@ export default async function handler(req, res) {
         return res.status(401).json({ message: 'Invalid path' })
     }
 
+    const isEdit = req.query.edit === "true" ? true : false;
     // Enable Preview Mode by setting the cookies
     res.setPreviewData({
-        isEdit:req.query.edit === "true" ? true : false
+        // isEdit:req.query.edit === "true" ? true : false
+    },{
+        // maxAge: 30, // The preview mode cookies expire in 30 s
     })
 
+    let redirect = `${jahia.paths.preview}${data.jcr.nodeByPath.path}.html`;
+    if(isEdit)
+        redirect = `${jahia.paths.edit}${data.jcr.nodeByPath.path}.html?redirect=false&edit=${isEdit}`;
+console.log("[api preview] redirect to : ",redirect);
     // Redirect to the path from the fetched post
     // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
     //TODO
-    res.redirect(data.jcr.nodeByPath.path);
+    res.redirect(redirect);
 }

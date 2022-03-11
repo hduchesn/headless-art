@@ -11,7 +11,7 @@ const Item = ({id,locale,isEdit}) => {
     const [content,setContent] = React.useState({})
     const isEditMode = getBoolean(isEdit);
 
-    console.log("[Item] isEditMode :",isEditMode);
+    // console.log("[Item] isEditMode :",isEditMode);
 
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
@@ -65,7 +65,7 @@ const Item = ({id,locale,isEdit}) => {
         onCompleted: data => setContent(data.jcr?.nodeById)
     });
 
-    console.log("[Item] image path :",content.media?.refNode?.path);
+    // console.log("[Item] image path :",content.media?.refNode?.path);
     // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">
     // element-animate
     return (

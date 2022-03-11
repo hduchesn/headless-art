@@ -36,7 +36,7 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             isPreview: !!context.preview,
-            isEdit:context.previewData?.isEdit || false
+            // isEdit:context.previewData?.isEdit || false
             // content
         },
         revalidate: 10

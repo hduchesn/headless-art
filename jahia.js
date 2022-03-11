@@ -7,5 +7,9 @@ export default {
         EXT_VIDEO:'ext:video',
         JNT_FILE:'jnt:file',
         IMAGE:'jmix:image'
+    },
+    paths:{//TODO remove locale from path to add it dynamically
+        preview:'/cms/render/default/en',
+        edit:'/cms/editframe/default/en'
     }
 }
