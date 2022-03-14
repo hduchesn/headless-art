@@ -1,9 +1,11 @@
-import Item from "./Item"
-import {getBoolean} from "../../../lib/utils";
+import React from 'react';
+import Item from "./Item";
+import {JahiaCtx} from "../../../lib/context";
 
-const Heading = ({items,locale,divs,isEdit}) =>{
-    console.log("[Heading] isEdit :",isEdit);
-    const isEditMode = getBoolean(isEdit);
+const Heading = ({items,locale,divs}) =>{
+    const {isEditMode} = React.useContext(JahiaCtx);
+console.log("[Heading] isEditMode : ",isEditMode);
+
 
     return (
         <>
@@ -12,8 +14,7 @@ const Heading = ({items,locale,divs,isEdit}) =>{
                     <div key={item.uuid} {...divs[item.path]}>
                         <Item key={item.uuid}
                               id={item.uuid}
-                              locale={locale}
-                              isEdit={isEdit}/>
+                              locale={locale}/>
                     </div>
                 )
             }
@@ -21,8 +22,7 @@ const Heading = ({items,locale,divs,isEdit}) =>{
                 items.map(item =>
                         <Item key={item.uuid}
                               id={item.uuid}
-                              locale={locale}
-                              isEdit={isEdit}/>
+                              locale={locale}/>
                 )
             }
         </>

@@ -1,22 +1,25 @@
+import React from 'react';
 import Head from "next/head";
 import Main from "./jahia/Main";
 import Script from "next/script";
-const Layout = ({children,isEdit,path,templateName,meta}) => {
+import {JahiaCtx} from "../lib/context";
+const Layout = ({children,path,templateName,meta}) => {
+    const {isEditMode} = React.useContext(JahiaCtx);
+console.log("[Layout] isEditMode : ",isEditMode);
     //TODO define meta here
     return(
         <>
             <Head>
                 <title>Hello</title>
 
-                {isEdit &&
+                {isEditMode &&
                     <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>
                 }
 
             </Head>
             <Main path={path}
                   templateName={templateName}
-                  locale="en"
-                  isEdit={isEdit}>
+                  locale="en">
                 {children}
             </Main>
 

@@ -4,7 +4,7 @@ import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {getImageURI} from "../lib/utils";
 
-const Hero = ({id, path, locale}) => {
+const Hero = ({id, locale}) => {
     const {workspace} = useContext(JahiaCtx);
     const [content,setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
@@ -51,7 +51,9 @@ const Hero = ({id, path, locale}) => {
 //     <div className="slider-item" style={{backgroundImage: `url('/files/default${getImageURI(content.media?.path)}')`}}>
 //     <div className="slider-item" style={{backgroundImage:   `url('/files/default${encodeURI(content.media?.path)}')`}}>
     return(
+
         <div className="inner-page">
+            {content &&
             <div className="slider-item" style={{backgroundImage: `url('${getImageURI({uri:content.media?.path,workspace})}')`}}>
                 <div className="container">
                     <div className="row slider-text align-items-center justify-content-center">
@@ -60,7 +62,7 @@ const Hero = ({id, path, locale}) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

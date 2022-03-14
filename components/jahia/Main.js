@@ -1,7 +1,8 @@
-import {getBoolean} from "../../lib/utils";
+import React from 'react';
+import {JahiaCtx} from "../../lib/context";
 
-const Main = ({path,templateName,locale,isEdit,children}) =>{
-    const isEditMode = getBoolean(isEdit);
+const Main = ({path,templateName,locale,children}) =>{
+    const {isEditMode} = React.useContext(JahiaCtx);
 
     if(!isEditMode)
         return(<>{children}</>)

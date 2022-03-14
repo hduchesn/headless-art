@@ -4,7 +4,7 @@ import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 
 
-const RichText = ({id,path, locale}) => {
+const RichText = ({id,locale}) => {
     const {workspace} = useContext(JahiaCtx);
     const [content,setContent] = React.useState("")
 

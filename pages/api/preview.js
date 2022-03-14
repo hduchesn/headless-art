@@ -5,9 +5,9 @@ import jahia from'../../jahia';
 export default async function handler(req, res) {
 
 
-    console.log('api preview',req.query.path)
+    console.log('[API Preview] req.query.path: ',req.query.path)
     let path = req.query.path
-    console.log("[MyApp.getInitialProps] initial path :", path);
+    console.log("[API Preview] initial path :", path);
 
     const qIndex = path.indexOf('?')
     if(qIndex!==-1)
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     let redirect = `${jahia.paths.preview}${data.jcr.nodeByPath.path}.html`;
     if(isEdit)
         redirect = `${jahia.paths.edit}${data.jcr.nodeByPath.path}.html?redirect=false&edit=${isEdit}`;
-console.log("[api preview] redirect to : ",redirect);
+console.log("[API Preview] redirect to : ",redirect);
     // Redirect to the path from the fetched post
     // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
     //TODO

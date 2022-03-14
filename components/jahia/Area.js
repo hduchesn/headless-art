@@ -1,14 +1,19 @@
 import React from "react";
 import {gql, useQuery} from "@apollo/client";
-import {getBoolean, getJahiaDivsProps} from "../../lib/utils";
+import {getJahiaDivsProps} from "../../lib/utils";
+import {JahiaCtx} from "../../lib/context";
 
 
-const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
+const Area = ({name, mainResourcePath, locale, components, path}) => {
+    const {workspace,isEditMode} = React.useContext(JahiaCtx);
+console.log("[Area] isEditMode : ",isEditMode);
+
     const [divs, setDivs] = React.useState([]);
     const [area, setArea] = React.useState({});
-    const isEditMode = getBoolean(isEdit);
+    // const isEditMode = getBoolean(isEdit);
 // console.log("[Area] components: ",components);
     const getRenderedContent = gql`query (
+        $workspace:Workspace!,
         $pathArea: String!,
         $mainResourcePath: String,
         $path: String,
@@ -29,7 +34,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
                 output
             }
         }
-        jcr {
+        jcr(workspace:$workspace) {
             workspace
             nodeByPath(path:$pathArea) {
                 workspace
@@ -51,6 +56,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
     // const area = useQuery(getRenderedContent, {
     useQuery(getRenderedContent, {
         variables: {
+            workspace,
             pathArea:`${mainResourcePath}/${name}`,
             node: {
                 name,
@@ -82,8 +88,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
                             <Component id={node.uuid}
                                        path={node.path}
                                        mainResourcePath={mainResourcePath}
-                                       locale={locale}
-                                       isEdit={isEdit}/>
+                                       locale={locale}/>
                         </div>
                     )
 
@@ -91,8 +96,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
                                   id={node.uuid}
                                   path={node.path}
                                   mainResourcePath={mainResourcePath}
-                                  locale={locale}
-                                  isEdit="false"/>
+                                  locale={locale}/>
             }
             return (
                 <div key={node.uuid}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>
@@ -100,6 +104,7 @@ const Area = ({name, mainResourcePath, isEdit, locale, components, path}) => {
         });
     }
 // console.log("[Area] resolve area : ",name);
+// console.log("[Area] divs : ",divs);
     return(
         <>
             {isEditMode &&

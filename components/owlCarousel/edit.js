@@ -4,22 +4,18 @@ import {gql, useQuery} from "@apollo/client";
 import classNames from 'classnames';
 import styles from './edit.module.css'
 
-import OWCHeading from "./heading"
-// import OWCTestimonial from "./testimonial"
 
-import {getBoolean, getJahiaDivsProps} from "../../lib/utils";
+import {getJahiaDivsProps} from "../../lib/utils";
 import {queryCarousel} from "./gqlQuery";
+import carouselType from './carouselType';
 
-const carouselType = {
-    'heading': OWCHeading,
-    // 'testimonial': OWCTestimonial
-}
 
-const OwlCarousel = ({id, path,mainResourcePath, locale,isEdit}) =>{
+
+const OwlCarousel = ({id, mainResourcePath, locale}) =>{
     const {workspace} = useContext(JahiaCtx);
     const [divs, setDivs] = React.useState([]);
     const [carousel, setCarousel] = React.useState({});
-    // const isEditMode = getBoolean(isEdit);
+
     // const carouselId = Math.ceil(Math.random()* 100000);
 
     useQuery(queryCarousel, {
@@ -45,7 +41,7 @@ const OwlCarousel = ({id, path,mainResourcePath, locale,isEdit}) =>{
                     carousel.class?.value,
                     styles.jOwlCarouselEdit
                 )}>
-                    <Component items={carousel.children.items} locale={locale} divs={divs} isEdit={isEdit}/>
+                    <Component items={carousel.children.items} locale={locale} divs={divs}/>
                 </section>
                 {/*Jahia btn placeholder to add a new item*/}
                 <div {...divs["*"]}></div>

@@ -1,8 +1,10 @@
+import React from 'react';
 import Area from "../components/jahia/Area";
 import components from "../components/";
+import {JahiaCtx} from "../lib/context";
 
-const Home = ({templateName,path,isEdit,locale}) => {
-
+const Home = ({path,locale}) => {
+    const {isEditMode} = React.useContext(JahiaCtx)
 // console.log("[Home] templateName : ",templateName);
     return(
         <>
@@ -13,8 +15,7 @@ const Home = ({templateName,path,isEdit,locale}) => {
             <Area
                 name="testArea"
                 mainResourcePath={path}
-                components={components({isEdit})}
-                isEdit={isEdit}
+                components={components({isEditMode})}
                 locale={locale}/>
 
 
@@ -24,8 +25,7 @@ const Home = ({templateName,path,isEdit,locale}) => {
             <Area
                 name="testArea2"
                 mainResourcePath={path}
-                components={components({isEdit})}
-                isEdit={isEdit}
+                components={components({isEditMode})}
                 locale={locale}/>
 
             {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}

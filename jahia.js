@@ -6,7 +6,9 @@ export default {
         WIDEN_VIDEO:"wdennt:video",
         EXT_VIDEO:'ext:video',
         JNT_FILE:'jnt:file',
-        IMAGE:'jmix:image'
+        IMAGE:'jmix:image',
+        HALFBLOCK_IMAGE:'hicnt:image',
+        INDUS_TEXT:'hicnt:text'
     },
     paths:{//TODO remove locale from path to add it dynamically
         preview:'/cms/render/default/en',

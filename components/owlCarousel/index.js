@@ -8,14 +8,9 @@ import OWCHeading from "./heading"
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
 import {queryCarousel} from "./gqlQuery";
+import carouselType from './carouselType';
 
-
-const carouselType = {
-    'heading': OWCHeading,
-    // 'testimonial': OWCTestimonial
-}
-
-const OwlCarousel = ({id, path,mainResourcePath, locale,isEdit}) =>{
+const OwlCarousel = ({id,mainResourcePath, locale}) =>{
     const {workspace} = useContext(JahiaCtx);
     const [carousel, setCarousel] = React.useState({});
 
@@ -80,7 +75,7 @@ const OwlCarousel = ({id, path,mainResourcePath, locale,isEdit}) =>{
         return(
             <>
                 <section id={carousel.uuid} className={carousel.class?.value}>
-                    <Component items={carousel.children.items} locale={locale} isEdit={isEdit}/>
+                    <Component items={carousel.children.items} locale={locale}/>
                 </section>
             </>
         )

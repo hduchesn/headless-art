@@ -9,6 +9,7 @@ import App, {AppContext, AppInitialProps, AppProps} from "next/dist/pages/_app";
 import {getPageInfo} from '../lib/pages';
 
 import '../styles/style.scss';
+import {getPathAndQuery} from "../lib/utils";
 
 
 
@@ -44,59 +45,42 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
   // )
 
   return (
-      <JahiaCtxProvider value={{
-        workspace: "EDIT"//pageProps.isPreview ? "EDIT" : "LIVE"
-      }}>
-          <ApolloProvider client={client}>
-              <Component {...pageProps} />
-          </ApolloProvider>
-      </JahiaCtxProvider>
+    <JahiaCtxProvider value={{
+      workspace: pageProps.isPreview ? "EDIT" : "LIVE",
+      isEditMode: pageProps.isEditMode ? pageProps.isEditMode : false,//TODO add locale here?
+    }}>
+        <ApolloProvider client={client}>
+            <Component {...pageProps} />
+        </ApolloProvider>
+    </JahiaCtxProvider>
   )
 }
 
 MyApp.getInitialProps = async (appContext) => {
   let data = await App.getInitialProps(appContext);
+
   console.log("[MyApp.getInitialProps] cookies : ",(appContext.ctx.req).cookies);
   const isPreview = (appContext.ctx.req).cookies && !!(appContext.ctx.req).cookies.__next_preview_data;
-  // console.log("appContext.ctx.req : ",appContext.ctx.req)
-  if (!process.browser ) {//&& (appContext.ctx.pathname === '/ssr/[...path]' || appContext.ctx.pathname === '/ssg/[...path]')
-    console.log("[MyApp.getInitialProps] isPreview :", isPreview);
+  console.log("[MyApp.getInitialProps] isPreview :", isPreview);
 
-    // console.log("[MyApp.getInitialProps] appContext.ctx.req :", (appContext.ctx.req));
+  console.log("[MyApp.getInitialProps] appContext.ctx.pathname :", appContext.ctx.pathname)
+  if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {//&& (appContext.ctx.pathname === '/ssr/[...path]' || appContext.ctx.pathname === '/ssg/[...path]')
 
-  if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {
-    await client.resetStore();
-  }
+    // if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {
+      await client.resetStore();
+    // }
 
+    console.log("[MyApp.getInitialProps] locale :", appContext.router.locale);
     console.log("[MyApp.getInitialProps] initial path :", appContext.ctx.asPath);
-    const [path,queryParams] = appContext.ctx.asPath.split("?");
-    const query = queryParams?.split('&').reduce((queryObj,item)=>{
-      const [key,value]=item.split('=');
-      queryObj[key]=value;
-      return queryObj;
-    },{});
+    const [path,query] = getPathAndQuery(appContext.ctx.asPath);
+
     console.log("[MyApp.getInitialProps] updated path :", path);
     console.log("[MyApp.getInitialProps] updated query :", query);
 
-    // // const path = appContext.ctx.asPath.substr(4)
-    // let path = appContext.ctx.asPath
-    //  console.log("[MyApp.getInitialProps] initial path :", path);
-    //
-    // const qIndex = path.indexOf('?')
-    //
-    //
-    // if(qIndex!==-1)
-    //   path = path.substr(0,qIndex)
-
-//TODO get meta of the page
-//     const meta = {
-//       title:"Industrial"
-//     }
-
-    // const {data: gqlData} = await client.query({
-    //   query: getPageInfo,
-    //   variables: {path}
-    // });
+    //TODO get meta of the page
+    //     const meta = {
+    //       title:"Industrial"
+    //     }
 
     const {data:gqlData} = await getPageInfo(path);
     console.log("[MyApp.getInitialProps] gqlData :", gqlData);
@@ -109,7 +93,7 @@ MyApp.getInitialProps = async (appContext) => {
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName.value,
         isPreview,
-        isEdit:query?.edit === 'true'?true:false,
+        isEditMode:query?.edit === 'true'?true:false,
         locale:'en'
       },
     }
@@ -119,7 +103,7 @@ MyApp.getInitialProps = async (appContext) => {
     const {AppTree} = appContext;
     const Wrapper = () => (<AppTree {...data}/>)
 
-    console.log('Pre-render:', appContext.ctx.req.url)
+    console.log('Pre-render:', path)
     await renderToStringWithData(<Wrapper/>)
     console.log('pre-render:done')
 
