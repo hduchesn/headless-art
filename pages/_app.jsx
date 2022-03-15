@@ -91,7 +91,7 @@ MyApp.getInitialProps = async (appContext) => {
         ...data.pageProps,
         // meta,
         path: gqlData.jcr.nodeByPath.path,
-        templateName: gqlData.jcr.nodeByPath.templateName.value,
+        templateName: gqlData.jcr.nodeByPath.templateName?.value || 'default',
         isPreview,
         isEditMode:query?.edit === 'true'?true:false,
         locale:'en'
