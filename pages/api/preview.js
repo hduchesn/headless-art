@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     if(qIndex!==-1)
         path = path.substr(0,qIndex)
 
-    const {error, data} = await getPageInfo(path);
+    const {error, data} = await getPageInfo(path,"EDIT");
     // const {error, data} = await client.query({
     //     query: getPageInfo,
     //     variables: { path: req.query.path.substring(req.query.path.indexOf('ssg/') + 3) }

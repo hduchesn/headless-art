@@ -23,7 +23,7 @@ export const getStaticPaths = async (context) => {
     //     const localePages = await fetchAPI(`/pages?_locale=${locale}`)
     //     return localePages
     // })
-    const paths = await getAllPages();
+    const paths = await getAllPages(context.locales);
     console.log('[getStaticPaths] paths: ',paths);
     return {
         paths,//: [ '/sites/headless-industrial/home' ],

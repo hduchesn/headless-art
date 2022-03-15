@@ -59,8 +59,12 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
 MyApp.getInitialProps = async (appContext) => {
   let data = await App.getInitialProps(appContext);
 
+  // console.log("[MyApp.getInitialProps] appContext : ",appContext);
   console.log("[MyApp.getInitialProps] cookies : ",(appContext.ctx.req).cookies);
-  const isPreview = (appContext.ctx.req).cookies && !!(appContext.ctx.req).cookies.__next_preview_data;
+  let isPreview = (appContext.ctx.req).cookies && !!(appContext.ctx.req).cookies.__next_preview_data;
+  isPreview = !!isPreview;
+  const workspace = isPreview ? "EDIT" : "LIVE";
+
   console.log("[MyApp.getInitialProps] isPreview :", isPreview);
 
   console.log("[MyApp.getInitialProps] appContext.ctx.pathname :", appContext.ctx.pathname)
@@ -82,7 +86,7 @@ MyApp.getInitialProps = async (appContext) => {
     //       title:"Industrial"
     //     }
 
-    const {data:gqlData} = await getPageInfo(path);
+    const {data:gqlData} = await getPageInfo(path,workspace);
     console.log("[MyApp.getInitialProps] gqlData :", gqlData);
 
     data = {
@@ -93,8 +97,8 @@ MyApp.getInitialProps = async (appContext) => {
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName?.value || 'default',
         isPreview,
-        isEditMode:query?.edit === 'true'?true:false,
-        locale:'en'
+        isEditMode: !!query?.edit, //query?.edit === 'true'?true:false,
+        locale: appContext.router.locale //'en'
       },
     }
 
