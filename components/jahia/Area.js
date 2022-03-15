@@ -6,7 +6,7 @@ import {JahiaCtx} from "../../lib/context";
 
 const Area = ({name, mainResourcePath, locale, components, path}) => {
     const {workspace,isEditMode} = React.useContext(JahiaCtx);
-console.log("[Area] isEditMode : ",isEditMode);
+// console.log("[Area] isEditMode : ",isEditMode);
 
     const [divs, setDivs] = React.useState([]);
     const [area, setArea] = React.useState({});

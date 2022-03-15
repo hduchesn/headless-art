@@ -1,14 +1,15 @@
 import Home from "./Home";
-// import News from "./News";
+import About from "./About";
 // import TwoColumns from "./TwoColumns";
 
 const templates = {
+    'about': About,
     'home': Home,
     'default': Home,
 }
 
  const Template = ({templateName, ...props}) => {
-    console.log('Render page ', props.path)
+    console.log('Render page ', props.path, ", with template : ",templateName)
     if (templateName && templates[templateName]) {
         const Template = templates[templateName];
         return (
