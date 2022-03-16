@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from "next/head";
 import Main from "./jahia/Main";
+import Nav from "./Nav";
 import Script from "next/script";
 import {JahiaCtx} from "../lib/context";
 const Layout = ({children,path,templateName,meta}) => {
@@ -20,6 +21,11 @@ console.log("[Layout] isEditMode : ",isEditMode);
             <Main path={path}
                   templateName={templateName}
                   locale="en">
+
+                <header role="banner">
+                    {/*TODO find a way to get base from context*/}
+                    <Nav base={`/sites/${process.env.JAHIA_SITE}/home`} path={path}/>
+                </header>
                 {children}
             </Main>
 

@@ -47,7 +47,8 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
   return (
     <JahiaCtxProvider value={{
       workspace: pageProps.isPreview ? "EDIT" : "LIVE",
-      isEditMode: pageProps.isEditMode ? pageProps.isEditMode : false,//TODO add locale here?
+      isEditMode: pageProps.isEditMode ? pageProps.isEditMode : false,
+      locale:pageProps.locale //TODO should be here?
     }}>
         <ApolloProvider client={client}>
             <Component {...pageProps} />
@@ -98,7 +99,7 @@ MyApp.getInitialProps = async (appContext) => {
         templateName: gqlData.jcr.nodeByPath.templateName?.value || 'default',
         isPreview,
         isEditMode: !!query?.edit, //query?.edit === 'true'?true:false,
-        locale: appContext.router.locale //'en'
+        locale: query?.locale || appContext.router.locale //'en'
       },
     }
 

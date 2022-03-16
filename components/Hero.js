@@ -41,8 +41,8 @@ const Hero = ({id, locale}) => {
             language: locale,
         },
         onCompleted: data => setContent({
-            body:data.jcr?.nodeById?.body.value,
-            media:data.jcr?.nodeById?.media.node
+            body:data.jcr?.nodeById?.body?.value || 'no body',
+            media:data.jcr?.nodeById?.media?.node
         })
     });
 

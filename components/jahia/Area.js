@@ -8,6 +8,11 @@ const Area = ({name, mainResourcePath, locale, components, path}) => {
     const {workspace,isEditMode} = React.useContext(JahiaCtx);
 // console.log("[Area] isEditMode : ",isEditMode);
 
+// console.log("[Area] mainResourcePath : ",mainResourcePath);
+// console.log("[Area] name : ",name);
+// console.log("[Area] locale : ",locale);
+// console.log("[Area] workspace : ",workspace);
+
     const [divs, setDivs] = React.useState([]);
     const [area, setArea] = React.useState({});
     // const isEditMode = getBoolean(isEdit);

@@ -29,7 +29,7 @@ const RichText = ({id,locale}) => {
             id,
             language: locale,
         },
-        onCompleted: data => setContent(data.jcr?.nodeById?.content.value)
+        onCompleted: data => setContent(data.jcr?.nodeById?.content?.value || "no text")
     });
     // console.log("[RichText] is resolved");
     // const content= "<h3>Hello le text</h3>"
