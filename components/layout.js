@@ -24,7 +24,8 @@ console.log("[Layout] isEditMode : ",isEditMode);
 
                 <header role="banner">
                     {/*TODO find a way to get base from context*/}
-                    <Nav base={`/sites/${process.env.JAHIA_SITE}/home`} path={path}/>
+                    {/*<Nav base={`/sites/${process.env.JAHIA_SITE}/home`} path={path}/>*/}
+                    <Nav base={`/sites/headless-industrial/home`} path={path}/>
                 </header>
                 {children}
             </Main>

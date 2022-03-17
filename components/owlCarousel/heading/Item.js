@@ -68,7 +68,7 @@ const Item = ({id,locale}) => {
     // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">
     // element-animate
 
-    console.log("[Item] content :",content);
+    // console.log("[owl Heading Item] content :",content);
     return (
         <>
             {isEditMode &&

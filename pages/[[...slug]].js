@@ -18,13 +18,13 @@ const DynamicPage = (props) => {
 export default DynamicPage;
 
 export const getStaticPaths = async (context) => {
-    console.log('[getStaticPaths] start with context : ',context);
+console.log('[getStaticPaths] start with context : ',context);
     // const allPages = context.locales.map(async (locale) => {
     //     const localePages = await fetchAPI(`/pages?_locale=${locale}`)
     //     return localePages
     // })
     const paths = await getAllPages(context.locales);
-    console.log('[getStaticPaths] paths: ',paths);
+// console.log('[getStaticPaths] paths: ',paths);
     return {
         paths,//: [ '/sites/headless-industrial/home' ],
         fallback: 'blocking'
@@ -34,7 +34,7 @@ export const getStaticPaths = async (context) => {
 
 export const getStaticProps = async (context) => {
     // const { params, locale, locales, defaultLocale, preview = null } = context
-    console.log("[getStaticProps] context.preview : ", context.preview)
+// console.log("[getStaticProps] context.preview : ", context.preview)
     // Nothing to add
     return {
         props: {

@@ -17,6 +17,7 @@ const Nav = ({base,path}) => {
         $MenuItem:[String]!) {
         
         jcr(workspace: $workspace) {
+            workspace
             nodeByPath(path: $base) {
                 workspace
                 uuid
@@ -55,6 +56,7 @@ const Nav = ({base,path}) => {
             }
         }
     }`;
+console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
 
     useQuery(getSitePages, {
         variables: {
@@ -65,12 +67,22 @@ const Nav = ({base,path}) => {
             MenuItem: contentTypes.MENU_ITEM
         },
         onCompleted: data => {
+console.log("[Nav] data",data);
             setNavTree(data.jcr?.nodeByPath)
+        },
+        onError: error => {
+console.log("[Nav] error",error);
         }
     });
 
+// console.log("[Nav] ret",ret);
+// console.log("[Nav] ret.data",ret.data);
+// console.log("[Nav] ret.loading",ret.loading);
+// console.log("[Nav] ret.error",ret.error);
+// console.log("[Nav] navTree",navTree);
+
     const hasChildren = (node) => {
-        return Array.isArray(node.children) && node.children.length >0
+        return Array.isArray(node.children?.nodes) && node.children.nodes.length >0
     }
 
     const buildAnchorProps = (node) => {
@@ -95,7 +107,7 @@ const Nav = ({base,path}) => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <Link href={navTree.path || ""} locale={locale}>
-                    <a className="navbar-brand " >{navTree.title}</a>
+                    <a className="navbar-brand " >{navTree.title?.value}</a>
                 </Link>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -108,6 +120,7 @@ const Nav = ({base,path}) => {
                     <ul className="navbar-nav pl-md-5 ml-auto">
                         {
                             navTree.children?.nodes?.map(node =>{
+                                console.log("node.path : ",node.path);
                                 return(
                                     <li key={node.uuid}
                                         className={classnames("nav-item",{
@@ -116,18 +129,23 @@ const Nav = ({base,path}) => {
                                     >
                                         <Link href={node.path} locale={locale}>
                                             <a {...buildAnchorProps(node)}>
-                                                node.title
+                                                {node.title?.value}
                                             </a>
-                                            {hasChildren(node) &&
-                                                (<div className="dropdown-menu" aria-labelledby={node.uuid}>
-                                                    {node.children.map( node2 =>(
-                                                        <Link href={node2.path} key={node2.uuid} locale={locale}>
-                                                            <a className="dropdown-item">{node2.title}</a>
-                                                        </Link>
-                                                    ))}
-                                                </div>)
-                                            }
                                         </Link>
+                                        {hasChildren(node) &&
+                                            (<div className="dropdown-menu" aria-labelledby={node.uuid}>
+                                                {node.children.nodes.map( node2 =>{
+                                                    console.log("node2.path : ",node2.path);
+                                                    return(
+                                                        <Link href={node2.path} key={node2.uuid} locale={locale}>
+                                                            <a className="dropdown-item">
+                                                                {node2.title?.value}
+                                                            </a>
+                                                        </Link>
+                                                    )}
+                                                )}
+                                            </div>)
+                                        }
                                     </li>
                                 )
 
@@ -159,12 +177,13 @@ const Nav = ({base,path}) => {
                         {/*</li>*/}
                     </ul>
 
-                    {/*<div className="navbar-nav ml-auto">*/}
-                    {/*    <form method="post" className="search-form">*/}
-                    {/*        <span className="icon ion ion-search"></span>*/}
-                    {/*        <input type="text" className="form-control" placeholder="Search..."/>*/}
-                    {/*    </form>*/}
-                    {/*</div>*/}
+                    <div className="navbar-nav ml-auto">
+                        <span style={{minWidth: "276px"}}>&nbsp;</span>
+                        {/*<form method="post" className="search-form">*/}
+                        {/*    <span className="icon ion ion-search"></span>*/}
+                        {/*    <input type="text" className="form-control" placeholder="Search..."/>*/}
+                        {/*</form>*/}
+                    </div>
 
                 </div>
             </div>
