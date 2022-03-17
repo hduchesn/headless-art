@@ -1,0 +1,11 @@
+.editImageWrapper{
+    position: relative;
+}
+
+.editImageContainer {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+    height: initial;
+}

@@ -1,10 +1,10 @@
 import React from "react";
 import {useContext} from "react";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 
 
-const RichText = ({id}) => {
+const Text = ({id}) => {
     const {workspace,locale} = useContext(JahiaCtx);
     const [content,setContent] = React.useState("")
 
@@ -37,4 +37,4 @@ const RichText = ({id}) => {
         <div dangerouslySetInnerHTML={{ __html: content }}></div>
     )
 }
-export default RichText
+export default Text
