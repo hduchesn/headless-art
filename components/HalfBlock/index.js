@@ -2,6 +2,7 @@ import React from 'react';
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import PlaceholderBtn from "../jahia/PlaceholderBtn";
+import PlaceholderNode from "../jahia/PlaceholderNode";
 import RichText from "../jahia/RichText";
 import config from "../../jahia";
 import styles from './index.module.css'
@@ -67,6 +68,11 @@ const HalfBlock = ({id,locale}) => {
                     </div>
                 )
             }
+            return (
+                <PlaceholderNode path="image" nodetypes={imageNode.primaryNodeType.name}>
+                    <Image id={imageNode.uuid}/>
+                </PlaceholderNode>
+            )
         }
         return <Image id={imageNode?.uuid}/>
     }
@@ -80,6 +86,11 @@ const HalfBlock = ({id,locale}) => {
              if(!bodyNode){
                  return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
              }
+             return(
+                 <PlaceholderNode path="image" nodetypes={bodyNode.primaryNodeType.name}>
+                     <RichText id={bodyNode?.uuid}/>
+                 </PlaceholderNode>
+             )
          }
          return <RichText id={bodyNode?.uuid}/>
      }
