@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.editImageWrapper div{
+    height: 100%;
+}
+
 .editImageContainer {
     position: absolute;
     top: 50%;

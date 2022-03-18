@@ -69,7 +69,7 @@ const HalfBlock = ({id,locale}) => {
                 )
             }
             return (
-                <PlaceholderNode path="image" nodetypes={imageNode.primaryNodeType.name}>
+                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name} >
                     <Image id={imageNode.uuid}/>
                 </PlaceholderNode>
             )
@@ -87,7 +87,7 @@ const HalfBlock = ({id,locale}) => {
                  return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
              }
              return(
-                 <PlaceholderNode path="image" nodetypes={bodyNode.primaryNodeType.name}>
+                 <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
                      <RichText id={bodyNode?.uuid}/>
                  </PlaceholderNode>
              )
@@ -99,7 +99,8 @@ const HalfBlock = ({id,locale}) => {
     return (
         <section>
             <div className="half d-lg-flex d-block">
-                <div className={classNames("image",content.imagePosition?.value,{
+                <div className={classNames("image",{
+                    "order-2": content.imagePosition?.value==="right",
                     [styles.editImageWrapper]:isEditMode
                 })}>
                     {getImageContent()}
@@ -109,19 +110,6 @@ const HalfBlock = ({id,locale}) => {
                     {getBodyContent()}
                 </div>
             </div>
-
-            {/*<div className="half d-lg-flex d-block">*/}
-            {/*    <div className="image order-2 element-animate" data-animate-effect="fadeIn"*/}
-            {/*         style={{backgroundImage: "url('/static/img/industrial_hero_2.jpg')"}}></div>*/}
-            {/*    <div className="text text-center element-animate">*/}
-            {/*        <h3 className="mb-4">Company History</h3>*/}
-            {/*        <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and*/}
-            {/*            Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the*/}
-            {/*            coast of the Semantics, a large language ocean.</p>*/}
-
-            {/*        <p><a href="#" className="btn btn-primary btn-sm px-3 py-2">Learn More</a></p>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </section>
     )
 }

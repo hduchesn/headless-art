@@ -48,7 +48,7 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
     <JahiaCtxProvider value={{
       workspace: pageProps.isPreview ? "EDIT" : "LIVE",
       isEditMode: pageProps.isEditMode ? pageProps.isEditMode : false,
-      locale:pageProps.locale //TODO should be here?
+      locale:pageProps.locale
     }}>
         <ApolloProvider client={client}>
             <Component {...pageProps} />
