@@ -5,9 +5,10 @@ import {getImageURI} from "../../../lib/utils";
 import styles from './item.module.css'
 import classNames from 'classnames';
 
+//TODO use xss to clean caption
 
-const Item = ({id,locale}) => {
-    const {workspace,isEditMode} = React.useContext(JahiaCtx);
+const Item = ({id}) => {
+    const {workspace,isEditMode,locale} = React.useContext(JahiaCtx);
     const [content,setContent] = React.useState({})
 
     // console.log("[Item] isEditMode :",isEditMode);

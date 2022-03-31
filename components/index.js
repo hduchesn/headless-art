@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import RichText from "./jahia/RichText";
 import Hero from "./Hero";
 import CarouselEdit from "./owlCarousel/edit";
-import HalfBlock from "./HalfBlock";
+import Article from "./Article";
 
 const CarouselFront = dynamic(
     () => import("./owlCarousel"),
@@ -16,10 +16,10 @@ const CarouselFront = dynamic(
 const components = ({isEditMode}) => {
 
     return{
-    'jnt:bigText': RichText,
-    'hicnt:heading': Hero,
-    'hicnt:owlcarousel' : isEditMode ? CarouselEdit : CarouselFront,
-    'hicnt:halfBlock' : HalfBlock
+        'jnt:bigText': RichText,
+        'hicnt:heading': Hero,
+        'hicnt:owlcarousel' : isEditMode ? CarouselEdit : CarouselFront,
+        'hicnt:article' : Article
     }
 }
 

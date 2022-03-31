@@ -6,10 +6,13 @@
     height: 100%;
 }
 
+.editImageWrapper .editImageContainer{
+    height: initial;
+}
+
 .editImageContainer {
     position: absolute;
     top: 50%;
     left: 25%;
     transform: translateY(-50%);
-    height: initial;
 }

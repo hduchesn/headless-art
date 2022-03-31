@@ -4,8 +4,8 @@ import {getJahiaDivsProps} from "../../lib/utils";
 import {JahiaCtx} from "../../lib/context";
 
 
-const Area = ({name, mainResourcePath, locale, components, path}) => {
-    const {workspace,isEditMode} = React.useContext(JahiaCtx);
+const Area = ({name, mainResourcePath, components, path}) => {
+    const {workspace,isEditMode,locale} = React.useContext(JahiaCtx);
 // console.log("[Area] isEditMode : ",isEditMode);
 
 // console.log("[Area] mainResourcePath : ",mainResourcePath);
@@ -92,16 +92,14 @@ const Area = ({name, mainResourcePath, locale, components, path}) => {
                         <div key={node.uuid} {...divs[node.path]}>
                             <Component id={node.uuid}
                                        path={node.path}
-                                       mainResourcePath={mainResourcePath}
-                                       locale={locale}/>
+                                       mainResourcePath={mainResourcePath}/>
                         </div>
                     )
 
                 return <Component key={node.uuid}
                                   id={node.uuid}
                                   path={node.path}
-                                  mainResourcePath={mainResourcePath}
-                                  locale={locale}/>
+                                  mainResourcePath={mainResourcePath}/>
             }
             return (
                 <div key={node.uuid}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>

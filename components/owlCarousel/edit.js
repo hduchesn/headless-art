@@ -11,8 +11,8 @@ import carouselType from './carouselType';
 
 
 
-const OwlCarousel = ({id, mainResourcePath, locale}) =>{
-    const {workspace} = useContext(JahiaCtx);
+const OwlCarousel = ({id, mainResourcePath}) =>{
+    const {workspace,locale} = useContext(JahiaCtx);
     const [divs, setDivs] = React.useState([]);
     const [carousel, setCarousel] = React.useState({});
 
@@ -41,7 +41,7 @@ const OwlCarousel = ({id, mainResourcePath, locale}) =>{
                     carousel.class?.value,
                     styles.jOwlCarouselEdit
                 )}>
-                    <Component items={carousel.children.items} locale={locale} divs={divs}/>
+                    <Component items={carousel.children.items} divs={divs}/>
                 </section>
                 {/*Jahia btn placeholder to add a new item*/}
                 <div {...divs["*"]}></div>

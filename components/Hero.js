@@ -3,8 +3,10 @@ import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {getImageURI} from "../lib/utils";
 
-const Hero = ({id, locale}) => {
-    const {workspace} = React.useContext(JahiaCtx);
+//TODO use xss to clean body
+
+const Hero = ({id}) => {
+    const {workspace,locale} = React.useContext(JahiaCtx);
     const [content,setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {

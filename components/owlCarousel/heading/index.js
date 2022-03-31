@@ -2,7 +2,7 @@ import React from 'react';
 import Item from "./Item";
 import {JahiaCtx} from "../../../lib/context";
 
-const Heading = ({items,locale,divs}) =>{
+const Heading = ({items,divs}) =>{
     const {isEditMode} = React.useContext(JahiaCtx);
 console.log("[Heading] isEditMode : ",isEditMode);
 
@@ -13,16 +13,14 @@ console.log("[Heading] isEditMode : ",isEditMode);
                 items.map(item =>
                     <div key={item.uuid} {...divs[item.path]}>
                         <Item key={item.uuid}
-                              id={item.uuid}
-                              locale={locale}/>
+                              id={item.uuid}/>
                     </div>
                 )
             }
             {!isEditMode &&
                 items.map(item =>
                         <Item key={item.uuid}
-                              id={item.uuid}
-                              locale={locale}/>
+                              id={item.uuid}/>
                 )
             }
         </>

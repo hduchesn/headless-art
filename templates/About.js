@@ -3,7 +3,7 @@ import Area from "../components/jahia/Area";
 import components from "../components/";
 import {JahiaCtx} from "../lib/context";
 
-const About = ({path,locale,templateName}) => {
+const About = ({path,templateName}) => {
     const {isEditMode} = React.useContext(JahiaCtx)
 console.log("[About] templateName : ",templateName);
     return(
@@ -11,8 +11,7 @@ console.log("[About] templateName : ",templateName);
             <Area
                 name="hero"
                 mainResourcePath={path}
-                components={components({isEditMode})}
-                locale={locale}/>
+                components={components({isEditMode})}/>
 
             <section className="section">
                 <div className="container">
@@ -21,15 +20,13 @@ console.log("[About] templateName : ",templateName);
                             <Area
                                 name="col-1"
                                 mainResourcePath={path}
-                                components={components({isEditMode})}
-                                locale={locale}/>
+                                components={components({isEditMode})}/>
                         </div>
                         <div className="col-md-6 text-center">
                             <Area
                                 name="col-2"
                                 mainResourcePath={path}
-                                components={components({isEditMode})}
-                                locale={locale}/>
+                                components={components({isEditMode})}/>
                         </div>
                     </div>
                 </div>

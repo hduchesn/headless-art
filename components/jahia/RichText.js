@@ -3,6 +3,7 @@ import {useContext} from "react";
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 
+//TODO use xss to clean content
 
 const RichText = ({id}) => {
     const {workspace,locale} = useContext(JahiaCtx);

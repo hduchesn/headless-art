@@ -1,16 +1,22 @@
 import React from 'react';
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
+import config from "../../jahia";
+import styles from "./index.module.css";
 import PlaceholderBtn from "../jahia/PlaceholderBtn";
 import PlaceholderNode from "../jahia/PlaceholderNode";
-import RichText from "../jahia/RichText";
-import config from "../../jahia";
-import styles from './index.module.css'
-import classNames from "classnames";
 import Image from "./Image";
+import RichText from "../jahia/RichText";
+import HalfBlock from "./HalfBlock";
+import Default from "./Default";
+
+const views = {
+    'halfBlock': HalfBlock,
+    'default': Default
+}
 
 
-const HalfBlock = ({id,locale}) => {
+const Article = ({id}) =>{
     const {workspace,isEditMode} = React.useContext(JahiaCtx);
     const [content,setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
@@ -21,6 +27,9 @@ const HalfBlock = ({id,locale}) => {
                 uuid
                 name
                 imagePosition:property(name:"imagePosition"){
+                    value
+                }
+                view:property(name:"view"){
                     value
                 }
                 children{
@@ -77,41 +86,37 @@ const HalfBlock = ({id,locale}) => {
         return <Image id={imageNode?.uuid}/>
     }
 
-     const getBodyContent = () => {
-         const bodyNode = getChildNodeOfType({
-             node:content,
-             nodeType:config.cnd_type.INDUS_TEXT
-         });
-         if(isEditMode){
-             if(!bodyNode){
-                 return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
-             }
-             return(
-                 <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
-                     <RichText id={bodyNode?.uuid}/>
-                 </PlaceholderNode>
-             )
-         }
-         return <RichText id={bodyNode?.uuid}/>
-     }
+    const getBodyContent = () => {
+        const bodyNode = getChildNodeOfType({
+            node:content,
+            nodeType:config.cnd_type.INDUS_TEXT
+        });
+        if(isEditMode){
+            if(!bodyNode){
+                return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
+            }
+            return(
+                <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
+                    <RichText id={bodyNode?.uuid}/>
+                </PlaceholderNode>
+            )
+        }
+        return <RichText id={bodyNode?.uuid}/>
+    }
 
+    const getView = () => {
+        if (content?.view?.value && views[content.view.value]) {
+            const View = views[content.view.value];
+            return (
+                <View body={getBodyContent} image={getImageContent} imagePosition={content.imagePosition}/>
+            );
+        }
+        console.log('View not found: ', content?.view?.value)
+        return <span>View not found : {content?.view?.value}</span>
+    }
 
-    return (
-        <section>
-            <div className="half d-lg-flex d-block">
-                <div className={classNames("image",{
-                    "order-2": content.imagePosition?.value==="right",
-                    [styles.editImageWrapper]:isEditMode
-                })}>
-                    {getImageContent()}
-                </div>
-
-                <div className="text text-center">
-                    {getBodyContent()}
-                </div>
-            </div>
-        </section>
-    )
+    return getView();
 }
 
-export default HalfBlock;
+export default Article;
+

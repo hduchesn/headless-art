@@ -10,8 +10,8 @@ import 'owl.carousel';
 import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
 
-const OwlCarousel = ({id,mainResourcePath, locale}) =>{
-    const {workspace} = useContext(JahiaCtx);
+const OwlCarousel = ({id,mainResourcePath}) =>{
+    const {workspace,locale} = useContext(JahiaCtx);
     const [carousel, setCarousel] = React.useState({});
 
     React.useEffect(() => {
@@ -75,7 +75,7 @@ const OwlCarousel = ({id,mainResourcePath, locale}) =>{
         return(
             <>
                 <section id={carousel.uuid} className={carousel.class?.value}>
-                    <Component items={carousel.children.items} locale={locale}/>
+                    <Component items={carousel.children.items}/>
                 </section>
             </>
         )
