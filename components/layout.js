@@ -4,6 +4,8 @@ import Main from "./jahia/Main";
 import Nav from "./Nav";
 import Script from "next/script";
 import {JahiaCtx} from "../lib/context";
+import classNames from "classnames";
+import styles from "./layout.module.css";
 const Layout = ({children,path,templateName,meta}) => {
     const {isEditMode} = React.useContext(JahiaCtx);
 console.log("[Layout] isEditMode : ",isEditMode);
@@ -27,6 +29,7 @@ console.log("[Layout] isEditMode : ",isEditMode);
                     {/*<Nav base={`/sites/${process.env.JAHIA_SITE}/home`} path={path}/>*/}
                     <Nav base={`/sites/headless-industrial/home`} path={path}/>
                 </header>
+                <div className={classNames("top-shadow",{[styles.topShadowEdit] : isEditMode})} ></div>
                 {children}
             </Main>
 

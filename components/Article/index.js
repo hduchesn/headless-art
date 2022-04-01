@@ -2,11 +2,6 @@ import React from 'react';
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import config from "../../jahia";
-import styles from "./index.module.css";
-import PlaceholderBtn from "../jahia/PlaceholderBtn";
-import PlaceholderNode from "../jahia/PlaceholderNode";
-import Image from "./Image";
-import RichText from "../jahia/RichText";
 import HalfBlock from "./HalfBlock";
 import Default from "./Default";
 
@@ -17,7 +12,7 @@ const views = {
 
 
 const Article = ({id}) =>{
-    const {workspace,isEditMode} = React.useContext(JahiaCtx);
+    const {workspace} = React.useContext(JahiaCtx);
     const [content,setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
         jcr(workspace: $workspace) {
@@ -63,56 +58,27 @@ const Article = ({id}) =>{
         return childArray[0];
     }
 
-    const getImageContent = () => {
-        const imageNode = getChildNodeOfType({
-            node:content,
-            nodeType:config.cnd_type.HALFBLOCK_IMAGE
-        });
+    const imageNode = getChildNodeOfType({
+        node:content,
+        nodeType:config.cnd_type.HALFBLOCK_IMAGE
+    });
 
-        if(isEditMode){
-            if(!imageNode){
-                return(
-                    <div className={styles.editImageContainer}>
-                        <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
-                    </div>
-                )
-            }
-            return (
-                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name} >
-                    <Image id={imageNode.uuid}/>
-                </PlaceholderNode>
-            )
-        }
-        return <Image id={imageNode?.uuid}/>
-    }
-
-    const getBodyContent = () => {
-        const bodyNode = getChildNodeOfType({
-            node:content,
-            nodeType:config.cnd_type.INDUS_TEXT
-        });
-        if(isEditMode){
-            if(!bodyNode){
-                return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
-            }
-            return(
-                <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
-                    <RichText id={bodyNode?.uuid}/>
-                </PlaceholderNode>
-            )
-        }
-        return <RichText id={bodyNode?.uuid}/>
-    }
+    const bodyNode = getChildNodeOfType({
+        node:content,
+        nodeType:config.cnd_type.INDUS_TEXT
+    });
 
     const getView = () => {
+        let View = views["default"];
         if (content?.view?.value && views[content.view.value]) {
-            const View = views[content.view.value];
-            return (
-                <View body={getBodyContent} image={getImageContent} imagePosition={content.imagePosition}/>
-            );
+            View = views[content.view.value];
+        }else{
+            console.warn(`Article View not found: ${content?.view?.value}; use default`)
         }
-        console.log('View not found: ', content?.view?.value)
-        return <span>View not found : {content?.view?.value}</span>
+
+        return (
+            <View bodyNode={bodyNode} imageNode={imageNode} imagePosition={content.imagePosition}/>
+        );
     }
 
     return getView();
