@@ -13,7 +13,7 @@ const generateUUID = () => {
 }
 
 const PlaceholderNode = ({path,nodetypes,children}) => {
-console.log("[PlaceholderNode] children : ",children);
+// console.log("[PlaceholderNode] children : ",children);
     const divElt = {
         class: 'jahia-template-gxt',
         jahiatype: 'module',

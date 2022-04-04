@@ -56,7 +56,7 @@ const Nav = ({base,path}) => {
             }
         }
     }`;
-console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
+//console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
 
     useQuery(getSitePages, {
         variables: {
@@ -67,19 +67,19 @@ console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, t
             MenuItem: contentTypes.MENU_ITEM
         },
         onCompleted: data => {
-console.log("[Nav] data",data);
+//console.log("[Nav] data",data);
             setNavTree(data.jcr?.nodeByPath)
         },
         onError: error => {
-console.log("[Nav] error",error);
+//console.log("[Nav] error",error);
         }
     });
 
-// console.log("[Nav] ret",ret);
-// console.log("[Nav] ret.data",ret.data);
-// console.log("[Nav] ret.loading",ret.loading);
-// console.log("[Nav] ret.error",ret.error);
-// console.log("[Nav] navTree",navTree);
+// //console.log("[Nav] ret",ret);
+// //console.log("[Nav] ret.data",ret.data);
+// //console.log("[Nav] ret.loading",ret.loading);
+// //console.log("[Nav] ret.error",ret.error);
+// //console.log("[Nav] navTree",navTree);
 
     const hasChildren = (node) => {
         return Array.isArray(node.children?.nodes) && node.children.nodes.length >0
@@ -120,7 +120,7 @@ console.log("[Nav] error",error);
                     <ul className="navbar-nav pl-md-5 ml-auto">
                         {
                             navTree.children?.nodes?.map(node =>{
-                                console.log("node.path : ",node.path);
+                                //console.log("node.path : ",node.path);
                                 return(
                                     <li key={node.uuid}
                                         className={classnames("nav-item",{
@@ -135,7 +135,7 @@ console.log("[Nav] error",error);
                                         {hasChildren(node) &&
                                             (<div className="dropdown-menu" aria-labelledby={node.uuid}>
                                                 {node.children.nodes.map( node2 =>{
-                                                    console.log("node2.path : ",node2.path);
+                                                    //console.log("node2.path : ",node2.path);
                                                     return(
                                                         <Link href={node2.path} key={node2.uuid} locale={locale}>
                                                             <a className="dropdown-item">

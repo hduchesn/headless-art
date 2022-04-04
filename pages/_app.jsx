@@ -88,7 +88,7 @@ MyApp.getInitialProps = async (appContext) => {
     //     }
 
     const {data:gqlData} = await getPageInfo(path,workspace);
-    console.log("[MyApp.getInitialProps] gqlData :", gqlData);
+    // console.log("[MyApp.getInitialProps] gqlData :", gqlData);
 
     data = {
       ...data,
@@ -103,7 +103,7 @@ MyApp.getInitialProps = async (appContext) => {
       },
     }
 
-    console.log("[MyApp.getInitialProps] data :", data);
+    // console.log("[MyApp.getInitialProps] data :", data);
 
     const {AppTree} = appContext;
     const Wrapper = () => (<AppTree {...data}/>)
