@@ -2,6 +2,7 @@
 const path = require('path');
 // import path from 'path';
 
+//TODO get file destination from jahia.js
 module.exports = {
   reactStrictMode: true,
   sassOptions: {
@@ -23,7 +24,7 @@ module.exports = {
     return [
       {
         source: '/files/:slug*',
-        destination: 'http://localhost:8080/files/:slug*',
+        destination: `http://localhost:8080/files/:slug*`,
         permanent: true,
       }
     ]

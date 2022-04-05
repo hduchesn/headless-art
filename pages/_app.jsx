@@ -59,12 +59,28 @@ const MyApp = ({Component, pageProps: {apolloState, ...pageProps}}) => {
 
 MyApp.getInitialProps = async (appContext) => {
   let data = await App.getInitialProps(appContext);
-
+  // console.log("[MyApp.getInitialProps] data : ",data);
+  // console.log("[MyApp.getInitialProps] appContext.ctx.req.url : ",appContext.ctx.req.url);
   // console.log("[MyApp.getInitialProps] appContext : ",appContext);
   console.log("[MyApp.getInitialProps] cookies : ",(appContext.ctx.req).cookies);
-  let isPreview = (appContext.ctx.req).cookies && !!(appContext.ctx.req).cookies.__next_preview_data;
-  isPreview = !!isPreview;
+  // let isPreview = false;
+  // let jahiaContext;
+  // if((appContext.ctx.req).cookies){
+  //   isPreview = !!(appContext.ctx.req).cookies.__next_preview_data
+  //
+  //
+  // }
+
+  const isPreview = !!(appContext.ctx.req).cookies?.__next_preview_data;
   const workspace = isPreview ? "EDIT" : "LIVE";
+
+  let jahiaContext;
+  try{
+    if((appContext.ctx.req).cookies?.__jContent_preview_ctx)
+      jahiaContext = JSON.parse((appContext.ctx.req).cookies.__jContent_preview_ctx);
+  }catch (e){
+    console.error("[MyApp.getInitialProps] jahiaContext json parse error : ",e );
+  }
 
   console.log("[MyApp.getInitialProps] isPreview :", isPreview);
 
@@ -98,8 +114,10 @@ MyApp.getInitialProps = async (appContext) => {
         path: gqlData.jcr.nodeByPath.path,
         templateName: gqlData.jcr.nodeByPath.templateName?.value || 'default',
         isPreview,
-        isEditMode: !!query?.edit, //query?.edit === 'true'?true:false,
-        locale: query?.locale || appContext.router.locale //'en'
+        isEditMode: jahiaContext?.edit, //query?.edit === 'true'?true:false,
+        locale: jahiaContext?.locale || appContext.router.locale //'en'
+        // isEditMode: !!query?.edit, //query?.edit === 'true'?true:false,
+        // locale: query?.locale || appContext.router.locale //'en'
       },
     }
 
