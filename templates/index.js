@@ -8,7 +8,7 @@ const templates = {
     'default': Home,
 }
 
- const Template = ({templateName, ...props}) => {
+const Template = ({templateName, ...props}) => {
     console.log('Render page ', props.path, ", with template : ",templateName)
     if (templateName && templates[templateName]) {
         const Template = templates[templateName];

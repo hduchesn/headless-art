@@ -36,25 +36,23 @@ export default async function handler(req, res) {
     // This secret should only be known to this API route and the CMS
     if (req.query.secret !== process.env.NEXT_PREVIEW_SECRET) {
         res.setHeader('content-type', 'text/html');
-        return res.send(getHTMLError({
+        return res.status(400).end(getHTMLError({
             path,
             locale,
-            message:"Oups! Invalid token, please configure the NEXT PREVIEW SECRET at site level"
+            message:"Oups! Invalid token, please configure the NEXT PREVIEW SECRET at Site level"
         }));
     }
 
     const {error, data} = await getPageInfo(path,"EDIT");
-
     // If the slug doesn't exist prevent preview mode from being enabled
     if (error || !data.jcr.nodeByPath) {
         res.setHeader('content-type', 'text/html');
-        return res.send(getHTMLError({
+        return res.status(400).end(getHTMLError({
             path,
             locale,
             message:"Oups! Invalid path"
         }));
     }
-
 
     // Enable Preview Mode by setting the cookies
     res.setPreviewData({
