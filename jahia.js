@@ -1,6 +1,6 @@
 export default {
-    baseUrl: 'http://localhost:8080',
-    siteName: 'headless-industrial',
+    // baseUrl: 'http://localhost:8080',
+    // siteName: 'headless-industrial',
     token: 'V+InkyRlQ/65oZIJ1TEFcYcfgC1Wyk7LE81s9v84CY0=',
     cnd_type : {
         WIDEN_IMAGE:"wdennt:image",

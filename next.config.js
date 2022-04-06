@@ -24,7 +24,7 @@ module.exports = {
     return [
       {
         source: '/files/:slug*',
-        destination: `http://localhost:8080/files/:slug*`,
+        destination: `${process.env.NEXT_PUBLIC_JAHIA_BASE_URL}/files/:slug*`,
         permanent: true,
       }
     ]
