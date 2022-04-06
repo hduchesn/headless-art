@@ -68,7 +68,6 @@ const Area = ({name, mainResourcePath, components, path}) => {
                 primaryNodeType: "jnt:area"
             },
             language: "en",
-            path:"/",
             mainResourcePath,
             isEditMode
         },
