@@ -11,8 +11,8 @@ export default {
         HALFBLOCK_IMAGE:'hicnt:image',
         INDUS_TEXT:'hicnt:text'
     },
-    paths:{//TODO remove locale from path to add it dynamically
-        preview:'/cms/render/default/en',
-        edit:'/cms/editframe/default/en'
+    paths:{
+        preview:'/cms/render/default',
+        edit:'/cms/editframe/default'
     }
 }
