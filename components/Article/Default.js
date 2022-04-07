@@ -8,33 +8,33 @@ import RichText from "../jahia/RichText";
 import classNames from "classnames";
 
 
-const Default = ({bodyNode,imageNode,imagePosition}) =>{
+function Default({bodyNode, imageNode, imagePosition}) {
     const {isEditMode} = React.useContext(JahiaCtx);
 
     const getImageContent = () => {
-        if(isEditMode){
-            if(!imageNode){
-                return(
+        if (isEditMode) {
+            if (!imageNode) {
+                return (
 
-                        <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
+                    <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
 
                 )
             }
             return (
-                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name} >
-                    <Image id={imageNode.uuid} view={"bubble_1"}/>
+                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
+                    <Image id={imageNode.uuid} view="bubble_1"/>
                 </PlaceholderNode>
             )
         }
-        return <Image id={imageNode?.uuid} view={"bubble_1"}/>
+        return <Image id={imageNode?.uuid} view="bubble_1"/>
     }
 
     const getBodyContent = () => {
-        if(isEditMode){
-            if(!bodyNode){
+        if (isEditMode) {
+            if (!bodyNode) {
                 return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
             }
-            return(
+            return (
                 <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
                     <RichText id={bodyNode?.uuid}/>
                 </PlaceholderNode>
@@ -48,9 +48,10 @@ const Default = ({bodyNode,imageNode,imagePosition}) =>{
             <div className="container">
                 <div className="row align-items-center mb-5">
                     {/*<div className="col-lg-7 order-md-2">*/}
-                    <div className={classNames("col-lg-7",{
-                        "order-md-2": imagePosition?.value==="right"
-                    })}>
+                    <div className={classNames("col-lg-7", {
+                        "order-md-2": imagePosition?.value === "right"
+                    })}
+                    >
                         <div className="scaling-image">
                             <div className="frame">
                                 {getImageContent()}

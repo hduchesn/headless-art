@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import {Head, Html, Main, NextScript} from 'next/document'
 
 
 export default function Document() {
@@ -12,8 +12,8 @@ export default function Document() {
         <Html>
             <Head/>
             <body jahia-parse-html="true">
-                <Main />
-                <NextScript />
+                <Main/>
+                <NextScript/>
             </body>
         </Html>
     )

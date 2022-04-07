@@ -1,5 +1,5 @@
 import Area from "./Area";
-import Main from"./Main";
+import Main from "./Main";
 import PlaceholderBtn from "./PlaceholderBtn";
 import RichText from "./RichText";
 

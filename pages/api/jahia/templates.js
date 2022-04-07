@@ -8,10 +8,10 @@ export default function handler(req, res) {
     // Get file names under /templates
     const fileNames = fs.readdirSync(postsDirectory)
     const allTemplateNames = fileNames.map(fileName => {
-        const name = fileName.substr(0,fileName.lastIndexOf(".")).toLowerCase();
+        const name = fileName.substr(0, fileName.lastIndexOf(".")).toLowerCase();
         return {
             name,
-            displayName : name.charAt(0).toUpperCase() + name.slice(1)
+            displayName: name.charAt(0).toUpperCase() + name.slice(1)
         }
     }).filter(template => !excludedName.includes(template.name));
 

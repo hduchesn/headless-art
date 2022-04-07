@@ -1,12 +1,12 @@
-.editImageWrapper{
+.editImageWrapper {
     position: relative;
 }
 
-.editImageWrapper div{
+.editImageWrapper div {
     height: 100%;
 }
 
-.editImageWrapper .editImageContainer{
+.editImageWrapper .editImageContainer {
     height: initial;
 }
 

@@ -1,15 +1,16 @@
-.jOwlCarouselEditCardEdit{
+.jOwlCarouselEditCardEdit {
     margin: .5rem 0 0 .5rem;
     width: 18rem;
 }
-.cardBody{
+
+.cardBody {
     padding: .5rem;
 }
 
-.jOwlCarouselEditCardEdit h1{
+.jOwlCarouselEditCardEdit h1 {
     font-size: 1.2rem;
 }
 
-.jOwlCarouselEditCardEdit p{
+.jOwlCarouselEditCardEdit p {
     width: 90% !important;
 }

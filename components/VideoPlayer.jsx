@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 // import {StoreContext} from "contexts";
 // import ReactPlayer from "react-player";
@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 //     playerWrapper:{}
 // }));
 
-const VideoPlayer = (props)=>{
+function VideoPlayer(props) {
     return <p>play the video</p>;
 
     // const classes = useStyles(props);
@@ -64,9 +64,9 @@ const VideoPlayer = (props)=>{
     // )
 }
 
-VideoPlayer.propTypes={
-    videoURL:PropTypes.string.isRequired,
-    ownerID:PropTypes.string.isRequired
+VideoPlayer.propTypes = {
+    videoURL: PropTypes.string.isRequired,
+    ownerID: PropTypes.string.isRequired
 }
 
 export default VideoPlayer;

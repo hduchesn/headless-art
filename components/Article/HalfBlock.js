@@ -8,32 +8,32 @@ import Image from "../images";
 import RichText from "../jahia/RichText";
 import config from "../../jahia";
 
-const HalfBlock = ({bodyNode,imageNode,imagePosition}) => {
+function HalfBlock({bodyNode, imageNode, imagePosition}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     const getImageContent = () => {
-        if(isEditMode){
-            if(!imageNode){
-                return(
+        if (isEditMode) {
+            if (!imageNode) {
+                return (
                     <div className={styles.editImageContainer}>
                         <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
                     </div>
                 )
             }
             return (
-                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name} >
-                    <Image id={imageNode.uuid} view={"halfBlock"}/>
+                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
+                    <Image id={imageNode.uuid} view="halfBlock"/>
                 </PlaceholderNode>
             )
         }
-        return <Image id={imageNode?.uuid} view={"halfBlock"}/>
+        return <Image id={imageNode?.uuid} view="halfBlock"/>
     }
 
     const getBodyContent = () => {
-        if(isEditMode){
-            if(!bodyNode){
+        if (isEditMode) {
+            if (!bodyNode) {
                 return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
             }
-            return(
+            return (
                 <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
                     <RichText id={bodyNode?.uuid}/>
                 </PlaceholderNode>
@@ -46,10 +46,11 @@ const HalfBlock = ({bodyNode,imageNode,imagePosition}) => {
     return (
         <section>
             <div className="half d-lg-flex d-block">
-                <div className={classNames("image",{
-                    "order-2": imagePosition?.value==="right",
-                    [styles.editImageWrapper]:isEditMode
-                })}>
+                <div className={classNames("image", {
+                    "order-2": imagePosition?.value === "right",
+                    [styles.editImageWrapper]: isEditMode
+                })}
+                >
                     {getImageContent()}
                 </div>
 

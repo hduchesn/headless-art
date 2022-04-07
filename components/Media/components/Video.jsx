@@ -2,16 +2,17 @@ import React from "react";
 // import PropTypes from "prop-types";
 import VideoPlayer from "../../VideoPlayer";
 
-const Video = ({url,ownerID}) =>{
+function Video({url, ownerID}) {
 
 
-    return(
+    return (
         <VideoPlayer
             videoURL={url}
             ownerID={ownerID}
         />
     )
 }
+
 // Video.propTypes={
 //     url:PropTypes.string.isRequired,
 //     ownerID:PropTypes.string.isRequired,

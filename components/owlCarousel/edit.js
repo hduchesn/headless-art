@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {JahiaCtx} from "../../lib/context";
-import {gql, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import classNames from 'classnames';
 import styles from './edit.module.css'
 
@@ -10,9 +10,8 @@ import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
 
 
-
-const OwlCarousel = ({id, mainResourcePath}) =>{
-    const {workspace,locale} = useContext(JahiaCtx);
+function OwlCarousel({id, mainResourcePath}) {
+    const {workspace, locale} = useContext(JahiaCtx);
     const [divs, setDivs] = React.useState([]);
     const [carousel, setCarousel] = React.useState({});
 
@@ -24,7 +23,7 @@ const OwlCarousel = ({id, mainResourcePath}) =>{
             id,
             language: locale,
             mainResourcePath,
-            isEditMode:true
+            isEditMode: true
         },
         onCompleted: data => {
             setDivs(getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output));
@@ -33,22 +32,25 @@ const OwlCarousel = ({id, mainResourcePath}) =>{
     });
 
     // console.log("[OwlCarousel] carousel.class :",carousel.class);
-    if (carouselType[carousel.carouselType?.value]){
+    if (carouselType[carousel.carouselType?.value]) {
         const Component = carouselType[carousel.carouselType.value];
-        return(
+        return (
             <>
-                <section id={carousel.uuid} className={classNames(
-                    carousel.class?.value,
-                    styles.jOwlCarouselEdit
-                )}>
+                <section
+                    id={carousel.uuid}
+                    className={classNames(
+                        carousel.class?.value,
+                        styles.jOwlCarouselEdit
+                    )}
+                >
                     <Component items={carousel.children.items} divs={divs}/>
                 </section>
                 {/*Jahia btn placeholder to add a new item*/}
-                <div {...divs["*"]}></div>
+                <div {...divs["*"]}/>
             </>
         )
     }
-    return(
+    return (
         <p>The carousel type is not supported</p>
     )
 }

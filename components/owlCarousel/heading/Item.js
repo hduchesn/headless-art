@@ -7,9 +7,9 @@ import classNames from 'classnames';
 
 //TODO use xss to clean caption
 
-const Item = ({id}) => {
-    const {workspace,isEditMode,locale} = React.useContext(JahiaCtx);
-    const [content,setContent] = React.useState({})
+function Item({id}) {
+    const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
+    const [content, setContent] = React.useState({})
 
     // console.log("[Item] isEditMode :",isEditMode);
 
@@ -76,27 +76,36 @@ const Item = ({id}) => {
                 <div className={classNames(
                     "card",
                     styles.jOwlCarouselEditCardEdit
-                    )}>
-                    <img className="card-img-top" src={getImageURI({uri:content.media?.refNode?.path,workspace})} alt="Card image cap"/>
-                        <div className={styles.cardBody} dangerouslySetInnerHTML={{ __html: content.caption?.value }}>
-                        </div>
-                </div>
-            }
+                )}
+                >
+                    <img
+className="card-img-top"
+src={getImageURI({uri: content.media?.refNode?.path, workspace})}
+alt="Card image cap"/>
+                    <div dangerouslySetInnerHTML={{__html: content.caption?.value}} className={styles.cardBody}/>
+                </div>}
             {!isEditMode &&
-                <div className="slider-item" style={{backgroundImage: `url('${getImageURI({uri:content.media?.refNode?.path,workspace})}')` }}>
+                <div
+className="slider-item"
+style={{backgroundImage: `url('${getImageURI({uri: content.media?.refNode?.path, workspace})}')`}}
+                >
                     <div className="container">
                         <div className="row slider-text align-items-center justify-content-center">
                             <div className="col-lg-7 text-center col-sm-12 ">
                                 <div className="btn-play-wrap mx-auto"><p className="mb-4"><a
-                                    href="https://vimeo.com/59256790" data-fancybox data-ratio="2"
-                                    className="btn-play"><span className="ion ion-ios-play"></span></a></p></div>
-                                <div dangerouslySetInnerHTML={{ __html: content.caption?.value }}>
+                                    data-fancybox
+                                    href="https://vimeo.com/59256790"
+                                    data-ratio="2"
+                                    className="btn-play"
+                                                                                           ><span className="ion ion-ios-play"/>
+                                </a>
+                                </p>
                                 </div>
+                                <div dangerouslySetInnerHTML={{__html: content.caption?.value}}/>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                </div>}
         </>
 
     )

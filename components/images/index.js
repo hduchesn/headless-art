@@ -8,19 +8,19 @@ import Bubble_1 from "./Bubble_1";
 
 const views = {
     'halfBlock': HalfBlock,
-    'bubble_1':Bubble_1,
+    'bubble_1': Bubble_1,
     'default': Basic
 }
 
-const Image = ({id,view}) =>{
-    const {workspace,locale} = React.useContext(JahiaCtx);
-    const [imageNode,setImageNode] = React.useState({})
+const Image = ({id, view}) => {
+    const {workspace, locale} = React.useContext(JahiaCtx);
+    const [imageNode, setImageNode] = React.useState({})
 
     useQuery(queryImage, {
         variables: {
             workspace,
             id,
-            language:locale
+            language: locale
         },
         onCompleted: data => setImageNode(data.jcr?.nodeById)
     });
@@ -29,7 +29,7 @@ const Image = ({id,view}) =>{
         let View = views["default"]
         if (view && views[view]) {
             View = views[view];
-        }else{
+        } else {
             console.warn(`Image View not found: ${view}; use default`)
         }
         return (

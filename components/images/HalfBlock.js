@@ -5,10 +5,14 @@ import classNames from "classnames";
 import styles from "./halfBlock.module.css";
 
 
-const Image = ({imageNode}) =>{
+function Image({imageNode}) {
     const {workspace} = React.useContext(JahiaCtx);
 
-    return <div className={classNames("image-display",styles.image)} style={{backgroundImage: `url('${getImageURI({uri:imageNode.media?.refNode?.path,workspace})}')`}}></div>
+    return (
+        <div
+className={classNames("image-display", styles.image)}
+style={{backgroundImage: `url('${getImageURI({uri: imageNode.media?.refNode?.path, workspace})}')`}}/>
+    )
 }
 
 export default Image;

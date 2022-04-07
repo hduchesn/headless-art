@@ -1,4 +1,3 @@
-
 const generateUUID = () => {
     let d = new Date().getTime();
     // if (window.performance && typeof window.performance.now === "function") {
@@ -12,7 +11,7 @@ const generateUUID = () => {
     return uuid;
 }
 
-const PlaceholderBtn = ({path,nodetypes}) => {
+function PlaceholderBtn({path, nodetypes}) {
 
     const divElt = {
         class: 'jahia-template-gxt',
@@ -25,8 +24,9 @@ const PlaceholderBtn = ({path,nodetypes}) => {
     }
 
 
-    return(
-        <div {...divElt}></div>
+    return (
+        <div {...divElt}/>
     )
 }
+
 export default PlaceholderBtn

@@ -2,35 +2,35 @@ import React from 'react';
 import Head from "next/head";
 import Main from "./jahia/Main";
 import Nav from "./Nav";
-import Script from "next/script";
 import {JahiaCtx} from "../lib/context";
 import classNames from "classnames";
 import styles from "./layout.module.css";
-import config from "../jahia";
-const Layout = ({children,path,templateName,meta}) => {
+
+function Layout({children, path, templateName, meta}) {
     const {isEditMode} = React.useContext(JahiaCtx);
-console.log("[Layout] isEditMode : ",isEditMode);
+    console.log("[Layout] isEditMode : ", isEditMode);
     //TODO define meta here
-    return(
+    return (
         <>
             <Head>
                 <title>Hello</title>
 
                 {isEditMode &&
-                    <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>
-                }
+                    <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>}
 
             </Head>
-            <Main path={path}
-                  templateName={templateName}
-                  locale="en">
+            <Main
+                path={path}
+                templateName={templateName}
+                locale="en"
+            >
 
                 <header role="banner">
                     {/*TODO find a way to get base from context*/}
                     <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>
                     {/*<Nav base={`/sites/${config.siteName}/home`} path={path}/>*/}
                 </header>
-                <div className={classNames("top-shadow",{[styles.topShadowEdit] : isEditMode})} ></div>
+                <div className={classNames("top-shadow", {[styles.topShadowEdit]: isEditMode})}/>
                 {children}
             </Main>
 
@@ -53,4 +53,5 @@ console.log("[Layout] isEditMode : ",isEditMode);
         </>
     )
 }
+
 export default Layout;

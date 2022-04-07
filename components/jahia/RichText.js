@@ -1,13 +1,12 @@
-import React from "react";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 
 //TODO use xss to clean content
 
-const RichText = ({id}) => {
-    const {workspace,locale} = useContext(JahiaCtx);
-    const [content,setContent] = React.useState("")
+function RichText({id}) {
+    const {workspace, locale} = useContext(JahiaCtx);
+    const [content, setContent] = React.useState("")
 
     //todo manage view ?
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
@@ -35,7 +34,8 @@ const RichText = ({id}) => {
     // console.log("[RichText] is resolved");
     // const content= "<h3>Hello le text</h3>"
     return (
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        <div dangerouslySetInnerHTML={{__html: content}}/>
     )
 }
+
 export default RichText

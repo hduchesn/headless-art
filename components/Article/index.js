@@ -11,9 +11,9 @@ const views = {
 }
 
 
-const Article = ({id}) =>{
+const Article = ({id}) => {
     const {workspace} = React.useContext(JahiaCtx);
-    const [content,setContent] = React.useState({})
+    const [content, setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
         jcr(workspace: $workspace) {
             workspace
@@ -48,9 +48,10 @@ const Article = ({id}) =>{
     });
 
 
-    const getChildNodeOfType = ({node,nodeType}) => {
-        if(!Array.isArray(node.children?.nodes))
+    const getChildNodeOfType = ({node, nodeType}) => {
+        if (!Array.isArray(node.children?.nodes)) {
             return;
+        }
 
         const childArray = node.children.nodes.filter(node =>
             node.primaryNodeType.name === nodeType
@@ -59,20 +60,20 @@ const Article = ({id}) =>{
     }
 
     const imageNode = getChildNodeOfType({
-        node:content,
-        nodeType:config.cnd_type.HALFBLOCK_IMAGE
+        node: content,
+        nodeType: config.cnd_type.HALFBLOCK_IMAGE
     });
 
     const bodyNode = getChildNodeOfType({
-        node:content,
-        nodeType:config.cnd_type.INDUS_TEXT
+        node: content,
+        nodeType: config.cnd_type.INDUS_TEXT
     });
 
     const getView = () => {
         let View = views["default"];
         if (content?.view?.value && views[content.view.value]) {
             View = views[content.view.value];
-        }else{
+        } else {
             console.warn(`Article View not found: ${content?.view?.value}; use default`)
         }
 

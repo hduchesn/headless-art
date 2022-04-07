@@ -1,19 +1,16 @@
 import React from 'react';
 // import PropTypes from "prop-types";
-import {StoreContext} from "contexts";
 import Image from './components/Image';
 import Video from './components/Video';
-import WidenImage from './components/widen/WidenImage';
-import WidenVideo from './components/widen/WidenVideo';
-import jahia from'../../../jahia';
+import jahia from '../../../jahia';
 
-const Media = ({id,type,mixins,path,sourceID,alt}) => {
+function Media({id, type, mixins, path, sourceID, alt}) {
     // const { state } = React.useContext(StoreContext);
     // const {cnd_type,files_endpoint} = state.jContent;
 
     // console.log("Media equals: ",type === cnd_type.WIDEN_IMAGE)
     let component = <></>;
-    switch(type){
+    switch (type) {
         // case jahia.cnd_type.WIDEN_IMAGE :
         //     component = <WidenImage uuid={id} />
         //     break;
@@ -23,24 +20,25 @@ const Media = ({id,type,mixins,path,sourceID,alt}) => {
         //     break;
 
         case jahia.cnd_type.EXT_VIDEO:
-            component = <Video url={path} ownerID={sourceID} />
+            component = <Video url={path} ownerID={sourceID}/>
             break;
 
         case jahia.cnd_type.JNT_FILE:
-            if(mixins.includes(jahia.cnd_type.IMAGE)){
+            if (mixins.includes(jahia.cnd_type.IMAGE)) {
                 component = <Image path={path} alt={alt}/>
-            }else{
-                component = <Video url={encodeURI(path)} ownerID={sourceID} />
+            } else {
+                component = <Video url={encodeURI(path)} ownerID={sourceID}/>
             }
             break;
 
         default:
-            if(path)
+            if (path) {
                 component = <Image path={path} alt={alt}/>
+            }
             break;
     }
     // console.log("Media component: ",component)
-    return(component)
+    return (component)
 }
 
 // Media.propTypes={

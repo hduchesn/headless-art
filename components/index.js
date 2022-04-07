@@ -8,18 +8,18 @@ const CarouselFront = dynamic(
     () => import("./owlCarousel"),
     // No need for SSR, when the module includes a library that only works in the
     // browser.
-    { ssr: false }
+    {ssr: false}
 );
 
 // console.log("[components] RichText : ",RichText)
 // console.log("[components] CarouselEdit : ",CarouselEdit)
 const components = ({isEditMode}) => {
 
-    return{
+    return {
         'jnt:bigText': RichText,
         'hicnt:heading': Hero,
-        'hicnt:owlcarousel' : isEditMode ? CarouselEdit : CarouselFront,
-        'hicnt:article' : Article
+        'hicnt:owlcarousel': isEditMode ? CarouselEdit : CarouselFront,
+        'hicnt:article': Article
     }
 }
 

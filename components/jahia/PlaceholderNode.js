@@ -1,4 +1,3 @@
-
 const generateUUID = () => {
     let d = new Date().getTime();
     // if (window.performance && typeof window.performance.now === "function") {
@@ -12,7 +11,7 @@ const generateUUID = () => {
     return uuid;
 }
 
-const PlaceholderNode = ({path,nodetypes,children}) => {
+function PlaceholderNode({path, nodetypes, children}) {
 // console.log("[PlaceholderNode] children : ",children);
     const divElt = {
         class: 'jahia-template-gxt',
@@ -22,15 +21,16 @@ const PlaceholderNode = ({path,nodetypes,children}) => {
         // scriptinfo:"Path dispatch: /modules/industrial/2.1.2/tint_text/html/text.jsp",
         path,
         showareabutton: 'true',
-        allowreferences:"false",
+        allowreferences: "false",
         nodetypes
     }
 
 
-    return(
+    return (
         <div {...divElt}>
             {children}
         </div>
     )
 }
+
 export default PlaceholderNode
