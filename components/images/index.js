@@ -4,11 +4,12 @@ import {useQuery} from "@apollo/client";
 import {queryImage} from "./gqlQuery";
 import HalfBlock from "./HalfBlock";
 import Basic from "./Basic";
-import Bubble_1 from "./Bubble_1";
+import BubbleI from "./Bubble_1";
+import * as PropTypes from "prop-types";
 
 const views = {
     'halfBlock': HalfBlock,
-    'bubble_1': Bubble_1,
+    'bubble_1': BubbleI,
     'default': Basic
 }
 
@@ -39,5 +40,10 @@ const Image = ({id, view}) => {
 
     return getView();
 }
+
+Image.propTypes = {
+    id: PropTypes.string.isRequired,
+    view: PropTypes.string.isRequired
+};
 
 export default Image;

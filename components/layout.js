@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import {JahiaCtx} from "../lib/context";
 import classNames from "classnames";
 import styles from "./layout.module.css";
+import * as PropTypes from "prop-types";
 
 function Layout({children, path, templateName, meta}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -22,11 +23,10 @@ function Layout({children, path, templateName, meta}) {
             <Main
                 path={path}
                 templateName={templateName}
-                locale="en"
             >
 
                 <header role="banner">
-                    {/*TODO find a way to get base from context*/}
+                    {/*TODO remove home and start from base*/}
                     <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>
                     {/*<Nav base={`/sites/${config.siteName}/home`} path={path}/>*/}
                 </header>
@@ -53,5 +53,12 @@ function Layout({children, path, templateName, meta}) {
         </>
     )
 }
+
+Layout.propTypes = {
+    children: PropTypes.object.isRequired,
+    path: PropTypes.string.isRequired,
+    templateName: PropTypes.string.isRequired,
+    meta: PropTypes.object
+};
 
 export default Layout;

@@ -7,6 +7,7 @@ import PlaceholderNode from "../jahia/PlaceholderNode";
 import Image from "../images";
 import RichText from "../jahia/RichText";
 import config from "../../jahia";
+import * as PropTypes from "prop-types";
 
 function HalfBlock({bodyNode, imageNode, imagePosition}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -61,5 +62,11 @@ function HalfBlock({bodyNode, imageNode, imagePosition}) {
         </section>
     )
 }
+
+HalfBlock.propTypes = {
+    bodyNode: PropTypes.object,
+    imageNode: PropTypes.object,
+    imagePosition: PropTypes.string
+};
 
 export default HalfBlock;

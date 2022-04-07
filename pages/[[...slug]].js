@@ -1,7 +1,8 @@
+import React from "react";
 import Layout from "../components/layout";
 import Template from "../templates";
 import {getAllPages} from "../lib/pages";
-
+import * as PropTypes from "prop-types";
 
 function DynamicPage(props) {
     const {meta, path, templateName} = props;
@@ -11,6 +12,12 @@ function DynamicPage(props) {
         </Layout>
     );
 }
+
+DynamicPage.propTypes = {
+    meta: PropTypes.object,
+    path: PropTypes.string,
+    templateName: PropTypes.string
+};
 
 export default DynamicPage;
 

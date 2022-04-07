@@ -4,6 +4,7 @@ import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {contentTypes} from "./jahia/common";
 import classnames from "classnames";
+import * as PropTypes from "prop-types";
 
 function Nav({base, path}) {
     const {workspace, locale} = React.useContext(JahiaCtx)
@@ -135,53 +136,33 @@ function Nav({base, path}) {
                                         })}
                                     >
                                         <Link href={node.path} locale={locale}>
-                                            <a {...buildAnchorProps(node)}>
+                                            <a {...buildAnchorProps(node)} target="_blank" rel="noreferrer">
                                                 {node.title?.value}
                                             </a>
                                         </Link>
-                                        {hasChildren(node) &&
-                                            (<div className="dropdown-menu" aria-labelledby={node.uuid}>
-                                                {node.children.nodes.map(node2 => {
-                                                        //console.log("node2.path : ",node2.path);
-                                                        return (
-                                                            <Link key={node2.uuid} href={node2.path} locale={locale}>
-                                                                <a className="dropdown-item">
-                                                                    {node2.title?.value}
-                                                                </a>
-                                                            </Link>
-                                                        )
-                                                    }
-                                                )}
-                                            </div>)}
+                                        {
+                                            hasChildren(node) &&
+                                            (
+                                                <div className="dropdown-menu" aria-labelledby={node.uuid}>
+                                                    {node.children.nodes.map(node2 => {
+                                                            //console.log("node2.path : ",node2.path);
+                                                            return (
+                                                                <Link key={node2.uuid} href={node2.path} locale={locale}>
+                                                                    <a className="dropdown-item">
+                                                                        {node2.title?.value}
+                                                                    </a>
+                                                                </Link>
+                                                            )
+                                                        }
+                                                    )}
+                                                </div>
+                                            )
+                                        }
                                     </li>
                                 )
 
                             })
                         }
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link" href="index.html">Home</a>*/}
-                        {/*</li>*/}
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link  active" href="about.html">About</a>*/}
-                        {/*</li>*/}
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link" href="projects.html">Projects</a>*/}
-                        {/*</li>*/}
-                        {/*<li className="nav-item dropdown">*/}
-                        {/*    <a className="nav-link dropdown-toggle" href="services.html" id="dropdown04"*/}
-                        {/*       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>*/}
-                        {/*    <div className="dropdown-menu" aria-labelledby="dropdown04">*/}
-                        {/*        <a className="dropdown-item" href="services.html">Architectural Design</a>*/}
-                        {/*        <a className="dropdown-item" href="services.html">Interior</a>*/}
-                        {/*        <a className="dropdown-item" href="services.html">Building</a>*/}
-                        {/*    </div>*/}
-                        {/*</li>*/}
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link" href="blog.html">Blog</a>*/}
-                        {/*</li>*/}
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link" href="contact.html">Contact</a>*/}
-                        {/*</li>*/}
                     </ul>
 
                     <div className="navbar-nav ml-auto">
@@ -197,5 +178,10 @@ function Nav({base, path}) {
         </nav>
     )
 }
+
+Nav.propTypes = {
+    path: PropTypes.string.isRequired,
+    base: PropTypes.string.isRequired
+};
 
 export default Nav

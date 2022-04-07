@@ -1,6 +1,7 @@
 import React from 'react';
 import Item from "./Item";
 import {JahiaCtx} from "../../../lib/context";
+import * as PropTypes from "prop-types";
 
 function Heading({items, divs}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -28,5 +29,10 @@ function Heading({items, divs}) {
         </>
     );
 }
+
+Heading.propTypes = {
+    items : PropTypes.array.isRequired,
+    divs: PropTypes.object.isRequired
+};
 
 export default Heading;

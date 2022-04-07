@@ -1,4 +1,5 @@
 import React from "react";
+import * as PropTypes from 'prop-types';
 import {JahiaCtx} from "../../lib/context";
 import PlaceholderBtn from "../jahia/PlaceholderBtn";
 import config from "../../jahia";
@@ -15,9 +16,7 @@ function Default({bodyNode, imageNode, imagePosition}) {
         if (isEditMode) {
             if (!imageNode) {
                 return (
-
                     <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
-
                 )
             }
             return (
@@ -77,6 +76,12 @@ function Default({bodyNode, imageNode, imagePosition}) {
         </section>
     )
 }
+
+Default.propTypes = {
+    bodyNode: PropTypes.object,
+    imageNode: PropTypes.object,
+    imagePosition: PropTypes.string
+};
 
 export default Default;
 

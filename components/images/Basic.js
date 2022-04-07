@@ -1,7 +1,8 @@
 import React from "react";
 import {JahiaCtx} from "../../lib/context";
-// import styles from "components/images/halfBlock.module.css";
 import {getImageURI} from "../../lib/utils";
+import * as PropTypes from "prop-types";
+
 
 function BasicImage({imageNode}) {
     const {workspace} = React.useContext(JahiaCtx);
@@ -13,5 +14,9 @@ function BasicImage({imageNode}) {
             className="img-fluid"/>
     )
 }
+
+BasicImage.propTypes = {
+    imageNode: PropTypes.object.isRequired
+};
 
 export default BasicImage;

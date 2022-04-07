@@ -8,6 +8,7 @@ import styles from './edit.module.css'
 import {getJahiaDivsProps} from "../../lib/utils";
 import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
+import * as PropTypes from "prop-types";
 
 
 function OwlCarousel({id, mainResourcePath}) {
@@ -54,5 +55,10 @@ function OwlCarousel({id, mainResourcePath}) {
         <p>The carousel type is not supported</p>
     )
 }
+
+OwlCarousel.propTypes = {
+    id : PropTypes.string.isRequired,
+    mainResourcePath: PropTypes.string.isRequired
+};
 
 export default OwlCarousel;

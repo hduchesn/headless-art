@@ -2,6 +2,7 @@ import React from "react";
 import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {getImageURI} from "../lib/utils";
+import * as PropTypes from "prop-types";
 
 //TODO use xss to clean body
 
@@ -56,12 +57,13 @@ function Hero({id}) {
         <div className="inner-page">
             {content &&
                 <div
-className="slider-item"
-style={{backgroundImage: `url('${getImageURI({uri: content.media?.path, workspace})}')`}}
+                    className="slider-item"
+                    style={{backgroundImage: `url('${getImageURI({uri: content.media?.path, workspace})}')`}}
                 >
                     <div className="container">
                         <div className="row slider-text align-items-center justify-content-center">
                             <div
+                                // eslint-disable-next-line react/no-danger
                                 dangerouslySetInnerHTML={{__html: content.body}}
                                 className="col-md-8 text-center col-sm-12  pt-5"
                             />
@@ -72,4 +74,7 @@ style={{backgroundImage: `url('${getImageURI({uri: content.media?.path, workspac
     )
 }
 
+Hero.propTypes = {
+    id: PropTypes.string.isRequired
+};
 export default Hero;

@@ -9,6 +9,7 @@ import {getPageInfo} from '../lib/pages';
 
 import '../styles/style.scss';
 import {getPathAndQuery} from "../lib/utils";
+import * as PropTypes from "prop-types";
 
 function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 
@@ -27,18 +28,6 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         inMemoryCache.restore(apolloState);
     }
 
-    // return (
-    //     <div jahiatype="mainmodule"
-    //          path="/sites/headless-industrial/home"
-    //          locale="en"
-    //          template=""
-    //          templateName="default"
-    //          nodetypes="nt:base jmix:navMenuItem">
-    //       <h1>Hello world</h1>
-    //     </div>
-    //
-    // )
-
     return (
         <JahiaCtxProvider value={{
             workspace: pageProps.isPreview ? "EDIT" : "LIVE",
@@ -52,6 +41,11 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         </JahiaCtxProvider>
     )
 }
+
+MyApp.propTypes = {
+    Component:PropTypes.object,
+    pageProps:PropTypes.object
+};
 
 MyApp.getInitialProps = async (appContext) => {
     let data = await App.getInitialProps(appContext);

@@ -6,6 +6,8 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
 import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
+import * as PropTypes from "prop-types";
+
 
 function OwlCarousel({id, mainResourcePath}) {
     const {workspace, locale} = useContext(JahiaCtx);
@@ -79,5 +81,10 @@ function OwlCarousel({id, mainResourcePath}) {
         <p>The carousel type is not supported</p>
     )
 }
+
+OwlCarousel.propTypes = {
+    id : PropTypes.string.isRequired,
+    mainResourcePath: PropTypes.string.isRequired
+};
 
 export default OwlCarousel;

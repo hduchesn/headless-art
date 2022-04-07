@@ -2,10 +2,10 @@ import React from "react";
 import {gql, useQuery} from "@apollo/client";
 import {getJahiaDivsProps} from "../../lib/utils";
 import {JahiaCtx} from "../../lib/context";
+import * as PropTypes from "prop-types";
 
-
-function Area({name, mainResourcePath, components, path}) {
-    const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
+function Area({name, mainResourcePath, components, allowedTypes}) {
+    const {workspace, isEditMode} = React.useContext(JahiaCtx);
     // console.log("[Area] isEditMode : ",isEditMode);
 
     // console.log("[Area] mainResourcePath : ",mainResourcePath);
@@ -58,15 +58,19 @@ function Area({name, mainResourcePath, components, path}) {
         }
     }`;
 
-    // const area = useQuery(getRenderedContent, {
+    const nodeProps = {
+        name,
+        primaryNodeType: "jnt:area",
+    };
+    //TODO add number of item limit too
+    if(Array.isArray(allowedTypes) && allowedTypes.length > 0)
+        nodeProps.properties = [{name:"j:allowedTypes", value:allowedTypes}];
+
     useQuery(getRenderedContent, {
         variables: {
             workspace,
             pathArea: `${mainResourcePath}/${name}`,
-            node: {
-                name,
-                primaryNodeType: "jnt:area"
-            },
+            node: {...nodeProps},
             language: "en",
             mainResourcePath,
             isEditMode
@@ -129,5 +133,12 @@ function Area({name, mainResourcePath, components, path}) {
     )
 
 }
+
+Area.propTypes = {
+    name: PropTypes.string.isRequired,
+    mainResourcePath: PropTypes.string.isRequired,
+    components: PropTypes.object.isRequired,
+    allowedTypes: PropTypes.array,
+};
 
 export default Area;

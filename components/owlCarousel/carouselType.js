@@ -1,7 +1,8 @@
 import OWCHeading from "./heading";
 
-
-export default {
+const carouselType = {
     'heading': OWCHeading,
     // 'testimonial': OWCTestimonial
 }
+
+export default carouselType;
