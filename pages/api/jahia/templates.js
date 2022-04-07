@@ -5,6 +5,12 @@ const postsDirectory = path.join(process.cwd(), 'templates')
 const excludedName = ["index"]
 
 export default function handler(req, res) {
+    console.log("[api/jahia/templates] req.url : ",req.url);
+    console.log("[api/jahia/templates] req.query : ",req.query);
+    if (req.query.secret !== process.env.NEXT_PREVIEW_SECRET){
+        return res.status(401).json({ message: 'Invalid token' })
+    }
+
     // Get file names under /templates
     const fileNames = fs.readdirSync(postsDirectory)
     const allTemplateNames = fileNames.map(fileName => {
@@ -15,5 +21,5 @@ export default function handler(req, res) {
         }
     }).filter(template => !excludedName.includes(template.name));
 
-    res.status(200).json(allTemplateNames)
+    return res.status(200).json(allTemplateNames)
 }
