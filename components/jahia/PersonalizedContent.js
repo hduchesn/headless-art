@@ -6,7 +6,7 @@ import * as PropTypes from "prop-types";
 
 export function PersonalizedContent({id, mainResourcePath}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
-
+    const [content, setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
         jcr(workspace: $workspace) {
             workspace
@@ -86,6 +86,7 @@ export function PersonalizedContent({id, mainResourcePath}) {
 }
 
 PersonalizedContent.propTypes = {
-    id: PropTypes.string.isRequired,
-    mainResourcePath: PropTypes.string.isRequired
-};
+    id : PropTypes.string.isRequired,
+    mainResourcePath : PropTypes.string.isRequired,
+}
+

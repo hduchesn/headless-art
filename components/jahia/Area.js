@@ -71,13 +71,10 @@ function Area({name, mainResourcePath, allowedTypes}) {
     })
 
     const area = data?.jcr?.nodeByPath;
-    const divs = useMemo(() => isEditMode && !loading && getJahiaDivsProps(data.npm?.renderedComponent?.output), [data, isEditMode, loading]);
+    const divs = useMemo(() => isEditMode && !loading && getJahiaDivsProps(data?.npm?.renderedComponent?.output), [data, isEditMode, loading]);
 
     if (loading) {
         return "loading";
-    }
-    if (error) {
-        return <div>{error}</div>;
     }
 
     const showChildren = () => {
