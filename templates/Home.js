@@ -5,8 +5,8 @@ import {JahiaCtx} from "../lib/context";
 
 const Home = ({path}) => {
     const {isEditMode} = React.useContext(JahiaCtx)
-// console.log("[Home] templateName : ",templateName);
-    return(
+
+    return (
         <>
 
             {/*<Nav/>*/}
@@ -15,8 +15,7 @@ const Home = ({path}) => {
             <Area
                 name="testArea"
                 mainResourcePath={path}
-                components={components({isEditMode})}/>
-
+            />
 
 
             {/*<p style={{color:"red"}}>hardcoded area 2</p>*/}
@@ -24,7 +23,7 @@ const Home = ({path}) => {
             <Area
                 name="testArea2"
                 mainResourcePath={path}
-                components={components({isEditMode})}/>
+            />
 
             {/*<AreaJ name="HD_Are" mainResourcePath={path}/>*/}
             <div className="top-shadow"></div>

@@ -1,22 +1,13 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {gql, useQuery} from "@apollo/client";
 import {getJahiaDivsProps} from "../../lib/utils";
 import {JahiaCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
+import components from "../index";
 
-function Area({name, mainResourcePath, components, allowedTypes}) {
-    const {workspace, isEditMode} = React.useContext(JahiaCtx);
-    // console.log("[Area] isEditMode : ",isEditMode);
+function Area({name, mainResourcePath, allowedTypes}) {
+    const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
 
-    // console.log("[Area] mainResourcePath : ",mainResourcePath);
-    // console.log("[Area] name : ",name);
-    // console.log("[Area] locale : ",locale);
-    // console.log("[Area] workspace : ",workspace);
-
-    const [divs, setDivs] = React.useState([]);
-    const [area, setArea] = React.useState({});
-    // const isEditMode = getBoolean(isEdit);
-    // console.log("[Area] components: ",components);
     const getRenderedContent = gql`query (
         $workspace:Workspace!,
         $pathArea: String!,
@@ -63,10 +54,12 @@ function Area({name, mainResourcePath, components, allowedTypes}) {
         primaryNodeType: "jnt:area",
     };
     //TODO add number of item limit too
-    if(Array.isArray(allowedTypes) && allowedTypes.length > 0)
-        nodeProps.properties = [{name:"j:allowedTypes", value:allowedTypes}];
+    if (Array.isArray(allowedTypes) && allowedTypes.length > 0) {
+        nodeProps.properties = [{name: "j:allowedTypes", value: allowedTypes}];
+    }
 
-    useQuery(getRenderedContent, {
+    // const area = useQuery(getRenderedContent, {
+    const {data, error, loading} = useQuery(getRenderedContent, {
         variables: {
             workspace,
             pathArea: `${mainResourcePath}/${name}`,
@@ -74,20 +67,21 @@ function Area({name, mainResourcePath, components, allowedTypes}) {
             language: "en",
             mainResourcePath,
             isEditMode
-        },
-        onCompleted: data => {
-            // console.log("[Area] data :",data)
-            setDivs(getJahiaDivsProps(data.npm?.renderedComponent?.output));
-            setArea(data.jcr?.nodeByPath);
         }
     })
 
-    const showChildren = () => {
-        if (!area.children?.nodes) {
-            return <>loading</>;
-        }
+    const area = data?.jcr?.nodeByPath;
+    const divs = useMemo(() => isEditMode && !loading && getJahiaDivsProps(data.npm?.renderedComponent?.output), [data, isEditMode, loading]);
 
-        return area.children.nodes.map(node => {
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    const showChildren = () => {
+        return area?.children.nodes.map(node => {
             if (components[node.primaryNodeType.name]) {
                 const Component = components[node.primaryNodeType.name];
 
@@ -115,8 +109,7 @@ function Area({name, mainResourcePath, components, allowedTypes}) {
             )
         });
     }
-    // console.log("[Area] resolve area : ",name);
-    // console.log("[Area] divs : ",divs);
+
     return (
         <>
             {isEditMode &&
@@ -137,7 +130,6 @@ function Area({name, mainResourcePath, components, allowedTypes}) {
 Area.propTypes = {
     name: PropTypes.string.isRequired,
     mainResourcePath: PropTypes.string.isRequired,
-    components: PropTypes.object.isRequired,
     allowedTypes: PropTypes.array,
 };
 
