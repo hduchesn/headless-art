@@ -8,7 +8,7 @@ import * as PropTypes from "prop-types";
 
 function Nav({base, path}) {
     const {workspace, locale} = React.useContext(JahiaCtx)
-    const [navTree, setNavTree] = React.useState({});
+    // const [navTree, setNavTree] = React.useState({});
     //TODO update query to start from virtualnode as base
     const getSitePages = gql`query(
         $workspace: Workspace!,
@@ -59,7 +59,7 @@ function Nav({base, path}) {
     }`;
     //console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
 
-    useQuery(getSitePages, {
+    const {data, error, loading} =useQuery(getSitePages, {
         variables: {
             base,
             workspace,
@@ -67,20 +67,23 @@ function Nav({base, path}) {
             title: contentTypes.PROPS.TITLE,
             MenuItem: contentTypes.MENU_ITEM
         },
-        onCompleted: data => {
-            //console.log("[Nav] data",data);
-            setNavTree(data.jcr?.nodeByPath)
-        },
-        onError: error => {
-            //console.log("[Nav] error",error);
-        }
+        // onCompleted: data => {
+        //     //console.log("[Nav] data",data);
+        //     setNavTree(data.jcr?.nodeByPath)
+        // },
+        // onError: error => {
+        //     //console.log("[Nav] error",error);
+        // }
     });
 
-    // //console.log("[Nav] ret",ret);
-    // //console.log("[Nav] ret.data",ret.data);
-    // //console.log("[Nav] ret.loading",ret.loading);
-    // //console.log("[Nav] ret.error",ret.error);
-    // //console.log("[Nav] navTree",navTree);
+    const navTree = data?.jcr?.nodeByPath
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const hasChildren = (node) => {
         return Array.isArray(node.children?.nodes) && node.children.nodes.length > 0
@@ -136,7 +139,8 @@ function Nav({base, path}) {
                                         })}
                                     >
                                         <Link href={node.path} locale={locale}>
-                                            <a {...buildAnchorProps(node)} target="_blank" rel="noreferrer">
+                                            {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                                            <a {...buildAnchorProps(node)}>
                                                 {node.title?.value}
                                             </a>
                                         </Link>

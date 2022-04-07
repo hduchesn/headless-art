@@ -10,8 +10,9 @@ function Image({imageNode}) {
 
     return (
         <div
-className={classNames("image-display", styles.image)}
-style={{backgroundImage: `url('${getImageURI({uri: imageNode.media?.refNode?.path, workspace})}')`}}/>
+            className={classNames("image-display", styles.image)}
+            style={{backgroundImage: `url('${getImageURI({uri: imageNode.media?.refNode?.path, workspace})}')`}}
+        />
     )
 }
 

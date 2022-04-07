@@ -7,7 +7,6 @@ import * as PropTypes from "prop-types";
 
 function RichText({id}) {
     const {workspace, locale} = useContext(JahiaCtx);
-    const [content, setContent] = React.useState("")
 
     //todo manage view ?
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
@@ -24,16 +23,23 @@ function RichText({id}) {
         }
     }`;
 
-    useQuery(getContent, {
+    const {data, error, loading} = useQuery(getContent, {
         variables: {
             workspace,
             id,
             language: locale,
-        },
-        onCompleted: data => setContent(data.jcr?.nodeById?.content?.value || "no text")
+        }
     });
-    // console.log("[RichText] is resolved");
-    // const content= "<h3>Hello le text</h3>"
+
+    const content = data?.jcr?.nodeById?.content?.value || "no text"
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
+
     return (
         // eslint-disable-next-line react/no-danger
         <div dangerouslySetInnerHTML={{__html: content}}/>

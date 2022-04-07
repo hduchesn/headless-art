@@ -13,18 +13,27 @@ const views = {
     'default': Basic
 }
 
-const Image = ({id, view}) => {
+function Image({id, view}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
-    const [imageNode, setImageNode] = React.useState({})
+    // const [imageNode, setImageNode] = React.useState({})
 
-    useQuery(queryImage, {
+    const {data, error, loading} = useQuery(queryImage, {
         variables: {
             workspace,
             id,
             language: locale
         },
-        onCompleted: data => setImageNode(data.jcr?.nodeById)
+        // onCompleted: data => setImageNode(data.jcr?.nodeById)
     });
+
+    const imageNode = data?.jcr?.nodeById;
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const getView = () => {
         let View = views["default"]

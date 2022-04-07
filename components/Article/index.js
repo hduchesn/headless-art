@@ -4,16 +4,16 @@ import {gql, useQuery} from "@apollo/client";
 import config from "../../jahia";
 import HalfBlock from "./HalfBlock";
 import Default from "./Default";
+import * as PropTypes from "prop-types";
 
 const views = {
     'halfBlock': HalfBlock,
     'default': Default
 }
 
-
-const Article = ({id}) => {
+function Article({id}) {
     const {workspace} = React.useContext(JahiaCtx);
-    const [content, setContent] = React.useState({})
+    // const [content, setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
         jcr(workspace: $workspace) {
             workspace
@@ -39,14 +39,21 @@ const Article = ({id}) => {
         }
     }`;
 
-    useQuery(getContent, {
+    const {data, error, loading} = useQuery(getContent, {
         variables: {
             workspace,
             id
         },
-        onCompleted: data => setContent(data.jcr?.nodeById)
+        // onCompleted: data => setContent(data.jcr?.nodeById)
     });
+    const content = data?.jcr?.nodeById;
 
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const getChildNodeOfType = ({node, nodeType}) => {
         if (!Array.isArray(node.children?.nodes)) {
@@ -85,5 +92,8 @@ const Article = ({id}) => {
     return getView();
 }
 
+Article.propTypes = {
+    id: PropTypes.string.isRequired
+};
 export default Article;
 

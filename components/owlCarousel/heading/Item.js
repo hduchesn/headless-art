@@ -10,7 +10,7 @@ import * as PropTypes from "prop-types";
 
 function Item({id}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
-    const [content, setContent] = React.useState({})
+    // const [content, setContent] = React.useState({})
 
     // console.log("[Item] isEditMode :",isEditMode);
 
@@ -57,14 +57,23 @@ function Item({id}) {
         }
     }`;
 
-    useQuery(getContent, {
+    const {data, error, loading} = useQuery(getContent, {
         variables: {
             workspace,
             id,
             language: locale,
         },
-        onCompleted: data => setContent(data.jcr?.nodeById)
+        // onCompleted: data => setContent(data.jcr?.nodeById)
     });
+
+    const content = data?.jcr?.nodeById;
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     // console.log("[Item] image path :",content.media?.refNode?.path);
     // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">

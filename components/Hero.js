@@ -8,7 +8,7 @@ import * as PropTypes from "prop-types";
 
 function Hero({id}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
-    const [content, setContent] = React.useState({})
+
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
             workspace
@@ -36,17 +36,25 @@ function Hero({id}) {
         }
     }`;
 
-    useQuery(getContent, {
+    const {data, error, loading} = useQuery(getContent, {
         variables: {
             workspace,
             id,
             language: locale,
-        },
-        onCompleted: data => setContent({
-            body: data.jcr?.nodeById?.body?.value || 'no body',
-            media: data.jcr?.nodeById?.media?.node
-        })
+        }
     });
+
+    const content={
+        body: data?.jcr?.nodeById?.body?.value || 'no body',
+        mediaNode: data?.jcr?.nodeById?.media?.node
+    }
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     // console.log("[Hero] is resolved");
     //element-animate
@@ -55,21 +63,20 @@ function Hero({id}) {
     return (
 
         <div className="inner-page">
-            {content &&
-                <div
-                    className="slider-item"
-                    style={{backgroundImage: `url('${getImageURI({uri: content.media?.path, workspace})}')`}}
-                >
-                    <div className="container">
-                        <div className="row slider-text align-items-center justify-content-center">
-                            <div
-                                // eslint-disable-next-line react/no-danger
-                                dangerouslySetInnerHTML={{__html: content.body}}
-                                className="col-md-8 text-center col-sm-12  pt-5"
-                            />
-                        </div>
+            <div
+                className="slider-item"
+                style={{backgroundImage: `url('${getImageURI({uri: content.mediaNode?.path, workspace})}')`}}
+            >
+                <div className="container">
+                    <div className="row slider-text align-items-center justify-content-center">
+                        <div
+                            // eslint-disable-next-line react/no-danger
+                            dangerouslySetInnerHTML={{__html: content.body}}
+                            className="col-md-8 text-center col-sm-12  pt-5"
+                        />
                     </div>
-                </div>}
+                </div>
+            </div>
         </div>
     )
 }

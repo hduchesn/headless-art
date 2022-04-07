@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useMemo} from "react";
 import {JahiaCtx} from "../../lib/context";
 import {useQuery} from "@apollo/client";
 import classNames from 'classnames';
@@ -13,12 +13,12 @@ import * as PropTypes from "prop-types";
 
 function OwlCarousel({id, mainResourcePath}) {
     const {workspace, locale} = useContext(JahiaCtx);
-    const [divs, setDivs] = React.useState([]);
-    const [carousel, setCarousel] = React.useState({});
+    // const [divs, setDivs] = React.useState([]);
+    // const [carousel, setCarousel] = React.useState({});
 
     // const carouselId = Math.ceil(Math.random()* 100000);
 
-    useQuery(queryCarousel, {
+    const {data, error, loading} = useQuery(queryCarousel, {
         variables: {
             workspace,
             id,
@@ -26,11 +26,22 @@ function OwlCarousel({id, mainResourcePath}) {
             mainResourcePath,
             isEditMode: true
         },
-        onCompleted: data => {
-            setDivs(getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output));
-            setCarousel(data.jcr?.nodeById);
-        }
+        // onCompleted: data => {
+        //     setDivs(getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output));
+        //     setCarousel(data.jcr?.nodeById);
+        // }
     });
+
+    const carousel = data?.jcr?.nodeById;
+    const divs = useMemo(() => !loading && getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output), [data, loading]);
+
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     // console.log("[OwlCarousel] carousel.class :",carousel.class);
     if (carouselType[carousel.carouselType?.value]) {

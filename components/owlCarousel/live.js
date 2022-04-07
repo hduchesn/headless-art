@@ -54,7 +54,7 @@ function OwlCarousel({id, mainResourcePath}) {
         }
     }, [carousel]);
 
-    useQuery(queryCarousel, {
+    const {error, loading} = useQuery(queryCarousel, {
         variables: {
             workspace,
             id,
@@ -66,6 +66,15 @@ function OwlCarousel({id, mainResourcePath}) {
             setCarousel(data.jcr?.nodeById);
         }
     });
+
+    // const carousel = data?.jcr?.nodeById;
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     // console.log("[OwlCarousel] carousel.class :",carousel.class);
     if (carouselType[carousel.carouselType?.value]) {

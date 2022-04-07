@@ -5,8 +5,6 @@ import * as PropTypes from "prop-types";
 
 function Heading({items, divs}) {
     const {isEditMode} = React.useContext(JahiaCtx);
-    console.log("[Heading] isEditMode : ", isEditMode);
-
 
     return (
         <>
@@ -32,7 +30,7 @@ function Heading({items, divs}) {
 
 Heading.propTypes = {
     items : PropTypes.array.isRequired,
-    divs: PropTypes.object.isRequired
+    divs: PropTypes.object
 };
 
 export default Heading;
