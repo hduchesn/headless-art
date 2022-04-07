@@ -1,0 +1,114 @@
+version: '3.6'
+
+services:
+  jahia-derby:
+    image: jahia/${JAHIA_REPO}:${JAHIA_VERSION}
+    hostname: jahia
+    container_name: jahia-derby
+    mem_limit: 4gb
+    environment:
+      JPDA: "true"
+      TZ: ${TZ}
+      EXECUTE_PROVISIONING_SCRIPT: ${EXECUTE_PROVISIONING_SCRIPT}
+      JAHIA_LICENSE: ${JAHIA_LICENSE}
+      CATALINA_OPTS: -XX:NativeMemoryTracking=detail
+      YOURKIT_ACTIVATED: "false"
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+      - "8101:8101"
+      - "9229:9229"
+      - "10001:10001"
+    volumes:
+      - ./provisioning:/var/jahia/patches/remote
+    networks:
+      - stack
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: '${ELASTICSEARCH_IMAGE}'
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=my-cluster
+      - cluster.initial_master_nodes=elasticsearch
+      - discovery.seed_hosts=
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    ports:
+      - '9200:9200'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - stack
+
+  jcustomer:
+    image: '${JCUSTOMER_IMAGE}'
+    hostname: jcustomer
+    container_name: jcustomer
+    networks:
+      - stack
+    depends_on:
+      - elasticsearch
+    environment:
+      unomi_env_var_UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch:9200
+      unomi_env_var_UNOMI_ELASTICSEARCH_CLUSTERNAME: docker-cluster
+      unomi_env_var_UNOMI_ELASTICSEARCH_INDEXPREFIX: ${JCUSTOMER_INDEXPREFIX}
+      unomi_env_var_UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer:9443
+      unomi_env_var_JAVA_MAX_MEM: 2G
+      unomi_env_var_UNOMI_ROOT_PASSWORD: jcustomerP@55
+      unomi_env_var_UNOMI_THIRDPARTY_PROVIDER1_KEY: 670c26d1cc413346c3b2fd9ce65dab41
+      unomi_env_var_UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.24.24.0/24,::1,127.0.0.1
+      unomi_env_var_KARAF_OPTS: "-Dunomi.autoStart=true"
+      unomi_env_var_UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer:8181
+      KARAF_OPTS: "-Dunomi.autoStart=true"
+      UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch:9200
+      UNOMI_ELASTICSEARCH_CLUSTERNAME: docker-cluster
+      UNOMI_ELASTICSEARCH_INDEXPREFIX: ${JCUSTOMER_INDEXPREFIX}
+      UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer:9443
+      UNOMI_ROOT_PASSWORD: jcustomerP@55
+      UNOMI_THIRDPARTY_PROVIDER1_KEY: 670c26d1cc413346c3b2fd9ce65dab41
+      UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.24.24.0/24,::1,127.0.0.1
+      MAXMIND_KEY: hYZIvpxdi8Ea647J
+      UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer:8181
+      KARAF_DEBUG: ${KARAF_DEBUG}
+      JAVA_MAX_MEM: 2G
+    ports:
+      - 8181:8181
+      - 9443:9443
+      - 5005:5005
+      - 8102:8102
+
+  hq:
+    container_name: hq
+    image: elastichq/elasticsearch-hq
+    ports:
+      - 5001:5000
+    networks:
+      - stack
+
+  vercel:
+    container_name: vercel
+    image: next:latest
+    ports:
+      - 3000:3000
+    environment:
+      DEV: ${NEXT_DEV}
+      JAHIA_BASE_URL: ${JAHIA_BASE_URL}
+    volumes:
+      - ./pages:/next/pages
+      - ./templates:/next/templates
+      - ./components:/next/components
+      - ./lib:/next/lib
+
+    networks:
+      - stack
+
+volumes:
+  jahia-data:
+
+networks:
+  stack:
