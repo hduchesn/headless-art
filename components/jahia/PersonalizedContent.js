@@ -3,7 +3,7 @@ import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import components from "../index";
 
-export const PersonalizedContent = ({id, mainResourcePath}) => {
+export function PersonalizedContent({id, mainResourcePath}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
     const [content, setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){

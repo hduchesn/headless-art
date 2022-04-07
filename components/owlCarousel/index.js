@@ -11,7 +11,7 @@ const CarouselFront = dynamic(
     {ssr: false}
 );
 
-export const OwlCarousel = (props) => {
+export function OwlCarousel(props) {
     const {isEditMode} = useContext(JahiaCtx);
 
     return isEditMode ? <CarouselEdit {...props}/> : <CarouselFront {...props}/>
