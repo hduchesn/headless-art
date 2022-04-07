@@ -2,6 +2,8 @@ import React from 'react';
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import components from "../index";
+import * as PropTypes from "prop-types";
+import RichText from "./RichText";
 
 export function PersonalizedContent({id, mainResourcePath}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
@@ -83,3 +85,9 @@ export function PersonalizedContent({id, mainResourcePath}) {
 
     );
 }
+
+PersonalizedContent.propTypes = {
+    id : PropTypes.string.isRequired,
+    mainResourcePath : PropTypes.string.isRequired,
+}
+
