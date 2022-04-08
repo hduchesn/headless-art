@@ -55,7 +55,7 @@ function Area({name, mainResourcePath, allowedTypes}) {
     };
     //TODO add number of item limit too
     if (Array.isArray(allowedTypes) && allowedTypes.length > 0) {
-        nodeProps.properties = [{name: "j:allowedTypes", value: allowedTypes}];
+        nodeProps.properties = [{name: "j:allowedTypes", values: allowedTypes}];
     }
 
     // const area = useQuery(getRenderedContent, {

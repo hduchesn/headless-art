@@ -11,7 +11,7 @@ function Third({path}) {
             <Area
                 name="hero"
                 mainResourcePath={path}
-                // allowedTypes={[cms.contentTypes.HERO]}
+                allowedTypes={[cms.contentTypes.HERO]}
             />
 
             <section className="section">

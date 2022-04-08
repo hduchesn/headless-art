@@ -80,7 +80,7 @@ function Default({bodyNode, imageNode, imagePosition}) {
 Default.propTypes = {
     bodyNode: PropTypes.object,
     imageNode: PropTypes.object,
-    imagePosition: PropTypes.string
+    imagePosition: PropTypes.object
 };
 
 export default Default;

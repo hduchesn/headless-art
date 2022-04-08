@@ -29,6 +29,7 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 
     if (pageProps.isPreview && !router.resolveHref.patched) {
         router.resolveHref = (router, href, resolveAs) => {
+            console.log('[_app.resolveHref] href : ',href);
             return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
         }
         router.resolveHref.patched = true
@@ -54,8 +55,8 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 }
 
 MyApp.propTypes = {
-    Component:PropTypes.object,
-    pageProps:PropTypes.object
+    Component:PropTypes.func.isRequired,
+    pageProps:PropTypes.object.isRequired
 };
 
 MyApp.getInitialProps = async (appContext) => {

@@ -66,7 +66,7 @@ function HalfBlock({bodyNode, imageNode, imagePosition}) {
 HalfBlock.propTypes = {
     bodyNode: PropTypes.object,
     imageNode: PropTypes.object,
-    imagePosition: PropTypes.string
+    imagePosition: PropTypes.object
 };
 
 export default HalfBlock;
