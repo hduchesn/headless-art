@@ -27,7 +27,7 @@ function Layout({children, path, templateName, meta}) {
 
                 <header role="banner">
                     {/*TODO remove home and start from base*/}
-                    <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>
+                    {/*<Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>*/}
                     <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>
                     {/*<Nav base={`/sites/${config.siteName}/home`} path={path}/>*/}
                 </header>

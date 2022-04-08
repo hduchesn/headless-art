@@ -3,7 +3,7 @@ import {gql, useQuery} from "@apollo/client";
 import {getJahiaDivsProps} from "../../lib/utils";
 import {JahiaCtx, MainResourceCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
-import {JahiaComponent} from "components/jahia/JahiaComponent";
+import {JahiaComponent} from "./JahiaComponent";
 
 function Area({name, allowedTypes}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);

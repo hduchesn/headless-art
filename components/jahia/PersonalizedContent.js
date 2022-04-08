@@ -3,7 +3,7 @@ import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import components from "../index";
 import * as PropTypes from "prop-types";
-import {JahiaComponent} from "components/jahia/JahiaComponent";
+import {JahiaComponent} from "./JahiaComponent";
 
 export function PersonalizedContent({id}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
