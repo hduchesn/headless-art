@@ -2,7 +2,7 @@ import React from "react";
 import * as PropTypes from 'prop-types';
 import {JahiaCtx} from "../../lib/context";
 import PlaceholderBtn from "../jahia/PlaceholderBtn";
-import config from "../../jahia";
+import cms from "../../jahia";
 import PlaceholderNode from "../jahia/PlaceholderNode";
 import Image from "../images";
 import RichText from "../jahia/RichText";
@@ -16,7 +16,7 @@ function Default({bodyNode, imageNode, imagePosition}) {
         if (isEditMode) {
             if (!imageNode) {
                 return (
-                    <PlaceholderBtn path="image" nodetypes={config.cnd_type.HALFBLOCK_IMAGE}/>
+                    <PlaceholderBtn path="image" nodetypes={cms.contentTypes.HALFBLOCK_IMAGE}/>
                 )
             }
             return (
@@ -31,7 +31,7 @@ function Default({bodyNode, imageNode, imagePosition}) {
     const getBodyContent = () => {
         if (isEditMode) {
             if (!bodyNode) {
-                return <PlaceholderBtn path="body" nodetypes={config.cnd_type.INDUS_TEXT}/>
+                return <PlaceholderBtn path="body" nodetypes={cms.contentTypes.INDUS_TEXT}/>
             }
             return (
                 <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>

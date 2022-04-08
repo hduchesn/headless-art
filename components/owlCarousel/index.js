@@ -17,7 +17,4 @@ export function OwlCarousel(props) {
     return isEditMode ? <CarouselEdit {...props}/> : <CarouselFront {...props}/>
 }
 
-OwlCarousel.propTypes = {
-    id : PropTypes.string.isRequired,
-    mainResourcePath: PropTypes.string.isRequired
-};
+OwlCarousel.propTypes = {};

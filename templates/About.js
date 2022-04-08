@@ -1,11 +1,11 @@
 import React from 'react';
 import Area from "../components/jahia/Area";
-import components from "../components/";
-import {JahiaCtx} from "../lib/context";
+// import {JahiaCtx} from "../lib/context";
+import * as PropTypes from "prop-types";
 
-const About = ({path, templateName}) => {
-    const {isEditMode} = React.useContext(JahiaCtx)
-    console.log("[About] templateName : ", templateName);
+function About({path}) {
+    // const {isEditMode} = React.useContext(JahiaCtx)
+
     return (
         <>
             <Area
@@ -35,6 +35,10 @@ const About = ({path, templateName}) => {
 
     )
 }
+
+About.propTypes = {
+    path: PropTypes.string.isRequired
+};
 export default About;
 
 

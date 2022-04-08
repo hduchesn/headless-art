@@ -1,5 +1,5 @@
 import {getPageInfo} from "../../lib/pages";
-import jahia from '../../jahia';
+import cms from '../../jahia';
 
 const getHTMLError = ({message, path, locale}) => `
     <div jahiatype="mainmodule"
@@ -14,16 +14,16 @@ const getHTMLError = ({message, path, locale}) => `
 
 export default async function handler(req, res) {
     const defaultLocale = "en"
-    let jahiaContext;
+    let cmsContext;
     try {
         if (req.cookies?.__jContent_preview_ctx) {
-            jahiaContext = JSON.parse(req.cookies.__jContent_preview_ctx);
+            cmsContext = JSON.parse(req.cookies.__jContent_preview_ctx);
         }
     } catch (e) {
-        console.error("[API Preview] jahiaContext json parse error : ", e);
+        console.error("[API Preview] cmsContext json parse error : ", e);
     }
 
-    const locale = jahiaContext.locale || defaultLocale;
+    const locale = cmsContext.locale || defaultLocale;
 
     // console.log('[API Preview] req: ',req)
     console.log('[API Preview] req.cookies.__jContent_preview_ctx: ', req.cookies?.__jContent_preview_ctx)
@@ -62,9 +62,9 @@ export default async function handler(req, res) {
         // maxAge: 30, // The preview mode cookies expire in 30 s
     })
 
-    let redirect = `${jahia.paths.preview}/${locale}${data.jcr.nodeByPath.path}.html`;
-    if (jahiaContext.edit) {
-        redirect = `${jahia.paths.edit}/${locale}${data.jcr.nodeByPath.path}.html?redirect=${req.query?.redirect}`;
+    let redirect = `${cms.paths.preview}/${locale}${data.jcr.nodeByPath.path}.html`;
+    if (cmsContext.edit) {
+        redirect = `${cms.paths.edit}/${locale}${data.jcr.nodeByPath.path}.html?redirect=${req.query?.redirect}`;
     }
     console.log("[API Preview] redirect to : ", redirect);
     // Redirect to the path from the fetched post

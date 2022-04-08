@@ -1,5 +1,6 @@
 export default {
-    cnd_type: {
+    contentTypes: {
+        HERO: "hicnt:heading",
         WIDEN_IMAGE: "wdennt:image",
         WIDEN_VIDEO: "wdennt:video",
         EXT_VIDEO: 'ext:video',

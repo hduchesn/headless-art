@@ -1,7 +1,7 @@
 import React from 'react';
 import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
-import config from "../../jahia";
+import cms from "../../jahia";
 import HalfBlock from "./HalfBlock";
 import Default from "./Default";
 import * as PropTypes from "prop-types";
@@ -68,12 +68,12 @@ function Article({id}) {
 
     const imageNode = getChildNodeOfType({
         node: content,
-        nodeType: config.cnd_type.HALFBLOCK_IMAGE
+        nodeType: cms.contentTypes.HALFBLOCK_IMAGE
     });
 
     const bodyNode = getChildNodeOfType({
         node: content,
-        nodeType: config.cnd_type.INDUS_TEXT
+        nodeType: cms.contentTypes.INDUS_TEXT
     });
 
     const getView = () => {

@@ -6,7 +6,7 @@ import * as PropTypes from "prop-types";
 import components from "../index";
 
 function Area({name, mainResourcePath, allowedTypes}) {
-    const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
+    const {workspace, isEditMode} = React.useContext(JahiaCtx);
 
     const getRenderedContent = gql`query (
         $workspace:Workspace!,
