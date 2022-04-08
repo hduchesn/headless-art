@@ -9,52 +9,57 @@ import * as PropTypes from "prop-types";
 function Nav({base, path}) {
     const {workspace, locale} = React.useContext(JahiaCtx)
     // const [navTree, setNavTree] = React.useState({});
-    //TODO update query to start from virtualnode as base
+
     const getSitePages = gql`query(
         $workspace: Workspace!,
         $base: String!,
         $language: String!,
         $title:String!,
-        $MenuItem:[String]!) {
+        $MenuItem:[String]!
+        $isLevel3:Boolean!) {
 
         jcr(workspace: $workspace) {
             workspace
+            # first node is site level
             nodeByPath(path: $base) {
                 workspace
                 uuid
                 path
-                title: property(name: $title  , language: $language) {
-                    value
-                }
                 children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) {
+                    # Home Page level
                     nodes {
-                        workspace
-                        uuid
-                        path
-                        primaryNodeType {
-                            name
-                        }
-                        page: isNodeType(type: {types:$MenuItem})
-                        title: property(name: $title, language: $language) {
+                        ...CoreNodeFields
+                        isHomePage : property(name:"j:isHomePage") {
                             value
                         }
                         children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) {
+                            # Home Page sub-level 
                             nodes {
-                                workspace
-                                uuid
-                                path
-                                primaryNodeType {
-                                    name
-                                }
-                                page: isNodeType(type: {types:$MenuItem})
-                                title: property(name: $title, language: $language) {
-                                    value
+                                ...CoreNodeFields
+                                # Home Page sub-sub-level
+                                children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) @include(if: $isLevel3) { 
+                                    # Home Page sub-level 
+                                    nodes {
+                                        ...CoreNodeFields
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+    fragment CoreNodeFields on JCRNode {
+        workspace
+        uuid
+        path
+        primaryNodeType {
+            name
+        }
+        page: isNodeType(type: {types:$MenuItem})
+        title: property(name: $title, language: $language) {
+            value
         }
     }`;
     //console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
@@ -65,7 +70,8 @@ function Nav({base, path}) {
             workspace,
             language: locale,
             title: contentTypes.PROPS.TITLE,
-            MenuItem: contentTypes.MENU_ITEM
+            MenuItem: contentTypes.MENU_ITEM,
+            isLevel3:true
         },
         // onCompleted: data => {
         //     //console.log("[Nav] data",data);
@@ -75,9 +81,10 @@ function Nav({base, path}) {
         //     //console.log("[Nav] error",error);
         // }
     });
+console.log("[nav] nodes",data?.jcr?.nodeByPath?.children?.nodes);
 
-    const navTree = data?.jcr?.nodeByPath
-
+    const navTree = data?.jcr?.nodeByPath?.children?.nodes?.filter(page => page.isHomePage?.value === "true")[0];
+    console.log("[nav] navTree",navTree);
     if (loading) {
         return "loading";
     }
