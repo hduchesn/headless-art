@@ -76,6 +76,10 @@ function Area({name, mainResourcePath, allowedTypes}) {
     if (loading) {
         return "loading";
     }
+    if (error) {
+        console.log(error);
+        return <div>Error when loading ${JSON.stringify(error)}</div>
+    }
 
     const showChildren = () => {
         return area?.children.nodes.map(node => {
