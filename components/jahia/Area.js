@@ -15,9 +15,9 @@ function Area({name, allowedTypes}) {
         $path: String,
         $language: String,
         $node: InputJCRNode,
-        $isEditMode: Boolean) {
+        $isEditMode: Boolean!) {
         # npm is used to create jahia area if needed and return jahia HTML tags for the edit mode       
-        npm {
+        npm @include(if: $isEditMode) {
             renderedComponent(
                 mainResourcePath:$mainResourcePath,
                 path: $path,
