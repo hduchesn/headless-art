@@ -3,8 +3,9 @@ import {JahiaCtx} from "../../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import components from "../index";
 import * as PropTypes from "prop-types";
+import {JahiaComponent} from "components/jahia/JahiaComponent";
 
-export function PersonalizedContent({id, mainResourcePath}) {
+export function PersonalizedContent({id}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
     const [content, setContent] = React.useState({})
     const getContent = gql`query($workspace: Workspace!, $id: String!){
@@ -43,42 +44,18 @@ export function PersonalizedContent({id, mainResourcePath}) {
         <div>
             Personalized content - edition
 
-            {data && data.jcr.nodeById.children.nodes.map(node => {
-
-                if (components[node.primaryNodeType.name]) {
-                    const Component = components[node.primaryNodeType.name];
-
-                    return (
-                        <Component
-                            id={node.uuid}
-                            path={node.path}
-                            mainResourcePath={mainResourcePath}
-                        />
-                    );
-                }
-                return "no render"
-            })}
+            {data && data.jcr.nodeById.children.nodes.map(node => <JahiaComponent node={node}/>)}
         </div>
     ) : (
         <div>
             Personalized content - live
 
             {data && data.jcr.nodeById.children.nodes.map(node => {
-
-                if (components[node.primaryNodeType.name]) {
-                    const Component = components[node.primaryNodeType.name];
-
-                    return (
-                        <div style={{display:"none"}}>
-                            <Component
-                                id={node.uuid}
-                                path={node.path}
-                                mainResourcePath={mainResourcePath}
-                            />
-                        </div>
-                    );
-                }
-                return "no render"
+                return (
+                    <div style={{display:"none"}}>
+                        <JahiaComponent node={node}/>
+                    </div>
+                );
             })}
         </div>
 
@@ -87,6 +64,5 @@ export function PersonalizedContent({id, mainResourcePath}) {
 
 PersonalizedContent.propTypes = {
     id : PropTypes.string.isRequired,
-    mainResourcePath : PropTypes.string.isRequired,
 }
 

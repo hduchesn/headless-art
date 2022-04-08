@@ -1,13 +1,13 @@
 import React, {useMemo} from "react";
 import {gql, useQuery} from "@apollo/client";
 import {getJahiaDivsProps} from "../../lib/utils";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx, MainResourceCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
-import components from "../index";
+import {JahiaComponent} from "components/jahia/JahiaComponent";
 
-function Area({name, mainResourcePath, allowedTypes}) {
-    const {workspace, isEditMode} = React.useContext(JahiaCtx);
-
+function Area({name, allowedTypes}) {
+    const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
+    const mainResourcePath = React.useContext(MainResourceCtx);
     const getRenderedContent = gql`query (
         $workspace:Workspace!,
         $pathArea: String!,
@@ -64,7 +64,7 @@ function Area({name, mainResourcePath, allowedTypes}) {
             workspace,
             pathArea: `${mainResourcePath}/${name}`,
             node: {...nodeProps},
-            language: "en",
+            language: {locale},
             mainResourcePath,
             isEditMode
         }
@@ -81,47 +81,16 @@ function Area({name, mainResourcePath, allowedTypes}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    const showChildren = () => {
-        return area?.children.nodes.map(node => {
-            if (components[node.primaryNodeType.name]) {
-                const Component = components[node.primaryNodeType.name];
-
-                if (isEditMode) {
-                    return (
-                        <div key={node.uuid} {...divs[node.path]}>
-                            <Component
-                                id={node.uuid}
-                                path={node.path}
-                                mainResourcePath={mainResourcePath}/>
-                        </div>
-                    )
-                }
-
-                return (
-                    <Component
-                        key={node.uuid}
-                        id={node.uuid}
-                        path={node.path}
-                        mainResourcePath={mainResourcePath}/>
-                )
-            }
-            return (
-                <div key={node.uuid}>Unknown rendering for : {node.name} - {node.primaryNodeType.name}</div>
-            )
-        });
-    }
-
     return (
         <>
             {isEditMode &&
                 <div {...divs[area.path]}>
-                    {showChildren()}
+                    {area?.children.nodes.map(node => <JahiaComponent key={node.uuid} node={node}/>)}
 
                     {/*Jahia btn placeholder*/}
                     <div {...divs["*"]}/>
                 </div>}
-            {!isEditMode &&
-                showChildren()}
+            {!isEditMode && area?.children.nodes.map(node => <JahiaComponent key={node.uuid} node={node}/>)}
         </>
 
     )
@@ -130,7 +99,6 @@ function Area({name, mainResourcePath, allowedTypes}) {
 
 Area.propTypes = {
     name: PropTypes.string.isRequired,
-    mainResourcePath: PropTypes.string.isRequired,
     allowedTypes: PropTypes.array,
 };
 

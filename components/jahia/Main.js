@@ -16,7 +16,7 @@ function Main({path, templateName, children}) {
             path={path}
             locale={locale}
             template=""
-            templateName={templateName}
+            templatename={templateName}
             nodetypes="nt:base jmix:navMenuItem"
         >
             {children}
