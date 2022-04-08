@@ -19,5 +19,4 @@ export function OwlCarousel(props) {
 
 OwlCarousel.propTypes = {
     id : PropTypes.string.isRequired,
-    mainResourcePath: PropTypes.string.isRequired
 };

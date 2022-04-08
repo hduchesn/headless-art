@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx, MainResourceCtx} from "../../lib/context";
 import {useQuery} from "@apollo/client";
 // import OWCTestimonial from "./testimonial"
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -8,7 +8,9 @@ import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
 import * as PropTypes from "prop-types";
 
-function OwlCarousel({id, mainResourcePath}) {
+function OwlCarousel({id}) {
+    const mainResourcePath = React.useContext(MainResourceCtx);
+
     const {workspace, locale} = useContext(JahiaCtx);
     const [carousel, setCarousel] = React.useState({});
 
@@ -93,7 +95,6 @@ function OwlCarousel({id, mainResourcePath}) {
 
 OwlCarousel.propTypes = {
     id : PropTypes.string.isRequired,
-    mainResourcePath: PropTypes.string.isRequired
 };
 
 export default OwlCarousel;

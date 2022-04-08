@@ -10,7 +10,7 @@ function PlaceholderBtn({path, nodetypes}) {
         id: `module${generateUUID()}`,
         type: 'placeholder',
         path,
-        showAreaButton: 'true',
+        showareabutton: 'true',
         nodetypes
     }
 

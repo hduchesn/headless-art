@@ -3,13 +3,16 @@ import Layout from "../components/layout";
 import Template from "../templates";
 import {getAllPages} from "../lib/pages";
 import * as PropTypes from "prop-types";
+import {MainResourceCtxProvider} from "../lib/context";
 
 function DynamicPage(props) {
     const {meta, path, templateName} = props;
     return (
-        <Layout meta={meta} path={path} templateName={templateName}>
-            <Template {...props}/>
-        </Layout>
+        <MainResourceCtxProvider value={path}>
+            <Layout meta={meta} path={path} templateName={templateName}>
+                <Template {...props}/>
+            </Layout>
+        </MainResourceCtxProvider>
     );
 }
 
