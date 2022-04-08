@@ -10,6 +10,10 @@ import {getPageInfo} from '../lib/pages';
 import '../styles/style.scss';
 import {getPathAndQuery} from "../lib/utils";
 import * as PropTypes from "prop-types";
+import * as router from "next/dist/shared/lib/router/router";
+import jahia from "../jahia";
+
+const previousResolveHref = router.resolveHref;
 
 function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 
@@ -23,11 +27,18 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         // import("../public/static/js/main.js");
     }, []);
 
+    if (pageProps.isPreview && !router.resolveHref.patched) {
+        router.resolveHref = (router, href, resolveAs) => {
+            return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
+        }
+        router.resolveHref.patched = true
+    }
+
     if (process.browser && apolloState) {
         console.log('restoring cache..')
         inMemoryCache.restore(apolloState);
     }
-
+    console.log('[MyApp] render')
     return (
         <JahiaCtxProvider value={{
             workspace: pageProps.isPreview ? "EDIT" : "LIVE",
@@ -53,13 +64,6 @@ MyApp.getInitialProps = async (appContext) => {
     // console.log("[MyApp.getInitialProps] appContext.ctx.req.url : ",appContext.ctx.req.url);
     // console.log("[MyApp.getInitialProps] appContext : ",appContext);
     console.log("[MyApp.getInitialProps] cookies : ", (appContext.ctx.req).cookies);
-    // let isPreview = false;
-    // let jahiaContext;
-    // if((appContext.ctx.req).cookies){
-    //   isPreview = !!(appContext.ctx.req).cookies.__next_preview_data
-    //
-    //
-    // }
 
     const isPreview = !!(appContext.ctx.req).cookies?.__next_preview_data;
     const workspace = isPreview ? "EDIT" : "LIVE";
