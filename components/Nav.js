@@ -81,10 +81,10 @@ function Nav({base, path}) {
         //     //console.log("[Nav] error",error);
         // }
     });
-console.log("[nav] nodes",data?.jcr?.nodeByPath?.children?.nodes);
+    // console.log("[nav] nodes",data?.jcr?.nodeByPath?.children?.nodes);
 
     const navTree = data?.jcr?.nodeByPath?.children?.nodes?.filter(page => page.isHomePage?.value === "true")[0];
-    console.log("[nav] navTree",navTree);
+    // console.log("[nav] navTree",navTree);
     if (loading) {
         return "loading";
     }
