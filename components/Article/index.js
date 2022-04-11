@@ -52,7 +52,8 @@ function Article({id}) {
         return "loading";
     }
     if (error) {
-        return <div>{error}</div>;
+        console.log(error);
+        return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
     const getChildNodeOfType = ({node, nodeType}) => {
