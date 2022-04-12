@@ -10,12 +10,12 @@ import {getPageInfo} from '../lib/pages';
 import '../styles/style.scss';
 import {getPathAndQuery} from "../lib/utils";
 import * as PropTypes from "prop-types";
-import * as internalRouter from "next/dist/shared/lib/router/router";
-import jahia from "../jahia";
+// import * as internalRouter from "next/dist/shared/lib/router/router";
+// import jahia from "../jahia";
 import { useRouter } from "next/router";
 import {CxsCtxProvider} from "../lib/cxs";
 
-const previousResolveHref = internalRouter.resolveHref;
+// const previousResolveHref = internalRouter.resolveHref;
 
 function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 
@@ -48,14 +48,14 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         }
     }, []);
 
-    if (pageProps.isPreview && !internalRouter.resolveHref.patched) {
-        internalRouter.resolveHref = (router, href, resolveAs) => {
-            console.log('[_app.resolveHref] href : ',href);
-            return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
-            // return previousResolveHref(router, href.startsWith(`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`) ? `${jahia.paths.preview}/${pageProps.locale}${href}.html` : href, resolveAs);
-        }
-        internalRouter.resolveHref.patched = true
-    }
+    // if (pageProps.isPreview && !internalRouter.resolveHref.patched) {
+    //     internalRouter.resolveHref = (router, href, resolveAs) => {
+    //         console.log('[_app.resolveHref] href : ',href);
+    //         return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
+    //         // return previousResolveHref(router, href.startsWith(`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`) ? `${jahia.paths.preview}/${pageProps.locale}${href}.html` : href, resolveAs);
+    //     }
+    //     internalRouter.resolveHref.patched = true
+    // }
 
     if (process.browser && apolloState) {
         console.log('restoring cache..')
@@ -66,6 +66,7 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         <JahiaCtxProvider value={{
             workspace: pageProps.isPreview ? "EDIT" : "LIVE",
             isEditMode: pageProps.isEditMode ? pageProps.isEditMode : false,
+            isPreview: pageProps.isPreview ? pageProps.isPreview : false,
             locale: pageProps.locale
         }}
         >

@@ -1,6 +1,6 @@
 import React from "react";
 // import Link from "next/link";
-import Link from "./jahia/InternalCmsLink";
+import Link from "./jahia/CmsLink";
 import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {contentTypes} from "./jahia/common";
