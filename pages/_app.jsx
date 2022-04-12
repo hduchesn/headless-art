@@ -52,6 +52,7 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         internalRouter.resolveHref = (router, href, resolveAs) => {
             console.log('[_app.resolveHref] href : ',href);
             return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
+            // return previousResolveHref(router, href.startsWith(`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`) ? `${jahia.paths.preview}/${pageProps.locale}${href}.html` : href, resolveAs);
         }
         internalRouter.resolveHref.patched = true
     }

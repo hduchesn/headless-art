@@ -1,13 +1,17 @@
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
+import Link from "./jahia/InternalCmsLink";
 import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import {contentTypes} from "./jahia/common";
 import classnames from "classnames";
 import * as PropTypes from "prop-types";
 
+// import NextLink from 'next/link';
+// import cms from '../jahia';
+
 function Nav({base, path}) {
-    const {workspace, locale} = React.useContext(JahiaCtx)
+    const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
     // const [navTree, setNavTree] = React.useState({});
 
     const getSitePages = gql`query(
@@ -71,20 +75,14 @@ function Nav({base, path}) {
             language: locale,
             title: contentTypes.PROPS.TITLE,
             MenuItem: contentTypes.MENU_ITEM,
-            isLevel3:true
-        },
-        // onCompleted: data => {
-        //     //console.log("[Nav] data",data);
-        //     setNavTree(data.jcr?.nodeByPath)
-        // },
-        // onError: error => {
-        //     //console.log("[Nav] error",error);
-        // }
+            isLevel3:false
+        }
     });
-    // console.log("[nav] nodes",data?.jcr?.nodeByPath?.children?.nodes);
+    // console.log("[nav] nodes: ",data?.jcr?.nodeByPath?.children?.nodes);
+    // console.log("[nav] loading: ",loading);
 
     const navTree = data?.jcr?.nodeByPath?.children?.nodes?.filter(page => page.isHomePage?.value === "true")[0];
-    // console.log("[nav] navTree",navTree);
+
     if (loading) {
         return "loading";
     }
@@ -115,10 +113,20 @@ function Nav({base, path}) {
         return aProps
     }
 
+    if(!navTree){
+        console.error("Error no HomePage found (check publication status or isHomePage property)");
+        return(<div>Error no HomePage found (check publication status or isHomePage property)</div>)
+    }
+
+
+    // console.log("[nav] navTree: ",navTree);
+    // console.log("[nav] navTree.path: ",navTree.path);
+    const slug=navTree.path;
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link href={navTree.path || ""} locale={locale}>
+
+                <Link href={navTree.path} locale={locale}>
                     <a className="navbar-brand ">{navTree.title?.value}</a>
                 </Link>
 

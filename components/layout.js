@@ -24,25 +24,12 @@ function Layout({children, path, templateName, meta}) {
                 path={path}
                 templateName={templateName}
             >
-
                 <header role="banner">
-                    {/*TODO remove home and start from base*/}
-                    {/*<Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`} path={path}/>*/}
                     <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>
-                    {/*<Nav base={`/sites/${config.siteName}/home`} path={path}/>*/}
                 </header>
                 <div className={classNames("top-shadow", {[styles.topShadowEdit]: isEditMode})}/>
                 {children}
             </Main>
-
-            {/*<div jahiatype="mainmodule"*/}
-            {/*     path={path}*/}
-            {/*     locale="en"*/}
-            {/*     template=""*/}
-            {/*     templateName={templateName}*/}
-            {/*     nodetypes="nt:base jmix:navMenuItem">*/}
-            {/*    {children}*/}
-            {/*</div>*/}
 
             {/*<Script src="/static/js/jquery-3.2.1.min.js" strategy="beforeInteractive" />*/}
             {/*<Script src="/static/js/popper.min.js"  />*/}
