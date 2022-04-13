@@ -12,7 +12,10 @@ function About({path}) {
                 name="hero"
                 mainResourcePath={path}
             />
-
+            <Area
+                name="Section-2"
+                mainResourcePath={path}
+            />
             <section className="section">
                 <div className="container">
                     <div className="row justify-content-center mb-5">
@@ -31,6 +34,8 @@ function About({path}) {
                     </div>
                 </div>
             </section>
+
+
         </>
 
     )

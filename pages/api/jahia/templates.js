@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 
-const postsDirectory = path.join(process.cwd(), 'templates')
+const templatesDirectory = path.join(process.cwd(), 'templates')
 const excludedName = ["index"]
 
 export default function handler(req, res) {
@@ -12,7 +12,7 @@ export default function handler(req, res) {
     }
 
     // Get file names under /templates
-    const fileNames = fs.readdirSync(postsDirectory)
+    const fileNames = fs.readdirSync(templatesDirectory)
     const allTemplateNames = fileNames.map(fileName => {
         const name = fileName.substr(0, fileName.lastIndexOf(".")).toLowerCase();
         return {

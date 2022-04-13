@@ -1,0 +1,17 @@
+import RichText from "./jahia/RichText";
+import BS4Grid from "./jahia/BS4/Grid";
+import Hero from "./Hero";
+import {OwlCarousel} from "./owlCarousel";
+import Article from "./Article";
+import {PersonalizedContent} from "./jahia/PersonalizedContent";
+
+const components = {
+    'jnt:bigText': RichText,
+    'bootstrap4nt:grid':BS4Grid,
+    'hicnt:heading': Hero,
+    'hicnt:owlcarousel': OwlCarousel,
+    'hicnt:article': Article,
+    'wemnt:personalizedContent': PersonalizedContent
+}
+
+export default components;

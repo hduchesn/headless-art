@@ -10,9 +10,11 @@ import {PersonalizedContent} from "./PersonalizedContent";
 import {PersonalizedList} from "./PersonalizedList";
 import {ContentList} from "./ContentList";
 import JahiaModuleTag from "./JahiaModuleTag";
+import BS4Grid from "./BS4/Grid";
 
 const components = {
     'jnt:contentList': ContentList,
+    'bootstrap4nt:grid':BS4Grid,
     'jnt:bigText': RichText,
     'hicnt:heading': Hero,
     'hicnt:owlcarousel': OwlCarousel,

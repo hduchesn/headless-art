@@ -2,7 +2,7 @@ $font-heading: 'Montserrat', sans-serif;
 @import "bootstrap";
 @import "variables";
 @import "mixins";
-
+//@import "~bootstrap/scss/bootstrap";
 
 
 
@@ -51,7 +51,7 @@ textarea.form-control {
 		color: $white;
 		border-width: 2px;
 		&:hover, &:active, &:focus {
-			border-color: lighten(theme-color('primary'), 10%); 
+			border-color: lighten(theme-color('primary'), 10%);
 			background: lighten(theme-color('primary'), 10%);
 		}
 	}
@@ -65,7 +65,7 @@ textarea.form-control {
 			color: $white;
 		}
 	}
-	
+
 	&.btn-outline-white {
 		border-width: 2px;
 		border-color: $white;
@@ -92,7 +92,7 @@ header {
 		top: 0;
 	}
 
-	
+
 	.navbar-brand {
 		text-transform: uppercase;
 		letter-spacing: .2em;
@@ -151,7 +151,7 @@ header {
 				height: 0;
 				width: 0;
 				position: absolute;
-				pointer-events: none;				
+				pointer-events: none;
 				border-bottom-color: #fff;
 				border-width: 7px;
 				@include media-breakpoint-down(md) {
@@ -160,10 +160,10 @@ header {
 			}
 
 			.dropdown-item {
-				
+
 				&:hover {
 					background: theme-color('primary');
-					color: $white;	
+					color: $white;
 				}
 				&.active {
 					background: theme-color('primary');
@@ -231,7 +231,7 @@ header {
 	}
 	.image {
 		@include media-breakpoint-down(md) {
-			height: 350px;	
+			height: 350px;
 		}
 		background-size: cover;
 		background-position: center center;
@@ -270,7 +270,7 @@ header {
 	}
 }
 
-// Flaticon 
+// Flaticon
 .custom-icon {
 	font-size: 70px;
 	color: theme-color('primary');
@@ -288,7 +288,7 @@ header {
 			opacity: 1;
 		}
 	}
-	
+
 	.owl-nav {
 		position: absolute;
 		top: 50%;
@@ -311,7 +311,7 @@ header {
 			}
 		}
 		.owl-prev {
-			
+
 			left: 30px!important;
 			// border: 1px solid red;
 		}
@@ -357,13 +357,13 @@ header {
 			}
 		}
 
-		
+
 		&.inner-page {
 			.slider-item {
 				position: relative;
 				z-index: 10;
 				height: calc(50vh - 117px);
-				min-height: 550px;	
+				min-height: 550px;
 				.slider-text {
 					color: $white;
 					height: calc(50vh - 117px);
@@ -397,9 +397,9 @@ header {
 					opacity: 1;
 					// border: 2px solid $white!important;
 					// background: rgba(255,255,255,1)!important;
-					span {	
+					span {
 						background: rgba(255,255,255,1)!important;
-					}	
+					}
 				}
 			}
 
@@ -439,7 +439,7 @@ header {
 			.slider-item {
 				position: relative;
 				height: calc(50vh - 117px);
-				min-height: 550px;	
+				min-height: 550px;
 				.slider-text {
 					color: $white;
 					height: calc(50vh - 117px);
@@ -452,7 +452,7 @@ header {
 			background-repeat: no-repeat;
 			background-position: center center;
 			height: calc(100vh);
-			min-height: 700px;	
+			min-height: 700px;
 			position: relative;
 			&:before {
 				content: "";
@@ -514,7 +514,7 @@ header {
 					}
 				}
 			}
-			
+
 		}
 .owl-custom-nav {
 	float: right;
@@ -530,7 +530,7 @@ header {
 		text-align: center;
 		display: inline-block;
 	}
-} 
+}
 
 
 // Section
@@ -538,7 +538,7 @@ header {
 	padding: 7em 0;
 }
 .section-subscribe {
-	padding: 2em 0;	
+	padding: 2em 0;
 }
 
 .contact-form-contact-info {
@@ -708,7 +708,7 @@ header {
 			&:before {
 				color: color('cyan');
 				left: 0;
-				font-family: "Ionicons"; 
+				font-family: "Ionicons";
 				content: "\f122";
 				position: absolute;
 			}
@@ -742,7 +742,7 @@ header {
 	padding: 7em 0;
 	border-top: #eee;
 	// background: lighten($black, 15%);
-	
+
 	// font-size: 13px;
 	// color: rgba(255,255,255,.5);
 	p {
@@ -750,7 +750,7 @@ header {
 			margin-bottom: 0;
 		}
 	}
-	
+
 	a {
 		color: $primary;
 		border-bottom: 1px solid rgba($black,.2);
@@ -803,7 +803,7 @@ header {
 	overflow: hidden;
 	text-align: center;
 	@include media-breakpoint-down(md) {
-		margin-bottom: 30px;	
+		margin-bottom: 30px;
 	}
 
 	img {
@@ -876,7 +876,7 @@ header {
 		&:before {
 			opacity: 1;
 			visibility: visible;
-			
+
 		}
 	}
 }
@@ -905,7 +905,7 @@ header {
 				background: $primary;
 			}
 			&.block-41-number {
-				
+
 			}
 		}
 	}
@@ -914,9 +914,9 @@ header {
 		line-height: 1.2;
 	}
 	.block-41-text {
-		
+
 		@include media-breakpoint-up(md) {
-			font-size: 20px;	
+			font-size: 20px;
 		}
 	}
 }
@@ -991,7 +991,7 @@ header {
 			}
 		}
 	}
-} 
+}
  .block-33 {
 	// box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
 	background: $white;
@@ -1048,7 +1048,7 @@ header {
 	background-color: rgba(255,255,255,0.9);
 	box-shadow: 0px 24px 64px rgba(0,0,0,0.24);
 	border-radius:16px;
-	opacity: 0; 
+	opacity: 0;
 	visibility: hidden;
 	transition: opacity .2s ease-out, visibility 0s linear .2s;
 	z-index:1000;
