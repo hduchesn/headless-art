@@ -15,6 +15,15 @@ export function PersonalizedContentEdit({id}) {
                 uuid
                 name
                 path
+                parent {
+                    workspace
+                    uuid
+                    name
+                    path
+                    property(name: "j:contributeTypes") {
+                        values
+                    }
+                }
                 property(name: "wem:controlVariant") {
                     value
                 }
@@ -25,6 +34,9 @@ export function PersonalizedContentEdit({id}) {
                         path
                         name
                         primaryNodeType {
+                            name
+                        }
+                        mixinTypes {
                             name
                         }
                     }
@@ -71,6 +83,7 @@ export function PersonalizedContentEdit({id}) {
                 ref={control}
                 className="personalizationControl"
                 data-value={`${index + 1} / ${data.jcr.nodeById.children.nodes.length}`}
+                data-nodetypes={data.jcr.nodeById.parent.property ? data.jcr.nodeById.parent.property.values.join(' ') : ''}
             />
             Personalized Content
             <JahiaComponent node={data.jcr.nodeById.children.nodes[index]}/>

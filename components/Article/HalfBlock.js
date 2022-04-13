@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './halfBlock.module.css'
 import classNames from "classnames";
 import {JahiaCtx} from "../../lib/context";
-import PlaceholderBtn from "../jahia/PlaceholderBtn";
-import PlaceholderNode from "../jahia/PlaceholderNode";
+import JahiaModuleTag from "../jahia/JahiaModuleTag";
 import Image from "../images";
 import RichText from "../jahia/RichText";
 import cms from "../../jahia";
@@ -16,14 +15,14 @@ function HalfBlock({bodyNode, imageNode, imagePosition}) {
             if (!imageNode) {
                 return (
                     <div className={styles.editImageContainer}>
-                        <PlaceholderBtn path="image" nodetypes={cms.contentTypes.HALFBLOCK_IMAGE}/>
+                        <JahiaModuleTag type="placeholder" path="image" nodetypes={cms.contentTypes.HALFBLOCK_IMAGE}/>
                     </div>
                 )
             }
             return (
-                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
+                <JahiaModuleTag path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
                     <Image id={imageNode.uuid} view="halfBlock"/>
-                </PlaceholderNode>
+                </JahiaModuleTag>
             )
         }
         return <Image id={imageNode?.uuid} view="halfBlock"/>
@@ -32,12 +31,12 @@ function HalfBlock({bodyNode, imageNode, imagePosition}) {
     const getBodyContent = () => {
         if (isEditMode) {
             if (!bodyNode) {
-                return <PlaceholderBtn path="body" nodetypes={cms.contentTypes.INDUS_TEXT}/>
+                return <JahiaModuleTag type="placeholder" path="body" nodetypes={cms.contentTypes.INDUS_TEXT}/>
             }
             return (
-                <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
+                <JahiaModuleTag path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
                     <RichText id={bodyNode?.uuid}/>
-                </PlaceholderNode>
+                </JahiaModuleTag>
             )
         }
         return <RichText id={bodyNode?.uuid}/>

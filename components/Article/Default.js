@@ -1,9 +1,8 @@
 import React from "react";
 import * as PropTypes from 'prop-types';
 import {JahiaCtx} from "../../lib/context";
-import PlaceholderBtn from "../jahia/PlaceholderBtn";
 import cms from "../../jahia";
-import PlaceholderNode from "../jahia/PlaceholderNode";
+import JahiaModuleTag from "../jahia/JahiaModuleTag";
 import Image from "../images";
 import RichText from "../jahia/RichText";
 import classNames from "classnames";
@@ -16,13 +15,13 @@ function Default({bodyNode, imageNode, imagePosition}) {
         if (isEditMode) {
             if (!imageNode) {
                 return (
-                    <PlaceholderBtn path="image" nodetypes={cms.contentTypes.HALFBLOCK_IMAGE}/>
+                    <JahiaModuleTag type="placeholder" path="image" nodetypes={cms.contentTypes.HALFBLOCK_IMAGE}/>
                 )
             }
             return (
-                <PlaceholderNode path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
+                <JahiaModuleTag path={imageNode.path} nodetypes={imageNode.primaryNodeType.name}>
                     <Image id={imageNode.uuid} view="bubble_1"/>
-                </PlaceholderNode>
+                </JahiaModuleTag>
             )
         }
         return <Image id={imageNode?.uuid} view="bubble_1"/>
@@ -31,12 +30,12 @@ function Default({bodyNode, imageNode, imagePosition}) {
     const getBodyContent = () => {
         if (isEditMode) {
             if (!bodyNode) {
-                return <PlaceholderBtn path="body" nodetypes={cms.contentTypes.INDUS_TEXT}/>
+                return <JahiaModuleTag type="placeholder" path="body" nodetypes={cms.contentTypes.INDUS_TEXT}/>
             }
             return (
-                <PlaceholderNode path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
+                <JahiaModuleTag path={bodyNode.path} nodetypes={bodyNode.primaryNodeType.name}>
                     <RichText id={bodyNode?.uuid}/>
-                </PlaceholderNode>
+                </JahiaModuleTag>
             )
         }
         return <RichText id={bodyNode?.uuid}/>

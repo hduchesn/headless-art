@@ -27,6 +27,9 @@ export function PersonalizedContentLive({id}) {
                         primaryNodeType {
                             name
                         }
+                        mixinTypes {
+                            name
+                        }
                     }
                 }
             }

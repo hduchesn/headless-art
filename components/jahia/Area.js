@@ -1,6 +1,5 @@
-import React, {useMemo} from "react";
+import React from "react";
 import {gql, useQuery} from "@apollo/client";
-import {getJahiaDivsProps} from "../../lib/utils";
 import {JahiaCtx, MainResourceCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
 import {JahiaComponent} from "./JahiaComponent";
@@ -37,13 +36,11 @@ function Area({name, allowedTypes}) {
                 uuid
                 name
                 path
-                children{
-                    nodes{
-                        workspace
-                        uuid
-                        path
-                        primaryNodeType{name}
-                    }
+                primaryNodeType {
+                    name
+                }
+                mixinTypes {
+                    name
                 }
             }
         }
@@ -70,9 +67,6 @@ function Area({name, allowedTypes}) {
         }
     })
 
-    const area = data?.jcr?.nodeByPath;
-    const divs = useMemo(() => isEditMode && !loading && getJahiaDivsProps(data?.npm?.renderedComponent?.output), [data, isEditMode, loading]);
-
     if (loading) {
         return "loading";
     }
@@ -83,14 +77,16 @@ function Area({name, allowedTypes}) {
 
     return (
         <>
-            {isEditMode &&
-                <div {...divs[area.path]}>
-                    {area?.children.nodes.map(node => <JahiaComponent key={node.uuid} node={node}/>)}
-
-                    {/*Jahia btn placeholder*/}
-                    <div {...divs["*"]}/>
-                </div>}
-            {!isEditMode && area?.children.nodes.map(node => <JahiaComponent key={node.uuid} node={node}/>)}
+            <JahiaComponent
+                node={data.jcr.nodeByPath}
+                tagProps={{
+                    type:"area",
+                    //todo get this dynamically
+                    nodetypes:"jmix:droppableContent",
+                    referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
+                    allowreferences: "true",
+                }}
+            />
         </>
 
     )

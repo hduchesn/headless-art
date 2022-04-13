@@ -6,6 +6,8 @@ services:
     hostname: jahia
     container_name: jahia-derby
     mem_limit: 4gb
+    env_file:
+      - .env.local
     environment:
       JPDA: "true"
       TZ: ${TZ}
