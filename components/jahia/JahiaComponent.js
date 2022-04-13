@@ -28,9 +28,9 @@ const mixins = {
 
 function getComponent(node) {
     if (node.mixinTypes) {
-        const mixin = node.mixinTypes.find(m => mixins[m])
+        const mixin = node.mixinTypes.find(m => mixins[m.name])
         if (mixin) {
-            return mixins[mixin]
+            return mixins[mixin.name]
         }
     }
     if (components[node.primaryNodeType.name]) {

@@ -76,8 +76,7 @@ function Area({name, allowedTypes}) {
     }
 
     return (
-        <>
-            <JahiaComponent
+        <JahiaComponent
                 node={data.jcr.nodeByPath}
                 tagProps={{
                     type:"area",
@@ -87,7 +86,6 @@ function Area({name, allowedTypes}) {
                     allowreferences: "true",
                 }}
             />
-        </>
 
     )
 

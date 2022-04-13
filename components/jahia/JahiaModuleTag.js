@@ -3,7 +3,6 @@ import * as PropTypes from "prop-types";
 import {generateUUID} from "./utils";
 
 function JahiaModuleTag({path, type, nodetypes, referencetypes, allowreferences, children}) {
-    console.log('r',type)
     const divElt = {
         class: 'jahia-template-gxt',
         jahiatype: 'module',

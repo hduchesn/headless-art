@@ -3,14 +3,18 @@ import {JahiaCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
 import {PersonalizedContentEdit} from "./PersonalizedContentEdit";
 import {PersonalizedContentLive} from "./PersonalizedContentLive";
+import {ContentList} from "./ContentList";
 
-export function PersonalizedList(props) {
+export function PersonalizedList({id}) {
     const {isEditMode} = useContext(JahiaCtx);
 
     return isEditMode ? (
-        <div>personalized list</div>
+        <>
+            <div>Personalized list</div>
+            <ContentList id={id}/>
+        </>
     ) : (
-        <div>personalized list</div>
+        <div>No render for personalized list yet ...</div>
     )
 }
 
