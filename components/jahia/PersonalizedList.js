@@ -19,6 +19,6 @@ export function PersonalizedList({id}) {
 }
 
 PersonalizedList.propTypes = {
-    id: PropTypes.string.isRequired,
+    // id: PropTypes.string.isRequired,
 }
 

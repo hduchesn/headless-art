@@ -5,6 +5,8 @@ import {types} from "../types";
 
 function BS4Section({grid,mixins,children}) {
 
+    if(!mixins.includes(types.createSection) || !grid.sectionElement?.value)
+        return children
 
     const sectionProps = {}
     if(grid.sectionId?.value)
@@ -18,14 +20,12 @@ function BS4Section({grid,mixins,children}) {
     if(grid.sectionAria?.value)
         sectionProps["aria-label"]=grid.sectionAria.value;
 
-    console.log("[BS4Section] mixins : ",mixins);
-    console.log("[BS4Section] children : ",children);
-    console.log("[BS4Section] sectionProps : ",sectionProps);
+    // console.log("[BS4Section] mixins : ",mixins);
+    // console.log("[BS4Section] children : ",children);
+    // console.log("[BS4Section] sectionProps : ",sectionProps);
 
-    if(grid.sectionElement?.value)
-        return React.createElement( grid.sectionElement.value,sectionProps,children)
+    return React.createElement( grid.sectionElement.value,sectionProps,children)
 
-    return children
 }
 
 BS4Section.propTypes = {

@@ -77,16 +77,15 @@ function Area({name, allowedTypes}) {
 
     return (
         <JahiaComponent
-                node={data.jcr.nodeByPath}
-                tagProps={{
-                    type:"area",
-                    //todo get this dynamically
-                    nodetypes:"jmix:droppableContent",
-                    referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
-                    allowreferences: "true",
-                }}
-            />
-
+            node={data.jcr.nodeByPath}
+            tagProps={{
+                type:"area",
+                //todo get this dynamically
+                nodetypes:"jmix:droppableContent",
+                referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
+                allowreferences: "true",
+            }}
+        />
     )
 
 }

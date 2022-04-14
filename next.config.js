@@ -26,21 +26,15 @@ module.exports = {
                 source: '/files/:slug*',
                 destination: `${process.env.NEXT_PUBLIC_JAHIA_BASE_URL}/files/:slug*`,
                 permanent: true,
+            },
+            {
+                source: '/modules/:slug*',
+                destination: `${process.env.NEXT_PUBLIC_JAHIA_BASE_URL}/modules/:slug*`,
+                permanent: true,
             }
         ]
     },
-    // async redirects() {
-    //   return [
-    //     {
-    //       source: '/files/:slug*',
-    //       destination: 'http://localhost:8080/files/:slug*',
-    //       permanent: true,
-    //     },
-    //     // {
-    //     //   source: '/modules/:slug*',
-    //     //   destination: 'http://localhost:8080/modules/:slug*',
-    //     //   permanent: true,
-    //     // },
-    //   ]
-    // }
+    // outputFileTracing: true
+    //if you want to expose more file type update the default pageExtensions ['tsx', 'ts', 'jsx', 'js']
+    // pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
 }
