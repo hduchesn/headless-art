@@ -11,11 +11,15 @@ import {PersonalizedList} from "./PersonalizedList";
 import {ContentList} from "./ContentList";
 import JahiaModuleTag from "./JahiaModuleTag";
 import BS4Grid from "./BS4/Grid";
+import Widen from "./Widen/Widen";
 
 const components = {
     'jnt:contentList': ContentList,
     'bootstrap4nt:grid':BS4Grid,
+    'wdennt:widenReference':Widen,
     'jnt:bigText': RichText,
+    'tint:text': RichText,
+    'hicnt:text': RichText,
     'hicnt:heading': Hero,
     'hicnt:owlcarousel': OwlCarousel,
     'hicnt:article': Article,

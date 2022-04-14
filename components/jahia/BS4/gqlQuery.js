@@ -26,13 +26,13 @@ export const queryGrid = gql`query (
                 ...ContainerFields
                 ...RowFields
                 children{
-                    items:nodes{
+                    nodes{
                         ...CoreNodeFields
-                        children{
-                            items:nodes{
-                                ...CoreNodeFields
-                            }
-                        }
+#                        children{
+#                            nodes{
+#                                ...CoreNodeFields
+#                            }
+#                        }
                     }
                 }
             }

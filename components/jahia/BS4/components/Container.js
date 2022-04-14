@@ -14,13 +14,23 @@ function BS4Container({grid,mixins,children}) {
         containerProps.id=grid.containerId.value;
     if(grid.containerCssClass?.value)
         containerProps.class=grid.containerCssClass.value;
-    if(grid.gridLayout?.value && grid.gridLayout.value === "full-width")//container-sm //todo faire un switch case et substring container
-        containerProps.fluid="fluid";
+    if(grid.gridLayout?.value){
+        switch (true){
+            case grid.gridLayout.value === "full-width":
+                containerProps.fluid=true;
+                break;
 
+            case grid.gridLayout.value.includes("container-"):
+                containerProps.fluid = grid.gridLayout.value.split("-")[1];
+                break;
 
-    console.log("[BS4Container] mixins : ",mixins);
-    console.log("[BS4Container] children : ",children);
-    console.log("[BS4Container] containerProps : ",containerProps);
+            // default: break;
+        }
+    }
+
+    // console.log("[BS4Container] mixins : ",mixins);
+    // console.log("[BS4Container] children : ",children);
+    // console.log("[BS4Container] containerProps : ",containerProps);
 
     return (
         <Container {...containerProps}>

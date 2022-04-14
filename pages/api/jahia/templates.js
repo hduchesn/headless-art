@@ -1,5 +1,8 @@
 import path from "path";
 import fs from "fs";
+// export const config = {
+//     'unstable_includeFiles': ['templates'],
+// };
 
 const templatesDirectory = path.join(process.cwd(), 'templates')
 const excludedName = ["index"]
