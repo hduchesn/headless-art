@@ -1,5 +1,6 @@
 import {getPageInfo} from "../../lib/pages";
 import cms from '../../jahia';
+import {getClient} from "../../lib/apollo";
 
 const getHTMLError = ({message, path, locale}) => `
     <div jahiatype="mainmodule"
@@ -26,8 +27,7 @@ export default async function handler(req, res) {
     const locale = cmsContext.locale || defaultLocale;
 
     // console.log('[API Preview] req: ',req)
-    console.log('[API Preview] req.cookies.__jContent_preview_ctx: ', req.cookies?.__jContent_preview_ctx)
-
+    // console.log('[API Preview] req.cookies.__jContent_preview_ctx: ', req.cookies?.__jContent_preview_ctx)
     // console.log('[API Preview] req.query.path: ',req.query?.path)
     // console.log('[API Preview] process.env.NEXT_PREVIEW_SECRET: ',process.env.NEXT_PREVIEW_SECRET)
 
@@ -44,7 +44,9 @@ export default async function handler(req, res) {
         }));
     }
 
-    const {error, data} = await getPageInfo(path, "EDIT");
+    const client = getClient();
+    const {error, data} = await getPageInfo(client, path, "EDIT");
+
     // If the slug doesn't exist prevent preview mode from being enabled
     if (error || !data.jcr.nodeByPath) {
         res.setHeader('content-type', 'text/html');

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {JahiaCtxProvider} from '../lib/context'
-import {client, inMemoryCache} from "../lib/apollo";
+import {getClient} from "../lib/apollo";
 import {ApolloProvider} from "@apollo/client";
 import {renderToStringWithData} from "@apollo/client/react/ssr";
 import App from "next/dist/pages/_app";
@@ -10,15 +10,10 @@ import {getPageInfo} from '../lib/pages';
 import '../styles/style.scss';
 import {getPathAndQuery} from "../lib/utils";
 import * as PropTypes from "prop-types";
-// import * as internalRouter from "next/dist/shared/lib/router/router";
-// import jahia from "../jahia";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import {CxsCtxProvider} from "../lib/cxs";
 
-// const previousResolveHref = internalRouter.resolveHref;
-
-function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
-
+function MyApp({Component, client, pageProps: {apolloState, ...pageProps}}) {
     useEffect(() => {
         console.log("[MyApps] pageProps:", JSON.stringify(pageProps))
     }, [pageProps]);
@@ -48,18 +43,17 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
         }
     }, []);
 
-    // if (pageProps.isPreview && !internalRouter.resolveHref.patched) {
-    //     internalRouter.resolveHref = (router, href, resolveAs) => {
-    //         console.log('[_app.resolveHref] href : ',href);
-    //         return previousResolveHref(router, href.startsWith('/') ? jahia.paths.preview + '/' + pageProps.locale + href : href, resolveAs);
-    //         // return previousResolveHref(router, href.startsWith(`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`) ? `${jahia.paths.preview}/${pageProps.locale}${href}.html` : href, resolveAs);
-    //     }
-    //     internalRouter.resolveHref.patched = true
-    // }
+    if (!client) {
+        client = getClient();
+    }
 
-    if (process.browser && apolloState) {
+    if (apolloState) {
         console.log('restoring cache..')
-        inMemoryCache.restore(apolloState);
+        if (process.browser) {
+            client.cache.restore({...client.cache.extract(), ...apolloState});
+        } else {
+            client.cache.restore(apolloState);
+        }
     }
     console.log('[MyApp] render')
     return (
@@ -81,15 +75,17 @@ function MyApp({Component, pageProps: {apolloState, ...pageProps}}) {
 
 MyApp.propTypes = {
     Component:PropTypes.func.isRequired,
+    client:PropTypes.object.isRequired,
     pageProps:PropTypes.object.isRequired
 };
 
 MyApp.getInitialProps = async (appContext) => {
+    const client = getClient();
     let data = await App.getInitialProps(appContext);
     // console.log("[MyApp.getInitialProps] data : ",data);
     // console.log("[MyApp.getInitialProps] appContext.ctx.req.url : ",appContext.ctx.req.url);
     // console.log("[MyApp.getInitialProps] appContext : ",appContext);
-    console.log("[MyApp.getInitialProps] cookies : ", (appContext.ctx.req).cookies);
+    // console.log("[MyApp.getInitialProps] cookies : ", (appContext.ctx.req).cookies);
 
     const isPreview = !!(appContext.ctx.req).cookies?.__next_preview_data;
     const workspace = isPreview ? "EDIT" : "LIVE";
@@ -107,24 +103,19 @@ MyApp.getInitialProps = async (appContext) => {
 
     console.log("[MyApp.getInitialProps] appContext.ctx.pathname :", appContext.ctx.pathname)
     if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {//&& (appContext.ctx.pathname === '/ssr/[...path]' || appContext.ctx.pathname === '/ssg/[...path]')
-
-        // if (!process.browser && appContext.ctx.pathname === '/[[...slug]]') {
-        await client.resetStore();
-        // }
-
-        console.log("[MyApp.getInitialProps] locale :", appContext.router.locale);
-        console.log("[MyApp.getInitialProps] initial path :", appContext.ctx.asPath);
+        // console.log("[MyApp.getInitialProps] locale :", appContext.router.locale);
+        // console.log("[MyApp.getInitialProps] initial path :", appContext.ctx.asPath);
         const [path, query] = getPathAndQuery(appContext.ctx.asPath);
 
-        console.log("[MyApp.getInitialProps] updated path :", path);
-        console.log("[MyApp.getInitialProps] updated query :", query);
+        // console.log("[MyApp.getInitialProps] updated path :", path);
+        // console.log("[MyApp.getInitialProps] updated query :", query);
 
         //TODO get meta of the page
         //     const meta = {
         //       title:"Industrial"
         //     }
 
-        const {data: gqlData} = await getPageInfo(path, workspace);
+        const {data: gqlData} = await getPageInfo(client, path, workspace);
         // console.log("[MyApp.getInitialProps] gqlData :", gqlData);
 
         data = {
@@ -147,7 +138,7 @@ MyApp.getInitialProps = async (appContext) => {
         const {AppTree} = appContext;
 
         function Wrapper() {
-            return <AppTree {...data}/>
+            return <AppTree client={client} {...data}/>
         }
 
         console.log('Pre-render:', path)
