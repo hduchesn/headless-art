@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import {CxsCtx} from "../../lib/cxs";
 import {JahiaComponent} from "./JahiaComponent";
 
-export function PersonalizedContentLive({id}) {
+export function PersonalizedContentLive({id, firstOnly}) {
     const {locale} = useContext(JahiaCtx);
     const cxs = useContext(CxsCtx);
 
@@ -20,7 +20,7 @@ export function PersonalizedContentLive({id}) {
                     profileId: $profileId
                     sessionId: $sessionId
                 ) {
-                    personalizedVariant {
+                    personalizedVariants {
                         uuid
                         workspace
                         path
@@ -54,12 +54,19 @@ export function PersonalizedContentLive({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    const node = data?.jcr?.nodeById.jExperience.personalizedVariant;
+    const nodes = data?.jcr?.nodeById.jExperience.personalizedVariants;
 
-    return !!node && <JahiaComponent node={node}/>;
+    return !!nodes && nodes.length > 0 && (
+        firstOnly ? (
+            <JahiaComponent node={nodes[0]}/>
+        ) : (
+            nodes.map(n => <JahiaComponent key={n.uuid} node={n}/>)
+        )
+    );
 }
 
 PersonalizedContentLive.propTypes = {
     id: PropTypes.string.isRequired,
+    firstOnly: PropTypes.bool
 }
 

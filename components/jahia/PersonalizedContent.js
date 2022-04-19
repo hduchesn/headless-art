@@ -10,7 +10,7 @@ export function PersonalizedContent(props) {
     return isEditMode ? (
         <PersonalizedContentEdit {...props}/>
     ) : (
-        <PersonalizedContentLive {...props}/>
+        <PersonalizedContentLive firstOnly {...props}/>
     )
 }
 
