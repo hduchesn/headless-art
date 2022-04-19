@@ -1,9 +1,10 @@
 import React from "react";
 import {JahiaCtx} from "../../lib/context";
 import styles from "./bubble_1.module.css";
-import {getImageURI} from "../../lib/utils";
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
+
+import {getImageURI} from "../jahia/utils";
 
 function BubbleImage1({imageNode}) {
     const {workspace} = React.useContext(JahiaCtx);

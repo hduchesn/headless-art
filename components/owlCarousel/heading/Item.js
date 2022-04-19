@@ -1,11 +1,14 @@
 import React from "react";
 import {JahiaCtx} from "../../../lib/context";
 import {gql, useQuery} from "@apollo/client";
-import {getImageURI} from "../../../lib/utils";
 import styles from './item.module.css'
 import classNames from 'classnames';
 import * as PropTypes from "prop-types";
-
+import { CORE_NODE_FIELDS } from '../../jahia/GQL/fragments';
+import {getImageURI} from "../../jahia/utils";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 //TODO use xss to clean caption
 
 function Item({id}) {
@@ -18,44 +21,25 @@ function Item({id}) {
         jcr(workspace: $workspace) {
             workspace
             nodeById(uuid: $id) {
-                workspace
-                uuid
-                name
-                caption: property(language:$language, name:"caption"){
-                    value
-                }
-                videoLink: property(name:"hic:videoLink"){
-                    value
-                }
-                videoExtPath: property(language:$language,name:"hic:videoExtPath"){
-                    value
-                }
+                ...CoreNodeFields
+                caption: property(language:$language, name:"caption"){value}
+                videoLink: property(name:"hic:videoLink"){value}
+                videoExtPath: property(language:$language,name:"hic:videoExtPath"){value}
                 videoIntPath: property(language:$language,name:"hic:videoIntPath"){
-                    refNode {
-                        workspace
-                        uuid
-                        primaryNodeType{
-                            name
-                        }
-                        path
+                    node: refNode {
+                        ...CoreNodeFields
                     }
                 }
                 media: property(language:$language,name:"wden:mediaNode",){
-                    refNode {
-                        workspace
-                        uuid
-                        primaryNodeType{
-                            name
-                        }
-                        mixinTypes{
-                            name
-                        }
-                        path
+                    node: refNode {
+                        ...CoreNodeFields
+                        templatedUrl:property(name:"wden:templatedUrl"){value}
                     }
                 }
             }
         }
-    }`;
+    }
+    ${CORE_NODE_FIELDS}`;
 
     const {data, error, loading} = useQuery(getContent, {
         variables: {
@@ -66,8 +50,6 @@ function Item({id}) {
         // onCompleted: data => setContent(data.jcr?.nodeById)
     });
 
-    const content = data?.jcr?.nodeById;
-
     if (loading) {
         return "loading";
     }
@@ -76,6 +58,13 @@ function Item({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
+    const content = data?.jcr?.nodeById;
+    const imageURI =
+        content.media?.node?.templatedUrl?.value
+            ?.replace("{size}",widenURIProps.size)
+            .replace("{scale}",widenURIProps.scale)
+            .replace("{quality}",widenURIProps.quality) ||
+        getImageURI({uri: content.media?.node?.path, workspace});
     // console.log("[Item] image path :",content.media?.refNode?.path);
     // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">
     // element-animate
@@ -90,9 +79,9 @@ function Item({id}) {
                 )}
                 >
                     <img
+                        src={imageURI}
                         className="card-img-top"
-                        src={getImageURI({uri: content.media?.refNode?.path, workspace})}
-                        alt="Card image cap"
+                        alt={content.media?.node?.name}
                     />
                     {/* eslint-disable-next-line react/no-danger */}
                     <div dangerouslySetInnerHTML={{__html: content.caption?.value}} className={styles.cardBody}/>
@@ -100,11 +89,15 @@ function Item({id}) {
             {!isEditMode &&
                 <div
                     className="slider-item"
-                    style={{backgroundImage: `url('${getImageURI({uri: content.media?.refNode?.path, workspace})}')`}}
+                    style={{backgroundImage: `url('${imageURI}')`}}
                 >
-                    <div className="container">
-                        <div className="row slider-text align-items-center justify-content-center">
-                            <div className="col-lg-7 text-center col-sm-12 ">
+                    <Container>
+                        <Row className="slider-text align-items-center justify-content-center">
+                            <Col
+                                sm={12}
+                                lg={7}
+                                className={classnames("text-center")}
+                            >
                                 <div className="btn-play-wrap mx-auto">
                                     <p className="mb-4">
                                         <a
@@ -118,10 +111,10 @@ function Item({id}) {
                                     </p>
                                 </div>
                                 {/* eslint-disable-next-line react/no-danger */}
-                                <div dangerouslySetInnerHTML={{__html: content.caption?.value}}/>
-                            </div>
-                        </div>
-                    </div>
+                                <div dangerouslySetInnerHTML={{__html: content.caption?.value || "no caption"}}/>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>}
         </>
 

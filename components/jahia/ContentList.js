@@ -4,6 +4,7 @@ import * as PropTypes from "prop-types";
 import {gql, useQuery} from "@apollo/client";
 import {JahiaComponent} from "./JahiaComponent";
 import JahiaModuleTag from "./JahiaModuleTag";
+import { CORE_NODE_FIELDS } from './GQL/fragments';
 
 export function ContentList({id}) {
     const {workspace, isEditMode} = useContext(JahiaCtx);
@@ -12,17 +13,10 @@ export function ContentList({id}) {
         jcr(workspace: $workspace) {
             workspace
             nodeById(uuid: $id) {
-                uuid
-                workspace
-                path
+                ...CoreNodeFields
                 children {
                     nodes {
-                        uuid
-                        workspace
-                        path
-                        primaryNodeType {
-                            name
-                        }
+                        ...CoreNodeFields
                         mixinTypes {
                             name
                         }
@@ -30,7 +24,8 @@ export function ContentList({id}) {
                 }
             }
         }
-    }`
+    }
+    ${CORE_NODE_FIELDS}`
 
     const {data, error, loading} = useQuery(getContent, {
         variables: {

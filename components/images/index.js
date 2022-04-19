@@ -3,14 +3,14 @@ import {JahiaCtx} from "../../lib/context";
 import {useQuery} from "@apollo/client";
 import {queryImage} from "./gqlQuery";
 import HalfBlock from "./HalfBlock";
-import Basic from "./Basic";
+import Default from "../jahia/Image/Default";
 import BubbleI from "./Bubble_1";
 import * as PropTypes from "prop-types";
 
 const views = {
     'halfBlock': HalfBlock,
     'bubble_1': BubbleI,
-    'default': Basic
+    'default': Default
 }
 
 function Image({id, view}) {

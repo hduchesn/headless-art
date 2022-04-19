@@ -1,5 +1,5 @@
 import {gql} from "@apollo/client";
-
+import { CORE_NODE_FIELDS } from '../GQL/fragments';
 
 export const queryGrid = gql`query (
         $workspace:Workspace!,
@@ -61,10 +61,4 @@ export const queryGrid = gql`query (
         rowHorizontalAlignment:property(name:"rowHorizontalAlignment") {value}
         
     }
-    fragment CoreNodeFields on JCRNode {
-        workspace
-        uuid
-        path
-        name
-        primaryNodeType {name}
-    }`;
+    ${CORE_NODE_FIELDS}`;

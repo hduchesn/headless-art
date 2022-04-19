@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import {JahiaCtx} from "../../../../lib/context";
 import {gql, useQuery} from "@apollo/client";
+import { CORE_NODE_FIELDS } from '../../GQL/fragments';
 import * as PropTypes from "prop-types";
 
 
@@ -21,13 +22,7 @@ function Pdf({id,defaultImageSize,imageSizes,referenceView}) {
             }
         }
     }
-    fragment CoreNodeFields on JCRNode {
-        workspace
-        uuid
-        path
-        name
-        primaryNodeType {name}
-    }`;
+    ${CORE_NODE_FIELDS}`;
 
     const {data, error, loading} = useQuery(queryWidenPdf, {
         variables: {

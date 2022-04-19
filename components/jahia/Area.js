@@ -3,6 +3,7 @@ import {gql, useQuery} from "@apollo/client";
 import {JahiaCtx, MainResourceCtx} from "../../lib/context";
 import * as PropTypes from "prop-types";
 import {JahiaComponent} from "./JahiaComponent";
+import { CORE_NODE_FIELDS } from './GQL/fragments';
 
 function Area({name, allowedTypes}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
@@ -32,19 +33,14 @@ function Area({name, allowedTypes}) {
         jcr(workspace:$workspace) {
             workspace
             nodeByPath(path:$pathArea) {
-                workspace
-                uuid
-                name
-                path
-                primaryNodeType {
-                    name
-                }
+                ...CoreNodeFields
                 mixinTypes {
                     name
                 }
             }
         }
-    }`;
+    }
+    ${CORE_NODE_FIELDS}`;
 
     const nodeProps = {
         name,
@@ -75,13 +71,17 @@ function Area({name, allowedTypes}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
+    const nodetypes = Array.isArray(allowedTypes) && allowedTypes.length > 0 ?
+        allowedTypes.join(" ") :
+        "jmix:droppableContent"
+
     return (
         <JahiaComponent
             node={data.jcr.nodeByPath}
             tagProps={{
                 type:"area",
+                nodetypes,
                 //todo get this dynamically
-                nodetypes:"jmix:droppableContent",
                 referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
                 allowreferences: "true",
             }}

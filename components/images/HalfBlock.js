@@ -1,9 +1,9 @@
 import React from 'react';
 import {JahiaCtx} from "../../lib/context";
-import {getImageURI} from "../../lib/utils";
 import classNames from "classnames";
 import styles from "./halfBlock.module.css";
 import * as PropTypes from "prop-types";
+import {getImageURI} from "../jahia/utils";
 
 function Image({imageNode}) {
     const {workspace} = React.useContext(JahiaCtx);

@@ -8,7 +8,8 @@ import App from "next/dist/pages/_app";
 import {getPageInfo} from '../lib/pages';
 
 import '../styles/style.scss';
-import {getPathAndQuery} from "../lib/utils";
+// import {getPathAndQuery} from "../lib/utils";
+import {getPathAndQuery} from "../components/jahia/utils";
 import * as PropTypes from "prop-types";
 import {useRouter} from "next/router";
 import {CxsCtxProvider} from "../lib/cxs";

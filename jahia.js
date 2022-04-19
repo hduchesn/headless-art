@@ -1,6 +1,9 @@
 export default {
     contentTypes: {
         HERO: "hicnt:heading",
+        GALLERY:"hicnt:galleryImage",
+        WIDEN_REF:"wdennt:widenReference",
+        IMAGE_REF:"jnt:imageReference",
         WIDEN_IMAGE: "wdennt:image",
         WIDEN_VIDEO: "wdennt:video",
         EXT_VIDEO: 'ext:video',

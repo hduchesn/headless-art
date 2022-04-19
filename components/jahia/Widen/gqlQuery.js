@@ -1,5 +1,5 @@
 import {gql} from "@apollo/client";
-
+import { CORE_NODE_FIELDS } from '../GQL/fragments';
 
 export const queryWidenRef = gql`query (
         $workspace:Workspace!,
@@ -30,10 +30,4 @@ export const queryWidenRef = gql`query (
             }
         }
     }
-    fragment CoreNodeFields on JCRNode {
-        workspace
-        uuid
-        path
-        name
-        primaryNodeType {name}
-    }`;
+    ${CORE_NODE_FIELDS}`;

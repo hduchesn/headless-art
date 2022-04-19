@@ -4,6 +4,7 @@ import {JahiaCtx} from "../../lib/context";
 import {generateUUID} from "./utils";
 import RichText from "./RichText";
 import Hero from "../Hero";
+import Gallery from "../Gallery";
 import {OwlCarousel} from "../owlCarousel";
 import Article from "../Article";
 import {PersonalizedContent} from "./PersonalizedContent";
@@ -21,6 +22,7 @@ const components = {
     'tint:text': RichText,
     'hicnt:text': RichText,
     'hicnt:heading': Hero,
+    'hicnt:galleryImage': Gallery,
     'hicnt:owlcarousel': OwlCarousel,
     'hicnt:article': Article,
     'wemnt:personalizedContent': PersonalizedContent

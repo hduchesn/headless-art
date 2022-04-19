@@ -7,6 +7,13 @@ import classNames from "classnames";
 import styles from "./layout.module.css";
 import * as PropTypes from "prop-types";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 function Layout({children, path, templateName, meta}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     console.log("[Layout] isEditMode : ", isEditMode);
@@ -29,15 +36,21 @@ function Layout({children, path, templateName, meta}) {
                 </header>
                 <div className={classNames("top-shadow", {[styles.topShadowEdit]: isEditMode})}/>
                 {children}
+                <footer className="site-footer" role="contentinfo">
+                    <Container>
+                        <Row>
+                            <Col className="text-md-center text-left">
+                                <p className="copyright">
+                                    Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is made
+                                    with <FontAwesomeIcon className="text-danger" icon={faHeart}/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
+                                </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </footer>
             </Main>
 
-            {/*<Script src="/static/js/jquery-3.2.1.min.js" strategy="beforeInteractive" />*/}
-            {/*<Script src="/static/js/popper.min.js"  />*/}
-            {/*<Script src="/static/js/bootstrap.min.js"  />*/}
-            {/*<Script src="/static/js/owl.carousel.min.js"  />*/}
-            {/*<Script src="/static/js/jquery.waypoints.min.js"  />*/}
-            {/*<Script src="/static/js/jquery.fancybox.min.js"  />*/}
-            {/*<Script src="/static/js/main.js"  />*/}
+
         </>
     )
 }

@@ -1,11 +1,12 @@
 import React, {useContext} from "react";
 import {JahiaCtx} from "../../../../lib/context";
 import {gql, useQuery} from "@apollo/client";
+import { CORE_NODE_FIELDS } from '../../GQL/fragments';
 
 import * as PropTypes from "prop-types";
 
 
-function Image({id,defaultImageSize,imageSizes,referenceView}) {
+function Image({id,defaultImageSize,imageSizes,className,referenceView}) {
     const {workspace} = useContext(JahiaCtx);
 
     const queryWidenImage = gql`query (
@@ -22,13 +23,7 @@ function Image({id,defaultImageSize,imageSizes,referenceView}) {
             }
         }
     }
-    fragment CoreNodeFields on JCRNode {
-        workspace
-        uuid
-        path
-        name
-        primaryNodeType {name}
-    }`;
+    ${CORE_NODE_FIELDS}`;
 
     const {data, error, loading} = useQuery(queryWidenImage, {
         variables: {
@@ -56,7 +51,7 @@ function Image({id,defaultImageSize,imageSizes,referenceView}) {
             width="100%"
             srcSet={imageSizes.map(width => (`${url.replace('{size}', width)} ${width}w`) ).toString()}
             // sizes="${sizes}"
-            // className="${class}"
+            className={className}
             alt={imageNode.name}
         />
     )
@@ -64,6 +59,7 @@ function Image({id,defaultImageSize,imageSizes,referenceView}) {
 
 Image.propTypes = {
     id : PropTypes.string.isRequired,
+    className: PropTypes.string,
     defaultImageSize: PropTypes.number,
     imageSizes: PropTypes.array,
     referenceView:PropTypes.string

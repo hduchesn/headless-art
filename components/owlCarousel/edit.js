@@ -4,12 +4,10 @@ import {useQuery} from "@apollo/client";
 import classNames from 'classnames';
 import styles from './edit.module.css'
 
-
-import {getJahiaDivsProps} from "../../lib/utils";
 import {queryCarousel} from "./gqlQuery";
 import carouselType from './carouselType';
 import * as PropTypes from "prop-types";
-
+import {getJahiaDivsProps} from "../jahia/utils";
 
 function OwlCarousel({id}) {
     const {workspace, locale} = useContext(JahiaCtx);

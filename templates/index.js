@@ -1,13 +1,11 @@
-import Home from "./Home";
-import About from "./About";
-import Third from "./Third";
+import Open from "./Open";
+import FixedStructure from "./FixedStructure";
 import * as PropTypes from "prop-types";
 
 const templates = {
-    'about': About,
-    'home': Home,
-    'third':Third,
-    'default': Home,
+    'open': Open,
+    'fixedstructure':FixedStructure,
+    'default': Open
 }
 
 function Template({templateName, ...props}) {
