@@ -57,7 +57,7 @@ export function PersonalizedContentLive({id, isFirstOnly}) {
     const nodes = data?.jcr?.nodeById.jExperience.personalizedVariants;
 
     return !!nodes && nodes.length > 0 && (
-        firstOnly ? (
+        isFirstOnly ? (
             <JahiaComponent node={nodes[0]}/>
         ) : (
             nodes.map(n => <JahiaComponent key={n.uuid} node={n}/>)
