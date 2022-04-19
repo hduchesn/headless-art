@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import {JahiaComponent} from "./JahiaComponent";
 import { CORE_NODE_FIELDS } from './GQL/fragments';
 
-function Area({name, allowedTypes}) {
+function Area({name, allowedTypes, renderComponent,className}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
     const mainResourcePath = React.useContext(MainResourceCtx);
     const getRenderedContent = gql`query (
@@ -78,6 +78,8 @@ function Area({name, allowedTypes}) {
     return (
         <JahiaComponent
             node={data.jcr.nodeByPath}
+            renderComponent={renderComponent}
+            className={className}
             tagProps={{
                 type:"area",
                 nodetypes,
@@ -93,6 +95,8 @@ function Area({name, allowedTypes}) {
 Area.propTypes = {
     name: PropTypes.string.isRequired,
     allowedTypes: PropTypes.array,
+    renderComponent: PropTypes.func,
+    className: PropTypes.string
 };
 
 export default Area;

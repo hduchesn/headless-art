@@ -17,9 +17,7 @@ function Image({id,defaultImageSize,imageSizes,className,referenceView}) {
             workspace
             nodeById(uuid:$id) {
                 ...CoreNodeFields
-                templatedUrl:property(name:"wden:templatedUrl"){
-                    value
-                }
+                templatedUrl:property(name:"wden:templatedUrl"){ value }
             }
         }
     }

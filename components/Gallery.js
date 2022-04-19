@@ -2,8 +2,8 @@ import React from "react";
 import {JahiaCtx} from "../lib/context";
 import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {PlusLg} from "react-bootstrap-icons";
+
 import WidenImage from "./jahia/Widen/components/Image";
 import CmsImage from "./jahia/Image/Default";
 import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
@@ -58,9 +58,7 @@ function Gallery({id}) {
     return (
         <a href="project-single.html" className="link-thumbnail">
             <h3>{content.heading.value}</h3>
-            {/*<FontAwesomeIcon icon={["fal", "coffee"]}/>*/}
-            <FontAwesomeIcon icon={faPlus}/>
-            {/*<FontAwesomeIcon icon={content.iconClass?.value}/>*/}
+            <PlusLg/>
             <ImageComponent
                 id={content.media?.node?.uuid}
                 path={content.media?.node?.path}

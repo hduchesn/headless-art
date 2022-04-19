@@ -1,9 +1,11 @@
+
 export default {
     contentTypes: {
+        FEATURE_CONTENT_BLOC:'hicnt:featureContentBloc',
         HERO: "hicnt:heading",
         GALLERY:"hicnt:galleryImage",
         WIDEN_REF:"wdennt:widenReference",
-        IMAGE_REF:"jnt:imageReference",
+        IMAGE_REF:"jnt:imageReferenceLink",
         WIDEN_IMAGE: "wdennt:image",
         WIDEN_VIDEO: "wdennt:video",
         EXT_VIDEO: 'ext:video',

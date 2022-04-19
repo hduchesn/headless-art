@@ -11,8 +11,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import {HeartFill} from 'react-bootstrap-icons';
 
 function Layout({children, path, templateName, meta}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -42,7 +41,7 @@ function Layout({children, path, templateName, meta}) {
                             <Col className="text-md-center text-left">
                                 <p className="copyright">
                                     Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is made
-                                    with <FontAwesomeIcon className="text-danger" icon={faHeart}/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
+                                    with <HeartFill className="text-danger"/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
                                 </p>
                             </Col>
                         </Row>
