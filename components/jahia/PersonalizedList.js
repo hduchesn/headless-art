@@ -15,7 +15,7 @@ export function PersonalizedList(props) {
             <ContentList {...props}/>
         </>
     ) : (
-        <PersonalizedContentLive firstOnly={false} {...props}/>
+        <PersonalizedContentLive isFirstOnly={false} {...props}/>
     )
 }
 

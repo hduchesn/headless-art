@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import {CxsCtx} from "../../lib/cxs";
 import {JahiaComponent} from "./JahiaComponent";
 
-export function PersonalizedContentLive({id, firstOnly}) {
+export function PersonalizedContentLive({id, isFirstOnly}) {
     const {locale} = useContext(JahiaCtx);
     const cxs = useContext(CxsCtx);
 
@@ -67,6 +67,6 @@ export function PersonalizedContentLive({id, firstOnly}) {
 
 PersonalizedContentLive.propTypes = {
     id: PropTypes.string.isRequired,
-    firstOnly: PropTypes.bool
+    isFirstOnly: PropTypes.bool
 }
 
