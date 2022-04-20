@@ -20,10 +20,9 @@ function Gallery({id}) {
                 ...CoreNodeFields
                 heading: property(language:$language, name:"heading"){value}
                 iconClass: property(name:"iconClass"){value}
-                media: property(language:$language,name:"wden:mediaNode",){
+                media: property(language:$language,name:"mediaNode",){
                     node: refNode {
                         ...CoreNodeFields
-                        templatedUrl:property(name:"wden:templatedUrl"){value}
                     }
                 }
             }
@@ -48,9 +47,7 @@ function Gallery({id}) {
     }
 
     const content = data?.jcr?.nodeById;
-    const ImageComponent =
-        content.media?.node?.templatedUrl?.value ?
-            WidenImage : CmsImage;
+    const ImageComponent = CmsImage;
 
     // {
     //     "element-animate":!isEditMode

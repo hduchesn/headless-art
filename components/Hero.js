@@ -9,11 +9,6 @@ import Col from 'react-bootstrap/Col';
 import classnames from "classnames";
 // import {getImageURI} from "../lib/utils";
 import {getImageURI} from "./jahia/utils";
-const widenURIProps = {
-    size:1280,
-    scale:1,
-    quality:72
-}
 
 //TODO use xss to clean body
 function Hero({id}) {
@@ -25,10 +20,9 @@ function Hero({id}) {
             nodeById(uuid: $id) {
                 ...CoreNodeFields
                 body: property(language:$language, name:"body"){value}
-                media: property(language:$language,name:"wden:mediaNode",){
+                media: property(language:$language,name:"mediaNode",){
                     node: refNode {
                         ...CoreNodeFields
-                        templatedUrl:property(name:"wden:templatedUrl"){value}
                     }
                 }
             }
@@ -53,12 +47,7 @@ function Hero({id}) {
     }
 
     const content = data?.jcr?.nodeById;
-    const uri =
-        content.media?.node?.templatedUrl?.value
-            ?.replace("{size}",widenURIProps.size)
-            .replace("{scale}",widenURIProps.scale)
-            .replace("{quality}",widenURIProps.quality) ||
-        getImageURI({uri: content.media?.node?.path, workspace});
+    const uri = getImageURI({uri: content.media?.node?.path, workspace});
 
     // {
     //     "element-animate":!isEditMode

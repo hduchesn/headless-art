@@ -4,12 +4,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {types} from "../types";
 import {JahiaComponent} from "../../JahiaComponent";
-
+import Area from "../../Area";
 
 function BS4Row({grid,mixins,children}) {
+//TODO review this
+    if(!mixins.includes(types.createRow)){
+        if(children)
+            return children
+        return (
+            <Area
+                name={`children-grid-${grid.name}`}
+                mainResourcePath={grid.path}
+            />
+        )
+    }
 
-    if(!mixins.includes(types.createRow))
-        return children
 
     const rowProps = {}
     if(grid.rowId?.value)

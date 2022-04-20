@@ -40,7 +40,7 @@ function FixedStructure({path, templateName}) {
                                 name="feature-image"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF],
+                                    nodetypes:[cms.contentTypes.IMAGE_REF],
                                     listlimit:1
                                 }}
                                 componentProps={{referenceComponent:FeatureImage}}
@@ -78,7 +78,7 @@ function FixedStructure({path, templateName}) {
                                 name="article-image"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF],
+                                    nodetypes:[cms.contentTypes.IMAGE_REF],
                                     listlimit:1
                                 }}
                             />
