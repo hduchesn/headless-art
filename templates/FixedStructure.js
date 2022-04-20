@@ -33,7 +33,7 @@ function FixedStructure({path}) {
                                 name="feature-image"
                                 mainResourcePath={path}
                                 allowedTypes={[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF]}
-                                renderComponent={FeatureImage}
+                                componentProps={{referenceComponent:FeatureImage}}
                             />
                         </Col>
                         <Col md={6} lg={4} className="feature-1-wrap d-md-flex flex-md-column order-lg-1">

@@ -46,24 +46,24 @@ function getComponent(node) {
     }
 }
 
-export function JahiaComponent({node,renderComponent,className, tagProps}) {
+export function JahiaComponent({node,componentProps, tagProps}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     const Component = getComponent(node);
 
-    console.log("[JahiaComponent] Component : ",Component);
-    console.log("[JahiaComponent] renderComponent : ",renderComponent);
+    // console.log("[JahiaComponent] **NodeType** : ",node.primaryNodeType.name);
+    // console.log("[JahiaComponent] **COMPONENT** : ",Component," **COMPONENT_PROPS** : ",componentProps);
 
     if (Component) {
         if (isEditMode) {
             return (
                 <JahiaModuleTag path={node.path} {...tagProps}>
-                    <Component id={node.uuid} renderComponent={renderComponent} className={className} path={node.path}/>
+                    <Component id={node.uuid} {...componentProps} path={node.path}/>
                 </JahiaModuleTag>
             )
         }
 
         return (
-            <Component id={node.uuid} renderComponent={renderComponent} className={className} path={node.path}/>
+            <Component id={node.uuid} {...componentProps} path={node.path}/>
         )
     }
     return (
@@ -73,7 +73,6 @@ export function JahiaComponent({node,renderComponent,className, tagProps}) {
 
 JahiaComponent.propTypes = {
     node: propTypes.object.isRequired,
-    renderComponent:propTypes.func,
-    className:propTypes.string,
+    componentProps:propTypes.object,
     tagProps: propTypes.object
 }

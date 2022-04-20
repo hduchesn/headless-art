@@ -6,7 +6,7 @@ import {JahiaComponent} from "./JahiaComponent";
 import JahiaModuleTag from "./JahiaModuleTag";
 import { CORE_NODE_FIELDS } from './GQL/fragments';
 
-export function ContentList({id}) {
+export function ContentList({id,childComponentProps}) {
     const {workspace, isEditMode} = useContext(JahiaCtx);
 
     const getContent = gql`query($id:String!, $workspace:Workspace!) {
@@ -45,7 +45,9 @@ export function ContentList({id}) {
 
     return (
         <>
-            {data.jcr.nodeById.children.nodes.map(node => <JahiaComponent key={node.uuid} node={node}/>)}
+            {data.jcr.nodeById.children.nodes.map(node =>
+                <JahiaComponent key={node.uuid} componentProps={childComponentProps} node={node}/>
+            )}
 
             {isEditMode && <JahiaModuleTag path="*" type="placeholder"/>}
         </>
@@ -54,5 +56,6 @@ export function ContentList({id}) {
 
 ContentList.propTypes = {
     id: PropTypes.string.isRequired,
+    childComponentProps:PropTypes.object
 }
 

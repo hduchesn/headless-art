@@ -7,8 +7,8 @@ import {queryImageRef} from "./gqlQuery";
 import Default from "../Default";
 
 
-function ImageReferenceLink({id,renderComponent,className}) {
-    console.log("[ImageReferenceLink] renderComponent : ",renderComponent);
+function ImageReferenceLink({id,referenceComponent,className}) {
+    console.log("[ImageReferenceLink] referenceComponent : ",referenceComponent);
 
     const {workspace,locale} = useContext(JahiaCtx);
     const {data, error, loading} = useQuery(queryImageRef, {
@@ -31,15 +31,15 @@ function ImageReferenceLink({id,renderComponent,className}) {
 
     const imageNode = imageRef.imageNode?.refNode;
     let Component = Default;
-    if(renderComponent)
-        Component= renderComponent;
+    if(referenceComponent)
+        Component= referenceComponent;
 
     return <Component path={imageNode?.path} alt={imageRef.alt?.value} className={className}/>
 }
 
 ImageReferenceLink.propTypes = {
     id : PropTypes.string.isRequired,
-    renderComponent: PropTypes.func,
+    referenceComponent: PropTypes.func,
     className: PropTypes.string
 };
 
