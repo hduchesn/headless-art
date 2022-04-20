@@ -34,6 +34,8 @@ function Area({name, /*allowedTypes,*/tagProps, componentProps}) {
             workspace
             nodeByPath(path:$pathArea) {
                 ...CoreNodeFields
+                nodetypes: property(name:"j:contributeTypes"){ values }
+                listlimit: property(name:"limit"){ value:longValue }
                 mixinTypes {
                     name
                 }
@@ -46,10 +48,6 @@ function Area({name, /*allowedTypes,*/tagProps, componentProps}) {
         name,
         primaryNodeType: "jnt:area",
     };
-    //TODO add number of item limit too
-    // if (Array.isArray(allowedTypes) && allowedTypes.length > 0) {
-    //     nodeProps.properties = [{name: "j:allowedTypes", values: allowedTypes}];
-    // }
 
     // const area = useQuery(getRenderedContent, {
     const {data, error, loading} = useQuery(getRenderedContent, {
@@ -71,23 +69,32 @@ function Area({name, /*allowedTypes,*/tagProps, componentProps}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    // const nodetypes = Array.isArray(allowedTypes) && allowedTypes.length > 0 ?
-    //     allowedTypes.join(" ") :
-    //     "jmix:droppableContent"
-    if(!tagProps)
-        tagProps={}
-    if(Array.isArray(tagProps.nodetypes) && tagProps.nodetypes.length > 0){
-        tagProps.nodetypes = tagProps.nodetypes.join(" ");
-    }else{
-        tagProps.nodetypes = "jmix:droppableContent"
+    const dataTagProps={
+        nodetypes:data.jcr.nodeByPath.nodetypes?.values,
+        listlimit:data.jcr.nodeByPath.listlimit?.value
     }
-// console.log("[Area] tagProps :",tagProps)
+    //cleaning
+    Object.keys(dataTagProps).forEach(key => {
+        if (dataTagProps[key] === undefined) {
+            delete dataTagProps[key];
+        }
+    });
+
+    let joinTagProps=Object.assign({
+        nodetypes : ["jmix:droppableContent"]
+    },tagProps,dataTagProps)
+
+    joinTagProps={
+        ...joinTagProps,
+        nodetypes:joinTagProps.nodetypes.join(" ")
+    }
+
     return (
         <JahiaComponent
             node={data.jcr.nodeByPath}
             componentProps={{childComponentProps:componentProps}}
             tagProps={{
-                ...tagProps,
+                ...joinTagProps,
                 type:"area",
                 // nodetypes,
                 //todo get this dynamically
