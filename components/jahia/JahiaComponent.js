@@ -14,12 +14,14 @@ import BS4Grid from "./BS4/Grid";
 import Widen from "./Widen/Widen";
 import FeatureContentBloc from "../FeatureContentBloc";
 import ImageReferenceLink from "./Image/ImageReferenceLink/ImageReferenceLink";
+import NavMenuText from "./NavMenuText";
 
 const components = {
     'jnt:contentList': ContentList,
     'bootstrap4nt:grid':BS4Grid,
     'wdennt:widenReference':Widen,
     'jnt:imageReferenceLink':ImageReferenceLink,
+    'jnt:navMenuText':NavMenuText,
     'jnt:bigText': RichText,
     'tint:text': RichText,
     'hicnt:text': RichText,

@@ -13,7 +13,10 @@ function FixedStructure({path}) {
             <Area
                 name="hero"
                 mainResourcePath={path}
-                allowedTypes={[cms.contentTypes.HERO]}
+                tagProps={{
+                    nodetypes:[cms.contentTypes.HERO],
+                    listlimit:1
+                }}
             />
             {/*Feature*/}
             <section className="section">
@@ -23,7 +26,10 @@ function FixedStructure({path}) {
                             <Area
                                 name="feature-title"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.INDUS_TEXT]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
+                                    listlimit:1
+                                }}
                             />
                         </Col>
                     </Row>
@@ -32,7 +38,10 @@ function FixedStructure({path}) {
                             <Area
                                 name="feature-image"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF],
+                                    listlimit:1
+                                }}
                                 componentProps={{referenceComponent:FeatureImage}}
                             />
                         </Col>
@@ -40,14 +49,20 @@ function FixedStructure({path}) {
                             <Area
                                 name="feature-text-1"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.FEATURE_CONTENT_BLOC]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.FEATURE_CONTENT_BLOC],
+                                    listlimit:2
+                                }}
                             />
                         </Col>
                         <Col md={6} lg={4} className="feature-1-wrap d-md-flex flex-md-column order-lg-3">
                             <Area
                                 name="feature-text-2"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.FEATURE_CONTENT_BLOC]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.FEATURE_CONTENT_BLOC],
+                                    listlimit:2
+                                }}
                             />
                         </Col>
                     </Row>
@@ -61,14 +76,20 @@ function FixedStructure({path}) {
                             <Area
                                 name="article-image"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.IMAGE_REF,cms.contentTypes.WIDEN_REF],
+                                    listlimit:1
+                                }}
                             />
                         </Col>
                         <Col md={5} className="pr-md-5 mb-5">
                             <Area
                                 name="article-text"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.INDUS_TEXT]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
+                                    listlimit:1
+                                }}
                             />
                         </Col>
                     </Row>
@@ -82,7 +103,10 @@ function FixedStructure({path}) {
                             <Area
                                 name="gallery-title"
                                 mainResourcePath={path}
-                                allowedTypes={[cms.contentTypes.INDUS_TEXT]}
+                                tagProps={{
+                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
+                                    listlimit:1
+                                }}
                             />
                         </Col>
                     </Row>
@@ -94,7 +118,10 @@ function FixedStructure({path}) {
                                 <Area
                                     name={`gallery-item-${i+1}`}
                                     mainResourcePath={path}
-                                    allowedTypes={[cms.contentTypes.GALLERY]}
+                                    tagProps={{
+                                        nodetypes:[cms.contentTypes.GALLERY],
+                                        listlimit:1
+                                    }}
                                 />
                             </Col>
                         ))}

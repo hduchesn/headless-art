@@ -6,16 +6,15 @@ import { CORE_NODE_FIELDS } from './GQL/fragments';
 
 //TODO use xss to clean content
 
-function RichText({id}) {
+function NavMenuText({id}) {
     const {workspace, locale} = useContext(JahiaCtx);
 
-    //todo manage view ?
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
             workspace
             nodeById(uuid: $id) {
                 ...CoreNodeFields
-                content: property(language:$language, name:"text"){ value }
+                displayName(language:$language)
             }
         }
     }
@@ -25,28 +24,25 @@ function RichText({id}) {
         variables: {
             workspace,
             id,
-            language: locale,
+            language: locale
         }
     });
-
-    const content = data?.jcr?.nodeById?.content?.value || "no text"
 
     if (loading) {
         return "loading";
     }
+
     if (error) {
         console.log(error);
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    return (
-        // eslint-disable-next-line react/no-danger
-        <div dangerouslySetInnerHTML={{__html: content}}/>
-    )
+    return <h3>{data?.jcr?.nodeById?.displayName}</h3>
+
 }
 
-RichText.propTypes = {
+NavMenuText.propTypes = {
     id : PropTypes.string.isRequired
 };
 
-export default RichText
+export default NavMenuText

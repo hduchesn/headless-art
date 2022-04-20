@@ -2,7 +2,7 @@ import React from 'react';
 import * as PropTypes from "prop-types";
 import {generateUUID} from "./utils";
 
-function JahiaModuleTag({path, type, nodetypes, showareabutton, referencetypes, allowreferences, children}) {
+function JahiaModuleTag({path, type, nodetypes,listlimit, showareabutton, referencetypes, allowreferences, children}) {
     const divElt = {
         class: 'jahia-template-gxt',
         jahiatype: 'module',
@@ -11,6 +11,7 @@ function JahiaModuleTag({path, type, nodetypes, showareabutton, referencetypes, 
         path,
         type,
         nodetypes,
+        listlimit,
         allowreferences,
         referencetypes,
     }
@@ -26,6 +27,7 @@ JahiaModuleTag.propTypes = {
     path: PropTypes.string.isRequired,
     type: PropTypes.string,
     nodetypes: PropTypes.string,
+    listlimit:PropTypes.number,
     showareabutton: PropTypes.string,
     allowreferences: PropTypes.string,
     referencetypes: PropTypes.string,

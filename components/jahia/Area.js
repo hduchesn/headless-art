@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import {JahiaComponent} from "./JahiaComponent";
 import { CORE_NODE_FIELDS } from './GQL/fragments';
 
-function Area({name, allowedTypes, componentProps}) {
+function Area({name, /*allowedTypes,*/tagProps, componentProps}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
     const mainResourcePath = React.useContext(MainResourceCtx);
     const getRenderedContent = gql`query (
@@ -47,9 +47,9 @@ function Area({name, allowedTypes, componentProps}) {
         primaryNodeType: "jnt:area",
     };
     //TODO add number of item limit too
-    if (Array.isArray(allowedTypes) && allowedTypes.length > 0) {
-        nodeProps.properties = [{name: "j:allowedTypes", values: allowedTypes}];
-    }
+    // if (Array.isArray(allowedTypes) && allowedTypes.length > 0) {
+    //     nodeProps.properties = [{name: "j:allowedTypes", values: allowedTypes}];
+    // }
 
     // const area = useQuery(getRenderedContent, {
     const {data, error, loading} = useQuery(getRenderedContent, {
@@ -71,17 +71,25 @@ function Area({name, allowedTypes, componentProps}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    const nodetypes = Array.isArray(allowedTypes) && allowedTypes.length > 0 ?
-        allowedTypes.join(" ") :
-        "jmix:droppableContent"
-
+    // const nodetypes = Array.isArray(allowedTypes) && allowedTypes.length > 0 ?
+    //     allowedTypes.join(" ") :
+    //     "jmix:droppableContent"
+    if(!tagProps)
+        tagProps={}
+    if(Array.isArray(tagProps.nodetypes) && tagProps.nodetypes.length > 0){
+        tagProps.nodetypes = tagProps.nodetypes.join(" ");
+    }else{
+        tagProps.nodetypes = "jmix:droppableContent"
+    }
+// console.log("[Area] tagProps :",tagProps)
     return (
         <JahiaComponent
             node={data.jcr.nodeByPath}
             componentProps={{childComponentProps:componentProps}}
             tagProps={{
+                ...tagProps,
                 type:"area",
-                nodetypes,
+                // nodetypes,
                 //todo get this dynamically
                 referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
                 allowreferences: "true",
@@ -93,7 +101,8 @@ function Area({name, allowedTypes, componentProps}) {
 
 Area.propTypes = {
     name: PropTypes.string.isRequired,
-    allowedTypes: PropTypes.array,
+    // allowedTypes: PropTypes.array,
+    tagProps:PropTypes.object,
     componentProps: PropTypes.object
 };
 

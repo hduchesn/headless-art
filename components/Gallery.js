@@ -55,10 +55,11 @@ function Gallery({id}) {
     // {
     //     "element-animate":!isEditMode
     // }
+    //TODO manage linkTo URL
     return (
         <a href="project-single.html" className="link-thumbnail">
             <h3>{content.heading?.value}</h3>
-            <PlusLg/>
+            <PlusLg className="icon"/>
             <ImageComponent
                 id={content.media?.node?.uuid}
                 path={content.media?.node?.path}
