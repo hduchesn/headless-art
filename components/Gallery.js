@@ -57,7 +57,7 @@ function Gallery({id}) {
     // }
     return (
         <a href="project-single.html" className="link-thumbnail">
-            <h3>{content.heading.value}</h3>
+            <h3>{content.heading?.value}</h3>
             <PlusLg/>
             <ImageComponent
                 id={content.media?.node?.uuid}

@@ -7,7 +7,7 @@ import Image from "../jahia/Image/Default"
 function FeatureImage({path,alt,className}) {
     const {workspace,isEditMode} = React.useContext(JahiaCtx);
     const imageUri = getImageURI({uri: path, workspace})
-    console.log("[FeatureImage] imageUri: ",imageUri);
+    // console.log("[FeatureImage] imageUri: ",imageUri);
 
     if(isEditMode)
         return <Image path={path} alt={alt} className={className}/>
@@ -24,7 +24,7 @@ function FeatureImage({path,alt,className}) {
 }
 
 FeatureImage.propTypes = {
-    path: PropTypes.string.isRequired,
+    path: PropTypes.string,
     alt: PropTypes.string,
     className: PropTypes.string,
 };

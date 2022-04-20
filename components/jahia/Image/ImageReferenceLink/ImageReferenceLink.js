@@ -8,7 +8,7 @@ import Default from "../Default";
 
 
 function ImageReferenceLink({id,referenceComponent,className}) {
-    console.log("[ImageReferenceLink] referenceComponent : ",referenceComponent);
+    // console.log("[ImageReferenceLink] referenceComponent : ",referenceComponent);
 
     const {workspace,locale} = useContext(JahiaCtx);
     const {data, error, loading} = useQuery(queryImageRef, {

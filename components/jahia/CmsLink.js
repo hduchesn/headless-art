@@ -14,10 +14,13 @@ function CmsLink({href,...props}) {
 
         const RenderCMSEditLink = () => (
             React.Children.map(props.children, child => {
-                // console.log("[Link] child: ",child);
-                // console.log("[Link] React.isValidElement(child): ",React.isValidElement(child));
+                // console.log("[CmsLink] child: ",child);
+                // console.log("[CmsLink] React.isValidElement(child): ",React.isValidElement(child));
                 if (React.isValidElement(child)) {
-                    return React.cloneElement(child, { href:url }, ...child.props.children);
+                    let children = []
+                    if(child.props.children)
+                        children = child.props.children;
+                    return React.cloneElement(child, { href:url }, ...children);
                 }
                 return child;
             })

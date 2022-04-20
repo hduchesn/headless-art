@@ -16,7 +16,7 @@ function DefaultImage({path,alt,className}) {
 }
 
 DefaultImage.propTypes = {
-    path: PropTypes.string.isRequired,
+    path: PropTypes.string,
     alt: PropTypes.string,
     className: PropTypes.string,
 };

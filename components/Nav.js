@@ -6,9 +6,7 @@ import {gql, useQuery} from "@apollo/client";
 import {contentTypes} from "./jahia/common";
 import classnames from "classnames";
 import * as PropTypes from "prop-types";
-
-// import NextLink from 'next/link';
-// import cms from '../jahia';
+import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 
 function Nav({base, path}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
@@ -26,25 +24,23 @@ function Nav({base, path}) {
             workspace
             # first node is site level
             nodeByPath(path: $base) {
-                workspace
-                uuid
-                path
+                ...CoreNodeFields
                 children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) {
                     # Home Page level
                     nodes {
-                        ...CoreNodeFields
+                        ...CorePageNodeFields
                         isHomePage : property(name:"j:isHomePage") {
                             value
                         }
                         children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) {
                             # Home Page sub-level 
                             nodes {
-                                ...CoreNodeFields
+                                ...CorePageNodeFields
                                 # Home Page sub-sub-level
                                 children(fieldFilter:{filters:{fieldName:"page", value:"true"}}) @include(if: $isLevel3) { 
                                     # Home Page sub-level 
                                     nodes {
-                                        ...CoreNodeFields
+                                        ...CorePageNodeFields
                                     }
                                 }
                             }
@@ -54,18 +50,12 @@ function Nav({base, path}) {
             }
         }
     }
-    fragment CoreNodeFields on JCRNode {
-        workspace
-        uuid
-        path
-        primaryNodeType {
-            name
-        }
+    fragment CorePageNodeFields on JCRNode {
+        ...CoreNodeFields
         page: isNodeType(type: {types:$MenuItem})
-        title: property(name: $title, language: $language) {
-            value
-        }
-    }`;
+        title: property(name: $title, language: $language) { value }
+    }
+    ${CORE_NODE_FIELDS}`;
     //console.log(`[Nav] base : ${base}, workspace: ${workspace}, locale: ${locale}, title: ${contentTypes.PROPS.TITLE}, MenuItem: ${contentTypes.MENU_ITEM}`);
 
     const {data, error, loading} =useQuery(getSitePages, {
