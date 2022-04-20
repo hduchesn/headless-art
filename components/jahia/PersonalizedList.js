@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
 import {PersonalizedContentEdit} from "./PersonalizedContentEdit";
 import {PersonalizedContentLive} from "./PersonalizedContentLive";

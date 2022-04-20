@@ -1,5 +1,5 @@
 import React, {useContext, useMemo} from "react";
-import {JahiaCtx, MainResourceCtx} from "../../../lib/context";
+import {JahiaCtx, MainResourceCtx} from "@jahia/nextjs-lib";
 import {useQuery} from "@apollo/client";
 
 // import {getJahiaDivsProps} from "../../../lib/utils";

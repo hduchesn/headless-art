@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
 import {JahiaComponent} from "./JahiaComponent";

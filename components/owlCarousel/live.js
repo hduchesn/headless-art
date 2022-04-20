@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {JahiaCtx, MainResourceCtx} from "../../lib/context";
+import {JahiaCtx, MainResourceCtx} from "@jahia/nextjs-lib";
 import {useQuery} from "@apollo/client";
 // import OWCTestimonial from "./testimonial"
 import 'owl.carousel/dist/assets/owl.carousel.css';

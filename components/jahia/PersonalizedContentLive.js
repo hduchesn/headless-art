@@ -1,8 +1,8 @@
 import React, {useContext, useRef} from 'react';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
-import {CxsCtx} from "../../lib/cxs";
+import {CxsCtx} from "@jahia/nextjs-lib";
 import {JahiaComponent} from "./JahiaComponent";
 
 export function PersonalizedContentLive({id, isFirstOnly}) {

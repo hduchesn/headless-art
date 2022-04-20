@@ -1,5 +1,5 @@
 import React from "react";
-import {JahiaCtx} from "../../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {gql, useQuery} from "@apollo/client";
 import styles from './item.module.css'
 import classNames from 'classnames';

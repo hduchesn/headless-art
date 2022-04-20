@@ -1,5 +1,5 @@
 import React from "react";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import styles from "./bubble_1.module.css";
 import classNames from "classnames";
 import * as PropTypes from "prop-types";

@@ -1,6 +1,6 @@
 import React from 'react';
 import Item from "./Item";
-import {JahiaCtx} from "../../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
 
 function Heading({items, divs}) {

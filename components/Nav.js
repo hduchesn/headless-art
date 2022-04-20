@@ -1,7 +1,7 @@
 import React from "react";
 // import Link from "next/link";
 import Link from "./jahia/CmsLink";
-import {JahiaCtx} from "../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {gql, useQuery} from "@apollo/client";
 import {contentTypes} from "./jahia/common";
 import classnames from "classnames";

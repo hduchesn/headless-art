@@ -1,5 +1,5 @@
 import React from "react";
-import {JahiaCtx} from "../../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {getImageURI} from "../utils";
 import * as PropTypes from "prop-types";
 

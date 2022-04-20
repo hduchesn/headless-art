@@ -1,5 +1,5 @@
 import React from 'react';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
 
 function Main({path, templateName, children}) {

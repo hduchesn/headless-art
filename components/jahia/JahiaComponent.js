@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from 'prop-types';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 
 import RichText from "./RichText";
 import Hero from "../Hero";

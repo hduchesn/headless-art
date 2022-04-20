@@ -1,6 +1,6 @@
 import React from "react";
 import * as PropTypes from 'prop-types';
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import cms from "../../jahia";
 import JahiaModuleTag from "../jahia/JahiaModuleTag";
 import Image from "../images";

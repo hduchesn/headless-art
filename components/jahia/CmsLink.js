@@ -1,7 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
 import * as PropTypes from "prop-types";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import cms from "../../jahia";
 
 function CmsLink({href,...props}) {

@@ -1,5 +1,5 @@
 import React from "react";
-import {JahiaCtx} from "../../lib/context";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {useQuery} from "@apollo/client";
 import {queryImage} from "./gqlQuery";
 import HalfBlock from "./HalfBlock";

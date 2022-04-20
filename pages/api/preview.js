@@ -1,6 +1,5 @@
-import {getPageInfo} from "../../lib/pages";
+import {getClient, getPageInfo} from "@jahia/nextjs-lib";
 import cms from '../../jahia';
-import {getClient} from "../../lib/apollo";
 
 const getHTMLError = ({message, path, locale}) => `
     <div jahiatype="mainmodule"

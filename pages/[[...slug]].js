@@ -1,9 +1,8 @@
 import React from "react";
 import Layout from "../components/layout";
 import Template from "../templates";
-import {getAllPages} from "../lib/pages";
+import {getAllPages, MainResourceCtxProvider} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
-import {MainResourceCtxProvider} from "../lib/context";
 
 function DynamicPage(props) {
     const {meta, path, templateName} = props;
