@@ -16,12 +16,17 @@ const getHTMLError = ({message, path, locale}) => `
 export default async function handler(req, res) {
     const defaultLocale = "en"
     let cmsContext;
+
+    if (!req.cookies?.__jContent_preview_ctx) {
+        console.error("[API Preview] cookie not set");
+        return;
+    }
+
     try {
-        if (req.cookies?.__jContent_preview_ctx) {
-            cmsContext = JSON.parse(req.cookies.__jContent_preview_ctx);
-        }
+        cmsContext = JSON.parse(req.cookies.__jContent_preview_ctx);
     } catch (e) {
         console.error("[API Preview] cmsContext json parse error : ", e);
+        return;
     }
 
     const locale = cmsContext.locale || defaultLocale;
