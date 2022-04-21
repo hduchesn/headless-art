@@ -6,10 +6,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import FeatureImage from "../components/images/Features";
+import Layout from "../components/layout";
 
-function FixedStructure({path}) {
+function FixedStructure({path, templateName}) {
     return (
-        <>
+        <Layout templateName={templateName} path={path}>
             <Area
                 name="hero"
                 mainResourcePath={path}
@@ -128,12 +129,13 @@ function FixedStructure({path}) {
                     </Row>
                 </Container>
             </section>
-        </>
-
+        </Layout>
     )
 }
 FixedStructure.propTypes = {
-    path: PropTypes.string.isRequired
+    path: PropTypes.string.isRequired,
+    templateName: PropTypes.string.isRequired
+
 };
 
 export default FixedStructure;
