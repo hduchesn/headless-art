@@ -28,11 +28,8 @@ export const queryGrid = gql`query (
                 children{
                     nodes{
                         ...CoreNodeFields
-#                        children{
-#                            nodes{
-#                                ...CoreNodeFields
-#                            }
-#                        }
+                        nodetypes: property(name:"j:contributeTypes"){ values }
+                        listlimit: property(name:"limit"){ value:longValue }
                     }
                 }
             }

@@ -4,21 +4,30 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {types} from "../types";
 import {JahiaComponent} from "../../JahiaComponent";
-import Area from "../../Area";
 
 function BS4Row({grid,mixins,children}) {
-//TODO review this
+
+    const renderComponent = (node) => (
+        <JahiaComponent
+            key={node.uuid}
+            node={node}
+            tagProps={{
+                type:"area",
+                nodetypes:node.nodetypes?.values.join(" ") || "jmix:droppableContent",
+                listlimit:node.listlimit?.value,
+                //todo get this dynamically
+                referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
+                allowreferences: "true",
+            }}
+        />
+    )
+
     if(!mixins.includes(types.createRow)){
         if(children)
             return children
-        return (
-            <Area
-                name={`children-grid-${grid.name}`}
-                mainResourcePath={grid.path}
-            />
-        )
-    }
 
+        return grid.children?.nodes?.map(node => renderComponent(node))
+    }
 
     const rowProps = {}
     if(grid.rowId?.value)
@@ -30,51 +39,15 @@ function BS4Row({grid,mixins,children}) {
     // console.log("[BS4Row] children : ",children);
     // console.log("[BS4Row] rowProps : ",rowProps);
 
-    function predifinedGrid() {
-        const cols = grid.grid?.value?.split("_");
-        return (
-            <Row {...rowProps}>
-                {cols.map( (col,index) => {
-                    const node = grid.children?.nodes[index]
-                    return(
-                        <Col key={node.uuid} md={col}>
-                            <JahiaComponent
-                                key={node.uuid}
-                                node={node}
-                                tagProps={{
-                                    type:"area",
-                                    //todo get this dynamically
-                                    nodetypes:"jmix:droppableContent",
-                                    referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
-                                    allowreferences: "true",
-                                }}
-                            />
-                        </Col>
-                    )
-                })}
-            </Row>
-        )
-    }
 
-    function customGrid() {
-        const cols = grid.gridClasses?.value?.split(",");
+    function renderRow({cols,keyProps}) {
         return (
             <Row {...rowProps}>
                 {cols.map( (col,index) => {
                     const node = grid.children?.nodes[index]
                     return(
-                        <Col key={node.uuid} className={col}>
-                            <JahiaComponent
-                                key={node.uuid}
-                                node={node}
-                                tagProps={{
-                                    type:"area",
-                                    //todo get this dynamically
-                                    nodetypes:"jmix:droppableContent",
-                                    referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
-                                    allowreferences: "true",
-                                }}
-                            />
+                        <Col key={node.uuid} {...{[keyProps]:col}}>
+                            {renderComponent(node)}
                         </Col>
                     )
                 })}
@@ -84,9 +57,15 @@ function BS4Row({grid,mixins,children}) {
 
     function getGrid() {
         if(mixins.includes(types.predefinedGrid))
-            return predifinedGrid();
+            return renderRow({
+                cols:grid.grid?.value?.split("_"),
+                keyProps:"md"
+            });
         if(mixins.includes(types.customGrid))
-            return customGrid();
+            return renderRow({
+                cols:grid.gridClasses?.value?.split(","),
+                keyProps:"className"
+            });
     }
 
     return getGrid();

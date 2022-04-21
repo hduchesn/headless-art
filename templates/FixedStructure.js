@@ -70,7 +70,7 @@ function FixedStructure({path, templateName}) {
                 </Container>
             </section>
             {/*Article*/}
-            <section className="section">{/*element-animate*/}
+            <section className="section bg-light">{/*element-animate*/}
                 <Container>
                     <Row className="align-items-center mb-5">
                         <Col lg={7} className="order-md-2">
