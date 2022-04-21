@@ -5,19 +5,20 @@ import styles from "./halfBlock.module.css";
 import * as PropTypes from "prop-types";
 import {getImageURI} from "../jahia/utils";
 
-function Image({imageNode}) {
+function Image({path}) {
     const {workspace} = React.useContext(JahiaCtx);
+    const imageUri = getImageURI({uri: path, workspace})
 
     return (
         <div
             className={classNames("image-display", styles.image)}
-            style={{backgroundImage: `url('${getImageURI({uri: imageNode.media?.refNode?.path, workspace})}')`}}
+            style={{backgroundImage: `url('${imageUri}')`}}
         />
     )
 }
 
 Image.propTypes = {
-    imageNode: PropTypes.object.isRequired
+    path: PropTypes.string
 };
 
 export default Image;
