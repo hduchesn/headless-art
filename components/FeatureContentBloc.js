@@ -7,7 +7,6 @@ import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 
 function FeatureContentBloc({id}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
-
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
             workspace
