@@ -36,7 +36,7 @@ ChildComponent.propTypes = {
     path: PropTypes.string,
     nodetypes: PropTypes.string,
     classname: PropTypes.string,
-    children: PropTypes.object,
+    children: PropTypes.node,
 };
 
 

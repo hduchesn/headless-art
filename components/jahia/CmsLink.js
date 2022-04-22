@@ -38,7 +38,7 @@ function CmsLink({href,...props}) {
 
 CmsLink.propTypes = {
     href: PropTypes.string.isRequired,
-    children: PropTypes.object
+    children: PropTypes.node
 };
 
 export default CmsLink

@@ -74,7 +74,7 @@ function BS4Row({grid,mixins,children}) {
 BS4Row.propTypes = {
     grid : PropTypes.object.isRequired,
     mixins : PropTypes.array,
-    children: PropTypes.object,
+    children: PropTypes.node,
 };
 
 export default BS4Row;

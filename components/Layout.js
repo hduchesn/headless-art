@@ -55,7 +55,7 @@ function Layout({children, path, templateName, meta}) {
 }
 
 Layout.propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.node.isRequired,
     path: PropTypes.string.isRequired,
     templateName: PropTypes.string.isRequired,
     meta: PropTypes.object

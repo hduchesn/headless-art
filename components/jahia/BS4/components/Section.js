@@ -31,7 +31,7 @@ function BS4Section({grid,mixins,children}) {
 BS4Section.propTypes = {
     grid : PropTypes.object.isRequired,
     mixins : PropTypes.array,
-    children: PropTypes.object,
+    children: PropTypes.node,
 };
 
 export default BS4Section;

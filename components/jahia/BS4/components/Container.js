@@ -42,7 +42,7 @@ function BS4Container({grid,mixins,children}) {
 BS4Container.propTypes = {
     grid : PropTypes.object.isRequired,
     mixins : PropTypes.array,
-    children: PropTypes.object,
+    children: PropTypes.node,
 };
 
 export default BS4Container;

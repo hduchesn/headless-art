@@ -27,7 +27,7 @@ function Main({path, templateName, children}) {
 Main.propTypes = {
     path : PropTypes.string.isRequired,
     templateName: PropTypes.string.isRequired,
-    children: PropTypes.array.isRequired
+    children: PropTypes.node.isRequired
 };
 
 export default Main;

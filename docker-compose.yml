@@ -22,6 +22,7 @@ services:
       - "9229:9229"
       - "10001:10001"
     volumes:
+      - /Users/tdraier/src:/var/jahia/sources
       - ./provisioning:/var/jahia/patches/remote
     networks:
       - stack

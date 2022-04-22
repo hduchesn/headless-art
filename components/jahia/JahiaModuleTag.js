@@ -31,7 +31,7 @@ JahiaModuleTag.propTypes = {
     showareabutton: PropTypes.string,
     allowreferences: PropTypes.string,
     referencetypes: PropTypes.string,
-    children: PropTypes.object,
+    children: PropTypes.node,
 };
 
 JahiaModuleTag.defaultProps = {
