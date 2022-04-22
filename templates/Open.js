@@ -1,7 +1,7 @@
 import React from 'react';
 import Area from "../components/jahia/Area";
 import * as PropTypes from "prop-types";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 
 function Open({templateName, path}) {
     return (
