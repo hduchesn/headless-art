@@ -5,14 +5,12 @@ services:
     image: jahia/${JAHIA_REPO}:${JAHIA_VERSION}
     hostname: jahia
     container_name: jahia-derby
-    mem_limit: 4gb
     env_file:
       - .env.local
     environment:
       JPDA: "true"
       TZ: ${TZ}
       EXECUTE_PROVISIONING_SCRIPT: ${EXECUTE_PROVISIONING_SCRIPT}
-      JAHIA_LICENSE: ${JAHIA_LICENSE}
       CATALINA_OPTS: -XX:NativeMemoryTracking=detail
       YOURKIT_ACTIVATED: "false"
     ports:

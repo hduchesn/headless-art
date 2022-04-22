@@ -3,7 +3,7 @@ import fs from "fs";
 
 
 const templatesDirectory = path.join(process.cwd(), 'templates')
-const excludedName = ["index"]
+const excludedName = ["registerTemplates"]
 let allTemplateNames = [
     {
         name:"fixedstructure",
