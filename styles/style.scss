@@ -4,7 +4,9 @@ $font-heading: 'Montserrat', sans-serif;
 @import "mixins";
 //@import "~bootstrap/scss/bootstrap";
 
-
+@import "owl.carousel.min";
+@import "animate";
+@import "animate.custom";
 
 body {
 	background: $white;

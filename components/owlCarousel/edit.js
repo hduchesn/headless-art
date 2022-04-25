@@ -1,38 +1,25 @@
-import React, {useContext, useMemo} from "react";
-import {JahiaCtx, MainResourceCtx} from "@jahia/nextjs-lib";
+import React, {useContext} from "react";
+import {JahiaCtx} from "@jahia/nextjs-lib";
 import {useQuery} from "@apollo/client";
 import classNames from 'classnames';
 import styles from './edit.module.css'
 
 import {queryCarousel} from "./gqlQuery";
-import carouselType from './carouselType';
+import {carousel as carouselType,carouselItem} from './types';
 import * as PropTypes from "prop-types";
-import {getJahiaDivsProps} from "../jahia/utils";
+import JahiaModuleTag from "../jahia/JahiaModuleTag";
 
 function OwlCarousel({id}) {
-    const {workspace, locale} = useContext(JahiaCtx);
-    const mainResourcePath = React.useContext(MainResourceCtx);
-    // const [divs, setDivs] = React.useState([]);
-    // const [carousel, setCarousel] = React.useState({});
-
-    // const carouselId = Math.ceil(Math.random()* 100000);
-
+    const {workspace} = useContext(JahiaCtx);
     const {data, error, loading} = useQuery(queryCarousel, {
         variables: {
             workspace,
-            id,
-            language: locale,
-            mainResourcePath,
-            isEditMode: true
-        },
-        // onCompleted: data => {
-        //     setDivs(getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output));
-        //     setCarousel(data.jcr?.nodeById);
-        // }
+            id
+        }
     });
 
     const carousel = data?.jcr?.nodeById;
-    const divs = useMemo(() => !loading && getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output), [data, loading]);
+    // const divs = useMemo(() => !loading && getJahiaDivsProps(data.jcr?.nodeById?.renderedContent?.output), [data, loading]);
 
 
     if (loading) {
@@ -43,11 +30,18 @@ function OwlCarousel({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    // console.log("[OwlCarousel] carousel.class :",carousel.class);
     if (carouselType[carousel.carouselType?.value]) {
-        const Component = carouselType[carousel.carouselType.value];
+        const type = carousel.carouselType.value;
+        const Component = carouselType[type];
+        const childNodeTypes = carousel.mixins.reduce((result,mixin) =>{
+            if(carouselItem[mixin.name])
+                result.push(carouselItem[mixin.name])
+            return result
+        },[]).join(" ");
+
+        //Note: JahiaModuleTag is required here to pass the childNodeTypes and enable the "create" btn to add children carousel item
         return (
-            <>
+            <JahiaModuleTag path={carousel.path} nodetypes={childNodeTypes}>
                 <section
                     id={carousel.uuid}
                     className={classNames(
@@ -55,11 +49,11 @@ function OwlCarousel({id}) {
                         styles.jOwlCarouselEdit
                     )}
                 >
-                    <Component items={carousel.children.items} divs={divs}/>
+                    <Component items={carousel.children.nodes}/>
                 </section>
                 {/*Jahia btn placeholder to add a new item*/}
-                <div {...divs["*"]}/>
-            </>
+                <JahiaModuleTag path="*" type="placeholder"/>
+            </JahiaModuleTag>
         )
     }
     return (

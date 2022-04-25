@@ -9,6 +9,10 @@ import {getImageURI} from "../../jahia/utils";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {PlayFill} from "react-bootstrap-icons";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox.css";
+
 //TODO use xss to clean caption
 
 function Item({id}) {
@@ -23,17 +27,16 @@ function Item({id}) {
             nodeById(uuid: $id) {
                 ...CoreNodeFields
                 caption: property(language:$language, name:"caption"){value}
-                videoLink: property(name:"hic:videoLink"){value}
-                videoExtPath: property(language:$language,name:"hic:videoExtPath"){value}
-                videoIntPath: property(language:$language,name:"hic:videoIntPath"){
+                videoLink: property(name:"videoLink"){value}
+                videoExtPath: property(language:$language,name:"videoExtPath"){value}
+                videoIntPath: property(language:$language,name:"videoIntPath"){
                     node: refNode {
                         ...CoreNodeFields
                     }
                 }
-                media: property(language:$language,name:"wden:mediaNode",){
+                media: property(language:$language,name:"mediaNode",){
                     node: refNode {
                         ...CoreNodeFields
-                        templatedUrl:property(name:"wden:templatedUrl"){value}
                     }
                 }
             }
@@ -59,12 +62,10 @@ function Item({id}) {
     }
 
     const content = data?.jcr?.nodeById;
-    const imageURI =
-        content.media?.node?.templatedUrl?.value
-            ?.replace("{size}",widenURIProps.size)
-            .replace("{scale}",widenURIProps.scale)
-            .replace("{quality}",widenURIProps.quality) ||
-        getImageURI({uri: content.media?.node?.path, workspace});
+    const imageURI = getImageURI({uri: content.media?.node?.path, workspace});
+    const videoLink = content.videoIntPath ?
+        getImageURI({uri: content.videoIntPath.node.path, workspace}) :
+        content.videoExtPath?.value;
     // console.log("[Item] image path :",content.media?.refNode?.path);
     // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">
     // element-animate
@@ -96,20 +97,24 @@ function Item({id}) {
                             <Col
                                 sm={12}
                                 lg={7}
-                                className={classnames("text-center")}
+                                className={classNames("text-center")}
                             >
+                                {videoLink &&
                                 <div className="btn-play-wrap mx-auto">
                                     <p className="mb-4">
+
                                         <a
                                             data-fancybox
-                                            href="https://vimeo.com/59256790"
+                                            href={videoLink}
                                             data-ratio="2"
                                             className="btn-play"
                                         >
-                                            <span className="ion ion-ios-play"/>
+                                            <span><PlayFill/></span>
                                         </a>
+
                                     </p>
-                                </div>
+                                </div>}
+
                                 {/* eslint-disable-next-line react/no-danger */}
                                 <div dangerouslySetInnerHTML={{__html: content.caption?.value || "no caption"}}/>
                             </Col>

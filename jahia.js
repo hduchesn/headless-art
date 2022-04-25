@@ -4,6 +4,8 @@ export default {
         FEATURE_CONTENT_BLOC:'hicnt:featureContentBloc',
         HERO: "hicnt:heading",
         GALLERY:"hicnt:galleryImage",
+        INDUS_CAROUSEL_HEADING_ITEM: 'hicnt:owlcarouselHeadingItem',
+        INDUS_CAROUSEL_TESTIMONIAL_ITEM: 'hicnt:owlcarouselTestimonialItem',
         // WIDEN_REF:"wdennt:widenReference",
         IMAGE_REF:"jnt:imageReferenceLink",
         WIDEN_IMAGE: "wdennt:image",
