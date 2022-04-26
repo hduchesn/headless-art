@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import * as PropTypes from "prop-types";
-import {generateUUID} from "./utils";
+import {generateUUID} from "@jahia/nextjs-lib";
 
 function JahiaModuleTag({path, type, nodetypes, listlimit, showareabutton, referencetypes, allowreferences, children}) {
+    const [uuid, setUuid] = useState('-');
+
+    useEffect(() => {
+        setUuid(generateUUID())
+    }, [setUuid]);
+
     const divElt = {
-        class: 'jahia-template-gxt',
+        className: 'jahia-template-gxt',
         jahiatype: 'module',
-        id: `module${generateUUID()}`,
+        id: `module${uuid.current}`,
         showareabutton,
         path,
         type,

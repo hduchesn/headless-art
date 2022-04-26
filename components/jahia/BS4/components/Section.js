@@ -12,7 +12,7 @@ function BS4Section({grid,mixins,children}) {
     if(grid.sectionId?.value)
         sectionProps.id=grid.sectionId.value;
     if(grid.sectionCssClass?.value)
-        sectionProps.class=grid.sectionCssClass.value;
+        sectionProps.className=grid.sectionCssClass.value;
     if(grid.sectionRole?.value)
         sectionProps.role=grid.sectionRole.value;
     if(grid.sectionStyle?.value)
