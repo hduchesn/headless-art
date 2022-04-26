@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {types} from "../types";
-import {JahiaComponent} from "../../JahiaComponent";
+import {JahiaComponent} from "@jahia/nextjs-lib";
 
 function BS4Row({grid,mixins,children}) {
 
@@ -13,11 +13,11 @@ function BS4Row({grid,mixins,children}) {
             node={node}
             tagProps={{
                 type:"area",
-                nodetypes:node.nodetypes?.values.join(" ") || "jmix:droppableContent",
+                nodetypes:node.nodetypes?.values || ["jmix:droppableContent"],
                 listlimit:node.listlimit?.value,
                 //todo get this dynamically
-                referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
-                allowreferences: "true",
+                referencetypes: ["jnt:fileReference[jnt:file]", "jnt:fileI18nReference[jnt:file]", "jnt:contentReference[jmix:droppableContent]", "jnt:contentFolderReference[jnt:contentFolder]","jnt:portletReference[jnt:portlet]","jnt:imageReferenceLink[jmix:image]","jnt:imageReference[jmix:image]","jnt:nodeLinkImageReference[jmix:image]", "jnt:nodeLinkI18nImageReference[jmix:image]", "jnt:externalLinkImageReference[jmix:image]", "jnt:externalLinkI18nImageReference[jmix:image]", "jnt:imageI18nReference[jmix:image]"],
+                allowreferences: true,
             }}
         />
     )

@@ -1,15 +1,14 @@
 import React from 'react';
 import classNames from "classnames";
-import {JahiaCtx} from "@jahia/nextjs-lib";
+import {JahiaCtx, JahiaModuleTag} from "@jahia/nextjs-lib";
 
 import styles from './halfBlock.module.css'
-import JahiaModuleTag from "./jahia/JahiaModuleTag";
 import Image from "./images/HalfBlock";
 import RichText from "./jahia/RichText";
 import cms from "../jahia";
 import * as PropTypes from "prop-types";
 import {gql, useQuery} from "@apollo/client";
-import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
+import {CORE_NODE_FIELDS} from './jahia/GQL/fragments';
 
 
 function ChildComponent({isNodeEmpty,path,nodetypes,classname,children}) {
@@ -34,7 +33,7 @@ function ChildComponent({isNodeEmpty,path,nodetypes,classname,children}) {
 ChildComponent.propTypes = {
     isNodeEmpty: PropTypes.bool.isRequired,
     path: PropTypes.string,
-    nodetypes: PropTypes.string,
+    nodetypes: PropTypes.arrayOf(PropTypes.string),
     classname: PropTypes.string,
     children: PropTypes.node,
 };
@@ -113,7 +112,7 @@ function HalfBlock({id}) {
                     <ChildComponent
                         isNodeEmpty={!imageNode}
                         path={imageNode?.path || "image"}
-                        nodetypes={imageNode?.primaryNodeType.name || cms.contentTypes.HALFBLOCK_IMAGE}
+                        nodetypes={[imageNode?.primaryNodeType.name || cms.contentTypes.HALFBLOCK_IMAGE]}
                         classname="editImageContainer"
                     >
                         <Image path={imageNode?.media?.refNode?.path}/>
@@ -124,7 +123,7 @@ function HalfBlock({id}) {
                     <ChildComponent
                         isNodeEmpty={!bodyNode}
                         path={bodyNode?.path || "body"}
-                        nodetypes={bodyNode?.primaryNodeType.name || cms.contentTypes.INDUS_TEXT}
+                        nodetypes={[bodyNode?.primaryNodeType.name || cms.contentTypes.INDUS_TEXT]}
                     >
                         <RichText id={bodyNode?.uuid}/>
                     </ChildComponent>

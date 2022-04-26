@@ -1,10 +1,8 @@
 import React, {useContext} from 'react';
-import {JahiaCtx} from "@jahia/nextjs-lib";
+import {JahiaComponent, JahiaCtx, JahiaModuleTag} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
 import {gql, useQuery} from "@apollo/client";
-import {JahiaComponent} from "./JahiaComponent";
-import JahiaModuleTag from "./JahiaModuleTag";
-import { CORE_NODE_FIELDS } from './GQL/fragments';
+import {CORE_NODE_FIELDS} from './GQL/fragments';
 
 export function ContentList({id,childComponentProps}) {
     const {workspace, isEditMode} = useContext(JahiaCtx);

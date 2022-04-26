@@ -2,8 +2,8 @@ import React from "react";
 import {gql, useQuery} from "@apollo/client";
 import {JahiaCtx, MainResourceCtx} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
-import {JahiaComponent} from "./JahiaComponent";
-import { CORE_NODE_FIELDS } from './GQL/fragments';
+import {JahiaComponent} from "@jahia/nextjs-lib";
+import {CORE_NODE_FIELDS} from './GQL/fragments';
 
 function Area({name, tagProps, componentProps}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
@@ -69,9 +69,9 @@ function Area({name, tagProps, componentProps}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>
     }
 
-    const dataTagProps={
-        nodetypes:data.jcr.nodeByPath.nodetypes?.values,
-        listlimit:data.jcr.nodeByPath.listlimit?.value
+    const dataTagProps = {
+        nodetypes: data.jcr.nodeByPath.nodetypes?.values,
+        listlimit: data.jcr.nodeByPath.listlimit?.value
     }
     //cleaning
     Object.keys(dataTagProps).forEach(key => {
@@ -80,25 +80,20 @@ function Area({name, tagProps, componentProps}) {
         }
     });
 
-    let joinTagProps=Object.assign({
-        nodetypes : ["jmix:droppableContent"]
-    },tagProps,dataTagProps)
-
-    joinTagProps={
-        ...joinTagProps,
-        nodetypes:joinTagProps.nodetypes.join(" ")
-    }
+    let joinTagProps = Object.assign({
+        nodetypes: ["jmix:droppableContent"]
+    }, tagProps, dataTagProps)
 
     return (
         <JahiaComponent
             node={data.jcr.nodeByPath}
-            componentProps={{childComponentProps:componentProps}}
+            componentProps={{childComponentProps: componentProps}}
             tagProps={{
                 ...joinTagProps,
-                type:"area",
+                type: "area",
                 //todo get this dynamically
-                referencetypes: "jnt:fileReference[jnt:file] jnt:fileI18nReference[jnt:file] jnt:contentReference[jmix:droppableContent] jnt:contentFolderReference[jnt:contentFolder] jnt:portletReference[jnt:portlet] jnt:imageReferenceLink[jmix:image] jnt:imageReference[jmix:image] jnt:nodeLinkImageReference[jmix:image] jnt:nodeLinkI18nImageReference[jmix:image] jnt:externalLinkImageReference[jmix:image] jnt:externalLinkI18nImageReference[jmix:image] jnt:imageI18nReference[jmix:image] wdennt:widenReference[wdenmix:widenAsset]",
-                allowreferences: "true",
+                referencetypes: ["jnt:fileReference[jnt:file]", "jnt:fileI18nReference[jnt:file]", "jnt:contentReference[jmix:droppableContent]", "jnt:contentFolderReference[jnt:contentFolder]","jnt:portletReference[jnt:portlet]","jnt:imageReferenceLink[jmix:image]","jnt:imageReference[jmix:image]","jnt:nodeLinkImageReference[jmix:image]", "jnt:nodeLinkI18nImageReference[jmix:image]", "jnt:externalLinkImageReference[jmix:image]", "jnt:externalLinkI18nImageReference[jmix:image]", "jnt:imageI18nReference[jmix:image]"],
+                allowreferences: true,
             }}
         />
     )
@@ -107,7 +102,7 @@ function Area({name, tagProps, componentProps}) {
 
 Area.propTypes = {
     name: PropTypes.string.isRequired,
-    tagProps:PropTypes.object,
+    tagProps: PropTypes.object,
     componentProps: PropTypes.object
 };
 

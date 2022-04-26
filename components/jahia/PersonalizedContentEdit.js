@@ -1,8 +1,7 @@
 import React, {useEffect, useRef} from 'react';
-import {JahiaCtx} from "@jahia/nextjs-lib";
+import {JahiaComponent, JahiaCtx} from "@jahia/nextjs-lib";
 import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
-import {JahiaComponent} from "./JahiaComponent";
 
 export function PersonalizedContentEdit({id}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
