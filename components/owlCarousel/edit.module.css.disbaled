@@ -1,4 +1,0 @@
-.jOwlCarouselEdit {
-    display: flex !important;
-    flex-wrap: wrap;
-}
