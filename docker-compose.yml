@@ -3,7 +3,7 @@ version: '3.6'
 services:
   jahia-derby:
     image: jahia/${JAHIA_REPO}:${JAHIA_VERSION}
-    hostname: jahia
+    hostname: jahia.my.local
     container_name: jahia-derby
     env_file:
       - .env.local
@@ -28,10 +28,11 @@ services:
   elasticsearch:
     container_name: elasticsearch
     image: '${ELASTICSEARCH_IMAGE}'
+    hostname: elasticsearch.my.local
     environment:
-      - node.name=elasticsearch
+      - node.name=elasticsearch.my.local
       - cluster.name=my-cluster
-      - cluster.initial_master_nodes=elasticsearch
+      - cluster.initial_master_nodes=elasticsearch.my.local
       - discovery.seed_hosts=
     deploy:
       resources:
@@ -48,33 +49,35 @@ services:
 
   jcustomer:
     image: '${JCUSTOMER_IMAGE}'
-    hostname: jcustomer
+    hostname: jcustomer.my.local
     container_name: jcustomer
     networks:
       - stack
     depends_on:
       - elasticsearch
     environment:
-      unomi_env_var_UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch:9200
+      unomi_env_var_UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch.my.local:9200
       unomi_env_var_UNOMI_ELASTICSEARCH_CLUSTERNAME: docker-cluster
       unomi_env_var_UNOMI_ELASTICSEARCH_INDEXPREFIX: ${JCUSTOMER_INDEXPREFIX}
-      unomi_env_var_UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer:9443
+      unomi_env_var_UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer.my.local:9443
       unomi_env_var_JAVA_MAX_MEM: 2G
       unomi_env_var_UNOMI_ROOT_PASSWORD: jcustomerP@55
       unomi_env_var_UNOMI_THIRDPARTY_PROVIDER1_KEY: 670c26d1cc413346c3b2fd9ce65dab41
       unomi_env_var_UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.24.24.0/24,::1,127.0.0.1
+      unomi_env_var_UNOMI_PROFILE_COOKIE_DOMAIN: .my.local
       unomi_env_var_KARAF_OPTS: "-Dunomi.autoStart=true"
-      unomi_env_var_UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer:8181
+      unomi_env_var_UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer.my.local:8181
       KARAF_OPTS: "-Dunomi.autoStart=true"
-      UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch:9200
+      UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch.my.local:9200
       UNOMI_ELASTICSEARCH_CLUSTERNAME: docker-cluster
       UNOMI_ELASTICSEARCH_INDEXPREFIX: ${JCUSTOMER_INDEXPREFIX}
-      UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer:9443
+      UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer.my.local:9443
       UNOMI_ROOT_PASSWORD: jcustomerP@55
       UNOMI_THIRDPARTY_PROVIDER1_KEY: 670c26d1cc413346c3b2fd9ce65dab41
       UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.24.24.0/24,::1,127.0.0.1
+      UNOMI_PROFILE_COOKIE_DOMAIN: .my.local
       MAXMIND_KEY: hYZIvpxdi8Ea647J
-      UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer:8181
+      UNOMI_CLUSTER_PUBLIC_ADDRESS: http://jcustomer.my.local:8181
       KARAF_DEBUG: ${KARAF_DEBUG}
       JAVA_MAX_MEM: 2G
     ports:
@@ -93,6 +96,7 @@ services:
 
   vercel:
     container_name: vercel
+    hostname: vercel.my.local
     image: next:latest
     ports:
       - 3000:3000
