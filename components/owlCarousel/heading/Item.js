@@ -17,9 +17,6 @@ import "@fancyapps/ui/dist/fancybox.css";
 
 function Item({id}) {
     const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
-    // const [content, setContent] = React.useState({})
-
-    // console.log("[Item] isEditMode :",isEditMode);
 
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
@@ -49,8 +46,7 @@ function Item({id}) {
             workspace,
             id,
             language: locale,
-        },
-        // onCompleted: data => setContent(data.jcr?.nodeById)
+        }
     });
 
     if (loading) {
@@ -66,10 +62,8 @@ function Item({id}) {
     const videoLink = content.videoIntPath ?
         getImageURI({uri: content.videoIntPath.node.path, workspace}) :
         content.videoExtPath?.value;
-    // console.log("[Item] image path :",content.media?.refNode?.path);
-    // <div className="slider-item" style="background-image: url('/img/industrial_hero_1');">
-    // element-animate
 
+    // element-animate
     // console.log("[owl Heading Item] content :",content);
     return (
         <>
@@ -109,7 +103,7 @@ function Item({id}) {
                                             data-ratio="2"
                                             className="btn-play"
                                         >
-                                            <span><PlayFill/></span>
+                                            <PlayFill/>
                                         </a>
 
                                     </p>

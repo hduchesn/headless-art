@@ -1,20 +1,44 @@
 import React, {useContext} from 'react';
 import {JahiaCtx} from "@jahia/nextjs-lib";
-import CarouselEdit from "./edit";
-import CarouselLive from "./live";
+import {OWCHeading} from "./heading";
+import {OWCTestimonial} from "./testimonial";
+import {useQuery} from "@apollo/client";
+import {queryCarousel} from "./gqlQuery";
+import * as PropTypes from "prop-types";
 
-// import dynamic from "next/dynamic";
-//
-// const CarouselFront = dynamic(
-//     () => import("./live"),
-//     // No need for SSR, when the module includes a library that only works in the
-//     // browser.
-//     {ssr: false}
-// );
-
-export function OwlCarousel(props) {
-    const {isEditMode} = useContext(JahiaCtx);
-    return isEditMode ? <CarouselEdit {...props}/> : <CarouselLive {...props}/>
+const carouselType = {
+    'heading': OWCHeading,
+    'testimonial': OWCTestimonial
 }
 
-OwlCarousel.propTypes = {};
+export function OwlCarousel({id,...props}) {
+    const {workspace} = useContext(JahiaCtx);
+    const {data, error, loading} = useQuery(queryCarousel, {
+        variables: {
+            workspace,
+            id
+        }
+    });
+
+    if (loading) {
+        return "loading";
+    }
+    if (error) {
+        console.log(error);
+        return <div>Error when loading ${JSON.stringify(error)}</div>
+    }
+
+    const carousel = data?.jcr?.nodeById;
+    const type = carousel?.carouselType?.value;
+    if (carouselType[type]) {
+        const Component = carouselType[type];
+        return <Component carousel={carousel} {...props}/>
+    }
+    return (
+        <p>The carousel type is not supported</p>
+    )
+}
+
+OwlCarousel.propTypes = {
+    id:PropTypes.string.isRequired,
+};

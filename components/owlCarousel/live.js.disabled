@@ -4,6 +4,7 @@ import {useQuery} from "@apollo/client";
 import {queryCarousel} from "./gqlQuery";
 import {carousel as carouselType} from './types';
 import * as PropTypes from "prop-types";
+import {ChevronLeft, ChevronRight} from "react-bootstrap-icons";
 
 function OwlCarousel({id}) {
     const {workspace} = useContext(JahiaCtx);
@@ -18,8 +19,8 @@ function OwlCarousel({id}) {
     React.useEffect(() => {
         if (carousel?.uuid && process.browser) {
             import('owl.carousel').then( () => {
-                console.log("[OwlCarousel] launch the carousel in the browser");
-                console.log("[OwlCarousel] carousel.uuid: ",carousel.uuid);
+                console.debug("[OwlCarousel] launch the carousel in the browser");
+                // console.log("[OwlCarousel] carousel.uuid: ",carousel.uuid);
 
                 let gqlOptions = {};
                 try {
@@ -73,9 +74,14 @@ function OwlCarousel({id}) {
     if (carouselType[carousel?.carouselType?.value]) {
         const Component = carouselType[carousel.carouselType.value];
         return (
-            <section id={carousel.uuid} className={carousel.class?.value}>
-                <Component items={carousel.children.nodes} carouselId={carousel.uuid}/>
-            </section>
+            <>
+                <section id={carousel.uuid} className={carousel.class?.value}>
+                    <Component items={carousel.children.nodes}/>
+                </section>
+                <ChevronLeft id={`owl-prev-${carousel.uuid}`}/>
+                <ChevronRight id={`owl-next-${carousel.uuid}`}/>
+            </>
+
         )
     }
     return (
