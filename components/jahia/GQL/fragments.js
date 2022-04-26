@@ -7,4 +7,5 @@ export const CORE_NODE_FIELDS = gql`
         path
         name
         primaryNodeType {name}
+        mixinTypes {name}
 }`;
