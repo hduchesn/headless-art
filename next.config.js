@@ -4,7 +4,7 @@ const path = require('path');
 
 //TODO get file destination from jahia.js
 module.exports = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
     },
