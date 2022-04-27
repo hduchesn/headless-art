@@ -1,5 +1,5 @@
 import React from "react";
-import {componentByMixin, componentsByType} from "@jahia/nextjs-lib";
+import {componentByMixin, componentsByType, componentRenderingModuleTag} from "@jahia/nextjs-lib";
 
 import {PersonalizedContent} from "./jahia/PersonalizedContent";
 import {PersonalizedList} from "./jahia/PersonalizedList";
@@ -15,7 +15,8 @@ import Hero from "./Hero";
 import Gallery from "./Gallery";
 import {OwlCarousel} from "./owlCarousel";
 import FeatureContentBloc from "./FeatureContentBloc";
-import HalfBlock from "./HalfBlock"
+import HalfBlock from "./HalfBlock";
+import MediaContentBloc from "./MediaContentBloc";
 
 export const registerComponents = () => {
     Object.assign(componentsByType, {
@@ -37,10 +38,15 @@ export const registerComponents = () => {
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
-        'hicnt:halfBlock': HalfBlock
+        'hicnt:halfBlock': HalfBlock,
+        'hicnt:mediaContentBloc': MediaContentBloc
     });
 
     Object.assign(componentByMixin, {
         'wemmix:personalizedList': PersonalizedList
     });
+
+    componentRenderingModuleTag.push(...[
+        'hicnt:owlcarousel'
+    ])
 }

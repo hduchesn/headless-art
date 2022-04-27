@@ -1,16 +1,16 @@
 import React from 'react';
 import Item from "./Item";
-import {JahiaCtx} from "@jahia/nextjs-lib";
+import {JahiaCtx,JahiaModuleTag} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
-import JahiaModuleTag from "../../jahia/JahiaModuleTag";
-function Heading({nodes}) {
+
+function TestimonialItems({nodes}) {
     const {isEditMode} = React.useContext(JahiaCtx);
 
     const getItems = () => {
         if(isEditMode){
             return (
                 nodes.map(item => (
-                    <JahiaModuleTag key={item.uuid} path={item.path} nodetypes={item.primaryNodeType.name}>
+                    <JahiaModuleTag key={item.uuid} path={item.path} nodetypes={[item.primaryNodeType.name]}>
                         <Item
                             key={item.uuid}
                             id={item.uuid}/>
@@ -30,8 +30,8 @@ function Heading({nodes}) {
     return getItems();
 }
 
-Heading.propTypes = {
+TestimonialItems.propTypes = {
     nodes : PropTypes.array.isRequired
 };
 
-export default Heading;
+export default TestimonialItems;

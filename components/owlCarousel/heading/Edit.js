@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import styles from './edit.module.css'
 import Items from "./Items";
 import * as PropTypes from "prop-types";
-import JahiaModuleTag from "../../jahia/JahiaModuleTag";
+import {JahiaModuleTag} from "@jahia/nextjs-lib";
 import cms from "../../../jahia";
 
 function OwlCarousel({carousel}) {
     //Note: JahiaModuleTag is required here to pass the childNodeTypes and enable the "create" btn to add children carousel item
     return (
-        <JahiaModuleTag path={carousel.path} nodetypes={cms.contentTypes.INDUS_CAROUSEL_HEADING_ITEM}>
+        <JahiaModuleTag path={carousel.path} nodetypes={[cms.contentTypes.INDUS_CAROUSEL_HEADING_ITEM]}>
             <section
                 id={carousel.uuid}
                 className={classNames(
