@@ -17,6 +17,7 @@ import {OwlCarousel} from "./owlCarousel";
 import FeatureContentBloc from "./FeatureContentBloc";
 import HalfBlock from "./HalfBlock";
 import MediaContentBloc from "./MediaContentBloc";
+import Card from "./Card";
 
 export const registerComponents = () => {
     Object.assign(componentsByType, {
@@ -39,7 +40,8 @@ export const registerComponents = () => {
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
         'hicnt:halfBlock': HalfBlock,
-        'hicnt:mediaContentBloc': MediaContentBloc
+        'hicnt:mediaContentBloc': MediaContentBloc,
+        'hicnt:card': Card
     });
 
     Object.assign(componentByMixin, {

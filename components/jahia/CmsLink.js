@@ -17,9 +17,8 @@ function CmsLink({href,...props}) {
                 // console.log("[CmsLink] child: ",child);
                 // console.log("[CmsLink] React.isValidElement(child): ",React.isValidElement(child));
                 if (React.isValidElement(child)) {
-                    let children = []
-                    if(child.props.children)
-                        children = child.props.children;
+                    const children = [child.props.children].flat()
+                    // console.log("[CmsLink] children: ",children);
                     return React.cloneElement(child, { href:url }, ...children);
                 }
                 return child;
