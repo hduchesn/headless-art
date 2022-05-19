@@ -14,7 +14,8 @@ export default {
         JNT_FILE: 'jnt:file',
         IMAGE: 'jmix:image',
         HALFBLOCK_IMAGE: 'hicnt:image',
-        INDUS_TEXT: 'hicnt:text'
+        INDUS_TEXT: 'hicnt:text',
+        AUGMENTED_SEARCH: 'sui:augmentedSearch'
     },
     paths: {
         preview: '/cms/render/default',

@@ -12,7 +12,11 @@ let allTemplateNames = [
     {
         name:"open",
         displayName:"Open"
-    }
+    },
+    {
+        name:"searchstructure",
+        displayName:"Search Structure"
+    },
 ]
 
 export default function handler(req, res) {

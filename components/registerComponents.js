@@ -1,8 +1,9 @@
 import React from "react";
-import {componentByMixin, componentsByType, componentRenderingModuleTag} from "@jahia/nextjs-lib";
+import {componentByMixin, componentRenderingModuleTag, componentsByType} from "@jahia/nextjs-lib";
 
 import {PersonalizedContent} from "./jahia/PersonalizedContent";
 import {PersonalizedList} from "./jahia/PersonalizedList";
+import {AugmentedSearch} from "./jahia/AugmentedSearch";
 import {ContentList} from "./jahia/ContentList";
 import BS4Grid from "./jahia/BS4/Grid";
 import ImageReferenceLink from "./jahia/Image/ImageReferenceLink/ImageReferenceLink";
@@ -22,14 +23,14 @@ export const registerComponents = () => {
     Object.assign(componentsByType, {
         //Core
         'jnt:contentList': ContentList,
-        'bootstrap4nt:grid':BS4Grid,
-        'jnt:imageReferenceLink':ImageReferenceLink,
-        'jnt:navMenuText':NavMenuText,
+        'bootstrap4nt:grid': BS4Grid,
+        'jnt:imageReferenceLink': ImageReferenceLink,
+        'jnt:navMenuText': NavMenuText,
         'jnt:bigText': RichText,
         'wemnt:personalizedContent': PersonalizedContent,
 
         //Community Module
-        'wdennt:widenReference':Widen,
+        'wdennt:widenReference': Widen,
 
         //Content Model Module
         'tint:text': RichText,
@@ -39,7 +40,11 @@ export const registerComponents = () => {
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
         'hicnt:halfBlock': HalfBlock,
-        'hicnt:mediaContentBloc': MediaContentBloc
+        'hicnt:mediaContentBloc': MediaContentBloc,
+
+        //Augmented search
+        'sui:augmentedSearch': AugmentedSearch,
+
     });
 
     Object.assign(componentByMixin, {
