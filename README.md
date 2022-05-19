@@ -1,5 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Jahia Nextjs initiative : *Next.js App*
 
+The aim of the Jahia Nextjs initiative is to explore and explain
+the Jahia capabilities to easily create and manage headless web project.
+Solutions we use are :
+- [Jahia][jahia-website] : a Cloud / On-premise *DXP* solution to create and contribute
+- [Vercel][vercel-website] a next-js Cloud platform provider to render the web project
+
+To know more about the Jahia Nextjs initiative [read this dedicated page][initiative.md].
+
+This github repository is one of three in the initiative and corresponds to the next.js
+app part. This app start as a simple [Next.js](https://nextjs.org/) project bootstrapped
+with [create-next-app]. Then the jahia team created templates and components to render
+web pages created, configured and contributed in Jahia. This application cannot run alone
+without its backend content. Thus to know more about the setup of this app
+[read this dedicated page][setup.md].
+<!--
 ## Getting Started
 
 First, run the development server:
@@ -32,3 +47,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-->
+[jahia-website]: https://www.jahia.com
+[vercel-website]: https://vercel.com
+[initiative.md]: https://github.com/Jahia/jahia-nextjs-initiative/blob/main/README.md
+[setup.md]: https://github.com/Jahia/jahia-nextjs-initiative/blob/main/doc/setup.md
+[create-next-app]: https://github.com/vercel/next.js/tree/canary/packages/create-next-app
