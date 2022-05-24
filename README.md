@@ -8,12 +8,21 @@ Solutions we use are :
 
 To know more about the Jahia Nextjs initiative [read this dedicated page][initiative.md].
 
+## Prerequisite
 This github repository is one of three in the initiative and corresponds to the next.js
 app part. This app start as a simple [Next.js](https://nextjs.org/) project bootstrapped
 with [create-next-app]. Then the jahia team created templates and components to render
 web pages created, configured and contributed in Jahia. This application cannot run alone
-without its backend content. Thus to know more about the setup of this app
-[read this dedicated page][setup.md].
+without its backend content.
+
+> Please be sur you have an up and running environment before to continue.
+> To know more about the setup of this app [read this dedicated page][setup.md].
+
+To know more about the architecture [read this dedicated page][archi.md]
+
+## Create a component
+
+
 <!--
 ## Getting Started
 
@@ -52,4 +61,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 [vercel-website]: https://vercel.com
 [initiative.md]: https://github.com/Jahia/jahia-nextjs-initiative/blob/main/README.md
 [setup.md]: https://github.com/Jahia/jahia-nextjs-initiative/blob/main/doc/setup.md
+[archi.md]: https://github.com/Jahia/jahia-nextjs-initiative/blob/main/doc/architecture.md
+
 [create-next-app]: https://github.com/vercel/next.js/tree/canary/packages/create-next-app

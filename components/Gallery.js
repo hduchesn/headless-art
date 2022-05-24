@@ -4,7 +4,7 @@ import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
 import {PlusLg} from "react-bootstrap-icons";
 
-import WidenImage from "./jahia/Widen/components/Image";
+// import WidenImage from "./jahia/Widen/components/Image";
 import CmsImage from "./jahia/Image/Default";
 import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 
