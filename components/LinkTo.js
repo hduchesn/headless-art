@@ -3,18 +3,27 @@ import * as PropTypes from "prop-types";
 import styles from "./linkTo.module.css";
 import NextLink from "next/link";
 import CmsLink from "./jahia/CmsLink";
+import classnames from "classnames";
 
-function LinkTo({content,locale,fallback,children}) {
-
+function LinkTo({content,locale,fallback,className,children}) {
+    // {[styles[fallback?.class]]:true}
     if(!content.linkType || !(content.externalLink || content.internalLink)){
         if(fallback.elt){
             function Fallback() {
                 // const eltChildren = [children].flat()
                 return React.createElement(
                     fallback.elt,
-                    {className:styles[fallback?.className]},
+                    {
+                        className:classnames(
+                            fallback?.className,
+                            fallback?.css?.reduce((classes,item)=>{
+                                classes[styles[item]]=true
+                                return classes;
+                            },{})
+                        )
+                    },
                     children
-                )
+                );
             }
             return (
                 <Fallback>
@@ -35,7 +44,7 @@ function LinkTo({content,locale,fallback,children}) {
     }
     return(
         <Component href={url} locale={locale}>
-            <a target={content.linkTarget?.value}>
+            <a target={content.linkTarget?.value} className={className}>
                 {children}
             </a>
         </Component>
@@ -44,7 +53,8 @@ function LinkTo({content,locale,fallback,children}) {
 LinkTo.propTypes = {
     content: PropTypes.object.isRequired,
     locale: PropTypes.string,
-    fallback: PropTypes.object.isRequired,
+    fallback: PropTypes.object,
+    className:PropTypes.string,
     children: PropTypes.node.isRequired
 };
 

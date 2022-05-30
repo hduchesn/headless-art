@@ -5,6 +5,7 @@ import * as PropTypes from "prop-types";
 import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 import CmsImage from "./jahia/Image/Default";
 import LinkTo from "./LinkTo";
+import {LINK_TO_FIELDS} from "./GQL/fragments";
 
 //TODO use xss to clean body
 function Card({id}) {
@@ -15,14 +16,7 @@ function Card({id}) {
             workspace
             nodeById(uuid: $id) {
                 ...CoreNodeFields
-                linkType: property(name:"linkType"){value}
-                linkTarget: property(name:"linkTarget"){value}
-                externalLink: property(name:"externalLink"){value}
-                internalLink: property(name:"internalLink"){
-                    node: refNode {
-                        ...CoreNodeFields
-                    }
-                }
+                ...LinkToFields
                 body: property(language:$language, name:"body"){value}
                 media: property(language:$language,name:"mediaNode",){
                     node: refNode {
@@ -32,7 +26,9 @@ function Card({id}) {
             }
         }
     }
-    ${CORE_NODE_FIELDS}`;
+    ${CORE_NODE_FIELDS}
+    ${LINK_TO_FIELDS}`;
+
 
     const {data, error, loading} = useQuery(getContent, {
         variables: {
@@ -55,7 +51,7 @@ function Card({id}) {
 
     return (
         <div className="media d-block media-custom text-center">
-            <LinkTo content={content} locale={locale} fallback={{elt:'div',className:'cardALike'}}>
+            <LinkTo content={content} locale={locale} fallback={{elt:'div',css:['cardALike']}}>
                 <ImageComponent
                     id={content.media?.node?.uuid}
                     path={content.media?.node?.path}

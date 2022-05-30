@@ -11,7 +11,7 @@ registerComponents();
 JahiaNextApp.useRender = () => {
     useEffect(() => {
         import("bootstrap/dist/js/bootstrap");
-    }, [])
+    }, []);
 }
 
 export default JahiaNextApp;
