@@ -4,34 +4,7 @@ import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
 import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 import CmsImage from "./jahia/Image/Default";
-import CmsLink from "./jahia/CmsLink";
-import NextLink from 'next/link';
-import styles from './card.module.css'
-
-function LinkedContent({content,locale,children}) {
-    if(!content.linkType || !(content.externalLink || content.internalLink))
-        return <div className={styles.aLike}>{children}</div>
-
-    let Component = NextLink;
-    let url = content.externalLink?.value;
-
-    if(content.internalLink?.node){
-        Component = CmsLink;
-        url = content.internalLink.node.path
-    }
-    return(
-        <Component href={url} locale={locale}>
-            <a target={content.linkTarget?.value}>
-                {children}
-            </a>
-        </Component>
-    )
-}
-LinkedContent.propTypes = {
-    content: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired,
-    locale: PropTypes.string
-};
+import LinkTo from "./LinkTo";
 
 //TODO use xss to clean body
 function Card({id}) {
@@ -82,13 +55,13 @@ function Card({id}) {
 
     return (
         <div className="media d-block media-custom text-center">
-            <LinkedContent content={content} locale={locale}>
+            <LinkTo content={content} locale={locale} fallback={{elt:'div',className:'cardALike'}}>
                 <ImageComponent
                     id={content.media?.node?.uuid}
                     path={content.media?.node?.path}
                     className="img-fluid"
                     alt={content.name}/>
-            </LinkedContent>
+            </LinkTo>
             {/* eslint-disable-next-line react/no-danger */}
             <div dangerouslySetInnerHTML={{__html: content.body?.value || 'no body'}}/>
         </div>
