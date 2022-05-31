@@ -63,8 +63,6 @@ function Item({id}) {
         getImageURI({uri: content.videoIntPath.node.path, workspace}) :
         content.videoExtPath?.value;
 
-    // element-animate
-    // console.log("[owl Heading Item] content :",content);
     return (
         <>
             {isEditMode &&
@@ -91,7 +89,7 @@ function Item({id}) {
                             <Col
                                 sm={12}
                                 lg={7}
-                                className={classNames("text-center")}
+                                className="text-center element-animate"
                             >
                                 {videoLink &&
                                 <div className="btn-play-wrap mx-auto">

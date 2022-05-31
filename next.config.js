@@ -31,7 +31,13 @@ module.exports = {
                 source: '/modules/:slug*',
                 destination: `${process.env.NEXT_PUBLIC_JAHIA_BASE_URL}/modules/:slug*`,
                 permanent: true,
+            },
+            {
+                source: "/",
+                destination: `/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}/home`,
+                permanent: true,
             }
+
         ]
     },
     // outputFileTracing: true

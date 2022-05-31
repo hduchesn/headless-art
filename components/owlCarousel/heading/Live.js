@@ -9,7 +9,7 @@ function OwlCarousel({carousel}) {
     React.useEffect(() => {
         if (carousel?.uuid && process.browser) {
             import('owl.carousel').then( () => {
-                console.debug("[OwlCarousel] launch the carousel in the browser");
+                // console.debug("[OwlCarousel] launch the carousel in the browser");
 
                 let gqlOptions = {};
                 try {

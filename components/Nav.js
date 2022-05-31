@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // import Link from "next/link";
 import Link from "./jahia/CmsLink";
 import {JahiaCtx} from "@jahia/nextjs-lib";
@@ -11,6 +11,21 @@ import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
 function Nav({base, path}) {
     const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
     // const [navTree, setNavTree] = React.useState({});
+    useEffect(() => {
+        if (process.browser) {
+            $('nav .dropdown').hover(function(){
+                var $this = $(this);
+                $this.addClass('show');
+                $this.find('> a').attr('aria-expanded', true);
+                $this.find('.dropdown-menu').addClass('show');
+            }, function(){
+                var $this = $(this);
+                $this.removeClass('show');
+                $this.find('> a').attr('aria-expanded', false);
+                $this.find('.dropdown-menu').removeClass('show');
+            });
+        }
+    },[]);
 
     const getSitePages = gql`query(
         $workspace: Workspace!,
@@ -65,7 +80,7 @@ function Nav({base, path}) {
             language: locale,
             title: contentTypes.PROPS.TITLE,
             MenuItem: contentTypes.MENU_ITEM,
-            isLevel3:false
+            isLevel3:true
         }
     });
     // console.log("[nav] nodes: ",data?.jcr?.nodeByPath?.children?.nodes);

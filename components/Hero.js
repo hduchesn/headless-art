@@ -48,9 +48,7 @@ function Hero({id}) {
     const content = data?.jcr?.nodeById;
     const uri = getImageURI({uri: content.media?.node?.path, workspace});
 
-    // {
-    //     "element-animate":!isEditMode
-    // }
+    // className={classnames("text-center","pt-5",{"element-animate":!isEditMode})}
     return (
 
         <div className="inner-page">
@@ -63,7 +61,7 @@ function Hero({id}) {
                         <Col
                             sm={12}
                             md={8}
-                            className={classnames("text-center","pt-5")}
+                            className="text-center pt-5 element-animate"
                             dangerouslySetInnerHTML={{__html: content.body?.value || 'no body'}}/>
                     </Row>
                 </Container>
