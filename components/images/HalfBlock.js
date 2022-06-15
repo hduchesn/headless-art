@@ -11,7 +11,8 @@ function Image({path}) {
 
     return (
         <div
-            className={classNames("image-display", styles.image)}
+            className={classNames("image-display","element-animate", styles.image)}
+            data-animate-effect="fadeIn"
             style={{backgroundImage: `url('${imageUri}')`}}
         />
     )

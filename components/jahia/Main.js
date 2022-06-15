@@ -2,12 +2,11 @@ import React from 'react';
 import {JahiaCtx} from "@jahia/nextjs-lib";
 import * as PropTypes from "prop-types";
 
-function Main({path, templateName, children}) {
+function Main({path, templateName,className, children}) {
     const {isEditMode,locale} = React.useContext(JahiaCtx);
 
     if (!isEditMode) {
-        // eslint-disable-next-line react/jsx-no-useless-fragment
-        return (<>{children}</>)
+        return children
     }
 
     return (
@@ -18,6 +17,7 @@ function Main({path, templateName, children}) {
             template=""
             templatename={templateName}
             nodetypes="nt:base jmix:navMenuItem"
+            className={className}
         >
             {children}
         </div>
@@ -27,6 +27,7 @@ function Main({path, templateName, children}) {
 Main.propTypes = {
     path : PropTypes.string.isRequired,
     templateName: PropTypes.string.isRequired,
+    className : PropTypes.string,
     children: PropTypes.node.isRequired
 };
 

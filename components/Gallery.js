@@ -4,20 +4,21 @@ import {gql, useQuery} from "@apollo/client";
 import * as PropTypes from "prop-types";
 import {PlusLg} from "react-bootstrap-icons";
 
-import WidenImage from "./jahia/Widen/components/Image";
 import CmsImage from "./jahia/Image/Default";
 import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
-
+import {LINK_TO_FIELDS} from "./GQL/fragments";
+import LinkTo from "./LinkTo";
 
 //TODO use xss to clean body
 function Gallery({id}) {
-    const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
+    const {workspace, locale} = React.useContext(JahiaCtx);
 
     const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
         jcr(workspace: $workspace) {
             workspace
             nodeById(uuid: $id) {
                 ...CoreNodeFields
+                ...LinkToFields
                 heading: property(language:$language, name:"heading"){value}
                 iconClass: property(name:"iconClass"){value}
                 media: property(language:$language,name:"mediaNode",){
@@ -28,7 +29,8 @@ function Gallery({id}) {
             }
         }
     }
-    ${CORE_NODE_FIELDS}`;
+    ${CORE_NODE_FIELDS}
+    ${LINK_TO_FIELDS}`;
 
     const {data, error, loading} = useQuery(getContent, {
         variables: {
@@ -52,9 +54,9 @@ function Gallery({id}) {
     // {
     //     "element-animate":!isEditMode
     // }
-    //TODO manage linkTo URL
+
     return (
-        <a href="project-single.html" className="link-thumbnail">
+        <LinkTo content={content} locale={locale} className="link-thumbnail" fallback={{elt:'div',className:'link-thumbnail'}}>
             <h3>{content.heading?.value}</h3>
             <PlusLg className="icon"/>
             <ImageComponent
@@ -62,7 +64,7 @@ function Gallery({id}) {
                 path={content.media?.node?.path}
                 className="img-fluid"
                 alt={content.name}/>
-        </a>
+        </LinkTo>
     )
 }
 

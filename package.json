@@ -27,6 +27,7 @@
     "react-dom": "17.0.2",
     "react-player": "^2.9.0",
     "sass": "^1.49.9",
+    "waypoints": "^4.0.1",
     "xss": "^1.0.11"
   },
   "devDependencies": {
