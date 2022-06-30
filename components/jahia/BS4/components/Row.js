@@ -5,17 +5,6 @@ import Col from 'react-bootstrap/Col';
 import {types} from '../types';
 import {JahiaComponent} from '@jahia/nextjs-sdk';
 
-//Note : revoir la creation de la grid
-//col-lg-4 order-lg-2,col-md-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-1,col-md-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-3
-
-function gridFromClassName ({gridClasses}) {
-    console.log("gridFromClassName : ",gridClasses);
-    if(!gridClasses?.value)
-        return
-
-
-}
-
 function BS4Row({grid, mixins, children}) {
     const renderComponent = node => (
         <JahiaComponent
@@ -57,9 +46,9 @@ function BS4Row({grid, mixins, children}) {
         return (
             <Row {...rowProps}>
                 {cols.map((col, index) => {
-                    console.log("grid.children?.nodes: ",grid.children?.nodes)
+                    // console.log("grid.children?.nodes: ",grid.children?.nodes)
                     const node = grid.children?.nodes[index];
-                    console.log("node: ",node)
+                    // console.log("node: ",node)
 
                     const{breakpoint,className} = col;
                     return (
@@ -74,10 +63,10 @@ function BS4Row({grid, mixins, children}) {
 
     function getGrid() {
         if (mixins.includes(types.predefinedGrid)) {
-            console.log("cols 1: ",grid.grid?.value?.split('_'))
+            // console.log("cols 1: ",grid.grid?.value?.split('_'))
             const cols = grid.grid?.value?.split('_')
                 .map(col => ({breakpoint:{md:col}}))
-            console.log("cols 2: ",cols)
+            // console.log("cols 2: ",cols)
             return renderRow({
                 cols
             });
@@ -85,7 +74,7 @@ function BS4Row({grid, mixins, children}) {
 
 //col-lg-4 order-lg-2,col-md-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-1,col-md-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-3
         if (mixins.includes(types.customGrid)) {
-            console.log("customGrid : ",grid.gridClasses);
+            // console.log("customGrid : ",grid.gridClasses);
             const cols = grid.gridClasses?.value?.split(',')
                 .map(col => {
                     // col = "col-lg-4 order-lg-2"
