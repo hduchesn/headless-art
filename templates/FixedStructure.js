@@ -1,5 +1,5 @@
 import React from 'react';
-import Area from "../components/jahia/Area";
+import {Area} from "@jahia/nextjs-sdk";
 import * as PropTypes from "prop-types";
 import cms from "../jahia"
 import Container from "react-bootstrap/Container";
@@ -81,6 +81,7 @@ function FixedStructure({path, templateName}) {
                                     nodetypes:[cms.contentTypes.IMAGE_REF],
                                     listlimit:1
                                 }}
+                                componentProps={{className:"img-fluid"}}
                             />
                         </Col>
                         <Col md={5} className="pr-md-5 mb-5">
