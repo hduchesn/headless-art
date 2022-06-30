@@ -11,7 +11,7 @@ import Container from './components/Container';
 import Row from './components/Row';
 
 function BS4Grid({id}) {
-    const {workspace,locale} = useContext(JahiaCtx);
+    const {workspace, locale} = useContext(JahiaCtx);
     const mainResourcePath = React.useContext(MainResourceCtx);
 
     const {data, error, loading} = useQuery(queryGrid, {
