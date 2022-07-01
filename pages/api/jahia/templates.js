@@ -1,5 +1,6 @@
 import {templates} from '@jahia/nextjs-sdk';
 const excludedName = ['default'];
+import {registerTemplates} from '../../../templates/registerTemplates';
 
 export default function handler(req, res) {
     if (req.query.secret !== process.env.NEXT_PREVIEW_SECRET) {
@@ -8,7 +9,9 @@ export default function handler(req, res) {
 
     let templateNames = [];
     try {
-        console.log('[API/templates] templates: ', templates);
+        console.log('[API/templates] BEFORE templates: ', templates);
+        registerTemplates();
+        console.log('[API/templates] AFTER templates: ', templates);
         templateNames = Object
             .keys(templates)
             .filter(templateName => !excludedName.includes(templateName))
