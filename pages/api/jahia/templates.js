@@ -8,6 +8,7 @@ export default function handler(req, res) {
 
     let templateNames = [];
     try {
+        console.log('[API/templates] templates: ',templates);
         templateNames = Object
             .keys(templates)
             .filter(templateName => !excludedName.includes(templateName))
