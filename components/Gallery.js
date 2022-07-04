@@ -1,72 +1,40 @@
-import React from "react";
-import {JahiaCtx} from "@jahia/nextjs-lib";
-import {gql, useQuery} from "@apollo/client";
-import * as PropTypes from "prop-types";
-import {PlusLg} from "react-bootstrap-icons";
+import React from 'react';
+import {JahiaCtx, useNode, DefaultImage} from '@jahia/nextjs-sdk';
+import * as PropTypes from 'prop-types';
+import {PlusLg} from 'react-bootstrap-icons';
+import {LinkTo, linkToProperties} from './LinkTo';
 
-// import WidenImage from "./jahia/Widen/components/Image";
-import CmsImage from "./jahia/Image/Default";
-import { CORE_NODE_FIELDS } from './jahia/GQL/fragments';
-
-
-//TODO use xss to clean body
+// Note : use xss to clean body
 function Gallery({id}) {
-    const {workspace, locale, isEditMode} = React.useContext(JahiaCtx);
-
-    const getContent = gql`query($workspace: Workspace!, $id: String!,$language:String!){
-        jcr(workspace: $workspace) {
-            workspace
-            nodeById(uuid: $id) {
-                ...CoreNodeFields
-                heading: property(language:$language, name:"heading"){value}
-                iconClass: property(name:"iconClass"){value}
-                media: property(language:$language,name:"mediaNode",){
-                    node: refNode {
-                        ...CoreNodeFields
-                    }
-                }
-            }
-        }
-    }
-    ${CORE_NODE_FIELDS}`;
-
-    const {data, error, loading} = useQuery(getContent, {
-        variables: {
-            workspace,
-            id,
-            language: locale,
-        }
-    });
+    const {locale} = React.useContext(JahiaCtx);
+    const {data, error, loading} = useNode(id, [...linkToProperties, 'heading', 'mediaNode']);
 
     if (loading) {
-        return "loading";
+        return 'loading';
     }
+
     if (error) {
         console.log(error);
-        return <div>Error when loading ${JSON.stringify(error)}</div>
+        return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const content = data?.jcr?.nodeById;
-    const ImageComponent = CmsImage;
+    const {name, properties: {heading, mediaNode}} = data;
+    const ImageComponent = DefaultImage;
 
-    // {
-    //     "element-animate":!isEditMode
-    // }
-    //TODO manage linkTo URL
     return (
-        <a href="project-single.html" className="link-thumbnail">
-            <h3>{content.heading?.value}</h3>
+        <LinkTo content={data.properties} locale={locale} className="link-thumbnail" fallback={{elt: 'div', className: 'link-thumbnail'}}>
+            <h3>{heading}</h3>
             <PlusLg className="icon"/>
-            <ImageComponent
-                id={content.media?.node?.uuid}
-                path={content.media?.node?.path}
+            {mediaNode && <ImageComponent
+                id={mediaNode.uuid}
+                path={mediaNode.path}
                 className="img-fluid"
-                alt={content.name}/>
-        </a>
-    )
+                alt={name}/>}
+        </LinkTo>
+    );
 }
 
 Gallery.propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
 };
 export default Gallery;

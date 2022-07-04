@@ -1,5 +1,5 @@
-import {gql} from "@apollo/client";
-import { CORE_NODE_FIELDS } from '../GQL/fragments';
+import {gql} from '@apollo/client';
+import {CORE_NODE_FIELDS} from '@jahia/nextjs-sdk';
 
 export const queryGrid = gql`query (
         $workspace:Workspace!,
@@ -18,9 +18,9 @@ export const queryGrid = gql`query (
                 ){
                     output
                 }
-                mixins:mixinTypes{
-                    name
-                }
+#                mixins:mixinTypes{
+#                    name
+#                }
                 ...CoreNodeFields
                 ...SectionFields
                 ...ContainerFields

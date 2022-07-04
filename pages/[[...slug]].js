@@ -1,5 +1,5 @@
-import React from "react";
-import {JahiaPage} from "@jahia/nextjs-lib";
+/* eslint-disable prefer-destructuring */
+import {JahiaPage} from '@jahia/nextjs-sdk';
 
 export default JahiaPage.Component;
 export const getStaticPaths = JahiaPage.getStaticPaths;
