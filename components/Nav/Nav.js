@@ -1,29 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {JahiaCtx, JahiaLink as Link, CORE_NODE_FIELDS} from '@jahia/nextjs-sdk';
 import {gql, useQuery} from '@apollo/client';
-import {contentTypes} from './jahia/common';
-import classnames from 'classnames';
+import {contentTypes} from '../jahia/common';
 import * as PropTypes from 'prop-types';
+import SubNav from './SubNav';
 
 function Nav({base, path}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
-    // Note : update the code with react handler onMouseEnter & onMouseLeave
-    useEffect(() => {
-        if (process.browser) {
-            window.jQuery('nav .dropdown').hover(function () {
-                const $this = window.jQuery(this);
-                $this.addClass('show');
-                $this.find('> a').attr('aria-expanded', true);
-                $this.find('.dropdown-menu').addClass('show');
-            }, function () {
-                const $this = window.jQuery(this);
-                $this.removeClass('show');
-                $this.find('> a').attr('aria-expanded', false);
-                $this.find('.dropdown-menu').removeClass('show');
-            });
-        }
-    }, []);
-
     const getSitePages = gql`query(
         $workspace: Workspace!,
         $base: String!,
@@ -95,26 +78,6 @@ function Nav({base, path}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const hasChildren = node => Array.isArray(node.children?.nodes) && node.children.nodes.length > 0;
-
-    const buildAnchorProps = node => {
-        const aProps = {
-            className: classnames('nav-link', {
-                active: node.path === path,
-                'dropdown-toggle': hasChildren(node),
-            }),
-        };
-
-        if (hasChildren(node)) {
-            aProps.id = node.uuid;
-            aProps['data-toggle'] = 'dropdown';
-            aProps['aria-haspopup'] = 'true';
-            aProps['aria-expanded'] = 'false';
-        }
-
-        return aProps;
-    };
-
     if (!navTree) {
         console.error('Error no HomePage found (check publication status or isHomePage property)');
         return (<div>Error no HomePage found (check publication status or isHomePage property)</div>);
@@ -145,45 +108,7 @@ function Nav({base, path}) {
 
                 <div className="collapse navbar-collapse" id="navbarsExample05">
                     <ul className="navbar-nav pl-md-5 ml-auto">
-                        {
-                            navTree.children?.nodes?.map(node =>
-                                // Console.log("node.path : ",node.path);
-                                 (
-                                     <li
-                                        key={node.uuid}
-                                        className={classnames('nav-item', {
-                                            dropdown: hasChildren(node),
-                                        })}
-                                     >
-                                         <Link href={node.path} locale={locale}>
-                                             {/* eslint-disable-next-line react/jsx-no-target-blank */}
-                                             <a {...buildAnchorProps(node)}>
-                                                 {node.title?.value}
-                                             </a>
-                                         </Link>
-                                         {
-                                            hasChildren(node)
-                                            && (
-                                                <div className="dropdown-menu" aria-labelledby={node.uuid}>
-                                                    {node.children.nodes.map(node2 =>
-                                                            // Console.log("node2.path : ",node2.path);
-                                                             (
-                                                                 <Link key={node2.uuid} href={node2.path} locale={locale}>
-                                                                     <a className="dropdown-item">
-                                                                         {node2.title?.value}
-                                                                     </a>
-                                                                 </Link>
-                                                            ),
-
-                                                    )}
-                                                </div>
-                                            )
-                                        }
-                                     </li>
-                                ),
-
-                            )
-                        }
+                        {navTree.children?.nodes?.map(node => (<SubNav key={node.uuid} node={node} path={path}/>))}
                     </ul>
 
                     <div className="navbar-nav ml-auto">
