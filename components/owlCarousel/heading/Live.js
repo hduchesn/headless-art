@@ -34,7 +34,7 @@ function OwlCarousel({carousel}) {
                         600: {items: 1, nav: false},
                         1000: {items: 1, nav: true},
                     }, ...gqlOptions};
-                console.debug('[OwlCarousel Heading Live] options: ', options);
+                // console.debug('[OwlCarousel Heading Live] options: ', options);
                 window.jQuery(`#${uuid}`).owlCarousel(options);
             });
         }

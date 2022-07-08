@@ -10,7 +10,9 @@
   "dependencies": {
     "@apollo/client": "^3.5.9",
     "@fancyapps/ui": "^4.0.26",
+    "@jahia/nextjs-community-components": "file:jahia-nextjs-community-components-v0.0.1.tgz",
     "@jahia/nextjs-sdk": "^0.0.1",
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.1.1",
     "classnames": "^2.3.1",
     "graphql-tag": "^2.12.6",
@@ -23,7 +25,6 @@
     "react-bootstrap-icons": "^1.8.1",
     "react-dom": "17.0.2",
     "sass": "^1.49.9",
-    "waypoints": "^4.0.1",
     "xss": "^1.0.11"
   },
   "devDependencies": {

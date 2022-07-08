@@ -6,7 +6,8 @@ import {
     ImageReferenceLink,
     RichText,
 } from '@jahia/nextjs-sdk';
-import BS4Grid from './jahia/BS4/Grid';
+// import BS4Grid from './jahia/BS4/Grid';
+import {BS4Grid} from '@jahia/nextjs-community-components';
 import NavMenuText from './jahia/NavMenuText';
 
 import Widen from './jahia/Widen/Widen';
