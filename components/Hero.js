@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import {Animate,animateProperties} from '@jahia/nextjs-community-components'
 // *** Query sample without usage of useNode() ***
 // const {workspace, locale} = React.useContext(JahiaCtx);
 //
@@ -38,7 +38,7 @@ import Col from 'react-bootstrap/Col';
 function Hero({id}) {
     const {workspace} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, ['body', 'mediaNode']);
+    const {data, error, loading} = useNode(id, [...animateProperties,'body', 'mediaNode']);
 
     if (loading) {
         return 'loading';
@@ -49,6 +49,13 @@ function Hero({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
+    const animateProps = Object.keys(data.properties)
+        .filter(key=>animateProperties.includes(key))
+        .reduce((props,key) =>{
+            props[key]=data.properties[key];
+            return props;
+        },{});
+    console.log("animateProps :",animateProps);
     const {body, mediaNode} = data.properties;
     const uri = getImageURI({uri: mediaNode?.path, workspace});
 
@@ -64,8 +71,9 @@ function Hero({id}) {
                         <Col
                             sm={12}
                             md={8}
-                            className="text-center pt-5"
-                            dangerouslySetInnerHTML={{__html: body || 'no body'}}/>
+                            className="text-center pt-5">
+                            <Animate properties={animateProps} dangerouslySetInnerHTML={{__html: body || 'no body'}}/>
+                        </Col>
                     </Row>
                 </Container>
             </div>
