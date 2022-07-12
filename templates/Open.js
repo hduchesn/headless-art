@@ -6,10 +6,7 @@ import Layout from "../components/Layout";
 function Open({templateName, path}) {
     return (
         <Layout templateName={templateName} path={path}>
-            <Area
-                name="mainContent"
-                mainResourcePath={path}
-            />
+            <Area name="mainContent" />
         </Layout>
     )
 }
