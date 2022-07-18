@@ -65,7 +65,10 @@ function Hero({id}) {
                             sm={12}
                             md={8}
                             className="text-center pt-5">
-                            <Animate properties={getAnimateProps(data.properties)} dangerouslySetInnerHTML={{__html: body || 'no body'}}/>
+                            <Animate
+                                properties={getAnimateProps(data.properties)}
+                                dangerouslySetInnerHTML={{__html: body || 'no body'}}
+                            />
                         </Col>
                     </Row>
                 </Container>

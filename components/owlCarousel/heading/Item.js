@@ -11,6 +11,7 @@ import {PlayFill} from 'react-bootstrap-icons';
 // eslint-disable-next-line no-unused-vars
 import {Fancybox} from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox.css';
+import {Animate, animateProperties, getAnimateProps} from "@jahia/nextjs-community-components";
 
 // *** Query sample without usage of useNode() ***
 // const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
@@ -51,7 +52,7 @@ import '@fancyapps/ui/dist/fancybox.css';
 function Item({id}) {
     const {workspace, isEditMode} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, ['caption', 'videoExtPath', 'videoIntPath', 'mediaNode']);
+    const {data, error, loading} = useNode(id, [...animateProperties,'caption', 'videoExtPath', 'videoIntPath', 'mediaNode']);
 
     if (loading) {
         return 'loading';
@@ -93,11 +94,14 @@ function Item({id}) {
                    >
                     <Container>
                         <Row className="slider-text align-items-center justify-content-center">
-                            <Col
+                            <Animate
+                                properties={getAnimateProps(data.properties)}
+                                component={Col}
                                 sm={12}
                                 lg={7}
                                 className="text-center"
                             >
+
                                 {videoLink
                                     && <div className="btn-play-wrap mx-auto">
                                         <p className="mb-4">
@@ -116,7 +120,7 @@ function Item({id}) {
 
                                 {/* eslint-disable-next-line react/no-danger */}
                                 <div dangerouslySetInnerHTML={{__html: caption || 'no caption'}}/>
-                            </Col>
+                            </Animate>
                         </Row>
                     </Container>
                     {/* eslint-disable-next-line  react/jsx-closing-tag-location */}
