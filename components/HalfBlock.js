@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import {JahiaCtx, JahiaModuleTag, RichText, useNode} from '@jahia/nextjs-sdk';
+import {getImageURI, JahiaCtx, JahiaModuleTag, useNode} from '@jahia/nextjs-sdk';
 
 import styles from './halfBlock.module.css';
-import Image from './images/HalfBlock';
+// import Image from './images/HalfBlock';
 import cms from '../jahia';
 import * as PropTypes from 'prop-types';
+import {animateProperties, getAnimateProps,Animate} from "@jahia/nextjs-community-components";
 
 function ChildComponent({isNodeEmpty, path, nodetypes, classname, children}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -68,9 +69,9 @@ ChildComponent.propTypes = {
 // const content = data?.jcr?.nodeById;
 
 function HalfBlock({id}) {
-    const {isEditMode} = React.useContext(JahiaCtx);
+    const {isEditMode,workspace} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, ['imagePosition', 'mediaNode'], true);
+    const {data, error, loading} = useNode(id, [...animateProperties,'imagePosition', 'mediaNode','text'], true);
 
     if (loading) {
         return 'loading';
@@ -118,7 +119,15 @@ function HalfBlock({id}) {
                         nodetypes={[imageNode?.primaryNodeType.name || cms.contentTypes.HALFBLOCK_IMAGE]}
                         classname="editImageContainer"
                     >
-                        <Image path={imageNode?.properties?.mediaNode?.path}/>
+                        {imageNode &&
+                            <Animate
+                                properties={getAnimateProps(imageNode.properties)}
+                                className={classNames('image-display', styles.image)}
+                                style={{backgroundImage: `url('${getImageURI({
+                                        uri: imageNode.properties.mediaNode.path,
+                                        workspace} )}')`}}/>
+                        }
+
                     </ChildComponent>
                 </div>
 
@@ -128,7 +137,13 @@ function HalfBlock({id}) {
                         path={bodyNode?.path || 'body'}
                         nodetypes={[bodyNode?.primaryNodeType.name || cms.contentTypes.INDUS_TEXT]}
                     >
-                        <RichText id={bodyNode?.uuid}/>
+                        {bodyNode &&
+                            <Animate
+                                properties={getAnimateProps(bodyNode.properties)}
+                                dangerouslySetInnerHTML={{__html: bodyNode.properties.text || 'no text'}}/>
+                            // <RichText id={bodyNode?.uuid}/>
+                        }
+
                     </ChildComponent>
                 </div>
             </div>
