@@ -11,7 +11,7 @@ import {PlayFill} from 'react-bootstrap-icons';
 // eslint-disable-next-line no-unused-vars
 import {Fancybox} from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox.css';
-import {Animate, animateProperties, getAnimateProps} from "@jahia/nextjs-community-components";
+import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
 
 // *** Query sample without usage of useNode() ***
 // const {workspace, isEditMode, locale} = React.useContext(JahiaCtx);
@@ -52,7 +52,7 @@ import {Animate, animateProperties, getAnimateProps} from "@jahia/nextjs-communi
 function Item({id}) {
     const {workspace, isEditMode} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, [...animateProperties,'caption', 'videoExtPath', 'videoIntPath', 'mediaNode']);
+    const {data, error, loading} = useNode(id, [...animateProperties, 'caption', 'videoExtPath', 'videoIntPath', 'mediaNode']);
 
     if (loading) {
         return 'loading';
