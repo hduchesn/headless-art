@@ -6,7 +6,9 @@ import {JahiaLink} from '@jahia/nextjs-sdk';
 import classnames from 'classnames';
 
 function Fallback({fallback, children}) {
-    // Const eltChildren = [children].flat()
+    if(!fallback.elt)
+        return children;
+
     return React.createElement(
         fallback.elt,
         {
@@ -29,25 +31,28 @@ Fallback.propTypes = {
 
 export function LinkTo({content, locale, fallback, className, children}) {
     // {[styles[fallback?.class]]:true}
-    const {linkType, externalLink, internalLink, linkTarget} = content;
-    if (!linkType || !(externalLink || internalLink)) {
-        if (fallback.elt) {
-            return (
-                <Fallback fallback={fallback}>
-                    {children}
-                </Fallback>
-            );
-        }
+    const {linkType, externalLink, internalLink, linkTarget,path} = content;
+    let Component,url;
 
-        return children;
-    }
-
-    let Component = NextLink;
-    let url = externalLink;
-
-    if (internalLink) {
-        Component = JahiaLink;
-        url = internalLink.path;
+    switch(linkType){
+        case "externalLink":
+            if(!externalLink)
+                return <Fallback fallback={fallback} children={children}/>;
+            Component = NextLink;
+            url = externalLink;
+            break;
+        case "internalLink":
+            if(!internalLink)
+                return <Fallback fallback={fallback} children={children}/>;
+            Component = JahiaLink;
+            url = internalLink.path;
+            break;
+        case "self":
+            Component = JahiaLink;
+            url = path;
+            break;
+        default:
+            return <Fallback fallback={fallback} children={children}/>;
     }
 
     return (

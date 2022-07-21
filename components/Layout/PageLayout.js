@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from './Nav/Nav';
+import Nav from '../Nav/Nav';
 import {JahiaCtx} from '@jahia/nextjs-sdk';
 import classNames from 'classnames';
-import styles from './layout.module.css';
+import styles from './pageLayout.module.css';
 import * as PropTypes from 'prop-types';
 
 import Container from 'react-bootstrap/Container';
@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 
 // Import {HeartFill} from 'react-bootstrap-icons';
 // meta
-function Layout({children, path}) {
+export function PageLayout({children, path}) {
     const {isEditMode} = React.useContext(JahiaCtx);
 
     // With <HeartFill className="text-danger"/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
@@ -47,10 +47,8 @@ function Layout({children, path}) {
     );
 }
 
-Layout.propTypes = {
+PageLayout.propTypes = {
     children: PropTypes.node.isRequired,
     path: PropTypes.string.isRequired,
     // Meta: PropTypes.object,
 };
-
-export default Layout;

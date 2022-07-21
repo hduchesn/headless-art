@@ -18,11 +18,11 @@ function Gallery({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, properties: {heading, mediaNode}} = data;
+    const {name,path, properties: {heading, mediaNode}} = data;
     const ImageComponent = DefaultImage;
 
     return (
-        <LinkTo content={data.properties} locale={locale} className="link-thumbnail" fallback={{elt: 'div', className: 'link-thumbnail'}}>
+        <LinkTo content={{...data.properties,path}} locale={locale} className="link-thumbnail" fallback={{elt: 'div', className: 'link-thumbnail'}}>
             <h3>{heading}</h3>
             <PlusLg className="icon"/>
             {mediaNode && <ImageComponent
