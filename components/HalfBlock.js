@@ -6,6 +6,7 @@ import styles from './halfBlock.module.css';
 import cms from '../jahia';
 import * as PropTypes from 'prop-types';
 
+//Note children can be null and empty the return must be managed otherwise there is an error
 function ChildComponent({isNodeEmpty, path, nodetypes, classname, children}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     if (isEditMode) {
@@ -24,7 +25,7 @@ function ChildComponent({isNodeEmpty, path, nodetypes, classname, children}) {
         );
     }
 
-    return children;
+    return children || null;
 }
 
 ChildComponent.propTypes = {

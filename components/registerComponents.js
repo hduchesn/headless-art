@@ -33,11 +33,16 @@ export const registerComponents = () => {
         // Content Model Module
         'tint:text': RichText,
         'hicnt:text': RichText,
-        'hicnt:heading': Hero,
+        'hicnt:heading': {
+            default:Hero,
+            laSuperVue:FeatureContentBloc
+        },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
-        'hicnt:halfBlock': HalfBlock,
+        'hicnt:halfBlock': {
+            default:HalfBlock
+        },
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
