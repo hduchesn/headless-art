@@ -11,7 +11,7 @@ import NavMenuText from './jahia/NavMenuText';
 
 import Widen from './jahia/Widen/Widen';
 
-import Hero from './Hero';
+import {Hero,Hero2Cols} from './Hero';
 import Gallery from './Gallery';
 import {OwlCarousel} from './owlCarousel';
 import FeatureContentBloc from './FeatureContentBloc';
@@ -35,14 +35,12 @@ export const registerComponents = () => {
         'hicnt:text': RichText,
         'hicnt:heading': {
             default:Hero,
-            laSuperVue:FeatureContentBloc
+            '2Cols':Hero2Cols
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
-        'hicnt:halfBlock': {
-            default:HalfBlock
-        },
+        'hicnt:halfBlock': HalfBlock,
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,

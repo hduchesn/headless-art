@@ -9,7 +9,7 @@ export default function handler(req, res) {
 
     const queryContentType = req.query.nodetype;
     if (!queryContentType) {
-        console.warn("queryContentType")
+        console.warn("nodetype parameter is missing (no view selected) return default")
         return res.status(200).json({
             name: "default",
             displayName: "Default",
@@ -17,7 +17,7 @@ export default function handler(req, res) {
         // return res.status(400).json({message: 'nodetype is missing'});
     }
 
-    console.log("queryContentType :",queryContentType);
+    // console.log("queryContentType :",queryContentType);
     let viewNames = [];
     try {
         registerComponents();
@@ -25,10 +25,10 @@ export default function handler(req, res) {
             .keys(componentsByType)
             .filter(contentType => contentType === queryContentType)
             .map(contentType => {
-                console.log("contentType :",contentType);
+                // console.log("contentType :",contentType);
                 const views = componentsByType[contentType]
-                console.log("views :",views);
-                console.log("typeof views :",typeof views)
+                // console.log("views :",views);
+                // console.log("typeof views :",typeof views)
                 if(typeof views === "function")
                     return {
                         name: "default",

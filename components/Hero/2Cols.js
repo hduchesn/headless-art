@@ -35,7 +35,7 @@ import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-communi
 // const uri = getImageURI({uri: content.media?.node?.path, workspace});
 
 // Note: use xss to clean body
-function Hero({id}) {
+export function Hero2Cols({id}) {
     const {workspace} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [...animateProperties, 'body', 'mediaNode']);
@@ -78,7 +78,6 @@ function Hero({id}) {
     );
 }
 
-Hero.propTypes = {
+Hero2Cols.propTypes = {
     id: PropTypes.string.isRequired,
 };
-export default Hero;

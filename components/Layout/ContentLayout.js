@@ -14,7 +14,7 @@ import {Animate, getAnimateProps} from "@jahia/nextjs-community-components";
 // Import {HeartFill} from 'react-bootstrap-icons';
 // meta
 // {[styles.topShadowEdit]: isEditMode}
-export function ContentLayout({children, path}) {
+export function ContentLayout({children, path, id}) {
     const {isEditMode} = React.useContext(JahiaCtx);
 //TODO extract current page from content path
     // With <HeartFill className="text-danger"/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
@@ -69,5 +69,6 @@ export function ContentLayout({children, path}) {
 ContentLayout.propTypes = {
     children: PropTypes.node.isRequired,
     path: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     // Meta: PropTypes.object,
 };
