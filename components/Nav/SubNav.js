@@ -69,11 +69,12 @@ function SubNav({node, path}) {
                             // Console.log("node2.path : ",node2.path);
                             (
                                 <Link key={node2.uuid} href={node2.path} locale={locale}>
-                                    <a className={classnames('dropdown-item',{
-                                        active: path.length > node2.path.length ?
-                                            path.includes(node2.path) :
-                                            node2.path === path
-                                    })}>
+                                    <a className={classnames('dropdown-item', {
+                                        active: path.length > node2.path.length
+                                            ? path.includes(node2.path)
+                                            : node2.path === path,
+                                    })}
+                                    >
                                         {node2.title?.value}
                                     </a>
                                 </Link>

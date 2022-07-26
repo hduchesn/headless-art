@@ -18,12 +18,12 @@ function Card({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name,path, properties: {body, mediaNode}} = data;
+    const {name, path, properties: {body, mediaNode}} = data;
     const ImageComponent = DefaultImage;
 
     return (
         <div className="media d-block media-custom text-center">
-            <LinkTo content={{...data.properties,path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
+            <LinkTo content={{...data.properties, path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
                 {mediaNode && <ImageComponent
                     id={mediaNode.uuid}
                     path={mediaNode.path}

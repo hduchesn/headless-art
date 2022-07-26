@@ -2,10 +2,10 @@ import React from 'react';
 import {JahiaCtx, DefaultImage, getImageURI} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 
-function FeatureImage({path, alt, className}) {
+export function Feature({path, alt, className}) {
     const {workspace, isEditMode} = React.useContext(JahiaCtx);
     const imageUri = getImageURI({uri: path, workspace});
-    // Console.log("[FeatureImage] imageUri: ",imageUri);
+    // Console.log("[Feature] imageUri: ",imageUri);
 
     if (isEditMode) {
         return <DefaultImage path={path} alt={alt} className={className}/>;
@@ -22,14 +22,14 @@ function FeatureImage({path, alt, className}) {
     );
 }
 
-FeatureImage.propTypes = {
+Feature.propTypes = {
     path: PropTypes.string,
     alt: PropTypes.string,
     className: PropTypes.string,
 };
 
-FeatureImage.defaultProps = {
+Feature.defaultProps = {
     alt: 'this is the feature image',
 };
 
-export default FeatureImage;
+// Export default Feature;

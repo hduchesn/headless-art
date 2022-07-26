@@ -9,14 +9,14 @@ import * as PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Animate, getAnimateProps} from "@jahia/nextjs-community-components";
+import {Animate, getAnimateProps} from '@jahia/nextjs-community-components';
 
 // Import {HeartFill} from 'react-bootstrap-icons';
 // meta
 // {[styles.topShadowEdit]: isEditMode}
 export function ContentLayout({children, path, id}) {
     const {isEditMode} = React.useContext(JahiaCtx);
-//TODO extract current page from content path
+    // TODO extract current page from content path
     // With <HeartFill className="text-danger"/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
     return (
         <>
