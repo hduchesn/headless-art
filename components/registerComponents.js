@@ -8,8 +8,8 @@ import {
 } from '@jahia/nextjs-sdk';
 import {
     BS4Grid,
-    // ClipPathBubble1,
-    // ClipPathBubble2
+    ClipPathBubble1,
+    ClipPathBubble2
 } from '@jahia/nextjs-community-components';
 
 import NavMenuText from './jahia/NavMenuText';
@@ -26,8 +26,8 @@ import Card from './Card';
 import {
     Feature,
     Scaling,
-    ClipPathBubble1,
-    ClipPathBubble2
+    // ClipPathBubble1,
+    // ClipPathBubble2
 } from './images';
 
 function ImageReferenceLinkWrapper(props) {
