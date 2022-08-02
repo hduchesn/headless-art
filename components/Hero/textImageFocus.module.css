@@ -1,0 +1,42 @@
+.overflowHidden {
+    overflow: hidden !important;
+}
+
+.sliderItemFocus {
+    height:100% !important;
+}
+.containerFocus {
+    padding-top : 117px;
+}
+
+.textFocus h1 {
+    font-size: 50px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: 300 !important;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    /*margin-left: 0.5em;*/
+}
+
+.textFocus p {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    margin-bottom: 0px;
+}
+
+.imageBorder {
+    display: inline-block;
+    margin:auto;
+    border: 10px solid hsla(0,0%,100%,.5);
+    background: #fff;
+    background-clip: padding-box;
+}
+
+.imageFocus {
+    border : 15px solid #fff;
+    max-height: 400px;
+}

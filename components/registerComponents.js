@@ -16,7 +16,10 @@ import NavMenuText from './jahia/NavMenuText';
 
 import Widen from './jahia/Widen/Widen';
 
-import {Hero, Hero2Cols} from './Hero';
+import {
+    Hero,
+    TextImageFocus
+} from './Hero';
 import Gallery from './Gallery';
 import {OwlCarousel} from './owlCarousel';
 import FeatureContentBloc from './FeatureContentBloc';
@@ -46,7 +49,7 @@ export const registerComponents = () => {
         'hicnt:text': RichText,
         'hicnt:heading': {
             default: Hero,
-            '2Cols': Hero2Cols,
+            'Text with image focus':TextImageFocus
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
