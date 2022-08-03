@@ -33,6 +33,13 @@ import {
     // ClipPathBubble2
 } from './images';
 
+import {
+    Card as gCard,
+    Hero as gHero,
+    TextImageFocus as gTIF,
+    Main as gMain
+} from './GenericContent'
+
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
 }
@@ -58,6 +65,12 @@ export const registerComponents = () => {
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
+        'hicnt:genericContent':{
+            default:gMain,
+            card : gCard,
+            hero : gHero,
+            'hero with image focus':gTIF
+        }
     });
 
     Object.assign(componentByMixin, {

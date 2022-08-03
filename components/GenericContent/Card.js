@@ -1,13 +1,12 @@
 import React from 'react';
 import {JahiaCtx, useNode, DefaultImage} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
-import {LinkTo, linkToProperties} from './LinkTo';
+import {LinkTo} from '../LinkTo';
 
-// Note:  use xss to clean body
-function Card({id}) {
+export function Card({id}) {
     const {locale} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, [...linkToProperties, 'body', 'mediaNode']);
+    const {data, error, loading} = useNode(id, ['mediaNodeFocus']);
 
     if (loading) {
         return 'loading';
@@ -18,18 +17,19 @@ function Card({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, path, properties: {body, mediaNode}} = data;
+    const {name, path, properties: {mediaNodeFocus : mediaNode}} = data;
 
     return (
         <div className="media d-block media-custom text-center">
-            <LinkTo content={{...data.properties, path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
+            <LinkTo content={{linkType:'self',linkTarget:"_self", path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
                 {mediaNode && <DefaultImage
                     path={mediaNode.path}
                     className="img-fluid"
-                    alt={name}/>}
+                    alt={mediaNode.name}/>}
             </LinkTo>
-            {/* eslint-disable-next-line react/no-danger */}
-            <div dangerouslySetInnerHTML={{__html: body || 'no body'}}/>
+            <div className="media-body">
+                <h3 className="mt-0 text-black"> {name || 'no body'}</h3>
+            </div>
         </div>
     );
 }
@@ -37,4 +37,3 @@ function Card({id}) {
 Card.propTypes = {
     id: PropTypes.string.isRequired,
 };
-export default Card;

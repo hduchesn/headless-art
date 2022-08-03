@@ -6,7 +6,7 @@ import {JahiaLink} from '@jahia/nextjs-sdk';
 import classnames from 'classnames';
 
 function Fallback({fallback, children}) {
-    if (!fallback.elt) {
+    if (!fallback || !fallback.elt) {
         return children;
     }
 

@@ -32,23 +32,6 @@ export function ContentLayout({children, path, id}) {
                 <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>
             </header>
             <div className={classNames('top-shadow')}/>
-            <div className="inner-page">
-                <div
-                    className="slider-item"
-                >
-                    <Container>
-                        <Row className="slider-text align-items-center justify-content-center">
-                            <Col
-                                sm={12}
-                                md={8}
-                                className="text-center pt-5"
-                            >
-                                <h2> Hero for content</h2>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-            </div>
             {children}
             <footer className="site-footer" role="contentinfo">
                 <Container>

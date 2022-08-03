@@ -7,16 +7,14 @@ import {DefaultImage} from "@jahia/nextjs-sdk";
 import styles from './textImageFocus.module.css'
 import classNames from "classnames";
 import {Image} from "react-bootstrap-icons";
-import {LinkTo, linkToProperties} from '../LinkTo';
 
 // Note: use xss to clean body
 export function TextImageFocus({id}) {
-    const {workspace,locale} = React.useContext(JahiaCtx);
+    const {workspace} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [
         ...animateProperties,
-        ...linkToProperties,
-        'body', 'mediaNode','mediaNodeFocus'
+        'teaser', 'mediaNode','mediaNodeFocus'
     ]);
 
     if (loading) {
@@ -28,7 +26,7 @@ export function TextImageFocus({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {path,properties:{body, mediaNode, mediaNodeFocus}} = data;
+    const {name, properties:{teaser, mediaNode, mediaNodeFocus}} = data;
     const uri = getImageURI({uri: mediaNode.path, workspace});
 
     return (
@@ -42,19 +40,17 @@ export function TextImageFocus({id}) {
                         <Col lg="7" className={classNames("text-center",styles.textFocus)}>
                             <Animate
                                 properties={getAnimateProps(data.properties)}
-                                dangerouslySetInnerHTML={{__html: body || 'no body'}}
+                                dangerouslySetInnerHTML={{__html: teaser || name}}
                             />
                         </Col>
                         <Col lg="5" className="text-lg-right text-center mt-5 mt-lg-0">
                             <div className={styles.imageBorder}>
                                 {mediaNodeFocus &&
-                                    <LinkTo content={{...data.properties, path}} locale={locale}>
-                                        <DefaultImage
-                                            path={mediaNodeFocus.path}
-                                            className={classNames("img-fluid",styles.imageFocus)}
-                                            alt={mediaNodeFocus.name}
-                                        />
-                                    </LinkTo>
+                                <DefaultImage
+                                    path={mediaNodeFocus.path}
+                                    className={classNames("img-fluid",styles.imageFocus)}
+                                    alt={mediaNodeFocus.name}
+                                />
                                 }
                                 {!mediaNodeFocus &&
                                 <div className="p-5">
