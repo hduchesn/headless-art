@@ -8,7 +8,6 @@ import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-communi
 
 // Note: use xss to clean body
 export function Hero({id}) {
-
     const {workspace} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [...animateProperties, 'teaser', 'mediaNode']);
@@ -22,9 +21,9 @@ export function Hero({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, properties:{teaser,mediaNode}} = data;
+    const {name, properties: {teaser, mediaNode}} = data;
     const uri = getImageURI({uri: mediaNode.path, workspace});
-    const body = teaser?teaser:`<h1>${name}</h1>`
+    const body = teaser ? teaser : `<h1>${name}</h1>`;
     return (
 
         <div className="inner-page">

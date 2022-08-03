@@ -17,11 +17,11 @@ export function Card({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, path, properties: {mediaNodeFocus : mediaNode}} = data;
+    const {name, path, properties: {mediaNodeFocus: mediaNode}} = data;
 
     return (
         <div className="media d-block media-custom text-center">
-            <LinkTo content={{linkType:'self',linkTarget:"_self", path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
+            <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
                 {mediaNode && <DefaultImage
                     path={mediaNode.path}
                     className="img-fluid"

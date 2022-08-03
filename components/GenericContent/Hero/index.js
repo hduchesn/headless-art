@@ -1,2 +1,2 @@
-export * from './Hero'
-export * from './TextImageFocus'
+export * from './Hero';
+export * from './TextImageFocus';

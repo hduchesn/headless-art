@@ -1,22 +1,24 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import {JahiaCtx, useNode, getImageURI} from '@jahia/nextjs-sdk';
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
-import {DefaultImage} from "@jahia/nextjs-sdk";
-import styles from './textImageFocus.module.css'
-import classNames from "classnames";
-import {Image} from "react-bootstrap-icons";
+import {DefaultImage} from '@jahia/nextjs-sdk';
+import styles from './textImageFocus.module.css';
+import classNames from 'classnames';
+import {Image} from 'react-bootstrap-icons';
 import {LinkTo, linkToProperties} from '../LinkTo';
 
 // Note: use xss to clean body
 export function TextImageFocus({id}) {
-    const {workspace,locale} = React.useContext(JahiaCtx);
+    const {workspace, locale} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [
         ...animateProperties,
         ...linkToProperties,
-        'body', 'mediaNode','mediaNodeFocus'
+        'body',
+        'mediaNode',
+        'mediaNodeFocus',
     ]);
 
     if (loading) {
@@ -28,18 +30,18 @@ export function TextImageFocus({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {path,properties:{body, mediaNode, mediaNodeFocus}} = data;
+    const {path, properties: {body, mediaNode, mediaNodeFocus}} = data;
     const uri = getImageURI({uri: mediaNode.path, workspace});
 
     return (
         <div className="inner-page">
             <div
-                className={classNames("slider-item",styles.sliderItemFocus)}
+                className={classNames('slider-item', styles.sliderItemFocus)}
                 style={{backgroundImage: `url('${uri}')`}}
             >
-                <Container className={classNames("pb-5",styles.containerFocus)}>
+                <Container className={classNames('pb-5', styles.containerFocus)}>
                     <Row className="align-items-center">
-                        <Col lg="7" className={classNames("text-center",styles.textFocus)}>
+                        <Col lg="7" className={classNames('text-center', styles.textFocus)}>
                             <Animate
                                 properties={getAnimateProps(data.properties)}
                                 dangerouslySetInnerHTML={{__html: body || 'no body'}}
@@ -47,22 +49,19 @@ export function TextImageFocus({id}) {
                         </Col>
                         <Col lg="5" className="text-lg-right text-center mt-5 mt-lg-0">
                             <div className={styles.imageBorder}>
-                                {mediaNodeFocus &&
-                                    <LinkTo content={{...data.properties, path}} locale={locale}>
+                                {mediaNodeFocus
+                                    && <LinkTo content={{...data.properties, path}} locale={locale}>
                                         <DefaultImage
                                             path={mediaNodeFocus.path}
-                                            className={classNames("img-fluid",styles.imageFocus)}
+                                            className={classNames('img-fluid', styles.imageFocus)}
                                             alt={mediaNodeFocus.name}
                                         />
-                                    </LinkTo>
-                                }
-                                {!mediaNodeFocus &&
-                                <div className="p-5">
+                                       </LinkTo>}
+                                {!mediaNodeFocus
+                                && <div className="p-5">
                                     <Image/>
                                     <p><b>Focus Image</b> must be filled</p>
-                                </div>
-
-                                }
+                                   </div>}
                             </div>
                         </Col>
                     </Row>

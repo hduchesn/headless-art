@@ -9,7 +9,7 @@ import {
 import {
     BS4Grid,
     ClipPathBubble1,
-    ClipPathBubble2
+    ClipPathBubble2,
 } from '@jahia/nextjs-community-components';
 
 import NavMenuText from './jahia/NavMenuText';
@@ -18,7 +18,7 @@ import Widen from './jahia/Widen/Widen';
 
 import {
     Hero,
-    TextImageFocus
+    TextImageFocus,
 } from './Hero';
 import Gallery from './Gallery';
 import {OwlCarousel} from './owlCarousel';
@@ -37,8 +37,8 @@ import {
     Card as gCard,
     Hero as gHero,
     TextImageFocus as gTIF,
-    Main as gMain
-} from './GenericContent'
+    Main as gMain,
+} from './GenericContent';
 
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
@@ -56,7 +56,7 @@ export const registerComponents = () => {
         'hicnt:text': RichText,
         'hicnt:heading': {
             default: Hero,
-            'Text with image focus':TextImageFocus
+            'Text with image focus': TextImageFocus,
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
@@ -65,12 +65,12 @@ export const registerComponents = () => {
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
-        'hicnt:genericContent':{
-            default:gMain,
-            card : gCard,
-            hero : gHero,
-            'hero with image focus':gTIF
-        }
+        'hicnt:genericContent': {
+            default: gMain,
+            card: gCard,
+            hero: gHero,
+            'hero with image focus': gTIF,
+        },
     });
 
     Object.assign(componentByMixin, {
