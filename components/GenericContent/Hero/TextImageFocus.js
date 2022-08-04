@@ -31,6 +31,25 @@ export function TextImageFocus({id}) {
     const {name, properties: {teaser, mediaNode, mediaNodeFocus}} = data;
     const uri = getImageURI({uri: mediaNode.path, workspace});
 
+    const getImage = () => {
+        if (mediaNodeFocus) {
+            return (
+                <DefaultImage
+                    path={mediaNodeFocus.path}
+                    className={classNames('img-fluid', styles.imageFocus)}
+                    alt={mediaNodeFocus.name}
+                />
+            );
+        }
+
+        return (
+            <div className="p-5">
+                <Image/>
+                <p><b>Focus Image</b> must be filled</p>
+            </div>
+        );
+    };
+
     return (
         <div className="inner-page">
             <div
@@ -47,17 +66,7 @@ export function TextImageFocus({id}) {
                         </Col>
                         <Col lg="5" className="text-lg-right text-center mt-5 mt-lg-0">
                             <div className={styles.imageBorder}>
-                                {mediaNodeFocus
-                                && <DefaultImage
-                                    path={mediaNodeFocus.path}
-                                    className={classNames('img-fluid', styles.imageFocus)}
-                                    alt={mediaNodeFocus.name}
-                                />}
-                                {!mediaNodeFocus
-                                && <div className="p-5">
-                                    <Image/>
-                                    <p><b>Focus Image</b> must be filled</p>
-                                   </div>}
+                                {getImage()}
                             </div>
                         </Col>
                     </Row>

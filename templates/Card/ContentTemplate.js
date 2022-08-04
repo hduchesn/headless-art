@@ -5,7 +5,7 @@ import {ContentLayout} from "../../components/Layout";
 
 function ContentTemplate({path, id}) {
     return (
-        <ContentLayout id={id} path={path}>
+        <ContentLayout path={path}>
             <h1>Hello card content !</h1>
         </ContentLayout>
     )

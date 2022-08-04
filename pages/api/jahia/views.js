@@ -11,7 +11,7 @@ export default function handler(req, res) {
     try {
         queryNodeTypes = JSON.parse(req.query.nodetypes);
     } catch (error) {
-        console.warn('nodetype parameter is missing (no view selected) return default');
+        console.warn('nodetype parameter is missing (no view selected) return default; error :', error);
         return res.status(200).json([]);
     }
 

@@ -5,7 +5,7 @@ import {ContentLayout} from "../../components/Layout";
 import {Hero,Main} from '../../components/GenericContent'
 function ContentTemplate({path, id}) {
     return (
-        <ContentLayout id={id} path={path}>
+        <ContentLayout path={path}>
             <Hero id={id}/>
             <Main id={id}/>
         </ContentLayout>

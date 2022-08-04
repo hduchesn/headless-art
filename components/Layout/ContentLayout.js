@@ -3,18 +3,13 @@ import Head from 'next/head';
 import Nav from '../Nav/Nav';
 import {JahiaCtx} from '@jahia/nextjs-sdk';
 import classNames from 'classnames';
-import styles from './pageLayout.module.css';
 import * as PropTypes from 'prop-types';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Animate, getAnimateProps} from '@jahia/nextjs-community-components';
 
-// Import {HeartFill} from 'react-bootstrap-icons';
-// meta
-// {[styles.topShadowEdit]: isEditMode}
-export function ContentLayout({children, path, id}) {
+export function ContentLayout({children, path}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     // TODO extract current page from content path
     // With <HeartFill className="text-danger"/> by <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
@@ -52,6 +47,6 @@ export function ContentLayout({children, path, id}) {
 ContentLayout.propTypes = {
     children: PropTypes.node.isRequired,
     path: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    // Id: PropTypes.string,
     // Meta: PropTypes.object,
 };
