@@ -7,10 +7,10 @@ import {DefaultImage} from '@jahia/nextjs-sdk';
 import styles from './textImageFocus.module.css';
 import classNames from 'classnames';
 import {Image} from 'react-bootstrap-icons';
-
+import {LinkTo} from '../../LinkTo';
 // Note: use xss to clean body
-export function TextImageFocus({id}) {
-    const {workspace} = React.useContext(JahiaCtx);
+export function TextImageFocus({id, disableLink}) {
+    const {workspace, locale} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [
         ...animateProperties,
@@ -28,17 +28,24 @@ export function TextImageFocus({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, properties: {teaser, mediaNode, mediaNodeFocus}} = data;
+    const {name, path, properties: {teaser, mediaNode, mediaNodeFocus}} = data;
     const uri = getImageURI({uri: mediaNode?.path, workspace});
 
     const getImage = () => {
         if (mediaNodeFocus) {
+            const imageProps = {
+                path:mediaNodeFocus.path,
+                className:classNames('img-fluid', styles.imageFocus),
+                alt:mediaNodeFocus.name
+            };
+            if (disableLink) {
+                return <DefaultImage {...imageProps}/>;
+            }
+
             return (
-                <DefaultImage
-                    path={mediaNodeFocus.path}
-                    className={classNames('img-fluid', styles.imageFocus)}
-                    alt={mediaNodeFocus.name}
-                />
+                <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale}>
+                    <DefaultImage {...imageProps}/>
+                </LinkTo>
             );
         }
 
@@ -78,6 +85,7 @@ export function TextImageFocus({id}) {
 
 TextImageFocus.propTypes = {
     id: PropTypes.string.isRequired,
+    disableLink: PropTypes.bool,
 };
 // HTML
 //
