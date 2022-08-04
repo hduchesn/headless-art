@@ -50,7 +50,7 @@ export function Hero({id}) {
     }
 
     const {body, mediaNode} = data.properties;
-    const uri = getImageURI({uri: mediaNode.path, workspace});
+    const uri = getImageURI({uri: mediaNode?.path, workspace});
 
     return (
 

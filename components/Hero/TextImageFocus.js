@@ -31,7 +31,7 @@ export function TextImageFocus({id}) {
     }
 
     const {path, properties: {body, mediaNode, mediaNodeFocus}} = data;
-    const uri = getImageURI({uri: mediaNode.path, workspace});
+    const uri = getImageURI({uri: mediaNode?.path, workspace});
 
     const getImage = () => {
         if (mediaNodeFocus) {

@@ -75,5 +75,5 @@ LinkTo.propTypes = {
     locale: PropTypes.string,
     fallback: PropTypes.object,
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 };

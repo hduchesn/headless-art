@@ -22,7 +22,7 @@ export function Hero({id}) {
     }
 
     const {name, properties: {teaser, mediaNode}} = data;
-    const uri = getImageURI({uri: mediaNode.path, workspace});
+    const uri = getImageURI({uri: mediaNode?.path, workspace});
     const body = teaser ? teaser : `<h1>${name}</h1>`;
     return (
 
