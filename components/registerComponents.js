@@ -8,6 +8,8 @@ import {
 } from '@jahia/nextjs-sdk';
 import {
     BS4Grid,
+    ContentRetrieval,
+    IsotopeContentRetrieval,
     ClipPathBubble1,
     ClipPathBubble2,
 } from '@jahia/nextjs-community-components';
@@ -38,6 +40,7 @@ import {
     Hero as gHero,
     TextImageFocus as gTIF,
     Main as gMain,
+    Isotope as gIsotope
 } from './GenericContent';
 
 function ImageReferenceLinkWrapper(props) {
@@ -50,6 +53,10 @@ export const registerComponents = () => {
         'wdennt:widenReference': Widen,
         'bootstrap4nt:grid': BS4Grid,
         'jnt:navMenuText': NavMenuText,
+        'jnt:contentRetrieval':{
+            default : ContentRetrieval,
+            isotope : IsotopeContentRetrieval
+        } ,
 
         // Content Model Module
         'tint:text': RichText,
@@ -68,6 +75,7 @@ export const registerComponents = () => {
         'hicnt:genericContent': {
             default: gMain,
             card: gCard,
+            isotope: gIsotope,
             hero: gHero,
             'hero with image focus': gTIF,
         },

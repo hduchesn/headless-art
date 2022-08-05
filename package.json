@@ -10,7 +10,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.9",
     "@fancyapps/ui": "^4.0.26",
-    "@jahia/nextjs-community-components": "file:jahia-nextjs-community-components-v0.0.1.tgz",
+    "@jahia/nextjs-community-components": "file:jahia-nextjs-community-components-v0.0.2.tgz",
     "@jahia/nextjs-sdk": "file:jahia-nextjs-sdk-v0.0.2.tgz",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.1.1",
