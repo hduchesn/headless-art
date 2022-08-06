@@ -40,7 +40,7 @@ import {
     Hero as gHero,
     TextImageFocus as gTIF,
     Main as gMain,
-    Isotope as gIsotope
+    Isotope as gIsotope,
 } from './GenericContent';
 
 function ImageReferenceLinkWrapper(props) {
@@ -53,10 +53,10 @@ export const registerComponents = () => {
         'wdennt:widenReference': Widen,
         'bootstrap4nt:grid': BS4Grid,
         'jnt:navMenuText': NavMenuText,
-        'jnt:contentRetrieval':{
-            default : ContentRetrieval,
-            isotope : IsotopeContentRetrieval
-        } ,
+        'jnt:contentRetrieval': {
+            default: ContentRetrieval,
+            isotope: IsotopeContentRetrieval,
+        },
 
         // Content Model Module
         'tint:text': RichText,

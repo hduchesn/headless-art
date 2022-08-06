@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import {Image} from 'react-bootstrap-icons';
 import {LinkTo} from '../../LinkTo';
 // Note: use xss to clean body
-export function TextImageFocus({id, disableLink}) {
+export function TextImageFocus({id, isLinkDisabled}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [
@@ -34,11 +34,11 @@ export function TextImageFocus({id, disableLink}) {
     const getImage = () => {
         if (mediaNodeFocus) {
             const imageProps = {
-                path:mediaNodeFocus.path,
-                className:classNames('img-fluid', styles.imageFocus),
-                alt:mediaNodeFocus.name
+                path: mediaNodeFocus.path,
+                className: classNames('img-fluid', styles.imageFocus),
+                alt: mediaNodeFocus.name,
             };
-            if (disableLink) {
+            if (isLinkDisabled) {
                 return <DefaultImage {...imageProps}/>;
             }
 
@@ -85,7 +85,7 @@ export function TextImageFocus({id, disableLink}) {
 
 TextImageFocus.propTypes = {
     id: PropTypes.string.isRequired,
-    disableLink: PropTypes.bool,
+    isLinkDisabled: PropTypes.bool,
 };
 // HTML
 //
