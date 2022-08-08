@@ -6,7 +6,7 @@ import {LinkTo} from '../LinkTo';
 export function Card({id}) {
     const {locale} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, ['mediaNodeFocus']);
+    const {data, error, loading} = useNode(id, ['mediaNodeFocus','jcr:title']);
 
     if (loading) {
         return 'loading';
@@ -17,7 +17,7 @@ export function Card({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, path, properties: {mediaNodeFocus: mediaNode}} = data;
+    const {path, properties: {mediaNodeFocus: mediaNode, ['jcr:title']:title}} = data;
 
     return (
         <div className="media d-block media-custom text-center">
@@ -28,7 +28,7 @@ export function Card({id}) {
                     alt={mediaNode.name}/>}
             </LinkTo>
             <div className="media-body">
-                <h3 className="mt-0 text-black"> {name || 'no body'}</h3>
+                <h3 className="mt-0 text-black"> {title || 'no body'}</h3>
             </div>
         </div>
     );

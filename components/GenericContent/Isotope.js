@@ -2,6 +2,7 @@ import React from 'react';
 import {JahiaCtx, useNode, DefaultImage} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {LinkTo} from '../LinkTo';
+import styles from './isotope.module.css';
 
 export function Isotope({id}) {
     const {locale} = React.useContext(JahiaCtx);
@@ -20,12 +21,12 @@ export function Isotope({id}) {
     const {path, properties: {mediaNodeFocus: mediaNode}} = data;
 
     return (
-        <div className="single-portfolio-content">
+        <div className={styles.singlePortfolioContent}>
             <DefaultImage
                 path={mediaNode.path}
                 alt={mediaNode.name}
             />
-            <div className="hover-content">
+            <div className={styles.hoverContent}>
                 <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} className="portfolio-img">
                     +
                 </LinkTo>
