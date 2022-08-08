@@ -22,10 +22,11 @@ export function Isotope({id}) {
 
     return (
         <div className={styles.singlePortfolioContent}>
-            <DefaultImage
-                path={mediaNode.path}
-                alt={mediaNode.name}
-            />
+            {mediaNode
+                && <DefaultImage
+                    path={mediaNode.path}
+                    alt={mediaNode.name}
+                />}
             <div className={styles.hoverContent}>
                 <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} className="portfolio-img">
                     +
