@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {getImageURI, JahiaCtx, JahiaModuleTag, useNode} from '@jahia/nextjs-sdk';
+import {getImageURI, JahiaCtx, JahiaModuleTag, useNode, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {animateProperties, getAnimateProps, Animate} from '@jahia/nextjs-community-components';
 import styles from './halfBlock.module.css';
 import cms from '../jahia';
@@ -136,9 +136,7 @@ function HalfBlock({id}) {
                         nodetypes={[bodyNode?.primaryNodeType.name || cms.contentTypes.INDUS_TEXT]}
                     >
                         {bodyNode
-                            && <Animate
-                                properties={getAnimateProps(bodyNode.properties)}
-                                dangerouslySetInnerHTML={{__html: bodyNode.properties.text || 'no text'}}/>}
+                        && <Animate properties={getAnimateProps(bodyNode.properties)}><EmbeddedPathInHtmlResolver htmlAsString={bodyNode.properties.text || 'no text'}/></Animate>}
                     </ChildComponent>
                 </div>
             </div>
