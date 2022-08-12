@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import {getImageURI, JahiaCtx, JahiaModuleTag, useNode} from '@jahia/nextjs-sdk';
+import {getImageURI, JahiaCtx, JahiaModuleTag, useNode, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {animateProperties, getAnimateProps, Animate} from '@jahia/nextjs-community-components';
 import styles from './halfBlock.module.css';
 import cms from '../jahia';
 import * as PropTypes from 'prop-types';
 
+// Note children can be null and empty the return must be managed otherwise there is an error
 function ChildComponent({isNodeEmpty, path, nodetypes, classname, children}) {
     const {isEditMode} = React.useContext(JahiaCtx);
     if (isEditMode) {
@@ -24,7 +25,7 @@ function ChildComponent({isNodeEmpty, path, nodetypes, classname, children}) {
         );
     }
 
-    return children;
+    return children || null;
 }
 
 ChildComponent.propTypes = {
@@ -135,9 +136,7 @@ function HalfBlock({id}) {
                         nodetypes={[bodyNode?.primaryNodeType.name || cms.contentTypes.INDUS_TEXT]}
                     >
                         {bodyNode
-                            && <Animate
-                                properties={getAnimateProps(bodyNode.properties)}
-                                dangerouslySetInnerHTML={{__html: bodyNode.properties.text || 'no text'}}/>}
+                        && <Animate properties={getAnimateProps(bodyNode.properties)}><EmbeddedPathInHtmlResolver htmlAsString={bodyNode.properties.text || 'no text'}/></Animate>}
                     </ChildComponent>
                 </div>
             </div>

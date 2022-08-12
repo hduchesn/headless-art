@@ -1,6 +1,9 @@
 import {templates} from '@jahia/nextjs-sdk';
 import {registerTemplates} from '../../../templates/registerTemplates';
-const excludedName = ['default'];
+const excludedName = [
+    'default',
+    'hicnt:card',
+];
 
 export default function handler(req, res) {
     if (req.query.secret !== process.env.NEXT_PREVIEW_SECRET) {

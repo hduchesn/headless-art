@@ -6,7 +6,10 @@ import {JahiaLink} from '@jahia/nextjs-sdk';
 import classnames from 'classnames';
 
 function Fallback({fallback, children}) {
-    // Const eltChildren = [children].flat()
+    if (!fallback || !fallback.elt) {
+        return children;
+    }
+
     return React.createElement(
         fallback.elt,
         {
@@ -29,25 +32,33 @@ Fallback.propTypes = {
 
 export function LinkTo({content, locale, fallback, className, children}) {
     // {[styles[fallback?.class]]:true}
-    const {linkType, externalLink, internalLink, linkTarget} = content;
-    if (!linkType || !(externalLink || internalLink)) {
-        if (fallback.elt) {
-            return (
-                <Fallback fallback={fallback}>
-                    {children}
-                </Fallback>
-            );
-        }
+    const {linkType, externalLink, internalLink, linkTarget, path} = content;
+    let Component;
+    let url;
 
-        return children;
-    }
+    switch (linkType) {
+        case 'externalLink':
+            if (!externalLink) {
+                return <Fallback fallback={fallback}>{children}</Fallback>;
+            }
 
-    let Component = NextLink;
-    let url = externalLink;
+            Component = NextLink;
+            url = externalLink;
+            break;
+        case 'internalLink':
+            if (!internalLink) {
+                return <Fallback fallback={fallback}>{children}</Fallback>;
+            }
 
-    if (internalLink) {
-        Component = JahiaLink;
-        url = internalLink.path;
+            Component = JahiaLink;
+            url = internalLink.path;
+            break;
+        case 'self':
+            Component = JahiaLink;
+            url = path;
+            break;
+        default:
+            return <Fallback fallback={fallback}>{children}</Fallback>;
     }
 
     return (
@@ -64,5 +75,5 @@ LinkTo.propTypes = {
     locale: PropTypes.string,
     fallback: PropTypes.object,
     className: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 };

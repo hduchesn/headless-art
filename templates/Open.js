@@ -1,13 +1,13 @@
 import React from 'react';
 import {Area} from "@jahia/nextjs-sdk";
 import * as PropTypes from "prop-types";
-import Layout from "../components/Layout";
+import {PageLayout} from "../components/Layout";
 
-function Open({templateName, path}) {
+function Open({path}) {
     return (
-        <Layout templateName={templateName} path={path}>
+        <PageLayout path={path}>
             <Area name="mainContent" />
-        </Layout>
+        </PageLayout>
     )
 }
 

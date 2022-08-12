@@ -1,13 +1,11 @@
-import React from "react";
-import {JahiaCtx} from "@jahia/nextjs-sdk";
-import styles from "./bubble_1.module.css";
-import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import React from 'react';
+import {JahiaCtx, DefaultImage} from '@jahia/nextjs-sdk';
+import styles from './bubble_1.module.css';
+import classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 
-import {getImageURI} from "../jahia/utils";
-
-function BubbleImage1({imageNode}) {
-    const {workspace} = React.useContext(JahiaCtx);
+export function ClipPathBubble1({path, alt = '', className = ''}) {
+    // Const {workspace} = React.useContext(JahiaCtx);
 
     return (
         <figure>
@@ -23,16 +21,17 @@ function BubbleImage1({imageNode}) {
                     />
                 </clipPath>
             </svg>
-            <img
-                src={getImageURI({uri: imageNode.media?.refNode?.path, workspace})}
-                alt="Free template by Free-Template.co"
-                className={classNames("img-fluid", styles.Blob__imgBlob_1)}/>
+            <DefaultImage
+                path={path}
+                alt={alt}
+                className={classNames('img-fluid', className, styles.Blob__imgBlob)}
+            />
         </figure>
-    )
+    );
 }
 
-BubbleImage1.propTypes = {
-    imageNode: PropTypes.object.isRequired
+ClipPathBubble1.propTypes = {
+    path: PropTypes.string,
+    alt: PropTypes.string,
+    className: PropTypes.string,
 };
-
-export default BubbleImage1;

@@ -19,6 +19,7 @@
     "camelcase": "error",
 
     // React specific rules
+    "react/no-danger": "warn",
     "react/jsx-fragments": "off",
     "react/jsx-indent": ["error", 4],
     "react/jsx-indent-props": ["error", "first"],

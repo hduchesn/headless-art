@@ -6,18 +6,42 @@ import {
     ImageReferenceLink,
     RichText,
 } from '@jahia/nextjs-sdk';
-import {BS4Grid} from '@jahia/nextjs-community-components';
+import {
+    BS4Grid,
+    ContentRetrieval,
+    IsotopeContentRetrieval,
+    ClipPathBubble1,
+    ClipPathBubble2,
+} from '@jahia/nextjs-community-components';
+
 import NavMenuText from './jahia/NavMenuText';
 
 import Widen from './jahia/Widen/Widen';
 
-import Hero from './Hero';
+import {
+    Hero,
+    TextImageFocus,
+} from './Hero';
 import Gallery from './Gallery';
 import {OwlCarousel} from './owlCarousel';
 import FeatureContentBloc from './FeatureContentBloc';
 import HalfBlock from './HalfBlock';
 import MediaContentBloc from './MediaContentBloc';
 import Card from './Card';
+import {
+    Feature,
+    Scaling,
+    // ClipPathBubble1,
+    // ClipPathBubble2
+} from './images';
+
+import {
+    Card as gCard,
+    Hero as gHero,
+    TextImageFocus as gTIF,
+    Main as gMain,
+    Isotope as gIsotope,
+} from './GenericContent';
 
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
@@ -29,11 +53,18 @@ export const registerComponents = () => {
         'wdennt:widenReference': Widen,
         'bootstrap4nt:grid': BS4Grid,
         'jnt:navMenuText': NavMenuText,
+        'jnt:contentRetrieval': {
+            default: ContentRetrieval,
+            isotope: IsotopeContentRetrieval,
+        },
 
         // Content Model Module
         'tint:text': RichText,
         'hicnt:text': RichText,
-        'hicnt:heading': Hero,
+        'hicnt:heading': {
+            default: Hero,
+            'Text with image focus': TextImageFocus,
+        },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
         'hicnt:owlcarousel': OwlCarousel,
@@ -41,9 +72,23 @@ export const registerComponents = () => {
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
+        'hicnt:genericContent': {
+            default: gMain,
+            card: gCard,
+            isotope: gIsotope,
+            hero: gHero,
+            'hero with image focus': gTIF,
+        },
     });
 
     Object.assign(componentByMixin, {
+        'jmix:image': {
+            ...componentByMixin['jmix:image'],
+            scaling: Scaling,
+            feature: Feature,
+            'bubble 1': ClipPathBubble1,
+            'bubble 2': ClipPathBubble2,
+        },
     });
 
     componentRenderingModuleTag.push(...[
