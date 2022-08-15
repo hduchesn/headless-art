@@ -1,3 +1,4 @@
+// Comment
 export const contentTypes = {
     FILE: 'jnt:file',
     IMAGE: 'jmix:image',
