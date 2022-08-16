@@ -1,5 +1,5 @@
 import React from 'react';
-import {getImageURI, JahiaCtx, useNode} from '@jahia/nextjs-sdk';
+import {EmbeddedPathInHtmlResolver, getImageURI, JahiaCtx, useNode} from '@jahia/nextjs-sdk';
 // Import {gql, useQuery} from "@apollo/client";
 import styles from './item.module.css';
 import classNames from 'classnames';
@@ -83,8 +83,9 @@ function Item({id}) {
                         className="card-img-top"
                         alt={mediaNode?.name}
                     />
-                    {/* eslint-disable-next-line react/no-danger */}
-                    <div dangerouslySetInnerHTML={{__html: caption}} className={styles.cardBody}/>
+                    <div className={styles.cardBody}>
+                        <EmbeddedPathInHtmlResolver htmlAsString={caption || 'no caption'}/>
+                    </div>
                     {/* eslint-disable-next-line  react/jsx-closing-tag-location */}
                 </div>}
             {!isEditMode
@@ -117,9 +118,7 @@ function Item({id}) {
                                         </p>
                                         {/* eslint-disable-next-line  react/jsx-closing-tag-location */}
                                     </div>}
-
-                                {/* eslint-disable-next-line react/no-danger */}
-                                <div dangerouslySetInnerHTML={{__html: caption || 'no caption'}}/>
+                                <EmbeddedPathInHtmlResolver htmlAsString={caption || 'no caption'}/>
                             </Animate>
                         </Row>
                     </Container>

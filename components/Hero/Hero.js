@@ -1,5 +1,5 @@
 import React from 'react';
-import {JahiaCtx, useNode, getImageURI} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode, getImageURI, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -66,10 +66,9 @@ export function Hero({id}) {
                             md={8}
                             className="text-center pt-5"
                         >
-                            <Animate
-                                properties={getAnimateProps(data.properties)}
-                                dangerouslySetInnerHTML={{__html: body || 'no body'}}
-                            />
+                            <Animate properties={getAnimateProps(data.properties)}>
+                                <EmbeddedPathInHtmlResolver htmlAsString={body || 'no body'}/>
+                            </Animate>
                         </Col>
                     </Row>
                 </Container>

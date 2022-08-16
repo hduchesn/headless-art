@@ -1,5 +1,5 @@
 import React from 'react';
-import {JahiaCtx, useNode, DefaultImage} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode, DefaultImage, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {LinkTo, linkToProperties} from './LinkTo';
 
@@ -28,8 +28,7 @@ function Card({id}) {
                     className="img-fluid"
                     alt={name}/>}
             </LinkTo>
-            {/* eslint-disable-next-line react/no-danger */}
-            <div dangerouslySetInnerHTML={{__html: body || 'no body'}}/>
+            <EmbeddedPathInHtmlResolver htmlAsString={body || 'no body'}/>
         </div>
     );
 }
