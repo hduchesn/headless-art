@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNode, DefaultImage} from '@jahia/nextjs-sdk';
+import {useNode, DefaultImage, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as PropTypes from 'prop-types';
 // Import classNames from 'classnames';
@@ -16,7 +16,7 @@ export function Main({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, properties: {body, mediaNodeFocus}} = data;
+    const {body, mediaNodeFocus} = data.properties;
 
     return (
         <section className="section">
@@ -34,8 +34,7 @@ export function Main({id}) {
                         </div>
                     </Col>
                     <Col md={6} className="pr-md-5 mb-5">
-
-                        <div dangerouslySetInnerHTML={{__html: body || name}}/>
+                        <EmbeddedPathInHtmlResolver htmlAsString={body || 'no text'}/>
                     </Col>
                 </Row>
             </Container>
