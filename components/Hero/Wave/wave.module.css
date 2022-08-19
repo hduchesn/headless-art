@@ -1,0 +1,54 @@
+.banner {
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
+    min-height: auto;
+    padding: 0;
+    margin: 0 auto;
+}
+.content {
+    max-width: 1280px;
+    margin: 0 auto;
+    left:0;
+    right:0;
+    top:22%;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    font-weight: 400;
+    padding: 0 20px;
+}
+
+.content h1 {
+    font-weight: 300;
+    font-size: 3rem;
+    line-height: 49px;
+    letter-spacing: 1px;
+    display: block;
+    color: #fff;
+}
+
+.content p {
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 125%;
+    font-size: 1.125rem;
+    margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .content p {
+        font-size: 1rem;
+    }
+}
+@media screen and (min-width: 992px) {
+    .content h1 {
+        font-size: 4rem;
+        line-height: 100px;
+    }
+    .content p {
+        font-size: 1.455rem;
+    }
+}

@@ -21,6 +21,8 @@ import Widen from './jahia/Widen/Widen';
 import {
     Hero,
     TextImageFocus,
+    WaveBlue,
+    WaveDark,
 } from './Hero';
 import Gallery from './Gallery';
 import {OwlCarousel} from './owlCarousel';
@@ -31,8 +33,6 @@ import Card from './Card';
 import {
     Feature,
     Scaling,
-    // ClipPathBubble1,
-    // ClipPathBubble2
 } from './images';
 
 import {
@@ -64,6 +64,8 @@ export const registerComponents = () => {
         'hicnt:heading': {
             default: Hero,
             'Text with image focus': TextImageFocus,
+            'Wave blue': WaveBlue,
+            'Wave Dark': WaveDark,
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,

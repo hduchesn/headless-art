@@ -34,7 +34,6 @@ import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-communi
 // const content = data?.jcr?.nodeById;
 // const uri = getImageURI({uri: content.media?.node?.path, workspace});
 
-// Note: use xss to clean body
 export function Hero({id}) {
     const {workspace} = React.useContext(JahiaCtx);
 
