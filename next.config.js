@@ -1,16 +1,23 @@
 // const webpack = require('webpack');
 const path = require('path');
-// import path from 'path';
 
-//TODO get file destination from jahia.js
+const getLocales = () => {
+    try{
+        return JSON.parse(process.env.NEXT_LOCALES)
+    }catch(e){
+        console.error("process.env.NEXT_LOCALES JSON parsing error, use fallback [\"en\", \"fr\"]. Error: ",e);
+        return ['en', 'fr'];
+    }
+}
+
 module.exports = {
     reactStrictMode: false,
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
     },
     i18n: {
-        locales: ['en', 'fr'],
-        defaultLocale: 'en',
+        locales: getLocales(),
+        defaultLocale: process.env.NEXT_DEFAULT_LOCALE || 'en',
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         config.plugins.push(new webpack.ProvidePlugin({

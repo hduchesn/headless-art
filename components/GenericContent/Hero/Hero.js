@@ -7,10 +7,10 @@ import Col from 'react-bootstrap/Col';
 import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
 
 // Note: use xss to clean body
-export function Hero({id}) {
+export function Hero({id, isTitleUsed}) {
     const {workspace} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, [...animateProperties, 'teaser', 'mediaNode']);
+    const {data, error, loading} = useNode(id, [...animateProperties, 'teaser', 'mediaNode', 'jcr:title']);
 
     if (loading) {
         return 'loading';
@@ -21,11 +21,11 @@ export function Hero({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, properties: {teaser, mediaNode}} = data;
+    const {properties: {teaser, mediaNode, 'jcr:title': title}} = data;
     const uri = getImageURI({uri: mediaNode?.path, workspace});
-    const body = teaser ? teaser : `<h1>${name}</h1>`;
-    return (
+    const body = isTitleUsed || !teaser ? `<h1><span>${title}</span></h1>` : teaser;
 
+    return (
         <div className="inner-page">
             <div
                 className="slider-item"
@@ -51,4 +51,5 @@ export function Hero({id}) {
 
 Hero.propTypes = {
     id: PropTypes.string.isRequired,
+    isTitleUsed: PropTypes.bool,
 };
