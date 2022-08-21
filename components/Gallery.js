@@ -4,7 +4,6 @@ import * as PropTypes from 'prop-types';
 import {PlusLg} from 'react-bootstrap-icons';
 import {LinkTo, linkToProperties} from './LinkTo';
 
-// Note : use xss to clean body
 function Gallery({id}) {
     const {locale} = React.useContext(JahiaCtx);
     const {data, error, loading} = useNode(id, [...linkToProperties, 'heading', 'mediaNode']);
@@ -19,14 +18,12 @@ function Gallery({id}) {
     }
 
     const {name, path, properties: {heading, mediaNode}} = data;
-    const ImageComponent = DefaultImage;
 
     return (
         <LinkTo content={{...data.properties, path}} locale={locale} className="link-thumbnail" fallback={{elt: 'div', className: 'link-thumbnail'}}>
             <h3>{heading}</h3>
             <PlusLg className="icon"/>
-            {mediaNode && <ImageComponent
-                id={mediaNode.uuid}
+            {mediaNode && <DefaultImage
                 path={mediaNode.path}
                 className="img-fluid"
                 alt={name}/>}
