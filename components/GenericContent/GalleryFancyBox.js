@@ -23,9 +23,9 @@ export function GalleryFancyBox({id}) {
 
     const {properties: {mediaGallery}} = data;
 
-    // If (!mediaGallery) {
-    //     return <></>;
-    // }
+    if (!mediaGallery) {
+        return null;
+    }
 
     return (
         <section className="section bg-light">
@@ -36,7 +36,7 @@ export function GalleryFancyBox({id}) {
                     </Col>
                 </Row>
                 <Row>
-                    {mediaGallery && mediaGallery.map(item => (
+                    {mediaGallery.map(item => (
                         <Col key={item.uuid} xs={4} md={3} lg={2} className={classNames('mb-3', styles.fancyBoxContainer)}>
                             <a className={styles.fancyBoxLink} data-fancybox="gallery" data-src={getImageURI({uri: item.path, workspace})}>
                                 <DefaultImage
