@@ -494,8 +494,8 @@ header {
 					margin-left: 0.5em;
 					span {
 						color: white;
-				    background-color: #fd5f00;
-				    box-shadow: 0.5em 0 0 #fd5f00,-0.5em 0 0 #fd5f00;
+				    background-color: var(--primary);
+				    box-shadow: 0.5em 0 0 var(--primary),-0.5em 0 0 var(--primary);
 					}
 					@include media-breakpoint-down(md) {
 						font-size: 40px;
