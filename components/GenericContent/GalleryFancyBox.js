@@ -24,7 +24,7 @@ export function GalleryFancyBox({id}) {
     const {properties: {mediaGallery}} = data;
 
     if (!mediaGallery) {
-        return;
+        return null;
     }
 
     return (
