@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import {JahiaCtx, useNode, getImageURI} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode, getImageURI, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
 import {DefaultImage} from '@jahia/nextjs-sdk';
@@ -63,10 +63,9 @@ export function TextImageFocus({id}) {
                 <Container className={classNames('pb-5', styles.containerFocus)}>
                     <Row className="align-items-center">
                         <Col lg="7" className={classNames('text-center', styles.textFocus)}>
-                            <Animate
-                                properties={getAnimateProps(data.properties)}
-                                dangerouslySetInnerHTML={{__html: body || 'no body'}}
-                            />
+                            <Animate properties={getAnimateProps(data.properties)}>
+                                <EmbeddedPathInHtmlResolver htmlAsString={body || 'no body'}/>
+                            </Animate>
                         </Col>
                         <Col lg="5" className="text-lg-right text-center mt-5 mt-lg-0">
                             <div className={styles.imageBorder}>
