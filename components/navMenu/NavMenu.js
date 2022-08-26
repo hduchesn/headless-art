@@ -1,9 +1,9 @@
 import {useNode} from "@jahia/nextjs-sdk";
-import {animateProperties, WaveBlue, WaveDark} from "@jahia/nextjs-community-components";
+import {navMenuProperties, WaveBlue, WaveDark} from "@jahia/nextjs-community-components";
 import React from "react";
 
 export function NavMenu({id, wave}) {
-    const {data, error, loading} = useNode(id, ['body', 'mediaNode']);
+    const {data, error, loading} = useNode(id, [...navMenuProperties]);
 
     if (loading) {
         return 'loading';
@@ -15,5 +15,6 @@ export function NavMenu({id, wave}) {
     }
 
     const {body, mediaNode} = data.properties;
-    const WaveCmp = wave === 'dark' ? WaveDark : WaveBlue;
-    return (
+
+    return (<></>)
+}
