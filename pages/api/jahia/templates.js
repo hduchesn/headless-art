@@ -1,9 +1,9 @@
 import {getTemplates} from '@jahia/nextjs-sdk';
-// import {registerTemplates} from '../../../templates/registerTemplates';
+// Import {registerTemplates} from '../../../templates/registerTemplates';
 const excludedName = [
     'default',
     'hicnt:card',
-    'hicnt:genericContent'
+    'hicnt:genericContent',
 ];
 
-export default (req,res) => getTemplates(req, res,excludedName)
+export default (req, res) => getTemplates(req, res, excludedName);
