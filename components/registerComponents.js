@@ -43,6 +43,8 @@ import {
     Isotope as gIsotope,
 } from './GenericContent';
 
+import {NavMenu} from './navMenu';
+
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
 }
@@ -81,6 +83,7 @@ export const registerComponents = () => {
             hero: gHero,
             'hero with image focus': gTIF,
         },
+        'jnt:navMenuNext': NavMenu
     });
 
     Object.assign(componentByMixin, {
@@ -90,7 +93,7 @@ export const registerComponents = () => {
             feature: Feature,
             'bubble 1': ClipPathBubble1,
             'bubble 2': ClipPathBubble2,
-        },
+        }
     });
 
     componentRenderingModuleTag.push(...[
