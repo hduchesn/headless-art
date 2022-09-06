@@ -1,8 +1,10 @@
 import React from "react";
 import {Row,Col,Container} from 'react-bootstrap';
 import {Area} from "@jahia/nextjs-sdk";
+// import {NavMenuFooter} from "./navMenu";
 
 export const Footer = () => {
+
     return (
         <footer className="site-footer" role="contentinfo">
             <Container>
@@ -33,20 +35,14 @@ export const Footer = () => {
                     </Col>
                     <Col md={3} className="mb-5">
                         <Area
-                            name="quick-links"
-                            mainResourcePath={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`}
+                            name="footer-quick-links"
+                            path={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`}
                             tagProps={{
                                 nodetypes:['jnt:navMenuNext'],
                                 listlimit:1
                             }}
+                            // componentProps={{referenceComponent:NavMenuFooter}}
                         />
-                        {/*<h3>Quick Links</h3>*/}
-                        {/*<ul className="list-unstyled footer-link">*/}
-                        {/*    <li><a href="#">About</a></li>*/}
-                        {/*    <li><a href="#">Terms of Use</a></li>*/}
-                        {/*    <li><a href="#">Disclaimers</a></li>*/}
-                        {/*    <li><a href="#">Contact</a></li>*/}
-                        {/*</ul>*/}
                     </Col>
                 </Row>
                 <Row>

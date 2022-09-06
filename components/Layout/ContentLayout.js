@@ -8,6 +8,8 @@ import * as PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Header} from "../Header";
+import {Footer} from "../Footer";
 
 export function ContentLayout({children, path}) {
     const {isEditMode} = React.useContext(JahiaCtx);
@@ -23,23 +25,25 @@ export function ContentLayout({children, path}) {
                     && <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>}
             </Head>
 
-            <header role="banner">
-                <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>
-            </header>
+            <Header/>
+            {/*<header role="banner">*/}
+            {/*    <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>*/}
+            {/*</header>*/}
             <div className={classNames('top-shadow')}/>
             {children}
-            <footer className="site-footer" role="contentinfo">
-                <Container>
-                    <Row>
-                        <Col className="text-md-center text-left">
-                            <p className="copyright">
-                                Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is inspired by
-                                template from <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>
-                            </p>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
+            <Footer/>
+            {/*<footer className="site-footer" role="contentinfo">*/}
+            {/*    <Container>*/}
+            {/*        <Row>*/}
+            {/*            <Col className="text-md-center text-left">*/}
+            {/*                <p className="copyright">*/}
+            {/*                    Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is inspired by*/}
+            {/*                    template from <a href="https://colorlib.com" target="_blank" rel="noreferrer">Colorlib</a>*/}
+            {/*                </p>*/}
+            {/*            </Col>*/}
+            {/*        </Row>*/}
+            {/*    </Container>*/}
+            {/*</footer>*/}
         </>
     );
 }

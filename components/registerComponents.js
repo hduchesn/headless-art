@@ -43,7 +43,10 @@ import {
     Isotope as gIsotope,
 } from './GenericContent';
 
-import {NavMenu} from './navMenu';
+import {
+    NavMenuHeader,
+    NavMenuFooter
+} from './navMenu';
 
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
@@ -83,7 +86,10 @@ export const registerComponents = () => {
             hero: gHero,
             'hero with image focus': gTIF,
         },
-        'jnt:navMenuNext': NavMenu
+        'jnt:navMenuNext': {
+            default: NavMenuHeader,
+            'Footer Menu': NavMenuFooter
+        }
     });
 
     Object.assign(componentByMixin, {

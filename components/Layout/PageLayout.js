@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Footer} from "../Footer";
+import {Header} from "../Header";
 
 // Import {HeartFill} from 'react-bootstrap-icons';
 // meta
@@ -27,13 +28,14 @@ export function PageLayout({children, path}) {
                     && <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>}
             </Head>
 
-            <header role="banner">
-                <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>
-            </header>
+            {/*<header role="banner">*/}
+            {/*    <Nav base={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`} path={path}/>*/}
+            {/*</header>*/}
+            <Header/>
             <div className={classNames('top-shadow', {[styles.topShadowEdit]: isEditMode})}/>
             {children}
 
-            <Footer />
+            <Footer/>
             {/*<footer className="site-footer" role="contentinfo">*/}
             {/*    <Container>*/}
             {/*        <Row>*/}
