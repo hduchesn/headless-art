@@ -1,9 +1,9 @@
 import React from 'react';
 import {Area} from "@jahia/nextjs-sdk";
 import * as PropTypes from "prop-types";
-import {ContentLayout} from "../../components/Layout";
+import {ContentLayout} from "../../Layout";
 
-function ContentTemplate({path, id}) {
+export function CardContentTemplate({path, id}) {
     return (
         <ContentLayout path={path}>
             <h1>Hello card content !</h1>
@@ -11,12 +11,12 @@ function ContentTemplate({path, id}) {
     )
 }
 
-ContentTemplate.propTypes = {
+CardContentTemplate.propTypes = {
     id: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     templateName: PropTypes.string.isRequired
 };
 
-export default ContentTemplate;
+// export default ContentTemplate;
 
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import {Area} from "@jahia/nextjs-sdk";
 import * as PropTypes from "prop-types";
-import cms from "../jahia"
+import cms from "../../../jahia"
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import {Feature as FeatureImage} from "../components/images";
-import {PageLayout} from "../components/Layout";
+import {Feature as FeatureImage} from "../../images";
+import {PageLayout} from "../../Layout";
 
-function FixedStructure({path}) {
+export function PageFixedStructureTemplate({path}) {
     return (
         <PageLayout path={path}>
             <Area
@@ -133,12 +133,12 @@ function FixedStructure({path}) {
         </PageLayout>
     )
 }
-FixedStructure.propTypes = {
+PageFixedStructureTemplate.propTypes = {
     path: PropTypes.string.isRequired,
     templateName: PropTypes.string.isRequired
 
 };
 
-export default FixedStructure;
+// export default FixedStructure;
 
 
