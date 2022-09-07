@@ -8,7 +8,7 @@ import {useNavMenu} from "@jahia/nextjs-community-components";
 export function NavMenuHeader({id}) {
     const {locale} = React.useContext(JahiaCtx);
     const mainResourcePath = React.useContext(MainResourceCtx);
-    console.log("[NavMenuHeader] mainResourcePath: ",mainResourcePath)
+    // console.log("[NavMenuHeader] mainResourcePath: ",mainResourcePath)
 
     const {data : navTree, loading, error} = useNavMenu({id});
 
@@ -21,9 +21,9 @@ export function NavMenuHeader({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    if (navTree) {
-        console.log("[NavMenuHeader] data:",navTree)
-    }
+    // if (navTree) {
+    //     console.log("[NavMenuHeader] data:",navTree)
+    // }
 
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from '../Nav/Nav';
+import Nav from '../Nav.disabled/Nav';
 import {JahiaCtx} from '@jahia/nextjs-sdk';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';

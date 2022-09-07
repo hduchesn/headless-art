@@ -15,20 +15,24 @@ export function NavMenuFooter({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    if (data) {
-        console.log("[NavMenuFooter] data:",data)
-    }
+    // if (data) {
+    //     console.log("[NavMenuFooter] data:",data)
+    // }
     return (
         <>
             <h3>{data?.navMenuTitle}</h3>
             <ul className="list-unstyled footer-link">
-                {data?.children?.map(menuEntry => (
-                    <li>
-                        <Link href={menuEntry.path} locale={locale}>
-                            <a>{menuEntry.title?.value}</a>
-                        </Link>
-                    </li>
-                ))}
+                {data?.children?.map(menuEntry => {
+                    if(!menuEntry.page)
+                        return null
+                    return (
+                        <li key={menuEntry.uuid}>
+                            <Link href={menuEntry.path} locale={locale}>
+                                <a>{menuEntry.title?.value}</a>
+                            </Link>
+                        </li>
+                    )
+                })}
             </ul>
         </>
     )

@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {JahiaCtx, JahiaLink as Link} from '@jahia/nextjs-sdk';
 
-function SubNav({node, path}) {
+function SubNavMenuHeader({node, path}) {
     const {locale} = React.useContext(JahiaCtx);
 
     const [hovered, setHovered] = React.useState(false);
@@ -29,8 +29,10 @@ function SubNav({node, path}) {
             className: classnames('nav-link', {
                 active: path.includes(node.path),
                 'dropdown-toggle': hasChildren(node),
-            }),
+            })
         };
+        // if(!node.page)
+        //     aProps.style={pointerEvents: "none"}
 
         if (hasChildren(node)) {
             aProps.id = node.uuid;
@@ -42,6 +44,25 @@ function SubNav({node, path}) {
         return aProps;
     };
 
+    const buildMenuItem = node => {
+        if(!node.page){
+            return(
+                <div {...buildAnchorProps(node)} style={{cursor:"default"}}>
+                    {node.title?.value}
+                </div>
+            )
+        }
+
+        return (
+            <Link href={node.path} locale={locale}>
+                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                <a {...buildAnchorProps(node)}>
+                    {node.title?.value}
+                </a>
+            </Link>
+        )
+    }
+// console.log("[SubNavMenuHeader] node :",node)
     return (
         <li
             className={classnames('nav-item', {
@@ -50,12 +71,7 @@ function SubNav({node, path}) {
             })}
             {...buildLiProps(node)}
         >
-            <Link href={node.path} locale={locale}>
-                {/* eslint-disable-next-line react/jsx-no-target-blank */}
-                <a {...buildAnchorProps(node)}>
-                    {node.title?.value}
-                </a>
-            </Link>
+            {buildMenuItem(node)}
             {
                 hasChildren(node)
                 && (
@@ -88,9 +104,9 @@ function SubNav({node, path}) {
     );
 }
 
-SubNav.propTypes = {
+SubNavMenuHeader.propTypes = {
     node: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired,
 };
 
-export default SubNav;
+export default SubNavMenuHeader;
