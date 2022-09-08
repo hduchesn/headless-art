@@ -1,2 +1,2 @@
-export * from "./FixedStructure"
-export * from "./Open"
+export * from './FixedStructure';
+export * from './Open';

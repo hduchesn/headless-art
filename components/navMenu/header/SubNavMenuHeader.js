@@ -29,9 +29,9 @@ function SubNavMenuHeader({node, path}) {
             className: classnames('nav-link', {
                 active: path.includes(node.path),
                 'dropdown-toggle': hasChildren(node),
-            })
+            }),
         };
-        // if(!node.page)
+        // If(!node.page)
         //     aProps.style={pointerEvents: "none"}
 
         if (hasChildren(node)) {
@@ -45,12 +45,12 @@ function SubNavMenuHeader({node, path}) {
     };
 
     const buildMenuItem = node => {
-        if(!node.page){
-            return(
-                <div {...buildAnchorProps(node)} style={{cursor:"default"}}>
+        if (!node.page) {
+            return (
+                <div {...buildAnchorProps(node)} style={{cursor: 'default'}}>
                     {node.title?.value}
                 </div>
-            )
+            );
         }
 
         return (
@@ -60,9 +60,10 @@ function SubNavMenuHeader({node, path}) {
                     {node.title?.value}
                 </a>
             </Link>
-        )
-    }
-// console.log("[SubNavMenuHeader] node :",node)
+        );
+    };
+
+    // Console.log("[SubNavMenuHeader] node :",node)
     return (
         <li
             className={classnames('nav-item', {

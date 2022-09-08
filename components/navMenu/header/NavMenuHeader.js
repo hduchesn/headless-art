@@ -1,16 +1,15 @@
 import React from 'react';
-import {JahiaCtx, MainResourceCtx, JahiaLink as Link, CORE_NODE_FIELDS} from '@jahia/nextjs-sdk';
-import {gql, useQuery} from '@apollo/client';
+import {JahiaCtx, MainResourceCtx, JahiaLink as Link} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import SubNavMenuHeader from './SubNavMenuHeader';
-import {useNavMenu} from "@jahia/nextjs-community-components";
+import {useNavMenu} from '@jahia/nextjs-community-components';
 
 export function NavMenuHeader({id}) {
     const {locale} = React.useContext(JahiaCtx);
     const mainResourcePath = React.useContext(MainResourceCtx);
-    // console.log("[NavMenuHeader] mainResourcePath: ",mainResourcePath)
+    // Console.log("[NavMenuHeader] mainResourcePath: ",mainResourcePath)
 
-    const {data : navTree, loading, error} = useNavMenu({id});
+    const {data: navTree, loading, error} = useNavMenu({id});
 
     if (loading) {
         return 'loading';
@@ -21,10 +20,9 @@ export function NavMenuHeader({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    // if (navTree) {
+    // If (navTree) {
     //     console.log("[NavMenuHeader] data:",navTree)
     // }
-
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -66,5 +64,5 @@ export function NavMenuHeader({id}) {
 }
 
 NavMenuHeader.propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
 };

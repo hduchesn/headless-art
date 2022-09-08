@@ -1,1 +1,1 @@
-export * from "./ContentTemplate"
+export * from './ContentTemplate';

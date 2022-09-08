@@ -1,7 +1,7 @@
-import {Area} from "@jahia/nextjs-sdk";
-import React from "react";
+import {Area} from '@jahia/nextjs-sdk';
+import React from 'react';
 
-export const Header = () => {
+export function Header() {
     return (
         <header role="banner">
             <Area
@@ -9,10 +9,10 @@ export const Header = () => {
                 path={`/sites/${process.env.NEXT_PUBLIC_JAHIA_SITE}`}
                 tagProps={{
                     nodetypes: ['jnt:navMenuNext'],
-                    listlimit: 1
+                    listlimit: 1,
                 }}
-                // componentProps={{referenceComponent:NavMenuFooter}}
+                // ComponentProps={{referenceComponent:NavMenuFooter}}
             />
         </header>
-    )
+    );
 }

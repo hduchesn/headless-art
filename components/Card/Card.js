@@ -36,4 +36,4 @@ export function Card({id}) {
 Card.propTypes = {
     id: PropTypes.string.isRequired,
 };
-// export default Card;
+// Export default Card;

@@ -1,22 +1,26 @@
 import React from 'react';
-import {Area} from "@jahia/nextjs-sdk";
-import * as PropTypes from "prop-types";
-import {ContentLayout} from "../../Layout";
+import * as PropTypes from 'prop-types';
+import {ContentLayout} from '../../Layout';
 
-export function CardContentTemplate({path, id}) {
+export function CardContentTemplate({node: {path}}) {
     return (
         <ContentLayout path={path}>
             <h1>Hello card content !</h1>
         </ContentLayout>
-    )
+    );
 }
 
 CardContentTemplate.propTypes = {
-    id: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    templateName: PropTypes.string.isRequired
+    node: PropTypes.shape({
+        workspace: PropTypes.string,
+        uuid: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        primaryNodeType: PropTypes.shape({name: PropTypes.string}).isRequired,
+        mixinTypes: PropTypes.arrayOf(PropTypes.shape({name: PropTypes.string})),
+        view: PropTypes.shape({value: PropTypes.string}),
+        templateName: PropTypes.shape({value: PropTypes.string}),
+    }).isRequired,
 };
-
-// export default ContentTemplate;
-
+// Export default ContentTemplate;
 

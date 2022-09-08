@@ -1,24 +1,30 @@
 import React from 'react';
-import {Area} from "@jahia/nextjs-sdk";
-import * as PropTypes from "prop-types";
-import {ContentLayout} from "../../Layout";
-import {Hero,Main,GalleryFancyBox} from '../'
+import * as PropTypes from 'prop-types';
+import {ContentLayout} from '../../Layout';
+import {Hero, Main, GalleryFancyBox} from '../';
 
-export function GenericContentTemplate({path, id}) {
+export function GenericContentTemplate({node: {path, uuid}}) {
     return (
         <ContentLayout path={path}>
-            <Hero id={id} isTitleUsed={true}/>
-            <Main id={id}/>
-            <GalleryFancyBox id={id}/>
+            <Hero isTitleUsed id={uuid}/>
+            <Main id={uuid}/>
+            <GalleryFancyBox id={uuid}/>
         </ContentLayout>
-    )
+    );
 }
 
 GenericContentTemplate.propTypes = {
-    id: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired
+    node: PropTypes.shape({
+        workspace: PropTypes.string,
+        uuid: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        primaryNodeType: PropTypes.shape({name: PropTypes.string}).isRequired,
+        mixinTypes: PropTypes.arrayOf(PropTypes.shape({name: PropTypes.string})),
+        view: PropTypes.shape({value: PropTypes.string}),
+        templateName: PropTypes.shape({value: PropTypes.string}),
+    }).isRequired,
 };
 
-// export default GenericContentTemplate;
-
+// Export default GenericContentTemplate;
 

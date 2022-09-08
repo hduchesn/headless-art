@@ -26,7 +26,7 @@ import {
     TextImageFocus as gTIF,
     Main as gMain,
     Isotope as gIsotope,
-    GenericContentTemplate
+    GenericContentTemplate,
 } from './GenericContent';
 
 import Gallery from './Gallery';
@@ -34,26 +34,27 @@ import FeatureContentBloc from './FeatureContentBloc';
 import HalfBlock from './HalfBlock';
 import MediaContentBloc from './MediaContentBloc';
 import {OwlCarousel} from './owlCarousel';
-import {Feature, Scaling,} from './images';
-import {NavMenuHeader,NavMenuFooter} from './navMenu';
-import {PageOpenTemplate,PageFixedStructureTemplate} from "./Page";
-import {CardContentTemplate, Card} from "./Card";
+import {Feature, Scaling} from './images';
+import {NavMenuHeader, NavMenuFooter} from './navMenu';
+import {PageOpenTemplate, PageFixedStructureTemplate} from './Page';
+import {CardContentTemplate, Card} from './Card';
 
 import NavMenuText from './jahia/NavMenuText';
-// import Widen from './jahia/Widen/Widen';
+// Import Widen from './jahia/Widen/Widen';
 
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
 }
 
 export const registerComponents = () => {
-
     Object.assign(templates, {
-        'default': PageOpenTemplate,
-        'open': PageOpenTemplate,
-        'fixedstructure': PageFixedStructureTemplate,
+        'jnt:page': {
+            default: PageOpenTemplate,
+            open: PageOpenTemplate,
+            'fixed Structure': PageFixedStructureTemplate,
+        },
         'hicnt:card': CardContentTemplate,
-        'hicnt:genericContent': GenericContentTemplate
+        'hicnt:genericContent': GenericContentTemplate,
 
     });
 
@@ -70,9 +71,9 @@ export const registerComponents = () => {
         // Content Model Module
         'hicnt:heading': {
             default: Hero,
-            'Text with image focus': TextImageFocus,
-            'Wave blue': WaveBlue,
-            'Wave Dark': WaveDark,
+            'text with image focus': TextImageFocus,
+            'wave blue': WaveBlue,
+            'wave Dark': WaveDark,
         },
         'hicnt:genericContent': {
             default: gMain,
@@ -82,8 +83,8 @@ export const registerComponents = () => {
             'hero with image focus': gTIF,
         },
         'jnt:navMenuNext': {
-            'Header Menu': NavMenuHeader,
-            'Footer Menu': NavMenuFooter
+            'header Menu': NavMenuHeader,
+            'footer Menu': NavMenuFooter,
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
@@ -92,7 +93,7 @@ export const registerComponents = () => {
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
-        'hicnt:text': RichText
+        'hicnt:text': RichText,
     });
 
     Object.assign(componentByMixin, {
@@ -102,7 +103,7 @@ export const registerComponents = () => {
             feature: Feature,
             'bubble 1': ClipPathBubble1,
             'bubble 2': ClipPathBubble2,
-        }
+        },
     });
 
     componentRenderingModuleTag.push(...[

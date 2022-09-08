@@ -1,6 +1,6 @@
-import {useNavMenu} from "@jahia/nextjs-community-components";
+import {useNavMenu} from '@jahia/nextjs-community-components';
 import {JahiaCtx, JahiaLink as Link} from '@jahia/nextjs-sdk';
-import React from "react";
+import React from 'react';
 
 export function NavMenuFooter({id}) {
     const {locale} = React.useContext(JahiaCtx);
@@ -15,25 +15,18 @@ export function NavMenuFooter({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    // if (data) {
-    //     console.log("[NavMenuFooter] data:",data)
-    // }
     return (
         <>
             <h3>{data?.navMenuTitle}</h3>
             <ul className="list-unstyled footer-link">
-                {data?.children?.map(menuEntry => {
-                    if(!menuEntry.page)
-                        return null
-                    return (
-                        <li key={menuEntry.uuid}>
-                            <Link href={menuEntry.path} locale={locale}>
-                                <a>{menuEntry.title?.value}</a>
-                            </Link>
-                        </li>
-                    )
-                })}
+                {data?.children?.filter(menuEntry => menuEntry.page).map(menuEntry => (
+                    <li key={menuEntry.uuid}>
+                        <Link href={menuEntry.path} locale={locale}>
+                            <a>{menuEntry.title?.value}</a>
+                        </Link>
+                    </li>
+                ))}
             </ul>
         </>
-    )
+    );
 }
