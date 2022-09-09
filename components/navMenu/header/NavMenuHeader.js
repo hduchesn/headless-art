@@ -46,7 +46,7 @@ export function NavMenuHeader({id}) {
 
                 <div className="collapse navbar-collapse" id="navbarsExample05">
                     <ul className="navbar-nav pl-md-5 ml-auto">
-                        {navTree.children?.nodes?.map(node => (<SubNavMenuHeader key={node.uuid} node={node} path={mainResourcePath}/>))}
+                        {navTree.children.map(node => (<SubNavMenuHeader key={node.uuid} node={node} path={mainResourcePath}/>))}
                     </ul>
 
                     <div className="navbar-nav ml-auto">

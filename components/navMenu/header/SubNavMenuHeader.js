@@ -11,7 +11,7 @@ function SubNavMenuHeader({node, path}) {
     const handleOnMouseEnter = () => setHovered(true);
     const handleOnMouseLeave = () => setHovered(false);
 
-    const hasChildren = node => Array.isArray(node.children?.nodes) && node.children.nodes.length > 0;
+    const hasChildren = node => Array.isArray(node.children) && node.children.length > 0;
 
     const buildLiProps = node => {
         if (hasChildren(node)) {
@@ -82,7 +82,7 @@ function SubNavMenuHeader({node, path}) {
                         })}
                         aria-labelledby={node.uuid}
                     >
-                        {node.children.nodes.map(node2 =>
+                        {node.children.map(node2 =>
                             // Console.log("node2.path : ",node2.path);
                             (
                                 <Link key={node2.uuid} href={node2.path} locale={locale}>
