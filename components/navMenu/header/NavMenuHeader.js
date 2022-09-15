@@ -17,7 +17,7 @@ export function NavMenuHeader({id}) {
 
     if (error) {
         console.log(error);
-        return <div>Error when loading ${JSON.stringify(error)}</div>;
+        return <div>[NavMenuHeader] Error when loading ${JSON.stringify(error)}</div>;
     }
 
     // If (navTree) {

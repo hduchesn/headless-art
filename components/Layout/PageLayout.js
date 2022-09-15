@@ -16,9 +16,6 @@ export function PageLayout({children}) {
     return (
         <>
             <Head>
-                <title>Hello</title>
-                {/* Note:  define meta here */}
-
                 {isEditMode
                     && <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>}
             </Head>

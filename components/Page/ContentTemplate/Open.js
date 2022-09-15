@@ -3,9 +3,9 @@ import {Area} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {PageLayout} from '../../Layout';
 
-export function PageOpenTemplate({node: {path}}) {
+export function PageOpenTemplate({node}) {
     return (
-        <PageLayout path={path}>
+        <PageLayout>
             <Area name="mainContent"/>
         </PageLayout>
     );

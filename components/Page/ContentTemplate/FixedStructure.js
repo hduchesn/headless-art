@@ -10,7 +10,7 @@ import {PageLayout} from '../../Layout';
 
 export function PageFixedStructureTemplate({node: {path}}) {
     return (
-        <PageLayout path={path}>
+        <PageLayout>
             <Area
                 name="hero"
                 mainResourcePath={path}

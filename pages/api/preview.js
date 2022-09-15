@@ -12,7 +12,7 @@ const getHTMLError = ({message, path, locale}) => `
     </div>`;
 
 export default async function handler(req, res) {
-    const defaultLocale = 'en';
+    const defaultLocale = process.env.NEXT_DEFAULT_LOCALE || 'en';
     let cmsContext;
 
     if (!req.cookies?.__jContent_preview_ctx) {
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     }
 
     const client = getClient();
-    const {error, data} = await getPageInfo(client, path, 'EDIT');
+    const {error, data} = await getPageInfo(client, path, 'EDIT',locale);
 
     // If the slug doesn't exist prevent preview mode from being enabled
     if (error || !data.jcr.nodeByPath) {

@@ -12,7 +12,7 @@ export function NavMenuFooter({id}) {
 
     if (error) {
         console.log(error);
-        return <div>Error when loading ${JSON.stringify(error)}</div>;
+        return <div>[NavMenuFooter] Error when loading ${JSON.stringify(error)}</div>;
     }
 
     return (
