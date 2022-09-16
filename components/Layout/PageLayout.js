@@ -16,14 +16,13 @@ export function PageLayout({children}) {
     return (
         <>
             <Head>
-                {isEditMode
-                    && <link type="text/css" href="/gwt/resources/css/jahia-anthracite/edit.css" rel="stylesheet"/>}
+                <link rel="icon" type="image/png" href={`${process.env.NEXT_PUBLIC_BASE_URL}/industrial_16x16.png`}/>
+                <meta name="author" content="Jahia" key="metaAuthor"/>
             </Head>
 
             <Header/>
             <div className={classNames('top-shadow', {[styles.topShadowEdit]: isEditMode})}/>
             {children}
-
             <Footer/>
         </>
     );
