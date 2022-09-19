@@ -51,7 +51,7 @@ export function TextImageFocus({id, isLinkDisabled}) {
 
         return (
             <div className="p-5">
-                <Image/>
+                <Image alt="image"/>
                 <p><b>Focus Image</b> must be filled</p>
             </div>
         );

@@ -9,7 +9,7 @@ export function ContentLayout({children}) {
         <>
             <Head>
                 <link rel="icon" type="image/png" href={`${process.env.NEXT_PUBLIC_BASE_URL}/industrial_16x16.png`}/>
-                <meta name="author" content="Jahia" key="metaAuthor"/>
+                <meta key="metaAuthor" name="author" content="Jahia"/>
             </Head>
 
             <Header/>

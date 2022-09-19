@@ -147,5 +147,3 @@ PageFixedStructureTemplate.propTypes = {
     }).isRequired,
 };
 
-// Export default FixedStructure;
-

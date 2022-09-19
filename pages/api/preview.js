@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     }
 
     const client = getClient();
-    const {error, data} = await getPageInfo(client, path, 'EDIT',locale);
+    const {error, data} = await getPageInfo(client, path, 'EDIT', locale);
 
     // If the slug doesn't exist prevent preview mode from being enabled
     if (error || !data.jcr.nodeByPath) {
