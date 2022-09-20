@@ -1,7 +1,10 @@
 import {getTemplates} from '@jahia/nextjs-sdk';
-// Import {registerTemplates} from '../../../templates/registerTemplates';
+import {registerComponents} from '../../../components/registerComponents';
 const excludedName = [
     'default',
 ];
 
-export default (req, res) => getTemplates(req, res, excludedName);
+export default (req, res) => {
+    registerComponents();
+    return getTemplates(req, res, excludedName);
+};

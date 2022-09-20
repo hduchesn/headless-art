@@ -1,2 +1,6 @@
 import {getViews} from '@jahia/nextjs-sdk';
-export default (req, res) => getViews(req, res);
+import {registerComponents} from '../../../components/registerComponents';
+export default (req, res) => {
+    registerComponents();
+    return getViews(req, res);
+};
