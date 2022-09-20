@@ -29,6 +29,9 @@
     }],
     "react/require-default-props": 0,
     "react/static-property-placement": 0,
-    "react/state-in-constructor": 0
+    "react/state-in-constructor": 0,
+    "react/boolean-prop-naming": [1, { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }],
+    "import/no-anonymous-default-export": [2, {"allowArrowFunction": true}]
+
   }
 }

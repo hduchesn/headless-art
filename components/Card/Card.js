@@ -1,10 +1,10 @@
 import React from 'react';
 import {JahiaCtx, useNode, DefaultImage, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
-import {LinkTo, linkToProperties} from './LinkTo';
+import {LinkTo, linkToProperties} from '../LinkTo';
 
 // Note:  use xss to clean body
-function Card({id}) {
+export function Card({id}) {
     const {locale} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, [...linkToProperties, 'body', 'mediaNode']);
@@ -36,4 +36,4 @@ function Card({id}) {
 Card.propTypes = {
     id: PropTypes.string.isRequired,
 };
-export default Card;
+// Export default Card;

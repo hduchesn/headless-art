@@ -5,6 +5,7 @@ import {
     componentsByType,
     ImageReferenceLink,
     RichText,
+    templates,
 } from '@jahia/nextjs-sdk';
 import {
     BS4Grid,
@@ -13,59 +14,77 @@ import {
     ClipPathBubble1,
     ClipPathBubble2,
 } from '@jahia/nextjs-community-components';
-
-import NavMenuText from './jahia/NavMenuText';
-
-import Widen from './jahia/Widen/Widen';
-
 import {
     Hero,
     TextImageFocus,
     WaveBlue,
     WaveDark,
 } from './Hero';
-import Gallery from './Gallery';
-import {OwlCarousel} from './owlCarousel';
-import FeatureContentBloc from './FeatureContentBloc';
-import HalfBlock from './HalfBlock';
-import MediaContentBloc from './MediaContentBloc';
-import Card from './Card';
-import {
-    Feature,
-    Scaling,
-} from './images';
-
 import {
     Card as gCard,
     Hero as gHero,
     TextImageFocus as gTIF,
     Main as gMain,
     Isotope as gIsotope,
+    GenericContentTemplate,
 } from './GenericContent';
+
+import Gallery from './Gallery';
+import FeatureContentBloc from './FeatureContentBloc';
+import HalfBlock from './HalfBlock';
+import MediaContentBloc from './MediaContentBloc';
+import {OwlCarousel} from './owlCarousel';
+import {Feature, Scaling} from './images';
+import {NavMenuHeader, NavMenuFooter} from './navMenu';
+import {PageOpenTemplate, PageFixedStructureTemplate} from './Page';
+import {CardContentTemplate, Card} from './Card';
+
+import NavMenuText from './jahia/NavMenuText';
+// Import Widen from './jahia/Widen/Widen';
 
 function ImageReferenceLinkWrapper(props) {
     return <ImageReferenceLink {...props} className="img-fluid"/>;
 }
 
 export const registerComponents = () => {
+    Object.assign(templates, {
+        'jnt:page': {
+            default: PageOpenTemplate,
+            open: PageOpenTemplate,
+            'fixed Structure': PageFixedStructureTemplate,
+        },
+        'hicnt:card': CardContentTemplate,
+        'hicnt:genericContent': GenericContentTemplate,
+
+    });
+
     Object.assign(componentsByType, {
         // Community Module
-        'wdennt:widenReference': Widen,
         'bootstrap4nt:grid': BS4Grid,
-        'jnt:navMenuText': NavMenuText,
         'jnt:contentRetrieval': {
             default: ContentRetrieval,
             isotope: IsotopeContentRetrieval,
         },
+        'jnt:navMenuText': NavMenuText,
+        // 'wdennt:widenReference': Widen,
 
         // Content Model Module
-        'tint:text': RichText,
-        'hicnt:text': RichText,
         'hicnt:heading': {
             default: Hero,
-            'Text with image focus': TextImageFocus,
-            'Wave blue': WaveBlue,
-            'Wave Dark': WaveDark,
+            'text with image focus': TextImageFocus,
+            'wave blue': WaveBlue,
+            'wave Dark': WaveDark,
+        },
+        'hicnt:genericContent': {
+            default: gMain,
+            card: gCard,
+            isotope: gIsotope,
+            hero: gHero,
+            'hero with image focus': gTIF,
+        },
+        'jnt:navMenuNext': {
+            'header Menu': NavMenuHeader,
+            'footer Menu': NavMenuFooter,
         },
         'hicnt:galleryImage': Gallery,
         'hicnt:featureContentBloc': FeatureContentBloc,
@@ -74,13 +93,7 @@ export const registerComponents = () => {
         'hicnt:mediaContentBloc': MediaContentBloc,
         'hicnt:card': Card,
         'jnt:imageReferenceLink': ImageReferenceLinkWrapper,
-        'hicnt:genericContent': {
-            default: gMain,
-            card: gCard,
-            isotope: gIsotope,
-            hero: gHero,
-            'hero with image focus': gTIF,
-        },
+        'hicnt:text': RichText,
     });
 
     Object.assign(componentByMixin, {

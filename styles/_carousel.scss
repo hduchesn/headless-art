@@ -234,3 +234,28 @@
   color: $carousel-caption-color;
   text-align: center;
 }
+
+
+// Extra carousel height management
+//
+//
+
+.ch-50 .slider-item{
+  height: calc(50vh);
+  min-height: unset;
+}
+
+.ch-50 .slider-item .slider-text {
+  height: calc(50vh);
+  min-height: unset;
+}
+
+.ch-70 .slider-item{
+  height: calc(70vh);
+  min-height: unset;
+}
+
+.ch-70 .slider-item .slider-text {
+  height: calc(70vh);
+  min-height: unset;
+}

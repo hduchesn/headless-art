@@ -3,3 +3,4 @@ export * from './Main';
 export * from './Hero';
 export * from './Isotope';
 export * from './GalleryFancyBox';
+export * from './ContentTemplate';

@@ -1,25 +1,25 @@
 import React from 'react';
-import {Area} from "@jahia/nextjs-sdk";
-import * as PropTypes from "prop-types";
-import cms from "../jahia"
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import {Area} from '@jahia/nextjs-sdk';
+import * as PropTypes from 'prop-types';
+import cms from '../../../jahia';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Feature as FeatureImage} from "../components/images";
-import {PageLayout} from "../components/Layout";
+import {Feature as FeatureImage} from '../../images';
+import {PageLayout} from '../../Layout';
 
-function FixedStructure({path}) {
+export function PageFixedStructureTemplate({node: {path}}) {
     return (
-        <PageLayout path={path}>
+        <PageLayout>
             <Area
                 name="hero"
                 mainResourcePath={path}
                 tagProps={{
-                    nodetypes:[cms.contentTypes.HERO],
-                    listlimit:1
+                    nodetypes: [cms.contentTypes.HERO],
+                    listlimit: 1,
                 }}
             />
-            {/*Feature*/}
+            {/* Feature */}
             <section className="section">
                 <Container>
                     <Row className="mb-5">
@@ -28,8 +28,8 @@ function FixedStructure({path}) {
                                 name="feature-title"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
-                                    listlimit:1
+                                    nodetypes: [cms.contentTypes.INDUS_TEXT],
+                                    listlimit: 1,
                                 }}
                             />
                         </Col>
@@ -40,10 +40,10 @@ function FixedStructure({path}) {
                                 name="feature-image"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.IMAGE_REF],
-                                    listlimit:1
+                                    nodetypes: [cms.contentTypes.IMAGE_REF],
+                                    listlimit: 1,
                                 }}
-                                componentProps={{referenceComponent:FeatureImage}}
+                                componentProps={{referenceComponent: FeatureImage}}
                             />
                         </Col>
                         <Col md={6} lg={4} className="feature-1-wrap d-md-flex flex-md-column order-lg-1">
@@ -51,8 +51,8 @@ function FixedStructure({path}) {
                                 name="feature-text-1"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.FEATURE_CONTENT_BLOC],
-                                    listlimit:2
+                                    nodetypes: [cms.contentTypes.FEATURE_CONTENT_BLOC],
+                                    listlimit: 2,
                                 }}
                             />
                         </Col>
@@ -61,16 +61,16 @@ function FixedStructure({path}) {
                                 name="feature-text-2"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.FEATURE_CONTENT_BLOC],
-                                    listlimit:2
+                                    nodetypes: [cms.contentTypes.FEATURE_CONTENT_BLOC],
+                                    listlimit: 2,
                                 }}
                             />
                         </Col>
                     </Row>
                 </Container>
             </section>
-            {/*Article*/}
-            <section className="section bg-light">{/*element-animate*/}
+            {/* Article */}
+            <section className="section bg-light">{/* element-animate */}
                 <Container>
                     <Row className="align-items-center mb-5">
                         <Col lg={7} className="order-md-2">
@@ -78,10 +78,10 @@ function FixedStructure({path}) {
                                 name="article-image"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.IMAGE_REF],
-                                    listlimit:1
+                                    nodetypes: [cms.contentTypes.IMAGE_REF],
+                                    listlimit: 1,
                                 }}
-                                componentProps={{className:"img-fluid"}}
+                                componentProps={{className: 'img-fluid'}}
                             />
                         </Col>
                         <Col md={5} className="pr-md-5 mb-5">
@@ -89,15 +89,15 @@ function FixedStructure({path}) {
                                 name="article-text"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
-                                    listlimit:1
+                                    nodetypes: [cms.contentTypes.INDUS_TEXT],
+                                    listlimit: 1,
                                 }}
                             />
                         </Col>
                     </Row>
                 </Container>
             </section>
-            {/*Gallery*/}
+            {/* Gallery */}
             <section className="section border-t pb-0">
                 <Container>
                     <Row className="mb-5 justify-content-center">
@@ -106,8 +106,8 @@ function FixedStructure({path}) {
                                 name="gallery-title"
                                 mainResourcePath={path}
                                 tagProps={{
-                                    nodetypes:[cms.contentTypes.INDUS_TEXT],
-                                    listlimit:1
+                                    nodetypes: [cms.contentTypes.INDUS_TEXT],
+                                    listlimit: 1,
                                 }}
                             />
                         </Col>
@@ -115,14 +115,14 @@ function FixedStructure({path}) {
                 </Container>
                 <Container fluid>
                     <Row className="mb-5 no-gutters">
-                        {Array.from({length: 6}, (v, i) => i).map( (v, i) => (
+                        {Array.from({length: 6}, (v, i) => i).map((v, i) => (
                             <Col key={v} md={4} className="text-center">
                                 <Area
-                                    name={`gallery-item-${i+1}`}
+                                    name={`gallery-item-${i + 1}`}
                                     mainResourcePath={path}
                                     tagProps={{
-                                        nodetypes:[cms.contentTypes.GALLERY],
-                                        listlimit:1
+                                        nodetypes: [cms.contentTypes.GALLERY],
+                                        listlimit: 1,
                                     }}
                                 />
                             </Col>
@@ -131,14 +131,19 @@ function FixedStructure({path}) {
                 </Container>
             </section>
         </PageLayout>
-    )
+    );
 }
-FixedStructure.propTypes = {
-    path: PropTypes.string.isRequired,
-    templateName: PropTypes.string.isRequired
 
+PageFixedStructureTemplate.propTypes = {
+    node: PropTypes.shape({
+        workspace: PropTypes.string,
+        uuid: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        primaryNodeType: PropTypes.shape({name: PropTypes.string}).isRequired,
+        mixinTypes: PropTypes.arrayOf(PropTypes.shape({name: PropTypes.string})),
+        view: PropTypes.shape({value: PropTypes.string}),
+        templateName: PropTypes.shape({value: PropTypes.string}),
+    }).isRequired,
 };
-
-export default FixedStructure;
-
 

@@ -19,6 +19,12 @@
     /*margin-left: 0.5em;*/
 }
 
+.textFocus h1 span {
+    color: white;
+    background-color: var(--primary);
+    box-shadow: 0.5em 0 0 var(--primary),-0.5em 0 0 var(--primary);
+}
+
 .textFocus p {
     font-size: 20px;
     line-height: 1.5;
