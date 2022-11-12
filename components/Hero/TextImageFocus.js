@@ -3,11 +3,11 @@ import * as PropTypes from 'prop-types';
 import {JahiaCtx, useNode, getImageURI, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
+import {DefaultImage} from '@jahia/nextjs-sdk';
 import styles from './textImageFocus.module.css';
 import classNames from 'classnames';
 import {Image} from 'react-bootstrap-icons';
 import {LinkTo, linkToProperties} from '../LinkTo';
-import {Optimizer} from '../images';
 
 // Note: use xss to clean body
 export function TextImageFocus({id}) {
@@ -37,7 +37,11 @@ export function TextImageFocus({id}) {
         if (mediaNodeFocus) {
             return (
                 <LinkTo content={{...data.properties, path}} locale={locale}>
-                    <Optimizer mediaNode={mediaNodeFocus} width={7} height={10} className={classNames('img-fluid', styles.imageFocus)}/>
+                    <DefaultImage
+                        path={mediaNodeFocus.path}
+                        className={classNames('img-fluid', styles.imageFocus)}
+                        alt={mediaNodeFocus.name}
+                    />
                 </LinkTo>
             );
         }

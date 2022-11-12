@@ -3,11 +3,11 @@ import * as PropTypes from 'prop-types';
 import {JahiaCtx, useNode, getImageURI} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import {Animate, animateProperties, getAnimateProps} from '@jahia/nextjs-community-components';
+import {DefaultImage} from '@jahia/nextjs-sdk';
 import styles from './textImageFocus.module.css';
 import classNames from 'classnames';
 import {Image} from 'react-bootstrap-icons';
 import {LinkTo} from '../../LinkTo';
-import {Optimizer} from '../../images';
 // Note: use xss to clean body
 export function TextImageFocus({id, isLinkDisabled}) {
     const {workspace, locale} = React.useContext(JahiaCtx);
@@ -34,17 +34,17 @@ export function TextImageFocus({id, isLinkDisabled}) {
     const getImage = () => {
         if (mediaNodeFocus) {
             const imageProps = {
-                // Path: mediaNodeFocus.path,
+                path: mediaNodeFocus.path,
                 className: classNames('img-fluid', styles.imageFocus),
-                // Alt: mediaNodeFocus.name,
+                alt: mediaNodeFocus.name,
             };
             if (isLinkDisabled) {
-                return <Optimizer mediaNode={mediaNodeFocus} width={7} height={10} {...imageProps}/>;
+                return <DefaultImage {...imageProps}/>;
             }
 
             return (
                 <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale}>
-                    <Optimizer mediaNode={mediaNodeFocus} width={7} height={10} {...imageProps}/>
+                    <DefaultImage {...imageProps}/>
                 </LinkTo>
             );
         }
