@@ -1,8 +1,9 @@
 import React from 'react';
-import {JahiaCtx, useNode, DefaultImage} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {PlusLg} from 'react-bootstrap-icons';
 import {LinkTo, linkToProperties} from './LinkTo';
+import {Optimizer} from './images';
 
 function Gallery({id}) {
     const {locale} = React.useContext(JahiaCtx);
@@ -17,16 +18,13 @@ function Gallery({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, path, properties: {heading, mediaNode}} = data;
+    const {path, properties: {heading, mediaNode}} = data;
 
     return (
         <LinkTo content={{...data.properties, path}} locale={locale} className="link-thumbnail" fallback={{elt: 'div', className: 'link-thumbnail'}}>
             <h3>{heading}</h3>
             <PlusLg className="icon"/>
-            {mediaNode && <DefaultImage
-                path={mediaNode.path}
-                className="img-fluid"
-                alt={name}/>}
+            {mediaNode && <Optimizer mediaNode={mediaNode} width={10} height={10} className="img-fluid"/>}
         </LinkTo>
     );
 }

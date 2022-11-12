@@ -1,13 +1,14 @@
 import React from 'react';
-import {getImageURI, JahiaCtx, useNode} from '@jahia/nextjs-sdk';
+import {/* getImageURI, */ JahiaCtx, useNode} from '@jahia/nextjs-sdk';
 import styles from './item.module.css';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
+import {Optimizer} from '../../images';
 
 // Note use xss to clean caption
 
 function Item({id}) {
-    const {workspace, isEditMode} = React.useContext(JahiaCtx);
+    const {/* workspace, */ isEditMode} = React.useContext(JahiaCtx);
 
     const {data, error, loading} = useNode(id, ['heading', 'testimonial', 'mediaNode']);
 
@@ -21,7 +22,7 @@ function Item({id}) {
     }
 
     const {heading, testimonial, mediaNode} = data.properties;
-    const imageURI = getImageURI({uri: mediaNode.path, workspace});
+    // Const imageURI = getImageURI({uri: mediaNode.path, workspace});
 
     return (
         <>
@@ -30,11 +31,12 @@ function Item({id}) {
                     'card',
                     styles.jOwlCarouselEditCardEdit)}
                    >
-                    <img
-                        src={imageURI}
-                        className="card-img-top"
-                        alt={mediaNode.name}
-                    />
+                    <Optimizer mediaNode={mediaNode} width={10} height={10} className="card-img-top"/>
+                    {/* <img */}
+                    {/*    src={imageURI} */}
+                    {/*    className="card-img-top" */}
+                    {/*    alt={mediaNode.name} */}
+                    {/* /> */}
                     {/* eslint-disable-next-line react/no-danger */}
                     <div dangerouslySetInnerHTML={{__html: heading}} className={styles.cardBody}/>
                     {/* eslint-disable-next-line react/jsx-indent */}
@@ -44,7 +46,7 @@ function Item({id}) {
                     <div className="block-33 h-100">
                         <div className="vcard d-flex mb-3">
                             <div className="image align-self-center">
-                                <img src={imageURI} alt={mediaNode.name}/>
+                                <Optimizer mediaNode={mediaNode} width={10} height={10}/>
                             </div>
                             {/* eslint-disable-next-line react/no-danger */}
                             <div dangerouslySetInnerHTML={{__html: heading}}/>

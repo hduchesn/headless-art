@@ -1,14 +1,14 @@
 import React from 'react';
-import {JahiaCtx, useNode, DefaultImage, getImageURI} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {LinkTo} from '../LinkTo';
 import styles from './isotope.module.css';
-import Image from 'next/image';
+import {Optimizer} from '../images';
 
 export function Isotope({id}) {
-    const {workspace, locale, isPreview, isEditMode} = React.useContext(JahiaCtx);
+    const {locale} = React.useContext(JahiaCtx);
 
-    const {data, error, loading} = useNode(id, ['mediaNodeFocus']);
+    const {data, error, loading} = useNode(id, ['mediaNodeFocus'], true);
 
     if (loading) {
         return 'loading';
@@ -21,36 +21,9 @@ export function Isotope({id}) {
 
     const {path, properties: {mediaNodeFocus: mediaNode}} = data;
 
-    const getImageComponent = () => {
-        if (mediaNode && (workspace !== 'LIVE' && isEditMode)) {
-            return (
-                <DefaultImage
-                    path={mediaNode.path}
-                    alt={mediaNode.name}
-                />
-            );
-        }
-
-        if (mediaNode && (workspace === 'LIVE' || isPreview)) {
-            return (
-                <Image
-                    unoptimized={isPreview}
-                    src={process.env.NEXT_PUBLIC_JAHIA_BASE_URL + getImageURI({uri: mediaNode.path, workspace})}
-                    alt={mediaNode.name}
-                    // Layout="fill"
-                    objectFit="cover"
-                    width={600}
-                    height={600}
-                />
-            );
-        }
-
-        return null;
-    };
-
     return (
         <div className={styles.singlePortfolioContent} style={{position: 'relative'}}>
-            {getImageComponent()}
+            <Optimizer mediaNode={mediaNode} width={10} height={10}/>
             <div className={styles.hoverContent}>
                 <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} className="portfolio-img">
                     +

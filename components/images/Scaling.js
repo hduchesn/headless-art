@@ -1,17 +1,13 @@
 import React from 'react';
-import {DefaultImage} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {Optimizer} from '../images';
 
 export function Scaling({path, alt, className}) {
     return (
         <div className="scaling-image">
             <div className="frame">
-                <DefaultImage
-                    path={path}
-                    alt={alt}
-                    className={classNames('img-fluid', className)}
-                />
+                <Optimizer mediaNode={{path, name: alt}} width={8} height={9} className={classNames('img-fluid', className)}/>
             </div>
         </div>
     );
