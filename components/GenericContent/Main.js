@@ -1,7 +1,9 @@
 import React from 'react';
-import {useNode, DefaultImage, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
+import {useNode, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as PropTypes from 'prop-types';
+import {Optimizer} from '../images';
+
 // Import classNames from 'classnames';
 
 export function Main({id}) {
@@ -21,19 +23,15 @@ export function Main({id}) {
     return (
         <section className="section">
             <Container>
-                <Row className="align-items-center mb-5">
-                    <Col lg={6} className="order-md-2">
+                <Row className="align-items-center">
+                    <Col lg={6} className="order-md-2 mb-5 mb-md-0">
                         <div className="scaling-image">
                             <div className="frame">
-                                <DefaultImage
-                                    path={mediaNodeFocus.path}
-                                    className="img-fluid"
-                                    alt={mediaNodeFocus.name}
-                                />
+                                <Optimizer id={mediaNodeFocus.uuid} width={8} height={9} className="img-fluid"/>
                             </div>
                         </div>
                     </Col>
-                    <Col md={6} className="pr-md-5 mb-5">
+                    <Col md={6} className="pr-md-5 mb-md-5">
                         <EmbeddedPathInHtmlResolver htmlAsString={body || 'no text'}/>
                     </Col>
                 </Row>

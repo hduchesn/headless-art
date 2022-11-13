@@ -1,28 +1,23 @@
 import React from 'react';
-import {DefaultImage} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {Optimizer} from '../images';
 
-export function Scaling({path, alt, className}) {
+export function Scaling({id, className}) {
     return (
         <div className="scaling-image">
             <div className="frame">
-                <DefaultImage
-                    path={path}
-                    alt={alt}
-                    className={classNames('img-fluid', className)}
-                />
+                <Optimizer id={id} width={8} height={9} className={classNames('img-fluid', className)}/>
             </div>
         </div>
     );
 }
 
 Scaling.propTypes = {
-    path: PropTypes.string,
-    alt: PropTypes.string,
+    id: PropTypes.string,
     className: PropTypes.string,
 };
 
-Scaling.defaultProps = {
-    alt: 'this is a scaling image',
-};
+// Scaling.defaultProps = {
+//     alt: 'this is a scaling image',
+// };

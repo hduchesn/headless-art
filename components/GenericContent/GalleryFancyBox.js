@@ -1,5 +1,5 @@
 import React from 'react';
-import {JahiaCtx, useNode, DefaultImage, getImageURI} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode, getImageURI} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 // eslint-disable-next-line no-unused-vars
 import {Fancybox} from '@fancyapps/ui';
@@ -7,6 +7,7 @@ import '@fancyapps/ui/dist/fancybox.css';
 import {Col, Container, Row} from 'react-bootstrap';
 import styles from './galleryFancyBox.module.css';
 import classNames from 'classnames';
+import {Optimizer} from '../images';
 
 export function GalleryFancyBox({id}) {
     const {workspace} = React.useContext(JahiaCtx);
@@ -39,9 +40,7 @@ export function GalleryFancyBox({id}) {
                     {mediaGallery.map(item => (
                         <Col key={item.uuid} xs={4} md={3} lg={2} className={classNames('mb-3', styles.fancyBoxContainer)}>
                             <a className={styles.fancyBoxLink} data-fancybox="gallery" data-src={getImageURI({uri: item.path, workspace})}>
-                                <DefaultImage
-                                    path={item.path}
-                                    alt={item.name}/>
+                                <Optimizer id={item.uuid} width={10} height={10}/>
                             </a>
                         </Col>
                     ))}

@@ -1,7 +1,8 @@
 import React from 'react';
-import {JahiaCtx, useNode, DefaultImage, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
+import {JahiaCtx, useNode, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import * as PropTypes from 'prop-types';
 import {LinkTo, linkToProperties} from '../LinkTo';
+import {Optimizer} from '../images';
 
 // Note:  use xss to clean body
 export function Card({id}) {
@@ -18,15 +19,12 @@ export function Card({id}) {
         return <div>Error when loading ${JSON.stringify(error)}</div>;
     }
 
-    const {name, path, properties: {body, mediaNode}} = data;
+    const {path, properties: {body, mediaNode}} = data;
 
     return (
         <div className="media d-block media-custom text-center">
             <LinkTo content={{...data.properties, path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
-                {mediaNode && <DefaultImage
-                    path={mediaNode.path}
-                    className="img-fluid"
-                    alt={name}/>}
+                {mediaNode && <Optimizer id={mediaNode.uuid} width={10} height={10} className="img-fluid"/>}
             </LinkTo>
             <EmbeddedPathInHtmlResolver htmlAsString={body || 'no body'}/>
         </div>

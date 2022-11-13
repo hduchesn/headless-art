@@ -10,6 +10,8 @@ const getLocales = () => {
     }
 }
 
+const JAHIA_BASE_URL = new URL(process.env.NEXT_PUBLIC_JAHIA_BASE_URL);
+
 module.exports = {
     reactStrictMode: false,
     sassOptions: {
@@ -46,6 +48,17 @@ module.exports = {
             }
 
         ]
+    },
+    images: {
+        // remotePatterns: [
+        //     {
+        //         protocol: JAHIA_BASE_URL.protocol,
+        //         hostname: JAHIA_BASE_URL.hostname,
+        //         port: JAHIA_BASE_URL.port,
+        //         pathname: '/files/**',
+        //     },
+        // ],
+        domains: [JAHIA_BASE_URL.hostname,"cdn.pixabay.com"]
     },
     // outputFileTracing: true
     //if you want to expose more file type update the default pageExtensions ['tsx', 'ts', 'jsx', 'js']
