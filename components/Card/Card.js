@@ -24,7 +24,7 @@ export function Card({id}) {
     return (
         <div className="media d-block media-custom text-center">
             <LinkTo content={{...data.properties, path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
-                {mediaNode && <Optimizer mediaNode={mediaNode} width={10} height={10} className="img-fluid"/>}
+                {mediaNode && <Optimizer id={mediaNode.uuid} width={10} height={10} className="img-fluid"/>}
             </LinkTo>
             <EmbeddedPathInHtmlResolver htmlAsString={body || 'no body'}/>
         </div>

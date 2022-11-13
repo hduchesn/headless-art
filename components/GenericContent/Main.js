@@ -3,6 +3,7 @@ import {useNode, EmbeddedPathInHtmlResolver} from '@jahia/nextjs-sdk';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as PropTypes from 'prop-types';
 import {Optimizer} from '../images';
+
 // Import classNames from 'classnames';
 
 export function Main({id}) {
@@ -26,7 +27,7 @@ export function Main({id}) {
                     <Col lg={6} className="order-md-2">
                         <div className="scaling-image">
                             <div className="frame">
-                                <Optimizer mediaNode={mediaNodeFocus} width={8} height={9} className="img-fluid"/>
+                                <Optimizer id={mediaNodeFocus.uuid} width={8} height={9} className="img-fluid"/>
                             </div>
                         </div>
                     </Col>

@@ -1,31 +1,56 @@
 import React from 'react';
-import {DefaultImage, getImageURI, JahiaCtx} from '@jahia/nextjs-sdk';
+import {DefaultImage, getImageURI, JahiaCtx, useNode} from '@jahia/nextjs-sdk';
 import Image from 'next/image';
 
-export function Optimizer({mediaNode, width, height, ...props}) {
+export function Optimizer({id, width, height, ...props}) {
     const {workspace, isPreview, isEditMode} = React.useContext(JahiaCtx);
+    const {data, error, loading} = useNode(id, ['j:width', 'j:height'], true);
 
-    if (mediaNode && (workspace !== 'LIVE' && isEditMode)) {
+    if (loading) {
+        return 'loading';
+    }
+
+    if (error) {
+        console.log(error);
+        return <div>Error when loading ${JSON.stringify(error)}</div>;
+    }
+
+    const {path, name} = data;
+
+    if (workspace !== 'LIVE' && isEditMode) {
         return (
             <DefaultImage
-                path={mediaNode.path}
-                alt={mediaNode.name}
                 {...props}
+                path={path}
+                alt={name}
             />
         );
     }
 
-    if (mediaNode && (workspace === 'LIVE' || isPreview)) {
+    if (workspace === 'LIVE' || isPreview) {
+        let w = width;
+        let h = height;
+console.log("data.properties :",data.properties)
+        if (data.properties) {
+            if (!Number.isNaN(Number.parseInt(data.properties['j:width'], 10))) {
+                w = Number.parseInt(data.properties['j:width'], 10);
+            }
+
+            if (!Number.isNaN(Number.parseInt(data.properties['j:height'], 10))) {
+                h = Number.parseInt(data.properties['j:height'], 10);
+            }
+        }
+        console.log("w,h :",w,h)
         return (
             <Image
-                unoptimized={isPreview}
-                src={process.env.NEXT_PUBLIC_JAHIA_BASE_URL + getImageURI({uri: mediaNode.path, workspace})}
-                alt={mediaNode.name}
                 {...props}
+                unoptimized={isPreview}
+                src={process.env.NEXT_PUBLIC_JAHIA_BASE_URL + getImageURI({uri: path, workspace})}
+                alt={name}
                 layout="responsive"
                 // Layout="fill"
-                width={width}
-                height={height}
+                width={w}
+                height={h}
                 objectFit="cover"
             />
         );

@@ -40,7 +40,7 @@ export function GalleryFancyBox({id}) {
                     {mediaGallery.map(item => (
                         <Col key={item.uuid} xs={4} md={3} lg={2} className={classNames('mb-3', styles.fancyBoxContainer)}>
                             <a className={styles.fancyBoxLink} data-fancybox="gallery" data-src={getImageURI({uri: item.path, workspace})}>
-                                <Optimizer mediaNode={item} width={10} height={10}/>
+                                <Optimizer id={item.uuid} width={10} height={10}/>
                             </a>
                         </Col>
                     ))}

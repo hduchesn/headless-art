@@ -23,7 +23,7 @@ export function Isotope({id}) {
 
     return (
         <div className={styles.singlePortfolioContent} style={{position: 'relative'}}>
-            <Optimizer mediaNode={mediaNode} width={10} height={10}/>
+            <Optimizer id={mediaNode.uuid} width={10} height={10}/>
             <div className={styles.hoverContent}>
                 <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} className="portfolio-img">
                     +

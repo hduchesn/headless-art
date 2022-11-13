@@ -23,7 +23,7 @@ export function Card({id}) {
     return (
         <div className="media d-block media-custom text-center">
             <LinkTo content={{linkType: 'self', linkTarget: '_self', path}} locale={locale} fallback={{elt: 'div', css: ['cardALike']}}>
-                {mediaNode && <Optimizer mediaNode={mediaNode} width={10} height={10} className="img-fluid"/>}
+                {mediaNode && <Optimizer id={mediaNode.uuid} width={10} height={10} className="img-fluid"/>}
             </LinkTo>
             <div className="media-body">
                 <h3 className="mt-0 text-black"> {title || 'no body'}</h3>

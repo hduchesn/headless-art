@@ -3,22 +3,21 @@ import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {Optimizer} from '../images';
 
-export function Scaling({path, alt, className}) {
+export function Scaling({id, className}) {
     return (
         <div className="scaling-image">
             <div className="frame">
-                <Optimizer mediaNode={{path, name: alt}} width={8} height={9} className={classNames('img-fluid', className)}/>
+                <Optimizer id={id} width={8} height={9} className={classNames('img-fluid', className)}/>
             </div>
         </div>
     );
 }
 
 Scaling.propTypes = {
-    path: PropTypes.string,
-    alt: PropTypes.string,
+    id: PropTypes.string,
     className: PropTypes.string,
 };
 
-Scaling.defaultProps = {
-    alt: 'this is a scaling image',
-};
+// Scaling.defaultProps = {
+//     alt: 'this is a scaling image',
+// };

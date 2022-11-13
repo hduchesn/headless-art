@@ -31,7 +31,7 @@ function Item({id}) {
                     'card',
                     styles.jOwlCarouselEditCardEdit)}
                    >
-                    <Optimizer mediaNode={mediaNode} width={10} height={10} className="card-img-top"/>
+                    <Optimizer id={mediaNode.uuid} width={10} height={10} className="card-img-top"/>
                     {/* <img */}
                     {/*    src={imageURI} */}
                     {/*    className="card-img-top" */}
@@ -46,7 +46,7 @@ function Item({id}) {
                     <div className="block-33 h-100">
                         <div className="vcard d-flex mb-3">
                             <div className="image align-self-center">
-                                <Optimizer mediaNode={mediaNode} width={10} height={10}/>
+                                <Optimizer id={mediaNode.uuid} width={10} height={10}/>
                             </div>
                             {/* eslint-disable-next-line react/no-danger */}
                             <div dangerouslySetInnerHTML={{__html: heading}}/>
