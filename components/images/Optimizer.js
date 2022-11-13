@@ -30,7 +30,7 @@ export function Optimizer({id, width, height, ...props}) {
     if (workspace === 'LIVE' || isPreview) {
         let w = width;
         let h = height;
-console.log("data.properties :",data.properties)
+
         if (data.properties) {
             if (!Number.isNaN(Number.parseInt(data.properties['j:width'], 10))) {
                 w = Number.parseInt(data.properties['j:width'], 10);
@@ -40,7 +40,7 @@ console.log("data.properties :",data.properties)
                 h = Number.parseInt(data.properties['j:height'], 10);
             }
         }
-        console.log("w,h :",w,h)
+
         return (
             <Image
                 {...props}

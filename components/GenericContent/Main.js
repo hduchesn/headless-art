@@ -23,15 +23,15 @@ export function Main({id}) {
     return (
         <section className="section">
             <Container>
-                <Row className="align-items-center mb-5">
-                    <Col lg={6} className="order-md-2">
+                <Row className="align-items-center">
+                    <Col lg={6} className="order-md-2 mb-5 mb-md-0">
                         <div className="scaling-image">
                             <div className="frame">
                                 <Optimizer id={mediaNodeFocus.uuid} width={8} height={9} className="img-fluid"/>
                             </div>
                         </div>
                     </Col>
-                    <Col md={6} className="pr-md-5 mb-5">
+                    <Col md={6} className="pr-md-5 mb-md-5">
                         <EmbeddedPathInHtmlResolver htmlAsString={body || 'no text'}/>
                     </Col>
                 </Row>
