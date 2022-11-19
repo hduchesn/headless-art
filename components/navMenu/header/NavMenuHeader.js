@@ -30,9 +30,9 @@ export function NavMenuHeader({id}) {
 
                 <Link href={navTree.path} locale={locale}>
                     <a
-className="navbar-brand "
-data-toggle="collapse"
-data-target=".navbar-collapse.show"
+                        className="navbar-brand "
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
                     >
                         {navTree.title?.value}
                     </a>
