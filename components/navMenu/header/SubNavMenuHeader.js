@@ -31,6 +31,11 @@ function SubNavMenuHeader({node, path}) {
                 'dropdown-toggle': hasChildren(node),
             }),
         };
+
+        if (!hasChildren(node)) {// Node.page &&
+            aProps['data-toggle'] = 'collapse';
+            aProps['data-target'] = '.navbar-collapse.show';
+        }
         // If(!node.page)
         //     aProps.style={pointerEvents: "none"}
 
@@ -86,11 +91,14 @@ function SubNavMenuHeader({node, path}) {
                             // Console.log("node2.path : ",node2.path);
                             (
                                 <Link key={node2.uuid} href={node2.path} locale={locale}>
-                                    <a className={classnames('dropdown-item', {
-                                        active: path.length > node2.path.length
-                                            ? path.includes(node2.path)
-                                            : node2.path === path,
-                                    })}
+                                    <a
+                                        className={classnames('dropdown-item', {
+                                            active: path.length > node2.path.length
+                                                ? path.includes(node2.path)
+                                                : node2.path === path,
+                                        })}
+                                        data-toggle="collapse"
+                                        data-target=".navbar-collapse.show"
                                     >
                                         {node2.title?.value}
                                     </a>
