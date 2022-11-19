@@ -29,7 +29,13 @@ export function NavMenuHeader({id}) {
             <div className="container-fluid">
 
                 <Link href={navTree.path} locale={locale}>
-                    <a className="navbar-brand ">{navTree.title?.value}</a>
+                    <a
+className="navbar-brand "
+data-toggle="collapse"
+data-target=".navbar-collapse.show"
+                    >
+                        {navTree.title?.value}
+                    </a>
                 </Link>
 
                 <button
